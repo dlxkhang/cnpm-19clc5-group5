@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <item
+        android:id="@+id/homeItem"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="@string/homeItem"/>
+
+    <item
+        android:id="@+id/myProductItem"
+        android:icon="@drawable/ic_product_icon"
+        android:title="@string/myProductItem"/>
+
+    <item
+        android:id="@+id/orderListItem"
+        android:icon="@drawable/ic_baseline_list_alt_24"
+        android:title="@string/orderListItem"/>
+</menu>
