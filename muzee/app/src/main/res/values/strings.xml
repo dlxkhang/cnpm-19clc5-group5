@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">MuZee</string>
+
+    // Main screen seller
+    <string name="welcomeMessage">Welcome</string>
+    <string name="storeName">Khang Music</string>
+    <string name="storeAddress">341 Tue Tinh, Q.11, TPHCM</string>
+
+    // Nav menu item for seller
+    <string name="homeItem">Home</string>
+    <string name="myProductItem">My Product</string>
+    <string name="orderListItem">Order List</string>
 </resources>
