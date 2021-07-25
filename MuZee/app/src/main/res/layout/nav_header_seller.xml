@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_marginTop="16dp"
-    android:layout_marginStart="16dp"
+    android:layout_marginTop="81dp"
+    android:paddingLeft="27dp"
     android:background="@color/gray">
 
     <ImageView
@@ -18,7 +18,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/store_name"
-        android:textSize="24sp">
+        android:textSize="24sp"
+        android:textColor="@color/black">
     </TextView>
 
     <TextView
@@ -26,7 +27,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/store_address"
-        android:textSize="18sp">
-    </TextView>
+        android:textColor="@color/black"
+        android:textColorHint="#9A8D8D"
+        android:textSize="18sp"></TextView>
 
 </LinearLayout>
