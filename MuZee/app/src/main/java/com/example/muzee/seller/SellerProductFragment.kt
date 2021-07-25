@@ -28,4 +28,16 @@ class SellerProductFragment : Fragment() {
 
         return fragmentBinding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding?.apply {
+            sellerProductFragment = this@SellerProductFragment
+        }
+    }
+
+    fun goToAddNewProductScreen() {
+        findNavController().navigate(R.id.action_sellerProductFragment_to_addNewProductFragment)
+    }
 }

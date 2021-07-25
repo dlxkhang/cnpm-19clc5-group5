@@ -5,9 +5,8 @@
     >
     <data>
         <variable
-            name="sellerProductFragment"
-            type="com.example.muzee.seller.SellerProductFragment" />
-
+            name="addNewProductFragment"
+            type="com.example.muzee.seller.AddNewProductFragment" />
     </data>
     <androidx.drawerlayout.widget.DrawerLayout
         android:layout_width="match_parent"
@@ -16,7 +15,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".seller.SellerProductFragment"
+            tools:context=".seller.AddNewProductFragment"
             android:fitsSystemWindows="true">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,9 +32,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/addNewProductBtn"
-                    android:text="@string/add_new_product_button"
+                    android:text="@string/confirm_button"
                     android:textColor="@color/black"
-                    android:onClick="@{() -> sellerProductFragment.goToAddNewProductScreen()}"
                     app:layout_constraintBottom_toBottomOf="@+id/textView"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
