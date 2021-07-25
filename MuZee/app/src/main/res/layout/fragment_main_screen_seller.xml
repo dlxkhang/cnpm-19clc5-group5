@@ -26,7 +26,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/welcomeMessage"
+                    android:text="@string/welcome_message"
                     android:textSize="34sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -38,6 +38,7 @@
             <com.google.android.material.navigation.NavigationView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:id="@+id/navView"
                 app:headerLayout="@layout/nav_header_seller"
                 app:menu="@menu/nav_menu_seller"
                 android:layout_gravity="start"

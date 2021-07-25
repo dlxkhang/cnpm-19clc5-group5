@@ -17,7 +17,7 @@
         android:id="@+id/storeName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/storeName"
+        android:text="@string/store_name"
         android:textSize="24sp">
     </TextView>
 
@@ -25,7 +25,7 @@
         android:id="@+id/storeAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/storeAddress"
+        android:text="@string/store_address"
         android:textSize="18sp">
     </TextView>
 
