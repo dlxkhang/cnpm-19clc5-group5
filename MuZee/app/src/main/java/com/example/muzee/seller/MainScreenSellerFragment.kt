@@ -1,4 +1,4 @@
-package com.example.muzee
+package com.example.muzee.seller
 
 
 import android.os.Bundle
@@ -7,6 +7,8 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.example.muzee.R
 import com.example.muzee.databinding.FragmentMainScreenSellerBinding
 
 
@@ -36,6 +38,23 @@ class MainScreenSellerFragment : Fragment(){
         val activity = activity as AppCompatActivity? // get activity
         activity!!.supportActionBar?.setDisplayHomeAsUpEnabled(true) // make toggle button visible
 
+        activity!!.supportActionBar?.setTitle("Home") // set title text for main screen
+
+        // handle onClick event on menu items
+        binding!!.navView.setNavigationItemSelectedListener {
+                when (it.itemId) {
+                    R.id.homeItem -> {
+                        drawerLayout.closeDrawers() // close menu and stay at home screen
+                    }
+                    R.id.myProductItem -> {
+                        findNavController().navigate(R.id.action_mainScreenSellerFragment_to_sellerProductFragment) // move to product screen
+                    }
+                    R.id.orderListItem -> {
+                        findNavController().navigate(R.id.action_mainScreenSellerFragment_to_sellerOrderFragment) // move to order list screen
+                    }
+                }
+            true
+        }
         return fragmentBinding.root
     }
 

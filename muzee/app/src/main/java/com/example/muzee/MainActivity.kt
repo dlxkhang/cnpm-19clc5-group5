@@ -10,7 +10,6 @@ import com.example.muzee.databinding.FragmentMainScreenSellerBinding
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private lateinit var navController: NavController
-    private var binding: FragmentMainScreenSellerBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

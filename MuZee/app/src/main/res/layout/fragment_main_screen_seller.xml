@@ -5,7 +5,7 @@
     <data>
         <variable
             name="mainScreenSellerFragment"
-            type="com.example.muzee.MainScreenSellerFragment" />
+            type="com.example.muzee.seller.MainScreenSellerFragment" />
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout
@@ -26,13 +26,14 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:context=".MainScreenSellerFragment">
+                tools:context=".seller.MainScreenSellerFragment">
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/textView"
+                        android:id="@+id/welcomeMessage"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/welcome_message"
@@ -42,6 +43,33 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.399" />
+
+                    <TextView
+                        android:id="@+id/storeName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/store_name"
+                        android:textSize="34sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/welcomeMessage"
+                        app:layout_constraintVertical_bias="0.065" />
+
+                    <ImageView
+                        android:layout_width="168dp"
+                        android:layout_height="122dp"
+                        android:src="@drawable/ic_baseline_store_24"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.497"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/storeName"
+                        app:layout_constraintVertical_bias="0.108">
+
+                    </ImageView>
+
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </FrameLayout>
         </androidx.appcompat.widget.LinearLayoutCompat>
