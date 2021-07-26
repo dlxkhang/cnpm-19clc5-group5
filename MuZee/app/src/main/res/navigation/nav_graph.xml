@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainScreenSellerFragment">
+
+    <fragment
+        android:id="@+id/mainScreenSellerFragment"
+        android:name="com.example.muzee.seller.MainScreenSellerFragment"
+        android:label="fragment_main_screen_seller"
+        tools:layout="@layout/fragment_main_screen_seller" >
+        <action
+            android:id="@+id/action_mainScreenSellerFragment_to_sellerProductFragment"
+            app:destination="@id/sellerProductFragment" />
+        <action
+            android:id="@+id/action_mainScreenSellerFragment_to_sellerOrderFragment"
+            app:destination="@id/sellerOrderFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sellerProductFragment"
+        android:name="com.example.muzee.seller.SellerProductFragment"
+        android:label="SellerProductFragment" >
+        <action
+            android:id="@+id/action_sellerProductFragment_to_addNewProductFragment"
+            app:destination="@id/addNewProductFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sellerOrderFragment"
+        android:name="com.example.muzee.seller.SellerOrderFragment"
+        android:label="SellerOrderFragment" />
+    <fragment
+        android:id="@+id/addNewProductFragment"
+        android:name="com.example.muzee.seller.AddNewProductFragment"
+        android:label="AddNewProductFragment" />
+</navigation>
