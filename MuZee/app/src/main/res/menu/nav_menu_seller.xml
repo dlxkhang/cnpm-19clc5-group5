@@ -5,15 +5,15 @@
     <item
         android:id="@+id/homeItem"
         android:icon="@drawable/ic_baseline_home_24"
-        android:title="@string/homeItem"/>
+        android:title="@string/home_item"/>
 
     <item
         android:id="@+id/myProductItem"
-        android:icon="@drawable/ic_product_icon"
-        android:title="@string/myProductItem"/>
+        android:icon="@drawable/ic_baseline_list_24"
+        android:title="@string/my_product_item"/>
 
     <item
         android:id="@+id/orderListItem"
         android:icon="@drawable/ic_baseline_list_alt_24"
-        android:title="@string/orderListItem"/>
+        android:title="@string/order_list_item"/>
 </menu>
