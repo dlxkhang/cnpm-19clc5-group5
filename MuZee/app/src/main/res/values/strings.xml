@@ -29,6 +29,14 @@
     <string name="organ">Organ</string>
     <string name="todo">TODO</string>
     <string name="category_fragment_label">Category</string>
+        // search key when clicking on the image
+        <string name="piano_search">piano</string>
+        <string name="organ_search">organ</string>
+        <string name="drum_search">drum</string>
+        <string name="guitar_search">guitar</string>
+        <string name="electric_search">electric</string>
+        <string name="bass_search">bass</string>
+
     // Nav menu item for normal users
     <string name="category_item">Categories</string>
     <string name="my_order_item">My order</string>

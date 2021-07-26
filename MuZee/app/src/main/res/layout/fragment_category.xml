@@ -6,6 +6,9 @@
         <variable
             name="CategoryFragment"
             type="com.example.muzee.CategoryFragment" />
+        <variable
+            name="viewModel"
+            type="com.example.muzee.model.CategoryViewModel" />
     </data>
     <androidx.drawerlayout.widget.DrawerLayout
         android:layout_width="match_parent"
@@ -37,6 +40,7 @@
                     android:layout_height="100dp"
                     android:layout_marginEnd="36dp"
                     android:contentDescription="@string/todo"
+                    android:onClick="@{()->CategoryFragment.sendRequestandBack(@string/piano_search)}"
                     app:layout_constraintEnd_toStartOf="@+id/organImage"
                     app:layout_constraintTop_toTopOf="@+id/organImage"
                     app:srcCompat="@drawable/piano" />
@@ -46,6 +50,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:contentDescription="@string/todo"
+                    android:onClick="@{()->CategoryFragment.sendRequestandBack(@string/organ_search)}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.511"
@@ -60,6 +65,7 @@
                     android:layout_height="100dp"
                     android:layout_marginStart="36dp"
                     android:contentDescription="@string/todo"
+                    android:onClick="@{()->CategoryFragment.sendRequestandBack(@string/drum_search)}"
                     app:layout_constraintStart_toEndOf="@+id/organImage"
                     app:layout_constraintTop_toTopOf="@+id/organImage"
                     app:srcCompat="@drawable/drum" />
@@ -69,6 +75,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:contentDescription="@string/todo"
+                    android:onClick="@{()->CategoryFragment.sendRequestandBack(@string/guitar_search)}"
                     app:layout_constraintEnd_toEndOf="@+id/pianoImage"
                     app:layout_constraintStart_toStartOf="@+id/pianoImage"
                     app:layout_constraintTop_toTopOf="@+id/electricalImage"
@@ -80,6 +87,7 @@
                     android:layout_height="100dp"
                     android:layout_marginTop="72dp"
                     android:contentDescription="@string/todo"
+                    android:onClick="@{()->CategoryFragment.sendRequestandBack(@string/electric_search)}"
                     app:layout_constraintEnd_toEndOf="@+id/organImage"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/organImage"
@@ -91,6 +99,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:contentDescription="@string/todo"
+                    android:onClick="@{()->CategoryFragment.sendRequestandBack(@string/bass_search)}"
                     app:layout_constraintEnd_toEndOf="@+id/drumImage"
                     app:layout_constraintStart_toStartOf="@+id/drumImage"
                     app:layout_constraintTop_toTopOf="@+id/electricalImage"

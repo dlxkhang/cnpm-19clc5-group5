@@ -37,7 +37,13 @@
         android:id="@+id/categoryFragment"
         android:name="com.example.muzee.CategoryFragment"
         android:label="@string/category_fragment_label"
-        tools:layout="@layout/fragment_category" />
+        tools:layout="@layout/fragment_category" >
+        <action
+            android:id="@+id/action_categoryFragment_to_mainScreenNormalUsersFragment"
+            app:destination="@id/mainScreenNormalUsersFragment"
+            app:popUpTo="@id/mainScreenNormalUsersFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/mainScreenNormalUsersFragment"
         android:name="com.example.muzee.normalUsers.MainScreenNormalUsersFragment"
