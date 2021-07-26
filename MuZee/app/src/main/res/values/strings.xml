@@ -16,4 +16,8 @@
     // My product screen for seller
     <string name="add_new_product_button">Add new product</string>
     <string name="confirm_button">Confirm</string>
+
+    // Order list screen
+    <string name="orderLabel">Order</string>
+    <string name="totalLabel">Total</string>
 </resources>
