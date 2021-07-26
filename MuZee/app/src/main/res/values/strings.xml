@@ -16,4 +16,27 @@
     // My product screen for seller
     <string name="add_new_product_button">Add new product</string>
     <string name="confirm_button">Confirm</string>
+
+    //Main screen normal user
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    //Category screen
+    <string name="pianoLabel">Piano</string>
+    <string name="bass_guitar">Bass Guitar</string>
+    <string name="acoustic_guitar">Acoustic Guitar</string>
+    <string name="electric_guitar">Electric Guitar</string>
+    <string name="drum">Drum</string>
+    <string name="organ">Organ</string>
+    <string name="todo">TODO</string>
+    <string name="category_fragment_label">Category</string>
+    // Nav menu item for normal users
+    <string name="category_item">Categories</string>
+    <string name="my_order_item">My order</string>
+    <string name="my_shop_item">My shop</string>
+    <string name="my_product">My product</string>
+    <string name="offers_item">Offers</string>
+    <string name="switch_shopping_mode_item">Switching shopping mode</string>
+    <string name="customer_support_item">Customer support</string>
+    <string name="username_header_navigation">TDN123</string>
+
 </resources>
