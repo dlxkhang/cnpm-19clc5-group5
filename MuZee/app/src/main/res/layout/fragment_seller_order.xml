@@ -6,7 +6,11 @@
         <variable
             name="sellerOrderFragment"
             type="com.example.muzee.seller.SellerOrderFragment" />
+        <variable
+            name="orderViewModel"
+            type="com.example.muzee.seller.OrderViewModel" />
     </data>
+
     <androidx.drawerlayout.widget.DrawerLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -14,15 +18,28 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".seller.SellerOrderFragment"
-            android:fitsSystemWindows="true">
+            tools:context=".seller.SellerOrderFragment">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scrollbars="vertical"
-                app:layoutManager="LinearLayoutManager" />
+                tools:context="com.example.muzee.seller.SellerOrderFragment">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:spanCount="1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    listSellerOrder="@{orderViewModel.listOfOrders}"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/order_seller_item"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </FrameLayout>
     </androidx.drawerlayout.widget.DrawerLayout>
