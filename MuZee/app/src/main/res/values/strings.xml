@@ -27,4 +27,13 @@
     <string name="display_price">$%,.0f</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="detail">Detail</string>
+    <string name="category">Category</string>
+    <string name="make">Make</string>
+    <string name="description">Description</string>
+    <string name="test_description">"General  \n- 88-note Triple Sensor keybed with grand weighted action  \n- Nord Virtual Hammer Action Technology   \n- Seamless Transitions NEW  \n- Layer and Split with Split Point crossfades NEW  \n- OLED display for excellent overview   \n- Enhanced Organize Mode NEW  \n- Numeric Pad for direct Program access  NEW "</string>
+    <string name="test_category">Keyboard</string>
+    <string name="test_make">Nord</string>
+    <string name="test_seller_name">Daph Duck</string>
+    <string name="test_seller_make">Tan Binh, Ho Chi Minh</string>
 </resources>
