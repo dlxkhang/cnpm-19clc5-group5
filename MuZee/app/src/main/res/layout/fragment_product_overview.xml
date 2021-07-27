@@ -6,13 +6,13 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.muzee.overview.ProductOverviewViewModel" />
+            type="com.example.muzee.productoverview.ProductOverviewViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.muzee.overview.ProductOverviewFragment">
+        tools:context="com.example.muzee.productoverview.ProductOverviewFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"

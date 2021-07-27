@@ -22,6 +22,9 @@
     <string name="test_price">$2,999</string>
     <string name="add_to_cart">Add to cart</string>
     <string name="view">View</string>
+
+    // Product detail
+    <string name="display_price">$%,.0f</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

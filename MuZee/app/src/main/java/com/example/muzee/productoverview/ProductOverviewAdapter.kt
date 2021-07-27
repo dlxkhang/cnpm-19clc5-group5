@@ -1,4 +1,4 @@
-package com.example.muzee.overview
+package com.example.muzee.productoverview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.muzee.data.Product
 import com.example.muzee.databinding.ProductItemBinding
 
-class ProductOverviewAdapter :
+class ProductOverviewAdapter(private  val onClickListener: OnClickListener) :
     ListAdapter<Product, ProductOverviewAdapter.ProductViewHolder>(DiffCallback) {
 
     class ProductViewHolder(
@@ -31,6 +31,9 @@ class ProductOverviewAdapter :
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val item = getItem(position)
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(item)
+        }
         holder.bind(item)
     }
 
@@ -42,5 +45,9 @@ class ProductOverviewAdapter :
         override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
             return oldItem.productPrice == newItem.productPrice
         }
+    }
+
+    class OnClickListener(val clickListener: (product: Product) -> Unit) {
+        fun onClick(product: Product) = clickListener(product)
     }
 }
