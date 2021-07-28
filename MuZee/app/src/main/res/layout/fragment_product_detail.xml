@@ -58,11 +58,12 @@
 
                 <TextView
                     android:id="@+id/product_title_detail"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@{viewModel.selectedProduct.productTitle}"
                     android:textColor="#de000000"
                     android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="Nord Piano 4 88-Key Digital Piano" />
@@ -209,11 +210,12 @@
 
                 <TextView
                     android:id="@+id/description"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="@string/test_description"
                     android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/textView11"
                     app:layout_constraintTop_toBottomOf="@+id/textView11"
                     tools:text="General  \n- 88-note Triple Sensor keybed with grand weighted action  \n- Nord Virtual Hammer Action Technology   \n- Seamless Transitions NEW  \n- Layer and Split with Split Point crossfades NEW  \n- OLED display for excellent overview   \n- Enhanced Organize Mode NEW  \n- Numeric Pad for direct Program access  NEW " />
