@@ -58,7 +58,7 @@
             android:id="@+id/totalLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/totalLabel"
+            android:text="@string/total_label"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/orderStatus"

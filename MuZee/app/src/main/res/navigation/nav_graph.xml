@@ -11,26 +11,39 @@
         android:label="fragment_main_screen_seller"
         tools:layout="@layout/fragment_main_screen_seller" >
         <action
-            android:id="@+id/action_mainScreenSellerFragment_to_sellerProductFragment"
-            app:destination="@id/sellerProductFragment" />
-        <action
             android:id="@+id/action_mainScreenSellerFragment_to_sellerOrderFragment"
             app:destination="@id/sellerOrderFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/sellerProductFragment"
-        android:name="com.example.muzee.seller.SellerProductFragment"
-        android:label="SellerProductFragment" >
         <action
-            android:id="@+id/action_sellerProductFragment_to_addNewProductFragment"
-            app:destination="@id/addNewProductFragment" />
+            android:id="@+id/action_mainScreenSellerFragment_to_sellerProductOverviewFragment"
+            app:destination="@id/sellerProductOverviewFragment" />
     </fragment>
     <fragment
         android:id="@+id/sellerOrderFragment"
-        android:name="com.example.muzee.seller.SellerOrderFragment"
-        android:label="SellerOrderFragment" />
+        android:name="com.example.muzee.seller.order_overview.SellerOrderFragment"
+        android:label="SellerOrderFragment" >
+        <action
+            android:id="@+id/action_sellerOrderFragment_to_sellerOrderDetailFragment22"
+            app:destination="@id/sellerOrderDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addNewProductFragment"
-        android:name="com.example.muzee.seller.AddNewProductFragment"
+        android:name="com.example.muzee.seller.product.AddNewProductFragment"
         android:label="AddNewProductFragment" />
+    <fragment
+        android:id="@+id/sellerOrderDetailFragment"
+        android:name="com.example.muzee.seller.order_detail.SellerOrderDetailFragment"
+        android:label="SellerOrderDetailFragment"
+        tools:layout="@layout/fragment_seller_order_detail">
+        <argument
+            android:name="selectedOrder"
+            app:argType="com.example.muzee.data.Order"/>
+    </fragment>
+    <fragment
+        android:id="@+id/sellerProductOverviewFragment"
+        android:name="com.example.muzee.seller.product.SellerProductOverviewFragment"
+        android:label="SellerProductOverviewFragment" >
+        <action
+            android:id="@+id/action_sellerProductOverviewFragment_to_addNewProductFragment"
+            app:destination="@id/addNewProductFragment" />
+    </fragment>
 </navigation>

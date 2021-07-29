@@ -1,16 +1,15 @@
-package com.example.muzee.seller
+package com.example.muzee.seller.order_overview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.muzee.R
 import com.example.muzee.data.SellerOrder
 import com.example.muzee.databinding.OrderSellerItemBinding
 
-class OrderAdapter :
-    ListAdapter<SellerOrder, OrderAdapter.OrderViewHolder>(DiffCallback) {
+class SellerOrderAdapter(private  val onClickListener: OnClickListener) :
+    ListAdapter<SellerOrder, SellerOrderAdapter.OrderViewHolder>(DiffCallback) {
 
     class OrderViewHolder(
         private var binding: OrderSellerItemBinding
@@ -44,11 +43,15 @@ class OrderAdapter :
         override fun areContentsTheSame(oldItem: SellerOrder, newItem: SellerOrder): Boolean {
             return oldItem.orderId == newItem.orderId
                     && oldItem.orderAddress == newItem.orderAddress
-                    //&& oldItem.orderedProducts == newItem.orderedProducts
+                    && oldItem.orderedProducts == newItem.orderedProducts
                     && oldItem.itemTotal == newItem.itemTotal
                     && oldItem.deliveryCharges == newItem.deliveryCharges
                     && oldItem.orderStatus == newItem.orderStatus
                     && oldItem.storeName == newItem.storeName
         }
+    }
+
+    class OnClickListener(val clickListener: (order: SellerOrder) -> Unit) {
+        fun onClick(order: SellerOrder) = clickListener(order)
     }
 }

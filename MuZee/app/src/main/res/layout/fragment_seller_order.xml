@@ -5,42 +5,34 @@
     <data>
         <variable
             name="sellerOrderFragment"
-            type="com.example.muzee.seller.SellerOrderFragment" />
+            type="com.example.muzee.seller.order_overview.SellerOrderFragment" />
         <variable
             name="orderViewModel"
-            type="com.example.muzee.seller.OrderViewModel" />
+            type="com.example.muzee.seller.order_overview.OrderViewModel" />
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
-        <FrameLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".seller.SellerOrderFragment">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            android:fillViewport="true"
+            android:layout_marginTop="81dp">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:context="com.example.muzee.seller.SellerOrderFragment">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                    app:spanCount="1"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    listSellerOrder="@{orderViewModel.listOfOrders}"
-                    tools:itemCount="3"
-                    tools:listitem="@layout/order_seller_item"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </FrameLayout>
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                listSellerOrder="@{orderViewModel.listOfOrders}"
+                tools:itemCount="10"
+                tools:listitem="@layout/order_seller_item"/>
+        </ScrollView>
     </androidx.drawerlayout.widget.DrawerLayout>
 </layout>

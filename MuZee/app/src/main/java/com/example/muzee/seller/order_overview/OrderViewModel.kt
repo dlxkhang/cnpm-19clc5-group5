@@ -1,4 +1,4 @@
-package com.example.muzee.seller
+package com.example.muzee.seller.order_overview
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -14,6 +14,10 @@ class OrderViewModel : ViewModel() {
     private val _listOfOrders = MutableLiveData<List<SellerOrder>>()
     val listOfOrders: LiveData<List<SellerOrder>> = _listOfOrders
 
+    private val _navigateToSelectedOrder = MutableLiveData<SellerOrder>()
+    val navigateToSelectedOrder: LiveData<SellerOrder>
+        get() = _navigateToSelectedOrder
+
     init {
         getListOfOrders()
     }
@@ -23,5 +27,13 @@ class OrderViewModel : ViewModel() {
         viewModelScope.launch {
             _listOfOrders.value = Datasource().loadOrder()
         }
+    }
+
+    fun displayOrderDetail(order: SellerOrder) {
+        _navigateToSelectedOrder.value = order
+    }
+
+    fun displayPropertyDetailsComplete() {
+        _navigateToSelectedOrder.value = null
     }
 }
