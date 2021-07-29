@@ -12,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.muzee.productoverview.ProductOverviewFragment">
+        tools:context="com.example.muzee.cart.CartFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
@@ -40,7 +40,7 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <Button
-                android:id="@+id/payment_button"
+                android:id="@+id/place_order_button"
                 style="@style/button_style"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -58,9 +58,9 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="8dp"
                 android:orientation="horizontal"
-                app:layout_constraintBottom_toTopOf="@+id/payment_button"
-                app:layout_constraintEnd_toEndOf="@+id/payment_button"
-                app:layout_constraintStart_toStartOf="@+id/payment_button"
+                app:layout_constraintBottom_toTopOf="@+id/place_order_button"
+                app:layout_constraintEnd_toEndOf="@+id/place_order_button"
+                app:layout_constraintStart_toStartOf="@+id/place_order_button"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
