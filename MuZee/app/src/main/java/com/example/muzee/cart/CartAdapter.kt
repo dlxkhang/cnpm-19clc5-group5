@@ -25,7 +25,7 @@ class CartAdapter :
         viewType: Int
     ): CartAdapter.CartViewHolder {
         return CartAdapter.CartViewHolder(
-            ProductItemCartBinding.inflate(LayoutInflater.from(parent.context))
+            ProductItemCartBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 
