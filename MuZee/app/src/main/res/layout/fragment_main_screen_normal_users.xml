@@ -13,30 +13,32 @@
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawerLayoutNormal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        tools:openDrawer="start">
+        android:layout_height="match_parent">
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
             tools:context=".normalUsers.mainScreenNormalUsersFragment">
+            <!--    TOOLBAR HERE-->
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/hello_blank_fragment" />
-        </FrameLayout>
-
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/search_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginBottom="16dp"
+                    app:iconifiedByDefault="true"
+                    app:queryHint="@string/search_hint"/>
+        </LinearLayout>
+        <!--    NavigationView HERE-->
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/nav_view"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:fitsSystemWindows="true"
             app:headerLayout="@layout/nav_header_normal_users"
-            app:menu="@menu/nav_menu_normal_users">
-
-        </com.google.android.material.navigation.NavigationView>
+            app:menu="@menu/nav_menu_normal_users" />
     </androidx.drawerlayout.widget.DrawerLayout>
 </layout>

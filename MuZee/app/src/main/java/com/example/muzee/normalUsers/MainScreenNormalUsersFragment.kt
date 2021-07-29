@@ -5,6 +5,7 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.fragment.findNavController
 import com.example.muzee.R
@@ -33,10 +34,9 @@ class MainScreenNormalUsersFragment : Fragment() {
         toggle = ActionBarDrawerToggle(activity,drawer_layout, R.string.open,R.string.close)
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
-
         val activity = activity as AppCompatActivity?// get activity
         activity!!.supportActionBar?.setDisplayHomeAsUpEnabled(true)// make toggle button visible
-        activity!!.supportActionBar?.setHomeButtonEnabled(true)
+        //activity!!.supportActionBar?.setHomeButtonEnabled(true)
         activity!!.supportActionBar?.setTitle(R.string.app_name)// set title text for main screen
 
         //handle onClick event on menu Items
@@ -44,11 +44,13 @@ class MainScreenNormalUsersFragment : Fragment() {
             when(it.itemId){
                 R.id.homeItem_normalUser ->{
                     drawer_layout.closeDrawers()
-
                 }
                 R.id.categoriesItem->{
                     findNavController().navigate(R.id.action_mainScreenNormalUsersFragment_to_categoryFragment)
 
+                }
+                R.id.cart_item->{
+                    findNavController().navigate(R.id.action_mainScreenNormalUsersFragment_to_cartFragment)
                 }
                 //R.id.myOrderItem->{true}
                 //R.id.myShopItem->{true}
@@ -58,7 +60,6 @@ class MainScreenNormalUsersFragment : Fragment() {
 
             }
             true
-
         }
 
         return fragmentbinding.root
