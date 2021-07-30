@@ -19,16 +19,20 @@
         android:title="@string/my_order_item" />
     <item
         android:id="@+id/myShopItem"
-        android:icon="@drawable/ic_baseline_store_24"
+        android:icon="@drawable/ic_shopping_cart"
+        app:actionLayout="@layout/my_shop_item"
         android:title="@string/my_shop_item">
 
     </item>
+
     <item
         android:id="@+id/productItem"
-        android:title="@string/my_product" />
+        android:title="@string/my_product"
+        android:visible="false" />
     <item
         android:id="@+id/offersItem"
-        android:title="@string/offers_item" />
+        android:title="@string/offers_item"
+        android:visible="false" />
 
     <item
         android:id="@+id/switchMode"

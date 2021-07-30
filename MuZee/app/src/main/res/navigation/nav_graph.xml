@@ -44,6 +44,9 @@
         <action
             android:id="@+id/action_mainScreenNormalUsersFragment_to_cartFragment"
             app:destination="@id/cartFragment" />
+        <action
+            android:id="@+id/action_mainScreenNormalUsersFragment_to_oldProductStoreFragment"
+            app:destination="@id/oldProductStoreFragment" />
     </fragment>
     <fragment
         android:id="@+id/categoryFragment"
@@ -61,5 +64,10 @@
         android:name="com.example.muzee.CartFragment"
         android:label="fragment_cart"
         tools:layout="@layout/fragment_cart" />
+    <fragment
+        android:id="@+id/oldProductStoreFragment"
+        android:name="com.example.muzee.normalUsers.oldProductStoreFragment"
+        android:label="fragment_old_product_store"
+        tools:layout="@layout/fragment_old_product_store" />
 
 </navigation>

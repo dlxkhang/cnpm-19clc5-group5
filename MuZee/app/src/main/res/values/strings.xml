@@ -52,5 +52,9 @@
     // toolbar menu item
     <string name="cart_item">Cart</string>
 
+    // old product frame
+    <string name="old_fragment_label">Your store</string>
+    <string name="post_button">Post</string>
+
 
 </resources>
