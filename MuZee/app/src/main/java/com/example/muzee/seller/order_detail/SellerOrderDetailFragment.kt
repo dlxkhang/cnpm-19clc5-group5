@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.muzee.data.SellerOrder
 import com.example.muzee.databinding.FragmentSellerOrderDetailBinding
 
 class SellerOrderDetailFragment : Fragment() {
@@ -15,9 +17,11 @@ class SellerOrderDetailFragment : Fragment() {
         val binding = FragmentSellerOrderDetailBinding.inflate(inflater)
         binding.lifecycleOwner = this
         val order = SellerOrderDetailFragmentArgs.fromBundle(requireArguments()).selectedOrder
-        val viewModelFactory = SellerOrderDetailViewModelFactory(order, application)
+        val viewModelFactory = SellerOrderDetailViewModelFactory(order as SellerOrder, application)
         binding.viewModel = ViewModelProvider(
             this, viewModelFactory).get(SellerOrderDetailViewModel::class.java)
+        val activity = activity as AppCompatActivity? // get activity
+        activity!!.supportActionBar?.setTitle("Order Detail") // set title text for seller order detail screen
         return binding.root
     }
 }

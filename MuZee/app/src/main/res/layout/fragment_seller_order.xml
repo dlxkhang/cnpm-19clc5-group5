@@ -14,7 +14,8 @@
     <androidx.drawerlayout.widget.DrawerLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true"
+        android:background="@color/gray">
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -31,7 +32,6 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 listSellerOrder="@{orderViewModel.listOfOrders}"
-                tools:itemCount="10"
                 tools:listitem="@layout/order_seller_item"/>
         </ScrollView>
     </androidx.drawerlayout.widget.DrawerLayout>

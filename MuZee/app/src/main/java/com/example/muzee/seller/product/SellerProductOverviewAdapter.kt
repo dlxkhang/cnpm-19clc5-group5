@@ -25,7 +25,7 @@ class SellerProductOverviewAdapter :
         viewType: Int
     ): ProductViewHolder {
         return ProductViewHolder(
-            ProductItemBinding.inflate(LayoutInflater.from(parent.context))
+            ProductItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 

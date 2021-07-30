@@ -25,13 +25,16 @@ class SellerOrderAdapter(private  val onClickListener: OnClickListener) :
         viewType: Int
     ): OrderViewHolder {
         return OrderViewHolder(
-            OrderSellerItemBinding.inflate(LayoutInflater.from(parent.context))
+            OrderSellerItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         )
     }
 
     override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {
         val item = getItem(position)
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(item)
+        }
         holder.bind(item)
     }
 
@@ -47,7 +50,7 @@ class SellerOrderAdapter(private  val onClickListener: OnClickListener) :
                     && oldItem.itemTotal == newItem.itemTotal
                     && oldItem.deliveryCharges == newItem.deliveryCharges
                     && oldItem.orderStatus == newItem.orderStatus
-                    && oldItem.storeName == newItem.storeName
+                    && oldItem.customerName == newItem.customerName
         }
     }
 
