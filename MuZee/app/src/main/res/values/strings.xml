@@ -55,6 +55,7 @@
     // old product frame
     <string name="old_fragment_label">Your store</string>
     <string name="post_button">Post</string>
+    <string name="next">Next</string>
 
 
 </resources>
