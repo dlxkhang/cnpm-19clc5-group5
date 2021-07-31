@@ -36,8 +36,7 @@
     <fragment
         android:id="@+id/productOverviewFragment"
         android:name="com.example.muzee.productoverview.ProductOverviewFragment"
-        android:label="ProductOverviewFragment"
-        tools:layout="@layout/fragment_product_overview">
+        android:label="ProductOverviewFragment">
         <action
             android:id="@+id/action_showDetail"
             app:destination="@id/productDetailFragment" />
@@ -55,5 +54,14 @@
         android:id="@+id/cartFragment"
         android:name="com.example.muzee.cart.CartFragment"
         android:label="CartFragment"
-        tools:layout="@layout/fragment_cart"/>
+        tools:layout="@layout/fragment_cart">
+        <action
+            android:id="@+id/action_cartFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentFragment"
+        android:name="com.example.muzee.payment.PaymentFragment"
+        android:label="PaymentFragment"
+        tools:layout="@layout/fragment_payment"/>
 </navigation>

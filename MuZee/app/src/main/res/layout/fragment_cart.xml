@@ -7,6 +7,9 @@
         <variable
             name="viewModel"
             type="com.example.muzee.cart.CartViewModel" />
+        <variable
+            name="cartFragment"
+            type="com.example.muzee.cart.CartFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -42,6 +45,7 @@
             <Button
                 android:id="@+id/place_order_button"
                 style="@style/button_style"
+                android:onClick="@{() -> cartFragment.goToPayment()}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
