@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/addNewProductFragment"
-        android:name="com.example.muzee.seller.product.AddNewProductFragment"
+        android:name="com.example.muzee.seller.product_overview.AddNewProductFragment"
         android:label="AddNewProductFragment" />
     <fragment
         android:id="@+id/sellerOrderDetailFragment"
@@ -40,10 +40,21 @@
     </fragment>
     <fragment
         android:id="@+id/sellerProductOverviewFragment"
-        android:name="com.example.muzee.seller.product.SellerProductOverviewFragment"
+        android:name="com.example.muzee.seller.product_overview.SellerProductOverviewFragment"
         android:label="SellerProductOverviewFragment" >
         <action
             android:id="@+id/action_sellerProductOverviewFragment_to_addNewProductFragment"
             app:destination="@id/addNewProductFragment" />
+        <action
+            android:id="@+id/action_sellerProductOverviewFragment_to_sellerProductDetailFragment"
+            app:destination="@id/sellerProductDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sellerProductDetailFragment"
+        android:name="com.example.muzee.seller.product_detail.SellerProductDetailFragment"
+        android:label="SellerProductDetailFragment" >
+        <argument
+            android:name="selectedProduct"
+            app:argType="com.example.muzee.data.Product" />
     </fragment>
 </navigation>

@@ -16,6 +16,9 @@ class SellerOrderDetailFragment : Fragment() {
         val application = requireNotNull(activity).application
         val binding = FragmentSellerOrderDetailBinding.inflate(inflater)
         binding.lifecycleOwner = this
+
+        binding.recyclerView.adapter = SellerOrderDetailAdapter()
+
         val order = SellerOrderDetailFragmentArgs.fromBundle(requireArguments()).selectedOrder
         val viewModelFactory = SellerOrderDetailViewModelFactory(order as SellerOrder, application)
         binding.viewModel = ViewModelProvider(

@@ -6,10 +6,10 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.muzee.seller.product.SellerProductOverviewViewModel" />
+            type="com.example.muzee.seller.product_overview.SellerProductOverviewViewModel" />
         <variable
             name="sellerProductOverviewFragment"
-            type="com.example.muzee.seller.product.SellerProductOverviewFragment" />
+            type="com.example.muzee.seller.product_overview.SellerProductOverviewFragment" />
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout

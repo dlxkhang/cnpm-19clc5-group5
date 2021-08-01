@@ -21,7 +21,16 @@ class Datasource {
             Product("Yamaha1 Revstar RS620 Electronic Guitar", 714.0),
             Product("Nord2 Piano 4 88-Key Digital Piano", 2.999),
             Product("Guitar2 Bass Yamaha TRBX174", 200.0),
-            Product("Yamaha2 Revstar RS620 Electronic Guitar", 714.0)
+            Product("Yamaha2 Revstar RS620 Electronic Guitar", 714.0),
+            Product("Nord Piano 4 88-Key Digital Piano", 2.999),
+            Product("Guitar Bass Yamaha TRBX174", 200.0),
+            Product("Yamaha Revstar RS620 Electronic Guitar", 714.0),
+            Product("Nord1 Piano 4 88-Key Digital Piano", 2.999),
+            Product("Guitar1 Bass Yamaha TRBX174", 200.0),
+            Product("Yamaha1 Revstar RS620 Electronic Guitar", 714.0),
+            Product("Nord2 Piano 4 88-Key Digital Piano", 2.999),
+            Product("Guitar2 Bass Yamaha TRBX174", 200.0),
+            Product("Yamaha2 Revstar123 RS620 Electronic Guitar", 714.0)
         )
     }
 }

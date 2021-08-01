@@ -1,4 +1,4 @@
-package com.example.muzee.seller.product
+package com.example.muzee.seller.product_overview
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -31,7 +31,16 @@ class SellerProductOverviewFragment : Fragment() {
         // Giving the binding access to the OverviewViewModel
         binding.viewModel = viewModel
         // Sets the adapter of the photosGrid RecyclerView
-        binding.recyclerView.adapter = SellerProductOverviewAdapter()
+        binding.recyclerView.adapter = SellerProductOverviewAdapter(SellerProductOverviewAdapter.OnClickListener {
+            viewModel.displayProductDetail(it)
+        })
+
+        viewModel.navigateToSelectedProduct.observe(viewLifecycleOwner, Observer {
+            if (null != it) {
+                this.findNavController().navigate(SellerProductOverviewFragmentDirections.actionSellerProductOverviewFragmentToSellerProductDetailFragment(it))
+                viewModel.displayPropertyDetailsComplete()
+            }
+        })
 
         return binding.root
     }

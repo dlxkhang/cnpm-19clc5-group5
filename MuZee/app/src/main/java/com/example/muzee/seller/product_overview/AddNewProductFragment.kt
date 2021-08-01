@@ -1,4 +1,4 @@
-package com.example.muzee.seller.product
+package com.example.muzee.seller.product_overview
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

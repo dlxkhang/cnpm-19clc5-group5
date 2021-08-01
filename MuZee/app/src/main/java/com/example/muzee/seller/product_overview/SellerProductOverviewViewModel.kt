@@ -1,4 +1,4 @@
-package com.example.muzee.seller.product
+package com.example.muzee.seller.product_overview
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,6 +13,10 @@ class SellerProductOverviewViewModel : ViewModel() {
     private val _products = MutableLiveData<List<Product>>()
     val products: LiveData<List<Product>> = _products
 
+    private val _navigateToSelectedProduct = MutableLiveData<Product>()
+    val navigateToSelectedProduct: LiveData<Product>
+        get() = _navigateToSelectedProduct
+
     init {
         getProducts()
     }
@@ -22,5 +26,13 @@ class SellerProductOverviewViewModel : ViewModel() {
         viewModelScope.launch {
             _products.value = Datasource().loadProduct()
         }
+    }
+
+    fun displayProductDetail(product: Product) {
+        _navigateToSelectedProduct.value = product
+    }
+
+    fun displayPropertyDetailsComplete() {
+        _navigateToSelectedProduct.value = null
     }
 }

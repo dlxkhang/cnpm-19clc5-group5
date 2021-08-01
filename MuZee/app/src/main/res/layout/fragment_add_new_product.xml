@@ -6,7 +6,7 @@
     <data>
         <variable
             name="addNewProductFragment"
-            type="com.example.muzee.seller.product.AddNewProductFragment" />
+            type="com.example.muzee.seller.product_overview.AddNewProductFragment" />
     </data>
     <androidx.drawerlayout.widget.DrawerLayout
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".seller.product.AddNewProductFragment"
+            tools:context=".seller.product_overview.AddNewProductFragment"
             android:fitsSystemWindows="true">
 
             <androidx.constraintlayout.widget.ConstraintLayout
