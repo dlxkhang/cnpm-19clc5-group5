@@ -2,12 +2,21 @@ package com.example.muzee.data
 
 class Datasource {
 
-    fun loadOrder(): List<SellerOrder> {
+    fun loadSellerOrder(): List<SellerOrder> {
         return listOf<SellerOrder>(
-            SellerOrder("1234", "341 khuong viet", loadProduct(),700.0, 50.5, "On-going", "Khang Music"),
-            SellerOrder("1234", "341 khuong viet", loadProduct(),700.0, 50.5, "On-going", "Khang Music"),
-            SellerOrder("1234", "341 khuong viet", loadProduct(),700.0, 50.5, "On-going", "Khang Music"),
-            SellerOrder("1234", "341 khuong viet", loadProduct(),700.0, 50.5, "On-going", "Khang Music")
+            SellerOrder("1234", "341 khuong viet", loadProduct(),700.0, 50.5, "On-going", "Khang Duong"),
+            SellerOrder("1234", "341 khuong viet", loadProduct(),700.0, 50.5, "On-going", "Khang Duong"),
+            SellerOrder("1234", "341 khuong viet", loadProduct(),700.0, 50.5, "On-going", "Khang Duong"),
+            SellerOrder("1234", "341 khuong viet", loadProduct(),700.0, 50.5, "On-going", "Khang Duong")
+        )
+    }
+
+    fun loadOrder(): List<NormalUserOrder> {
+        return listOf<NormalUserOrder>(
+            NormalUserOrder("1234", "341 khuong viet", loadProduct(),700.0, 50.5, "On-going", "Khang Music"),
+            NormalUserOrder("1234", "341 khuong viet", loadProduct(),700.0, 50.5, "On-going", "Khang Music"),
+            NormalUserOrder("1234", "341 khuong viet", loadProduct(),700.0, 50.5, "On-going", "Khang Music"),
+            NormalUserOrder("1234", "341 khuong viet", loadProduct(),700.0, 50.5, "On-going", "Khang Music")
         )
     }
 

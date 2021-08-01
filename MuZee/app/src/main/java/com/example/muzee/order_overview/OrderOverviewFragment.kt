@@ -1,4 +1,4 @@
-package com.example.muzee.seller.order_overview
+package com.example.muzee.order_overview
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,19 +8,19 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.muzee.databinding.FragmentSellerOrderBinding
+import com.example.muzee.databinding.FragmentOrderOverviewBinding
 
 
-class SellerOrderFragment : Fragment() {
+class OrderOverviewFragment : Fragment() {
 
-    private val viewModel: SellerOrderViewModel by viewModels()
-    private var binding: FragmentSellerOrderBinding? = null // binding fragment_seller_order.xml
+    private val viewModel: OrderOverviewViewModel by viewModels()
+    private var binding: FragmentOrderOverviewBinding? = null // binding fragment_seller_order.xml
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // setup data binding
-        val fragmentBinding = FragmentSellerOrderBinding.inflate(inflater, container, false)
+        val fragmentBinding = FragmentOrderOverviewBinding.inflate(inflater, container, false)
         binding = fragmentBinding
 
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
@@ -32,13 +32,13 @@ class SellerOrderFragment : Fragment() {
         val activity = activity as AppCompatActivity? // get activity
         activity!!.supportActionBar?.setTitle("Order List") // set title text for seller order screen
 
-        binding!!.recyclerView.adapter = SellerOrderAdapter(SellerOrderAdapter.OnClickListener {
+        binding!!.recyclerView.adapter = OrderOverviewAdapter(OrderOverviewAdapter.OnClickListener {
             viewModel.displayOrderDetail(it)
         })
 
         viewModel.navigateToSelectedOrder.observe(viewLifecycleOwner, {
             if (null != it) {
-                this.findNavController().navigate(SellerOrderFragmentDirections.actionSellerOrderFragmentToSellerOrderDetailFragment22(it))
+                this.findNavController().navigate(OrderOverviewFragmentDirections.actionOrderOverviewFragmentToOrderDetailFragment(it))
                 viewModel.displayPropertyDetailsComplete()
             }
         })

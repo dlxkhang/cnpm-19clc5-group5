@@ -36,7 +36,7 @@
         tools:layout="@layout/fragment_seller_order_detail">
         <argument
             android:name="selectedOrder"
-            app:argType="com.example.muzee.data.Order"/>
+            app:argType="com.example.muzee.data.SellerOrder"/>
     </fragment>
     <fragment
         android:id="@+id/sellerProductOverviewFragment"
@@ -56,5 +56,21 @@
         <argument
             android:name="selectedProduct"
             app:argType="com.example.muzee.data.Product" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderOverviewFragment"
+        android:name="com.example.muzee.order_overview.OrderOverviewFragment"
+        android:label="OrderOverviewFragment" >
+        <action
+            android:id="@+id/action_orderOverviewFragment_to_orderDetailFragment"
+            app:destination="@id/orderDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderDetailFragment"
+        android:name="com.example.muzee.order_detail.OrderDetailFragment"
+        android:label="OrderDetailFragment" >
+        <argument
+            android:name="selectedOrder"
+            app:argType="com.example.muzee.data.NormalUserOrder" />
     </fragment>
 </navigation>

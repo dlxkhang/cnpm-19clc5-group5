@@ -9,7 +9,7 @@ import com.example.muzee.data.Order
 import com.example.muzee.data.SellerOrder
 import kotlinx.coroutines.launch
 
-class OrderViewModel : ViewModel() {
+class SellerOrderViewModel : ViewModel() {
 
     private val _listOfOrders = MutableLiveData<List<SellerOrder>>()
     val listOfOrders: LiveData<List<SellerOrder>> = _listOfOrders
@@ -25,7 +25,7 @@ class OrderViewModel : ViewModel() {
     private fun getListOfOrders() {
 
         viewModelScope.launch {
-            _listOfOrders.value = Datasource().loadOrder()
+            _listOfOrders.value = Datasource().loadSellerOrder()
         }
     }
 
