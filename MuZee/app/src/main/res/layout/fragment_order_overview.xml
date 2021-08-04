@@ -5,10 +5,10 @@
     <data>
         <variable
             name="sellerOrderFragment"
-            type="com.example.muzee.seller.order_overview.SellerOrderFragment" />
+            type="com.example.muzee.order_overview.OrderOverviewFragment" />
         <variable
             name="orderViewModel"
-            type="com.example.muzee.seller.order_overview.SellerOrderViewModel" />
+            type="com.example.muzee.order_overview.OrderOverviewViewModel" />
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout
@@ -31,8 +31,8 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                listSellerOrder="@{orderViewModel.listOfOrders}"
-                tools:listitem="@layout/order_seller_item"/>
+                listOrder="@{orderViewModel.listOfOrders}"
+                tools:listitem="@layout/order_item"/>
         </ScrollView>
     </androidx.drawerlayout.widget.DrawerLayout>
 </layout>
