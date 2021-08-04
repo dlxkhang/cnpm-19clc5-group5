@@ -57,5 +57,25 @@
     <string name="post_button">Post</string>
     <string name="next">Next</string>
 
+    // add product
+    <string name="add_old_product_fragment">Add product</string>
+    <string name="add_product_image">Add product image</string>
+    <string name="enter_product_details">Enter product details</string>
+    <string name="add_product_category">Product category</string>
+    <string name="add_product_name">Product name</string>
+    <string name="add_product_price">Product price</string>
+    <string name="add_product_description">Product description</string>
+    <string name="btn_confirm_label">Confirm</string>
+    <string name="required_help_text">Required*</string>
+    // error:
+    <string name="error_text_CATEGORY">Select a category</string>
+    <string name="error_text_PRODUCT_NAME">Enter product name</string>
+    <string name="error_text_PRODUCT_PRICE">Enter product price</string>
+    <string name="view">View</string>
+    <string name="edit">Edit</string>
+    <string name="myShopFragment">My Shop</string>
+    <string name="old_shopping">Old shopping mode</string>
+    <string name="new_shopping">New shopping mode</string>
+
 
 </resources>

@@ -22,7 +22,7 @@ class CategoryFragment : Fragment(){
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val fragmentbinding = FragmentCategoryBinding.inflate(inflater,container,false)
         binding = fragmentbinding
         return fragmentbinding.root
