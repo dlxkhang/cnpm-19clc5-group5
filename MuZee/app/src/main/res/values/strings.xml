@@ -60,4 +60,65 @@
     <string name="shipping_to">Shipping to</string>
     <string name="test_shipping_profile">David Dean | 0908999888</string>
     <string name="test_address">Adr: 246 Cong Hoa, Q.Tan Binh, Ho Chi Minh</string>
+
+    //Main screen normal user
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    // Search View
+    <string name="search_hint">What are you looking for today?</string>
+
+    //Category screen
+    <string name="pianoLabel">Piano</string>
+    <string name="bass_guitar">Bass Guitar</string>
+    <string name="acoustic_guitar">Acoustic Guitar</string>
+    <string name="electric_guitar">Electric Guitar</string>
+    <string name="drum">Drum</string>
+    <string name="organ">Organ</string>
+    <string name="todo">TODO</string>
+    <string name="category_fragment_label">Category</string>
+    // search key when clicking on the image
+    <string name="piano_search">piano</string>
+    <string name="organ_search">organ</string>
+    <string name="drum_search">drum</string>
+    <string name="guitar_search">guitar</string>
+    <string name="electric_search">electric</string>
+    <string name="bass_search">bass</string>
+
+    // Nav menu item for normal users
+    <string name="category_item">Categories</string>
+    <string name="my_order_item">My order</string>
+    <string name="my_shop_item">My shop</string>
+    <string name="my_product">My product</string>
+    <string name="offers_item">Offers</string>
+    <string name="switch_shopping_mode_item">Switching mode</string>
+    <string name="customer_support_item">Customer support</string>
+    <string name="username_header_navigation">TDN123</string>
+
+    // toolbar menu item
+    <string name="cart_item">Cart</string>
+
+    // old product frame
+    <string name="old_fragment_label">Your store</string>
+    <string name="post_button">Post</string>
+    <string name="next">Next</string>
+
+    // add product
+    <string name="add_old_product_fragment">Add product</string>
+    <string name="add_product_image">Add product image</string>
+    <string name="enter_product_details">Enter product details</string>
+    <string name="add_product_category">Product category</string>
+    <string name="add_product_name">Product name</string>
+    <string name="add_product_price">Product price</string>
+    <string name="add_product_description">Product description</string>
+    <string name="btn_confirm_label">Confirm</string>
+    <string name="required_help_text">Required*</string>
+    // error:
+    <string name="error_text_CATEGORY">Select a category</string>
+    <string name="error_text_PRODUCT_NAME">Enter product name</string>
+    <string name="error_text_PRODUCT_PRICE">Enter product price</string>
+    <string name="view">View</string>
+    <string name="edit">Edit</string>
+    <string name="myShopFragment">My Shop</string>
+    <string name="old_shopping">Old shopping mode</string>
+    <string name="new_shopping">New shopping mode</string>
+
 </resources>
