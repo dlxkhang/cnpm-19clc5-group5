@@ -25,7 +25,7 @@ class ProductOverviewAdapter(private  val onClickListener: OnClickListener) :
         viewType: Int
     ): ProductViewHolder {
         return ProductViewHolder(
-            ProductItemBinding.inflate(LayoutInflater.from(parent.context))
+            ProductItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 

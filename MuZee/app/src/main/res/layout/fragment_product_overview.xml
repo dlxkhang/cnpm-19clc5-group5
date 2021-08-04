@@ -12,10 +12,12 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/gray"
         tools:context="com.example.muzee.productoverview.ProductOverviewFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
+            listData="@{viewModel.products}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -23,9 +25,8 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            listData="@{viewModel.products}"
             tools:itemCount="3"
-            tools:listitem="@layout/product_item"/>
+            tools:listitem="@layout/product_item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

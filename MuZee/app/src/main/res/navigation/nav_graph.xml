@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/cartFragment">
+    app:startDestination="@id/productOverviewFragment">
 
     <fragment
         android:id="@+id/mainScreenSellerFragment"
@@ -36,7 +36,8 @@
     <fragment
         android:id="@+id/productOverviewFragment"
         android:name="com.example.muzee.productoverview.ProductOverviewFragment"
-        android:label="ProductOverviewFragment">
+        android:label="ProductOverviewFragment"
+        tools:layout="@layout/fragment_product_overview">
         <action
             android:id="@+id/action_showDetail"
             app:destination="@id/productDetailFragment" />
