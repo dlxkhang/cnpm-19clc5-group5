@@ -120,6 +120,9 @@
         <action
             android:id="@+id/action_mainScreenNormalUsersFragment_to_oldProductStoreFragment"
             app:destination="@id/oldProductStoreFragment" />
+        <action
+            android:id="@+id/action_mainScreenNormalUsersFragment_to_orderOverviewFragment"
+            app:destination="@id/orderOverviewFragment" />
     </fragment>
     <fragment
         android:id="@+id/categoryFragment"

@@ -102,6 +102,7 @@ class MainScreenNormalUsersFragment : Fragment() {
             findNavController().navigate(R.id.action_mainScreenNormalUsersFragment_to_cartFragment)
             return true
         }
+
         return super.onOptionsItemSelected(item)
     }
 

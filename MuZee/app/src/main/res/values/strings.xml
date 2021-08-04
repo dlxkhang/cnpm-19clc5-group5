@@ -36,8 +36,6 @@
 
     // Product detail
     <string name="display_price">$%,.0f</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="detail">Detail</string>
     <string name="category">Category</string>
     <string name="make">Make</string>
@@ -115,7 +113,6 @@
     <string name="error_text_CATEGORY">Select a category</string>
     <string name="error_text_PRODUCT_NAME">Enter product name</string>
     <string name="error_text_PRODUCT_PRICE">Enter product price</string>
-    <string name="view">View</string>
     <string name="edit">Edit</string>
     <string name="myShopFragment">My Shop</string>
     <string name="old_shopping">Old shopping mode</string>

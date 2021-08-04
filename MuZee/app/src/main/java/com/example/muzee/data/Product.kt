@@ -1,19 +1,18 @@
 package com.example.muzee.data
 
 import android.os.Parcel
-import android.os.ParcelFileDescriptor
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
-import java.net.URI
 
 @Parcelize
-open class Product (
+open class Product(
     var productCategory: Category,
     var productName:String,
     var productPrice:Double,
     var sellerName:String,
-    var imageURI: URI? = null,
+    var imageURI: String? = null,
     var productDescription:String? = null): Parcelable
+
 
 class oldProduct(
     product_category: Category,

@@ -17,13 +17,13 @@ import com.example.muzee.seller.order_overview.SellerOrderAdapter
 import com.example.muzee.seller.product_overview.SellerProductOverviewAdapter
 
 @BindingAdapter("listData")
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<Product>?) {
+fun bindRecyclerViewProductOverview(recyclerView: RecyclerView, data: List<Product>?) {
     val adapter = recyclerView.adapter as ProductOverviewAdapter
     adapter.submitList(data)
 }
 
 @BindingAdapter("listData1")
-fun bindRecyclerView1(recyclerView: RecyclerView, data: List<Product>?) {
+fun bindRecyclerViewProductCart(recyclerView: RecyclerView, data: List<Product>?) {
     val adapter = recyclerView.adapter as CartAdapter
     adapter.submitList(data)
 }
@@ -65,7 +65,7 @@ fun bindRecyclerViewOrderDetail(recyclerView: RecyclerView, data: List<Product>?
 }
 
 @BindingAdapter("listOldData")
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<oldProduct>?) {
+fun bindRecyclerViewOldProduct(recyclerView: RecyclerView, data: List<oldProduct>?) {
     val adapter = recyclerView.adapter as OldProductAdapter
     adapter.submitList(data)
 }
