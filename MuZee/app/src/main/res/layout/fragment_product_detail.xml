@@ -60,7 +60,7 @@
                     android:id="@+id/product_title_detail"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@{viewModel.selectedProduct.productTitle}"
+                    android:text="@{viewModel.selectedProduct.productName}"
                     android:textColor="#de000000"
                     android:textSize="20sp"
                     app:layout_constraintEnd_toEndOf="parent"

@@ -22,7 +22,7 @@
             style="@style/text_style"
             android:layout_width="0dp"
             android:layout_marginStart="16dp"
-            android:text="@{product.productTitle}"
+            android:text="@{product.productName}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

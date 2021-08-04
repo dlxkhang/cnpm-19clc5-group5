@@ -6,6 +6,8 @@ import com.example.muzee.cart.CartAdapter
 import com.example.muzee.data.NormalUserOrder
 import com.example.muzee.data.Product
 import com.example.muzee.data.SellerOrder
+import com.example.muzee.data.oldProduct
+import com.example.muzee.oldProduct.OldProductAdapter
 import com.example.muzee.order_detail.OrderDetailAdapter
 import com.example.muzee.order_overview.OrderOverviewAdapter
 import com.example.muzee.payment.PaymentAdapter
@@ -59,5 +61,11 @@ fun bindRecyclerViewSellerOrderDetail(recyclerView: RecyclerView, data: List<Pro
 @BindingAdapter("listProductOrderDetail")
 fun bindRecyclerViewOrderDetail(recyclerView: RecyclerView, data: List<Product>?) {
     val adapter = recyclerView.adapter as OrderDetailAdapter
+    adapter.submitList(data)
+}
+
+@BindingAdapter("listOldData")
+fun bindRecyclerView(recyclerView: RecyclerView, data: List<oldProduct>?) {
+    val adapter = recyclerView.adapter as OldProductAdapter
     adapter.submitList(data)
 }

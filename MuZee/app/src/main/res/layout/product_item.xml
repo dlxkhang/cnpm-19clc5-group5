@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="@{product.productTitle}"
+            android:text="@{product.productName}"
             app:layout_constraintStart_toEndOf="@+id/product_image"
             app:layout_constraintTop_toTopOf="@+id/product_image"
             tools:text="Nord Piano 4 88-Key Digital Piano" />
