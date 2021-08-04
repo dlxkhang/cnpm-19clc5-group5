@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/mainScreenSellerFragment">
+    app:startDestination="@id/productOverviewFragment">
 
     <fragment
         android:id="@+id/mainScreenSellerFragment"
@@ -73,4 +73,35 @@
             android:name="selectedOrder"
             app:argType="com.example.muzee.data.NormalUserOrder" />
     </fragment>
+        android:id="@+id/productOverviewFragment"
+        android:name="com.example.muzee.productoverview.ProductOverviewFragment"
+        android:label="ProductOverviewFragment"
+        tools:layout="@layout/fragment_product_overview">
+        <action
+            android:id="@+id/action_showDetail"
+            app:destination="@id/productDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.example.muzee.productdetail.ProductDetailFragment"
+        android:label="ProductDetailFragment"
+        tools:layout="@layout/fragment_product_detail">
+        <argument
+            android:name="selectedProduct"
+            app:argType="com.example.muzee.data.Product"/>
+    </fragment>
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.example.muzee.cart.CartFragment"
+        android:label="CartFragment"
+        tools:layout="@layout/fragment_cart">
+        <action
+            android:id="@+id/action_cartFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentFragment"
+        android:name="com.example.muzee.payment.PaymentFragment"
+        android:label="PaymentFragment"
+        tools:layout="@layout/fragment_payment"/>
 </navigation>
