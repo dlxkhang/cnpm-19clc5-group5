@@ -33,7 +33,7 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycle_view_old_product"
-                    listData="@{viewModel.oldproducts}"
+                    listOldData="@{viewModel.oldproducts}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
