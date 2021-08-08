@@ -2,7 +2,6 @@ package com.example.muzee.normalUsers
 
 import android.os.Bundle
 import android.view.*
-import android.widget.CompoundButton
 import android.widget.ImageView
 import android.widget.Switch
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -10,15 +9,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat.invalidateOptionsMenu
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.muzee.R
 import com.example.muzee.databinding.FragmentMainScreenNormalUsersBinding
+import com.example.muzee.productoverview.ProductOverviewAdapter
+import com.example.muzee.productoverview.ProductOverviewViewModel
 
 class MainScreenNormalUsersFragment : Fragment() {
     private lateinit var drawer_layout: DrawerLayout // drawerLayout contain nav menu in xml
     lateinit var toggle: ActionBarDrawerToggle // toggle button
     private var binding: FragmentMainScreenNormalUsersBinding? = null
     private var isOpenMyStore: Boolean = false
+    private val viewModel: ProductOverviewViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,6 +32,24 @@ class MainScreenNormalUsersFragment : Fragment() {
         val fragmentbinding =
             FragmentMainScreenNormalUsersBinding.inflate(inflater, container, false)
         binding = fragmentbinding
+
+        // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
+        fragmentbinding.lifecycleOwner = this
+
+        // Giving the binding access to the OverviewViewModel
+        fragmentbinding.viewModel = viewModel
+
+        // Sets the adapter of the photosGrid RecyclerView
+        fragmentbinding.recyclerView.adapter = ProductOverviewAdapter(ProductOverviewAdapter.OnClickListener {
+            viewModel.displayProductDetail(it)
+        })
+
+        viewModel.navigateToSelectedProduct.observe(viewLifecycleOwner, Observer {
+            if (null != it) {
+                this.findNavController().navigate(MainScreenNormalUsersFragmentDirections.actionShowDetail(it))
+                viewModel.displayPropertyDetailsComplete()
+            }
+        })
 
         setHasOptionsMenu(true)
 

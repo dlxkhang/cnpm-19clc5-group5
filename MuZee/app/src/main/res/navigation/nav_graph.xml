@@ -77,11 +77,7 @@
         android:id="@+id/productOverviewFragment"
         android:name="com.example.muzee.productoverview.ProductOverviewFragment"
         android:label="ProductOverviewFragment"
-        tools:layout="@layout/fragment_product_overview">
-        <action
-            android:id="@+id/action_showDetail"
-            app:destination="@id/productDetailFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_product_overview"/>
     <fragment
         android:id="@+id/productDetailFragment"
         android:name="com.example.muzee.productdetail.ProductDetailFragment"
@@ -123,6 +119,9 @@
         <action
             android:id="@+id/action_mainScreenNormalUsersFragment_to_orderOverviewFragment"
             app:destination="@id/orderOverviewFragment" />
+        <action
+            android:id="@+id/action_showDetail"
+            app:destination="@id/productDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/categoryFragment"

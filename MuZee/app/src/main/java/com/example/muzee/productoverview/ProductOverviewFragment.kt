@@ -6,8 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import com.example.muzee.databinding.FragmentProductOverviewBinding
 
 class ProductOverviewFragment : Fragment() {
@@ -29,13 +27,6 @@ class ProductOverviewFragment : Fragment() {
         // Sets the adapter of the photosGrid RecyclerView
         binding.recyclerView.adapter = ProductOverviewAdapter(ProductOverviewAdapter.OnClickListener {
             viewModel.displayProductDetail(it)
-        })
-
-        viewModel.navigateToSelectedProduct.observe(viewLifecycleOwner, Observer {
-            if (null != it) {
-                this.findNavController().navigate(ProductOverviewFragmentDirections.actionShowDetail(it))
-                viewModel.displayPropertyDetailsComplete()
-            }
         })
 
         return binding.root
