@@ -4,9 +4,10 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.muzee.data.Product
+import com.example.muzee.network.NewProduct
 
 class ProductDetailViewModelFactory(
-    private val product: Product,
+    private val product: NewProduct,
     private val application: Application
 ) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")

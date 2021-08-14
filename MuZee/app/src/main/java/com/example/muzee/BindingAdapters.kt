@@ -7,6 +7,7 @@ import com.example.muzee.data.NormalUserOrder
 import com.example.muzee.data.Product
 import com.example.muzee.data.SellerOrder
 import com.example.muzee.data.oldProduct
+import com.example.muzee.network.NewProduct
 import com.example.muzee.oldProduct.OldProductAdapter
 import com.example.muzee.order_detail.OrderDetailAdapter
 import com.example.muzee.order_overview.OrderOverviewAdapter
@@ -17,7 +18,7 @@ import com.example.muzee.seller.order_overview.SellerOrderAdapter
 import com.example.muzee.seller.product_overview.SellerProductOverviewAdapter
 
 @BindingAdapter("listData")
-fun bindRecyclerViewProductOverview(recyclerView: RecyclerView, data: List<Product>?) {
+fun bindRecyclerViewProductOverview(recyclerView: RecyclerView, data: List<NewProduct>?) {
     val adapter = recyclerView.adapter as ProductOverviewAdapter
     adapter.submitList(data)
 }

@@ -85,7 +85,7 @@
         tools:layout="@layout/fragment_product_detail">
         <argument
             android:name="selectedProduct"
-            app:argType="com.example.muzee.data.Product"/>
+            app:argType="com.example.muzee.network.NewProduct"/>
     </fragment>
     <fragment
         android:id="@+id/cartFragment"

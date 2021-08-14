@@ -6,7 +6,7 @@
     <data>
         <variable
             name="product"
-            type="com.example.muzee.data.Product" />
+            type="com.example.muzee.network.NewProduct" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

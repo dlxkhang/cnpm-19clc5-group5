@@ -5,16 +5,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.muzee.data.Product
 import com.example.muzee.databinding.ProductItemBinding
+import com.example.muzee.network.NewProduct
 
-class ProductOverviewAdapter(private  val onClickListener: OnClickListener) :
-    ListAdapter<Product, ProductOverviewAdapter.ProductViewHolder>(DiffCallback) {
+class ProductOverviewAdapter(private val onClickListener: OnClickListener) :
+    ListAdapter<NewProduct, ProductOverviewAdapter.ProductViewHolder>(DiffCallback) {
 
     class ProductViewHolder(
         private var binding: ProductItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(product: Product) {
+        fun bind(product: NewProduct) {
             binding.product = product
             binding.executePendingBindings()
         }
@@ -37,17 +37,17 @@ class ProductOverviewAdapter(private  val onClickListener: OnClickListener) :
         holder.bind(item)
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<Product>() {
-        override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
+    companion object DiffCallback : DiffUtil.ItemCallback<NewProduct>() {
+        override fun areItemsTheSame(oldItem: NewProduct, newItem: NewProduct): Boolean {
             return oldItem.productName == newItem.productName
         }
 
-        override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
+        override fun areContentsTheSame(oldItem: NewProduct, newItem: NewProduct): Boolean {
             return oldItem.productPrice == newItem.productPrice
         }
     }
 
-    class OnClickListener(val clickListener: (product: Product) -> Unit) {
-        fun onClick(product: Product) = clickListener(product)
+    class OnClickListener(val clickListener: (product: NewProduct) -> Unit) {
+        fun onClick(product: NewProduct) = clickListener(product)
     }
 }
