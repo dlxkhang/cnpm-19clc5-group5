@@ -110,7 +110,6 @@ module.exports.addNewProduct = async (product) => {
                 var storeId = await getStoreId(product)
                 
                 // add product to warehouse
-                console.log(product)
                 var query = "INSERT INTO Warehouse VALUES (?, ?, ?, ?)"
                 var params = [storeId, product.productId, product.stock, product.productPrice]
                 db.run(query, params, function(err) {
@@ -213,7 +212,53 @@ module.exports.deleteProduct = async (productId) => {
     })
 }
 
+async function queryProductPrice(SID, PID) {
+    return new Promise(async function(resolve, reject) {
+        var query = "SELECT UNIT_PRICE FROM Warehouse WHERE SID = ? AND PID = ?"
+        db.each(query, SID, PID, function(err, row) {
+            if(err) {
+                reject(err)
+                return
+            }
+            resolve(row.UNIT_PRICE)
+        })
+    })
+}
 
+module.exports.addToCart = async (request) => {
+    return new Promise(async function(resolve, reject) {
+        db.serialize(async () => {
+            // query Price of product
+            var productPrice = await queryProductPrice(request.SID, request.PID)
+            
+            db.serialize(() => {
+                // add to ShoppingCart table
+                var query = "INSERT INTO ShoppingCart VALUES (?, ?, ?, ?, ?)"
+                var params = [request.NID, request.SID, request.PID, 1, productPrice]
+                db.run(query, params, function(err) {
+                    if (err) {
+                        reject(err)
+                        return
+                    }
+                    resolve('add_to_cart_success')
+                })
+            })
+        })
+    })
+}
+
+module.exports.getProductsInCart = (NID) => {
+    return new Promise(function(resolve, reject) {
+        var query = "SELECT p.PRODUCT_NAME as productName, sc.TOTAL_PRICE as productPrice FROM ShoppingCart sc JOIN Product p ON(sc.PID = p.PID) WHERE sc.NID = ?"
+        db.all(query, NID, function(err, allRows) {
+            if(err) {
+                reject(err)
+                return
+            }
+            resolve(allRows)
+        })
+    })
+}
 //////////////////////////////////////////////////////////////////
 // OLD PRODUCT
 module.exports.getOldProductList = () => {
