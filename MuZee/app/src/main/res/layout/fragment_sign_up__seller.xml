@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/sign_up_seller_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".signup.SignUp_SellerFragment">
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/label_store_name"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/add_store_name"
+            android:layout_margin = "15dp"
+            app:endIconMode="clear_text"
+            app:errorEnabled="true"
+            app:helperText="@string/required_help_text"
+            app:hintTextAppearance="@style/ErrorText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/label_address_store"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/add_address_store"
+            android:layout_marginTop = "15dp"
+            app:endIconMode="clear_text"
+            app:errorEnabled="true"
+            app:helperText="@string/required_help_text"
+            app:hintTextAppearance="@style/ErrorText"
+            app:layout_constraintEnd_toEndOf="@id/label_store_name"
+            app:layout_constraintStart_toStartOf="@id/label_store_name"
+            app:layout_constraintTop_toBottomOf="@id/label_store_name">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/label_username"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/add_username"
+            android:layout_marginTop = "15dp"
+            app:endIconMode="clear_text"
+            app:errorEnabled="true"
+            app:helperText="@string/required_help_text"
+            app:hintTextAppearance="@style/ErrorText"
+            app:layout_constraintEnd_toEndOf="@id/label_address_store"
+            app:layout_constraintStart_toStartOf="@id/label_address_store"
+            app:layout_constraintTop_toBottomOf="@id/label_address_store">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/label_phone_number"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/add_phone_number"
+            android:layout_marginTop = "15dp"
+            app:endIconMode="clear_text"
+            app:errorEnabled="true"
+            app:helperText="@string/required_help_text"
+            app:hintTextAppearance="@style/ErrorText"
+            app:layout_constraintEnd_toEndOf="@id/label_username"
+            app:layout_constraintStart_toStartOf="@id/label_username"
+            app:layout_constraintTop_toBottomOf="@id/label_username">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/label_enter_password"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/enter_password"
+            android:layout_marginTop = "15dp"
+            app:endIconMode="clear_text"
+            app:errorEnabled="true"
+            app:helperText="@string/required_help_text"
+            app:hintTextAppearance="@style/ErrorText"
+            app:layout_constraintEnd_toEndOf="@id/label_phone_number"
+            app:layout_constraintStart_toStartOf="@id/label_phone_number"
+            app:layout_constraintTop_toBottomOf="@id/label_phone_number">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/label_re_enter_password"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/re_enter_password"
+            android:layout_marginTop = "15dp"
+            app:endIconMode="clear_text"
+            app:errorEnabled="true"
+            app:helperText="@string/required_help_text"
+            app:hintTextAppearance="@style/ErrorText"
+            app:layout_constraintEnd_toEndOf="@id/label_enter_password"
+            app:layout_constraintStart_toStartOf="@id/label_enter_password"
+            app:layout_constraintTop_toBottomOf="@id/label_enter_password">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <Button
+            android:id="@+id/btn_sign_up"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/btn_sign_up"
+            app:layout_constraintEnd_toEndOf="@+id/label_re_enter_password"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/label_re_enter_password"
+            app:layout_constraintTop_toBottomOf="@+id/label_re_enter_password" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

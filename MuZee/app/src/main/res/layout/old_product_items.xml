@@ -42,7 +42,7 @@
             style="@style/text_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{String.valueOf(oldproduct.productPrice)}"
+            android:text="@{String.valueOf(oldproduct)}"
             app:layout_constraintBottom_toTopOf="@+id/view_button"
             app:layout_constraintStart_toStartOf="@+id/product_title"
             app:layout_constraintTop_toBottomOf="@+id/product_title" />

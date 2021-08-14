@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/mainScreenNormalUsersFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/mainScreenSellerFragment"
@@ -164,4 +164,18 @@
         android:name="com.example.muzee.oldProduct.EditOldProductFragment"
         android:label="fragment_edit_old_product"
         tools:layout="@layout/fragment_edit_old_product" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.muzee.login.LoginFragment"
+        android:label="login_fragment"
+        tools:layout="@layout/login_fragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.example.muzee.signup.SignUpFragment"
+        android:label="sign_up_fragment"
+        tools:layout="@layout/sign_up_fragment" />
 </navigation>

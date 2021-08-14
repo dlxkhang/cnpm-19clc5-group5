@@ -20,5 +20,6 @@
     <color name="divider_color">#696969</color>
     <color name="nav_header">#bdbdbd</color>
     <color name="red">#FF0000</color>
+    <color name="button">#66BB6A</color>
 </resources>
 

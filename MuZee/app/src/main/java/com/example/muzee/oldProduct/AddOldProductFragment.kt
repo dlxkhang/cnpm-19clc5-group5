@@ -45,7 +45,7 @@ class AddOldProductFragment : Fragment() {
         }
         val plus_img = binding?.plusImage
 
-        plus_img?.setOnClickListener(View.OnClickListener {
+        plus_img?.setOnClickListener({
             plus_img.isVisible = false
             dispatchTakePictureIntent()
         })
@@ -59,11 +59,9 @@ class AddOldProductFragment : Fragment() {
 
         }
         binding?.labelSelectCategory?.editText?.doOnTextChanged{text, start, before, count ->
-
-
             binding!!.labelSelectCategory.error = null
-
         }
+
         return fragmentbinding.root
     }
     private fun handle_confirm_btn()
@@ -71,6 +69,7 @@ class AddOldProductFragment : Fragment() {
         val inputName = binding?.labelInputName
         val inputPrice = binding?.labelInputPrice
         val selectCategory = binding?.labelSelectCategory
+        val inputCondition = binding?.labelInputCondition
         var success = true
         if(inputName!!.editText!!.text!!.isEmpty()){
             success = false
@@ -84,13 +83,17 @@ class AddOldProductFragment : Fragment() {
             success = false
             selectCategory.error = getString(R.string.error_text_PRODUCT_NAME)
         }
+        if(inputCondition!!.editText!!.text!!.isEmpty()){
+            success = false
+            inputCondition.error = getString(R.string.error_text_OLD_PRODUCT_CONDITION)
+        }
         if(success){
             val category = category((selectCategory.editText as? AutoCompleteTextView)?.text.toString())
             val name = inputName.editText?.text.toString()
             val price = inputPrice.editText?.text.toString().toDouble()
-
+            val condition = inputCondition.editText?.text.toString().toInt()
             val sellerName = "huy"
-            val oldProduct = oldProduct(category,name,price,sellerName,null)
+            val oldProduct = oldProduct(category,name,price,sellerName,condition)
             viewModel.addAnOldProduct(oldProduct)
             findNavController().navigate(R.id.action_addOldProductFragment_to_oldProductStoreFragment)
         }

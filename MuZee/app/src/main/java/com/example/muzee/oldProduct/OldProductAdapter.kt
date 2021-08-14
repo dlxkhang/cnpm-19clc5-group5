@@ -47,7 +47,7 @@ class OldProductAdapter(private  val onClickListener: OnClickListener) :
                     &&(oldItem.productCategory==newItem.productCategory)
                     &&(oldItem.productPrice==newItem.productPrice)
                     &&(oldItem.sellerName == newItem.sellerName)
-                    &&(oldItem.condidtion==oldItem.condidtion)
+                    &&(oldItem.condition==oldItem.condition)
                     &&(oldItem.imageURI == newItem.imageURI)
                     &&(oldItem.productDescription == newItem.productDescription)
         }

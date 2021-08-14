@@ -11,48 +11,48 @@ class Datasource {
                 "Nord Piano 4 88-Key Digital Piano",
                 2.999,
                 "Tho Chung",
-                "Used"
+                8
             ),
-            oldProduct(Category.Bass, "Guitar Bass Yamaha TRBX174", 200.0, "Xuan Khang", "new"),
+            oldProduct(Category.Bass, "Guitar Bass Yamaha TRBX174", 200.0, "Xuan Khang", 7),
             oldProduct(
                 Category.Electronic,
                 "Yamaha Revstar RS620 Electronic Guitar",
                 714.0,
                 "Tho Chung",
-                "new"
+                6
             ),
             oldProduct(
                 Category.Piano,
                 "Nord1 Piano 4 88-Key Digital Piano",
                 2.999,
                 "Nguyen",
-                "Like new"
+                5
             ),
-            oldProduct(Category.Guitar, "Guitar1 Bass Yamaha TRBX174", 200.0, "Xuan Khang", "new"),
+            oldProduct(Category.Guitar, "Guitar1 Bass Yamaha TRBX174", 200.0, "Xuan Khang", 9),
             oldProduct(
                 Category.Electronic,
                 "Yamaha1 Revstar RS620 Electronic Guitar",
                 714.0,
                 "Nguyen",
-                "new"
+                4
             ),
             oldProduct(
                 Category.Guitar,
                 "Nord2 Piano 4 88-Key Digital Piano",
                 2.999,
                 "Ba Huy",
-                "new"
+                9
             ),
-            oldProduct(Category.Bass, "Guitar2 Bass Yamaha TRBX174", 200.0, "Nguyen", "Used"),
+            oldProduct(Category.Bass, "Guitar2 Bass Yamaha TRBX174", 200.0, "Nguyen", 10),
             oldProduct(
                 Category.Electronic,
                 "Yamaha2 Revstar RS620 Electronic Guitar",
                 714.0,
                 "Xuan Khang",
-                "new"
+                9
             ),
-            oldProduct(Category.Drum, "Yamaha1 Revstar RS620 Drum", 714.0, "Nguyen", "new"),
-            oldProduct(Category.Organ, "Nord21 88-Key Organ", 89.99, "Ba Huy", "new"),
+            oldProduct(Category.Drum, "Yamaha1 Revstar RS620 Drum", 714.0, "Nguyen", 10),
+            oldProduct(Category.Organ, "Nord21 88-Key Organ", 89.99, "Ba Huy", 9),
         )
     }
 
