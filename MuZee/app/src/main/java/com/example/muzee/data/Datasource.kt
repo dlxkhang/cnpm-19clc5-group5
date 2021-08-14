@@ -9,7 +9,7 @@ class Datasource {
             oldProduct(
                 Category.Piano,
                 "Nord Piano 4 88-Key Digital Piano",
-                2.999,
+                2999.0,
                 "Tho Chung",
                 "Used"
             ),
@@ -24,7 +24,7 @@ class Datasource {
             oldProduct(
                 Category.Piano,
                 "Nord1 Piano 4 88-Key Digital Piano",
-                2.999,
+                2999.0,
                 "Nguyen",
                 "Like new"
             ),
@@ -39,7 +39,7 @@ class Datasource {
             oldProduct(
                 Category.Guitar,
                 "Nord2 Piano 4 88-Key Digital Piano",
-                2.999,
+                2999.0,
                 "Ba Huy",
                 "new"
             ),
@@ -148,39 +148,39 @@ class Datasource {
             Product(
                 Category.Piano,
                 "Nord Piano 4 88-Key Digital Piano",
-                2.999,
+                2999.0,
                 "Tho Chung",
                 "test"
             ),
             Product(
                 Category.Piano,
                 "Nord Piano 4 88-Key Digital Piano",
-                2.999,
+                2999.0,
                 "Tho Chung",
                 "test"
             ),
             Product(
                 Category.Piano,
                 "Nord Piano 4 88-Key Digital Piano",
-                2.999,
+                2999.0,
                 "Tho Chung",
                 "test"
             ),
             Product(
                 Category.Piano,
                 "Nord Piano 4 88-Key Digital Piano",
-                2.999,
+                2999.0,
                 "Tho Chung",
                 "test"
             ),
             Product(
                 Category.Piano,
                 "Nord Piano 4 88-Key Digital Piano",
-                2.999,
+                2999.0,
                 "Tho Chung",
                 "test"
             ),
-            Product(Category.Piano, "Nord Piano 4 88-Key Digital Piano", 2.999, "Tho Chung", "test")
+            Product(Category.Piano, "Nord Piano 4 88-Key Digital Piano", 2999.0, "Tho Chung", "test")
         )
     }
 }
