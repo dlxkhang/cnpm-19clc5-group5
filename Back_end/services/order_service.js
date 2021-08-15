@@ -56,8 +56,8 @@ async function getOrderedProducts(OID, listSID) {
         var orderedProducts = []
         for(const SID of listSID) {
             // get ordered product
-            var query = "SELECT distinct p.PID as productId, p.CATEGORY as productCategory, p.PRODUCT_NAME as productName, w.UNIT_PRICE as productPrice, s.STORE_NAME as sellerName, p.IMAGE_URL as imageURI, p.DESCRIPTION as productDescription, w.STOCK as stock FROM Product p JOIN Warehouse w ON(p.PID = w.PID) JOIN OrderDetail od ON(od.PID = p.PID) JOIN Seller s ON(od.SID = s.SID) WHERE p.PID IN (SELECT od.PID FROM OrderDetail od WHERE od.OID = ?) AND od.OID = ? AND od.SID = ?"
-            db.all(query, OID, OID, SID, async function(err, allRows) {
+            var query = "SELECT distinct p.PID as productId, p.CATEGORY as productCategory, p.PRODUCT_NAME as productName, w.UNIT_PRICE as productPrice, s.STORE_NAME as sellerName, p.IMAGE_URL as imageURI, p.DESCRIPTION as productDescription, w.STOCK as stock FROM Product p JOIN Warehouse w ON(p.PID = w.PID) JOIN OrderDetail od ON(od.PID = p.PID) JOIN Seller s ON(od.SID = s.SID) WHERE od.OID = ? AND w.SID = ? AND od.SID = ?"
+            db.all(query, OID, SID, SID, async function(err, allRows) {
                 if(err) {
                     reject(err)
                     return
@@ -308,5 +308,149 @@ module.exports.cancelOrder = (NID, OID) => {
             }
         })
         resolve('cancel_order_success')
+    })
+}
+
+
+
+// SELLER ORDER
+async function getCustomerNameByOID(OID) {
+    return new Promise(async function(resolve, reject) {
+        var query = "SELECT NID FROM OrderOf WHERE OID = ?"
+        db.each(query, OID, async function(err, row) {
+            if (err) {
+                reject(err)
+                return
+            }
+            var customerName = await getCustomerName(row.NID)
+            resolve(customerName)
+        })
+    })
+}
+
+async function getListOIDSeller(SID) {
+    return new Promise(function(resolve, reject) {
+        var query = "SELECT OID FROM OrderDetail WHERE SID = ?"
+        var listOID = []
+        db.all(query, SID, function(err, allRows) {
+            if(err) {
+                reject(err)
+                return
+            }
+            allRows.forEach((item) => {
+                if(!listOID.includes(item.OID))
+                    listOID.push(item.OID)
+            })
+            resolve(listOID)
+        })
+    })
+}
+
+async function getOrderedProductsSeller(OID, SID) {
+    return new Promise(async function(resolve, reject) {
+        var orderedProducts = []
+        // get ordered product
+        var query = "SELECT distinct p.PID as productId, p.CATEGORY as productCategory, p.PRODUCT_NAME as productName, w.UNIT_PRICE as productPrice, s.STORE_NAME as sellerName, p.IMAGE_URL as imageURI, p.DESCRIPTION as productDescription, w.STOCK as stock FROM Product p JOIN Warehouse w ON(p.PID = w.PID) JOIN OrderDetail od ON(od.PID = p.PID) JOIN Seller s ON(od.SID = s.SID) WHERE od.OID = ? AND w.SID = ? AND od.SID = ?"
+        db.all(query, OID, SID, SID, async function(err, allRows) {
+            if(err) {
+                reject(err)
+                return
+            }
+            allRows.forEach((row) => {
+                orderedProducts.push(row)
+            })
+        })
+        resolve(orderedProducts)
+    })
+}
+
+module.exports.getSellerOrderList = (SID) => { 
+    return new Promise(async function(resolve, reject) {
+        var listOfOrder = []
+        // get orders id
+        var listOID = await getListOIDSeller(SID)
+        // loop through each OID to get detail info
+        for(const OID of listOID) {
+            // get list of ordered products
+            var orderedProducts = await getOrderedProductsSeller(OID, SID)
+
+            // calculate items total price
+            var itemTotal = await calcItemTotal(orderedProducts)
+
+            // calculate delivery charges
+            var deliveryCharges = deliveryChargesByProduct * orderedProducts.length
+
+            // get order address of current OID
+            var orderAddress = await getOrderAddress(OID)
+
+            // get order status of current OID
+            var orderStatus = await getOrderStatus(OID)
+        
+            // get customer name of current OID
+            var customerName = await getCustomerNameByOID(OID)
+            
+            var order = await initOrder(OID, orderAddress, orderedProducts, itemTotal, deliveryCharges, orderStatus,customerName)
+            listOfOrder.push(order)
+        }
+        resolve(listOfOrder)
+    })
+}
+
+async function checkOrderSellerStatus(OID) {
+    return new Promise(async function(resolve, reject) {
+        var query = "SELECT Status FROM OrderOf WHERE OID = ?"
+        db.each(query, OID, function(err, row) {
+            if(err) {
+                reject(err)
+                return
+            }
+            resolve(row.Status)
+        })  
+    })
+}
+
+module.exports.acceptOrderSeller = (SID, OID) => {
+    return new Promise(async function(resolve, reject) {
+        // check order status
+        var orderStatus = await checkOrderSellerStatus(OID)
+        if(orderStatus == "Accepted") {
+            resolve('order_seller_already_accepted')
+            return
+        }
+        else if(orderStatus == "Canceled") {
+            resolve('cannot_accept_an_canceled_order')
+            return
+        }
+
+        // update in OrderOf table
+        var query = "UPDATE OrderOf SET Status = 'Accepted' WHERE OID = ?"
+        db.run(query, OID, function(err) {
+            if (err) {
+                reject(err)
+                return
+            }
+        })
+        resolve('accept_order_seller_success')
+    })
+}
+
+module.exports.cancelOrderSeller = (SID, OID) => {
+    return new Promise(async function(resolve, reject) {
+        // check order status
+        var orderStatus = await checkOrderSellerStatus(OID)
+        if(orderStatus == "Canceled") {
+            resolve('order_seller_already_canceled')
+            return
+        }
+
+        // update in OrderOf table
+        var query = "UPDATE OrderOf SET Status = 'Canceled' WHERE OID = ?"
+        db.run(query, OID, function(err) {
+            if (err) {
+                reject(err)
+                return
+            }
+        })
+        resolve('cancel_order_seller_success')
     })
 }

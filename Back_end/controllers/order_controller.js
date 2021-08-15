@@ -36,14 +36,29 @@ module.exports.cancelOrder = async function(req, res) {
 
 // //////////////////////////////////////////////////////////////////
 // // SELLER ORDER
-// module.exports.getSellerOrderList = async function(req, res) { 
-//   // get list of order
-//   var orderList = await orderService.getOrderList() 
-//   res.send(JSON.stringify(orderList))
-// }
+module.exports.getSellerOrderList = async function(req, res) { 
+  // get list of order
+  var SID = '001'
+  var orderList = await orderService.getSellerOrderList(SID) 
+  res.send(JSON.stringify(orderList))
+}
 
-// module.exports.updateSellerOrderStatus = async function(req, res) { 
-//   // update order status
-//   var ack = orderService.updateSellerOrderStatus() 
-//   res.send(JSON.stringify(ack))
-// }
+module.exports.acceptOrderSeller = async function(req, res) { 
+  // update order status
+  var request = {
+    SID: '001',
+    OID: '002'
+  }
+  var ack = await orderService.acceptOrderSeller(request.SID, request.OID) 
+  res.send(JSON.stringify(ack))
+}
+
+module.exports.cancelOrderSeller = async function(req, res) { 
+  // update order status
+  var request = {
+    SID: '001',
+    OID: '002'
+  }
+  var ack = await orderService.cancelOrder(request.SID, request.OID) 
+  res.send(JSON.stringify(ack))
+}

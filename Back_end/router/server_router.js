@@ -2,6 +2,13 @@ var express = require('express');
 var router = express.Router();
 var productController = require('../controllers/product_controller')
 var orderController = require('../controllers/order_controller')
+var accountController = require('../controllers/account_controller')
+
+
+// ACCOUNT
+router.get('/api/account/login', accountController.checkLogin) // check validity of account
+router.get('/api/account/signup/normal_user', accountController.addNormalAccount) // add normal user account
+router.get('/api/account/signup/seller', accountController.addSellerAccount) // add seller account
 
 // NEW PRODUCT
 router.get('/api/product', productController.getProductList) // get list of product
@@ -21,5 +28,10 @@ router.get('/api/old_product/delete', productController.deleteOldProduct) // del
 router.get('/api/order', orderController.getOrderList) // get order list
 router.get('/api/order/place_order', orderController.placeOrder) // place order
 router.get('/api/order/cancel', orderController.cancelOrder) // update order status
+
 // SELLER ORDER
+router.get('/api/order_seller', orderController.getSellerOrderList) // get seller order list
+router.get('/api/order_seller/accept', orderController.acceptOrderSeller) // accept seller order
+router.get('/api/order_seller/cancel', orderController.cancelOrderSeller) // cancel seller order
+
 module.exports = router
