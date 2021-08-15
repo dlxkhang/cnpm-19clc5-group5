@@ -3,7 +3,7 @@ var router = express.Router();
 var productController = require('../controllers/product_controller')
 var orderController = require('../controllers/order_controller')
 var accountController = require('../controllers/account_controller')
-
+var searchController = require('../controllers/search_controller')
 
 // ACCOUNT
 router.get('/api/account/login', accountController.checkLogin) // check validity of account
@@ -33,5 +33,10 @@ router.get('/api/order/cancel', orderController.cancelOrder) // update order sta
 router.get('/api/order_seller', orderController.getSellerOrderList) // get seller order list
 router.get('/api/order_seller/accept', orderController.acceptOrderSeller) // accept seller order
 router.get('/api/order_seller/cancel', orderController.cancelOrderSeller) // cancel seller order
+
+// SEARCH ENGINE
+router.get('/api/search/product', searchController.searchNewProductByName) // search new product by name
+router.get('/api/search/old_product', searchController.searchOldProductByName) // search old product by name
+router.get('/api/search/product/category', searchController.searchNewProductByCategory) // search new product by category
 
 module.exports = router
