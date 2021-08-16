@@ -47,7 +47,7 @@ module.exports.acceptOrderSeller = async function(req, res) {
   // update order status
   var request = {
     SID: '001',
-    OID: '002'
+    OID: '001'
   }
   var ack = await orderService.acceptOrderSeller(request.SID, request.OID) 
   res.send(JSON.stringify(ack))
