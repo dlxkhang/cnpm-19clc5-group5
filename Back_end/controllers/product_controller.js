@@ -74,6 +74,7 @@ module.exports.addToCart = async function(req, res) {
   //   imageURI: null,
   //   productDescription: 'description'
   // }
+  console.log(req.body)
   var request = {
     NID: '001',
     SID: '002',
