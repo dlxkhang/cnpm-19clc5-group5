@@ -9,33 +9,33 @@ module.exports.checkLogin = async function(req, res) {
       username: 'buenas',
       password: '123456'
   }
-  var ack = await accountService.checkLogin(account) 
-  res.send(JSON.stringify(ack))
+  var response = await accountService.checkLogin(account) 
+  res.send(JSON.stringify(response))
 }
 
 module.exports.addNormalAccount = async function(req, res) { 
     // get list of order
     var account = {
         accountId: null,
-        fullname: 'Daph Duck',
-        username: 'buenas',
+        fullname: 'khang',
+        username: 'testacc',
         phoneNumber: '0909888999',
         password: '123456'
     }
-    var ack = await accountService.addNormalAccount(account) 
-    res.send(JSON.stringify(ack))
+    var response = await accountService.addNormalAccount(account) 
+    res.send(JSON.stringify(response))
 }
 
 module.exports.addSellerAccount = async function(req, res) { 
     // get list of order
     var account = {
         accountId: null,
-        storeName: 'Test Store 1',
+        storeName: 'Test Store 3',
         storeAddress: '341 Khuong Viet',
-        username: 'hola',
+        username: 'hola2',
         phoneNumber: '0909233222',
         password: '123456'
     }
-    var ack = await accountService.addSellerAccount(account) 
-    res.send(JSON.stringify(ack))
+    var response = await accountService.addSellerAccount(account) 
+    res.send(JSON.stringify(response))
 }

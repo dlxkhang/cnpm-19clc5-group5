@@ -460,3 +460,16 @@ module.exports.deleteOldProduct = async (productId) => {
         });
     })
 }
+
+module.exports.getUserProducts = (NID) => {
+    return new Promise(function(resolve, reject) {
+        var query = "SELECT p.PID as productId, c.CATEGORY_NAME as productCategory, p.PRODUCT_NAME as productName, n.FULL_NAME as sellerName, n.NID, p.IMAGE_URL as imageURI, p.DESCRIPTION as productDescription, w.CONDITION as condition FROM OldProduct p JOIN UserWarehouse w ON(p.PID = w.PID) JOIN NormalUser n ON(w.NID = n.NID AND w.NID = ?) JOIN Category c ON(c.CID = p.CATEGORY)"
+        db.all(query, NID, function(err, allRows) {
+            if(err) {
+                reject(err)
+                return
+            }
+            resolve(allRows)
+        })
+    })
+}

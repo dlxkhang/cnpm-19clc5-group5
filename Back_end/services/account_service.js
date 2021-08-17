@@ -45,6 +45,36 @@ async function checkUserType(userID) {
     })
 }
 
+async function getSID(userID) {
+    return new Promise(async function(resolve, reject) {
+        db.serialize(() => {
+            var query = "SELECT SID FROM SellerAccount WHERE AID = ?"
+            db.all(query, userID, function(err, allRows) {
+                if(err) {
+                    reject(err)
+                    return
+                }
+                resolve(allRows[0].SID)           
+            })  
+        })
+    })
+}
+
+async function getNID(userID) {
+    return new Promise(async function(resolve, reject) {
+        db.serialize(() => {
+            var query = "SELECT NID FROM NormalAccount WHERE AID = ?"
+            db.all(query, userID, function(err, allRows) {
+                if(err) {
+                    reject(err)
+                    return
+                }
+                resolve(allRows[0].NID)        
+            })  
+        })
+    })
+}
+
 module.exports.checkLogin = (account) => {
     return new Promise(async function(resolve, reject) {
         // check username, password
@@ -59,13 +89,26 @@ module.exports.checkLogin = (account) => {
         }
         // case account valid => checkMsg contain AID
         var userID = checkMsg.toString()
+        console.log(userID)
         // check whether seller or normal user
         var userType = await checkUserType(userID)
         if(userType == "seller") {
-            resolve("seller_account_valid")
+            var response = {
+                ack: null,
+                SID: null
+            }
+            response.ack = 'seller_account_valid'
+            response.SID = await getSID(userID)
+            resolve(response)
             return
         }
-        resolve("normal_user_account_valid")
+        var response = {
+            ack: null,
+            NID: null
+        }
+        response.ack = 'normal_user_account_valid'
+        response.NID = await getNID(userID)
+        resolve(response)
     })
 }
 
@@ -174,7 +217,11 @@ module.exports.addNormalAccount = (account) => {
                         return
                     }
                 })
-                resolve('sign_up_success')
+                var response = {
+                    ack: 'sign_up_success',
+                    NID: NID
+                }
+                resolve(response)
             })
         })
     })
@@ -248,7 +295,11 @@ module.exports.addSellerAccount = (account) => {
                         return
                     }
                 })
-                resolve('sign_up_success')
+                var response = {
+                    ack: 'sign_up_success',
+                    SID: SID
+                }
+                resolve(response)
             })
         })
     })

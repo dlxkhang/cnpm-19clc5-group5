@@ -137,3 +137,10 @@ module.exports.deleteOldProduct = async function(req, res) {
   var ack = await productService.deleteOldProduct(productId)
   res.send(JSON.stringify(ack)) // send acknowledge message
 }
+
+module.exports.getUserProducts= async function(req, res) { 
+  // get list of product in cart
+  var NID = '001'
+  var ack = await productService.getUserProducts(NID)
+  res.send(JSON.stringify(ack)) // send acknowledge message
+}
