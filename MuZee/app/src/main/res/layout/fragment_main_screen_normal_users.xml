@@ -49,7 +49,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/search_view"
                 tools:itemCount="3"
-                tools:listitem="@layout/product_item" />
+                tools:listitem="@layout/new_product_item" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

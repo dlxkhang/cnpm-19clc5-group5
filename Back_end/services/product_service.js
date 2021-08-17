@@ -15,7 +15,7 @@ var db = require('../database/database') // get an instance of database
 // NEW PRODUCT
 module.exports.getProductList = () => {
     return new Promise(function(resolve, reject) {
-        var query = "SELECT p.PID as productId, p.CATEGORY as productCategory, p.PRODUCT_NAME as productName, w.UNIT_PRICE as productPrice, s.STORE_NAME as sellerName, p.IMAGE_URL as imageURI, p.DESCRIPTION as productDescription, w.STOCK as stock FROM Product p JOIN Warehouse w ON(p.PID = w.PID) JOIN Seller s ON(w.SID = s.SID) WHERE w.stock > 0"
+        var query = "SELECT p.PID as productId, c.CATEGORY_NAME as productCategory, p.PRODUCT_NAME as productName, w.UNIT_PRICE as productPrice, s.STORE_NAME as sellerName, s.SID, p.IMAGE_URL as imageURI, p.DESCRIPTION as productDescription, w.STOCK as stock FROM Product p JOIN Warehouse w ON(p.PID = w.PID) JOIN Seller s ON(w.SID = s.SID) JOIN Category c ON(c.CID = p.CATEGORY) WHERE w.stock > 0"
         db.all(query, function(err, allRows) {
             if(err) {
                 reject(err)
@@ -110,7 +110,6 @@ module.exports.addNewProduct = async (product) => {
                 var storeId = await getStoreId(product)
                 
                 // add product to warehouse
-                console.log(product)
                 var query = "INSERT INTO Warehouse VALUES (?, ?, ?, ?)"
                 var params = [storeId, product.productId, product.stock, product.productPrice]
                 db.run(query, params, function(err) {
@@ -213,12 +212,58 @@ module.exports.deleteProduct = async (productId) => {
     })
 }
 
+async function queryProductPrice(SID, PID) {
+    return new Promise(async function(resolve, reject) {
+        var query = "SELECT UNIT_PRICE FROM Warehouse WHERE SID = ? AND PID = ?"
+        db.each(query, SID, PID, function(err, row) {
+            if(err) {
+                reject(err)
+                return
+            }
+            resolve(row.UNIT_PRICE)
+        })
+    })
+}
 
+module.exports.addToCart = async (request) => {
+    return new Promise(async function(resolve, reject) {
+        db.serialize(async () => {
+            // query Price of product
+            var productPrice = await queryProductPrice(request.SID, request.PID)
+            
+            db.serialize(() => {
+                // add to ShoppingCart table
+                var query = "INSERT INTO ShoppingCart VALUES (?, ?, ?, ?, ?)"
+                var params = [request.NID, request.SID, request.PID, 1, productPrice]
+                db.run(query, params, function(err) {
+                    if (err) {
+                        reject(err)
+                        return
+                    }
+                    resolve('add_to_cart_success')
+                })
+            })
+        })
+    })
+}
+
+module.exports.getProductsInCart = (NID) => {
+    return new Promise(function(resolve, reject) {
+        var query = "SELECT p.PRODUCT_NAME as productName, sc.TOTAL_PRICE as productPrice FROM ShoppingCart sc JOIN Product p ON(sc.PID = p.PID) WHERE sc.NID = ?"
+        db.all(query, NID, function(err, allRows) {
+            if(err) {
+                reject(err)
+                return
+            }
+            resolve(allRows)
+        })
+    })
+}
 //////////////////////////////////////////////////////////////////
 // OLD PRODUCT
 module.exports.getOldProductList = () => {
     return new Promise(function(resolve, reject) {
-        var query = "SELECT p.PID as productId, p.CATEGORY as productCategory, p.PRODUCT_NAME as productName, n.FULL_NAME as sellerName, p.IMAGE_URL as imageURI, p.DESCRIPTION as productDescription, w.CONDITION as condition FROM OldProduct p JOIN UserWarehouse w ON(p.PID = w.PID) JOIN NormalUser n ON(w.NID = n.NID)"
+        var query = "SELECT p.PID as productId, c.CATEGORY_NAME as productCategory, p.PRODUCT_NAME as productName, n.FULL_NAME as sellerName, n.NID, p.IMAGE_URL as imageURI, p.DESCRIPTION as productDescription, w.CONDITION as condition FROM OldProduct p JOIN UserWarehouse w ON(p.PID = w.PID) JOIN NormalUser n ON(w.NID = n.NID) JOIN Category c ON(c.CID = p.CATEGORY)"
         db.all(query, function(err, allRows) {
             if(err) {
                 reject(err)

@@ -74,11 +74,6 @@
             app:argType="com.example.muzee.data.NormalUserOrder" />
     </fragment>
     <fragment
-        android:id="@+id/productOverviewFragment"
-        android:name="com.example.muzee.productoverview.ProductOverviewFragment"
-        android:label="ProductOverviewFragment"
-        tools:layout="@layout/fragment_product_overview"/>
-    <fragment
         android:id="@+id/productDetailFragment"
         android:name="com.example.muzee.productdetail.ProductDetailFragment"
         android:label="ProductDetailFragment"
@@ -86,7 +81,13 @@
         <argument
             android:name="selectedProduct"
             app:argType="com.example.muzee.network.NewProduct"/>
+        <action
+            android:id="@+id/action_productDetailFragment_to_mainScreenNormalUsersFragment"
+            app:destination="@id/mainScreenNormalUsersFragment"
+            app:popUpTo="@id/mainScreenNormalUsersFragment"
+            app:popUpToInclusive="false" />
     </fragment>
+
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.example.muzee.cart.CartFragment"

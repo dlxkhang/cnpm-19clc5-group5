@@ -77,7 +77,9 @@ class MainScreenNormalUsersFragment : Fragment() {
                 R.id.cart_item -> {
                     findNavController().navigate(R.id.action_mainScreenNormalUsersFragment_to_cartFragment)
                 }
-                //R.id.myOrderItem->{true}
+                R.id.myOrderItem->{
+                    findNavController().navigate(R.id.action_mainScreenNormalUsersFragment_to_orderOverviewFragment)
+                }
                 R.id.myShopItem -> {
 //                    val productItem = binding!!.navView.menu.findItem(R.id.productItem)
 //                    val offersItem = binding!!.navView.menu.findItem(R.id.offersItem)

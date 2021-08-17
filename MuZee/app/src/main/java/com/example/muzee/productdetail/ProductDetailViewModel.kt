@@ -1,12 +1,12 @@
 package com.example.muzee.productdetail
 
+import Api
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.*
 import com.example.muzee.R
+import com.example.muzee.network.AddToCartProduct
 import com.example.muzee.network.NewProduct
+import kotlinx.coroutines.launch
 
 class ProductDetailViewModel(product: NewProduct, app: Application) : AndroidViewModel(app) {
     private val _selectedProduct = MutableLiveData<NewProduct>()
@@ -21,5 +21,12 @@ class ProductDetailViewModel(product: NewProduct, app: Application) : AndroidVie
 
     val displayPropertyPrice = Transformations.map(selectedProduct) {
         app.applicationContext.getString(R.string.display_price, it.productPrice)
+    }
+
+    fun addProductToCart() {
+        viewModelScope.launch {
+            val cartProduct = AddToCartProduct("001",selectedProduct.value!!.SID, selectedProduct.value!!.productId)
+            Api.retrofitService.addToCart(cartProduct)
+        }
     }
 }

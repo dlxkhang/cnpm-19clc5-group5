@@ -5,14 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.muzee.databinding.ProductItemBinding
+import com.example.muzee.databinding.NewProductItemBinding
 import com.example.muzee.network.NewProduct
 
 class ProductOverviewAdapter(private val onClickListener: OnClickListener) :
     ListAdapter<NewProduct, ProductOverviewAdapter.ProductViewHolder>(DiffCallback) {
 
     class ProductViewHolder(
-        private var binding: ProductItemBinding
+        private var binding: NewProductItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(product: NewProduct) {
             binding.product = product
@@ -25,7 +25,7 @@ class ProductOverviewAdapter(private val onClickListener: OnClickListener) :
         viewType: Int
     ): ProductViewHolder {
         return ProductViewHolder(
-            ProductItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            NewProductItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 

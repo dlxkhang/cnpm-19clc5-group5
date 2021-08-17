@@ -62,7 +62,34 @@ module.exports.deleteProduct = async function(req, res) {
   res.send(JSON.stringify(ack)) // send acknowledge message
 }
 
+module.exports.addToCart = async function(req, res) { 
+  // parse JSON to object
+  //var product = JSON.parse(req.body)
+  // var product = {
+  //   productId: null,
+  //   productCategory: null,
+  //   productName: 'test',
+  //   productPrice: 1303,
+  //   sellerName: 'Test Store',
+  //   imageURI: null,
+  //   productDescription: 'description'
+  // }
+  console.log(req.body)
+  // var request = {
+  //   NID: '001',
+  //   SID: '002',
+  //   PID: '002'
+  // }
+  var ack = await productService.addToCart(req.body)
+  // res.send(JSON.stringify(ack)) // send acknowledge message
+}
 
+module.exports.getProductsInCart = async function(req, res) { 
+  // get list of product in cart
+  var NID = '001'
+  var ack = await productService.getProductsInCart(NID)
+  res.send(JSON.stringify(ack)) // send acknowledge message
+}
 //////////////////////////////////////////////////////////////////
 // OLD PRODUCT
 module.exports.getOldProductList = async function(req, res) { 
