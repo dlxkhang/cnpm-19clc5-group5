@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/sellerProductOverviewFragment">
+    app:startDestination="@id/editNewProductFragment">
 
     <fragment
         android:id="@+id/mainScreenSellerFragment"
@@ -54,6 +54,9 @@
         <action
             android:id="@+id/action_sellerProductOverviewFragment_to_sellerProductDetailFragment"
             app:destination="@id/sellerProductDetailFragment" />
+        <action
+            android:id="@+id/action_sellerProductOverviewFragment_to_editNewProductFragment"
+            app:destination="@id/editNewProductFragment" />
     </fragment>
     <fragment
         android:id="@+id/sellerProductDetailFragment"
@@ -149,6 +152,9 @@
         <action
             android:id="@+id/action_oldProductStoreFragment_to_addOldProductFragment"
             app:destination="@id/addOldProductFragment" />
+        <action
+            android:id="@+id/action_oldProductStoreFragment_to_editOldProductFragment"
+            app:destination="@id/editOldProductFragment" />
     </fragment>
     <fragment
         android:id="@+id/addOldProductFragment"
@@ -167,9 +173,18 @@
 <!--        tools:layout="@layout/fragment_camera" />-->
     <fragment
         android:id="@+id/editOldProductFragment"
-        android:name="com.example.muzee.oldProduct.EditOldProductFragment"
+        android:name="com.example.muzee.oldProduct.edit.EditOldProductFragment"
         android:label="fragment_edit_old_product"
-        tools:layout="@layout/fragment_edit_old_product" />
+        tools:layout="@layout/fragment_edit_old_product">
+        <argument
+            android:name="selectedOldProduct"
+            app:argType="com.example.muzee.data.Product"/>
+        <action
+            android:id="@+id/action_editOldProductFragment_to_oldProductStoreFragment"
+            app:destination="@id/oldProductStoreFragment"
+            app:popUpTo="@id/oldProductStoreFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.muzee.login.LoginFragment"
@@ -178,10 +193,31 @@
         <action
             android:id="@+id/action_loginFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_mainScreenSellerFragment"
+            app:destination="@id/mainScreenSellerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_mainScreenNormalUsersFragment"
+            app:destination="@id/mainScreenNormalUsersFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.example.muzee.signup.SignUpFragment"
         android:label="sign_up_fragment"
-        tools:layout="@layout/sign_up_fragment" />
+        tools:layout="@layout/sign_up_fragment" >
+        <action
+            android:id="@+id/action_signUpFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/editNewProductFragment"
+        android:name="com.example.muzee.seller.edit_new_product.EditNewProductFragment"
+        android:label="fragment_edit_new_product"
+        tools:layout="@layout/fragment_edit_new_product" >
+        <argument
+            android:name="selectedNewProduct"
+            app:argType="com.example.muzee.data.Product"/>
+    </fragment>
 </navigation>

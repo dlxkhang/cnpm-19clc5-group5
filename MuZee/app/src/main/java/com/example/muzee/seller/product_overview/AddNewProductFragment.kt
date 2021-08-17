@@ -116,7 +116,7 @@ class AddNewProductFragment : Fragment() {
             val price = inputPrice.editText?.text.toString().toDouble()
             val condition = inputStock.editText?.text.toString().toInt()
             val sellerName = "huy"
-            val newProduct = newProduct(category,name,price,sellerName,condition)
+            val newProduct = newProduct("",category,name,price,sellerName,condition)
             viewModel.addAnNewProduct(newProduct)
             findNavController().navigate(R.id.action_addNewProductFragment_to_sellerProductOverviewFragment)
         }

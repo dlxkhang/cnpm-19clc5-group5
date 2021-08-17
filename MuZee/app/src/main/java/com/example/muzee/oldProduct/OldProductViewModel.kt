@@ -36,7 +36,7 @@ class OldProductViewModel: ViewModel() {
     fun deleteAnProduct(oldproduct:oldProduct){
         _oldproducts.value = _oldproducts.value?.minusElement(oldproduct)
     }
-    fun editAnProduct(index_product: Int){
+    fun editAnProduct(){
 
     }
 }

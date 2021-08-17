@@ -1,10 +1,12 @@
 package com.example.muzee.oldProduct
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.muzee.R
 import com.example.muzee.data.oldProduct
 import com.example.muzee.databinding.OldProductItemsBinding
 
@@ -34,6 +36,9 @@ class OldProductAdapter(private  val onClickListener: OnClickListener) :
         holder.itemView.setOnClickListener {
             onClickListener.onClick(item)
         }
+        holder.itemView.findViewById<View>(R.id.edit_button).setOnClickListener{
+            onClickListener.onClick(item)
+        }
         holder.bind(item)
     }
 
@@ -43,13 +48,7 @@ class OldProductAdapter(private  val onClickListener: OnClickListener) :
         }
 
         override fun areContentsTheSame(oldItem: oldProduct, newItem: oldProduct): Boolean {
-            return (oldItem.productPrice == newItem.productPrice)
-                    &&(oldItem.productCategory==newItem.productCategory)
-                    &&(oldItem.productPrice==newItem.productPrice)
-                    &&(oldItem.sellerName == newItem.sellerName)
-                    &&(oldItem.condition==oldItem.condition)
-                    &&(oldItem.imageURI == newItem.imageURI)
-                    &&(oldItem.productDescription == newItem.productDescription)
+            return oldItem.product_id == newItem.product_id
         }
     }
 

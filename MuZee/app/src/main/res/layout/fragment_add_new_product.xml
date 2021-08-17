@@ -127,7 +127,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:hint="@string/add_product_condition"
+                android:hint="@string/add_product_stock"
                 app:helperText="@string/required_help_text"
                 app:endIconMode="clear_text"
                 app:errorEnabled="true"

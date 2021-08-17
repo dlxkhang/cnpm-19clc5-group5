@@ -6,27 +6,26 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 open class Account(
-    private var id: Int,
+    private var id: String,
     private var phoneNumber:String,
     private var username:String,
     private var password:String): Parcelable
-class NormalUser( private var id: Int,
+class NormalUser( private var id: String,
                   private var fullName :String,
                   private var phoneNumber:String,
                   private var username:String,
                   private var password:String):Account(id,phoneNumber,username,password) {
     constructor(parcel: Parcel) : this(
-        parcel.readInt(),
         parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!,
-        parcel.readString()!!
-        ) {
+        parcel.readString()!!,
+        parcel.readString()!!) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         super.writeToParcel(parcel, flags)
-        parcel.writeInt(id)
+        parcel.writeString(id)
         parcel.writeString(fullName)
         parcel.writeString(phoneNumber)
         parcel.writeString(username)
@@ -47,14 +46,15 @@ class NormalUser( private var id: Int,
         }
     }
 }
-class Seller(private var id: Int,
+
+class Seller(private var id: String,
              private var storeName:String,
              private var storeAddress:String,
              private var phoneNumber:String,
              private var username:String,
              private var password:String):Account(id,phoneNumber,username,password) {
     constructor(parcel: Parcel) : this(
-        parcel.readInt(),
+        parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!,
@@ -64,7 +64,7 @@ class Seller(private var id: Int,
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         super.writeToParcel(parcel, flags)
-        parcel.writeInt(id)
+        parcel.writeString(id)
         parcel.writeString(storeName)
         parcel.writeString(storeAddress)
         parcel.writeString(phoneNumber)

@@ -7,52 +7,53 @@ class Datasource {
     init {
         list_product_your_shop = listOf<oldProduct>(
             oldProduct(
+                "123",
                 Category.Piano,
                 "Nord Piano 4 88-Key Digital Piano",
                 2.999,
                 "Tho Chung",
                 8
             ),
-            oldProduct(Category.Bass, "Guitar Bass Yamaha TRBX174", 200.0, "Xuan Khang", 7),
-            oldProduct(
+            oldProduct("12",Category.Bass, "Guitar Bass Yamaha TRBX174", 200.0, "Xuan Khang", 7),
+            oldProduct("1",
                 Category.Electronic,
                 "Yamaha Revstar RS620 Electronic Guitar",
                 714.0,
                 "Tho Chung",
                 6
             ),
-            oldProduct(
+            oldProduct("321",
                 Category.Piano,
                 "Nord1 Piano 4 88-Key Digital Piano",
                 2.999,
                 "Nguyen",
                 5
             ),
-            oldProduct(Category.Guitar, "Guitar1 Bass Yamaha TRBX174", 200.0, "Xuan Khang", 9),
-            oldProduct(
+            oldProduct("22",Category.Guitar, "Guitar1 Bass Yamaha TRBX174", 200.0, "Xuan Khang", 9),
+            oldProduct("123",
                 Category.Electronic,
                 "Yamaha1 Revstar RS620 Electronic Guitar",
                 714.0,
                 "Nguyen",
                 4
             ),
-            oldProduct(
+            oldProduct("543",
                 Category.Guitar,
                 "Nord2 Piano 4 88-Key Digital Piano",
                 2.999,
                 "Ba Huy",
                 9
             ),
-            oldProduct(Category.Bass, "Guitar2 Bass Yamaha TRBX174", 200.0, "Nguyen", 10),
-            oldProduct(
+            oldProduct("22",Category.Bass, "Guitar2 Bass Yamaha TRBX174", 200.0, "Nguyen", 10),
+            oldProduct("123",
                 Category.Electronic,
                 "Yamaha2 Revstar RS620 Electronic Guitar",
                 714.0,
                 "Xuan Khang",
                 9
             ),
-            oldProduct(Category.Drum, "Yamaha1 Revstar RS620 Drum", 714.0, "Nguyen", 10),
-            oldProduct(Category.Organ, "Nord21 88-Key Organ", 89.99, "Ba Huy", 9),
+            oldProduct("3321",Category.Drum, "Yamaha1 Revstar RS620 Drum", 714.0, "Nguyen", 10),
+            oldProduct("1124",Category.Organ, "Nord21 88-Key Organ", 89.99, "Ba Huy", 9),
         )
     }
 
@@ -145,42 +146,42 @@ class Datasource {
 
     fun loadProduct(): List<Product> {
         return listOf<Product>(
-            Product(
+            Product("12",
                 Category.Piano,
                 "Nord Piano 4 88-Key Digital Piano",
                 2.999,
                 "Tho Chung",
                 "test"
             ),
-            Product(
+            Product("3319",
                 Category.Piano,
                 "Nord Piano 4 88-Key Digital Piano",
                 2.999,
                 "Tho Chung",
                 "test"
             ),
-            Product(
+            Product("342",
                 Category.Piano,
                 "Nord Piano 4 88-Key Digital Piano",
                 2.999,
                 "Tho Chung",
                 "test"
             ),
-            Product(
+            Product("255",
                 Category.Piano,
                 "Nord Piano 4 88-Key Digital Piano",
                 2.999,
                 "Tho Chung",
                 "test"
             ),
-            Product(
+            Product("322",
                 Category.Piano,
                 "Nord Piano 4 88-Key Digital Piano",
                 2.999,
                 "Tho Chung",
                 "test"
             ),
-            Product(Category.Piano, "Nord Piano 4 88-Key Digital Piano", 2.999, "Tho Chung", "test")
+            Product("142",Category.Piano, "Nord Piano 4 88-Key Digital Piano", 2.999, "Tho Chung", "test")
         )
     }
 }

@@ -2,18 +2,18 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".oldProduct.OldProductStoreFragment">
+    tools:context=".seller.edit_new_product.EditNewProductFragment">
 
     <data>
         <variable
             name="viewModel"
-            type="com.example.muzee.oldProduct.edit.EditOldProductViewMoldel" />
+            type="com.example.muzee.seller.edit_new_product.EditNewProductViewMoldel" />
     </data>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/scroll_edit_old_product_Fragment"
+            android:id="@+id/scroll_edit_new_product_Fragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -75,7 +75,7 @@
                 app:layout_constraintTop_toBottomOf="@id/edit_Enter_product_detail_label">
 
                 <AutoCompleteTextView
-                    android:text="@{viewModel.selectedOldProduct.productCategory.toString()}"
+                    android:text="@{viewModel.selectedNewProduct.productCategory.toString()}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="none"
@@ -99,7 +99,7 @@
                 app:layout_constraintTop_toBottomOf="@id/label_edit_category">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:text="@{viewModel.selectedOldProduct.productName.toString()}"
+                    android:text="@{viewModel.selectedNewProduct.productName.toString()}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -123,7 +123,7 @@
                 app:prefixText="$">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:text="@{Double.toString(viewModel.selectedOldProduct.productPrice)}"
+                    android:text="@{Double.toString(viewModel.selectedNewProduct.productPrice)}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="numberDecimal" />
@@ -131,21 +131,20 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/label_edit_condition"
+                android:id="@+id/label_edit_stock"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:hint="@string/add_product_condition"
+                android:hint="@string/edit_stock"
                 app:helperText="@string/required_help_text"
                 app:endIconMode="clear_text"
                 app:errorEnabled="true"
                 app:layout_constraintTop_toBottomOf="@id/label_edit_price"
                 app:layout_constraintEnd_toEndOf="@+id/label_edit_price"
                 app:layout_constraintStart_toStartOf="@id/label_edit_price"
-                app:suffixText="/10"
                 >
                 <com.google.android.material.textfield.TextInputEditText
-                    android:text="@{viewModel.selectedOldProduct.condition.toString()}"
+                    android:text="@{Integer.toString(viewModel.selectedNewProduct.stock)}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"/>
@@ -158,13 +157,13 @@
                 android:layout_marginTop="10dp"
                 android:hint="@string/add_product_description"
                 app:helperTextEnabled="false"
-                app:layout_constraintTop_toBottomOf="@id/label_edit_condition"
-                app:layout_constraintEnd_toEndOf="@id/label_edit_condition"
+                app:layout_constraintTop_toBottomOf="@id/label_edit_stock"
+                app:layout_constraintEnd_toEndOf="@id/label_edit_stock"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@id/label_edit_condition">
+                app:layout_constraintStart_toStartOf="@id/label_edit_stock">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:text="@{viewModel.selectedOldProduct.productDescription.toString()}"
+                    android:text="@{viewModel.selectedNewProduct.productDescription.toString()}"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scrollbars="vertical" />

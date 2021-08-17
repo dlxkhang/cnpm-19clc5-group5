@@ -1,4 +1,4 @@
-package com.example.muzee.oldProduct
+package com.example.muzee.oldProduct.edit
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
@@ -12,78 +12,67 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.core.view.isVisible
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.muzee.R
 import com.example.muzee.data.Category
 import com.example.muzee.data.oldProduct
-import com.example.muzee.databinding.FragmentAddOldProductBinding
-import androidx.core.widget.doOnTextChanged
+import com.example.muzee.databinding.FragmentEditOldProductBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-
-class AddOldProductFragment : Fragment() {
-
-    var binding: FragmentAddOldProductBinding? = null
-    private val viewModel: OldProductViewModel by viewModels()
+class EditOldProductFragment : Fragment() {
+    private lateinit var binding:FragmentEditOldProductBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View {
-        val fragmentbinding = FragmentAddOldProductBinding.inflate(inflater,container,false)
-        binding = fragmentbinding
-        binding?.viewModel = viewModel
-        val textField = binding?.labelSelectCategory
+    ): View? {
+        val application = requireNotNull(activity).application
+        val fragmentbinding = FragmentEditOldProductBinding.inflate(inflater,container,false)
+        val binding = fragmentbinding
+        binding.lifecycleOwner = this
+        val old_product = EditOldProductFragmentArgs.fromBundle(requireArguments()).selectedOldProduct
+        val viewModelFractory = EditOldProductViewModelFractory(old_product as oldProduct,application)
+        binding.viewModel = ViewModelProvider(this,viewModelFractory).get(EditOldProductViewMoldel::class.java)
 
+        //handle list category
+        val textField = binding.labelEditCategory
         val items = getListCategory()
         val adapter = ArrayAdapter(requireContext(), R.layout.list_item,items)
-        (textField?.editText as? AutoCompleteTextView)?.setAdapter(adapter)
+        (textField.editText as? AutoCompleteTextView)?.setAdapter(adapter)
 
-        val btn_confirm = binding?.btnConfirmAddProduct
-        btn_confirm?.setOnClickListener {
-            handle_confirm_btn()
-        }
-        val plus_img = binding?.plusImage
-
-        plus_img?.setOnClickListener({
+        //handle select image
+        val plus_img = binding.editPlusImage
+        plus_img.setOnClickListener({
             plus_img.isVisible = false
             dispatchTakePictureIntent()
         })
-        binding?.labelInputName?.editText?.doOnTextChanged{text, start, before, count ->
-                binding!!.labelInputName.error = null
 
+        // handle confirm button
+        binding.btnConfirmEditProduct.setOnClickListener{
+            handle_confirm_btn()
         }
-        binding?.labelInputPrice?.editText?.doOnTextChanged{text, start, before, count ->
-
-            binding!!.labelInputPrice.error = null
-
-        }
-        binding?.labelSelectCategory?.editText?.doOnTextChanged{text, start, before, count ->
-            binding!!.labelSelectCategory.error = null
-        }
-
         return fragmentbinding.root
     }
     private fun handle_confirm_btn()
     {
-        val inputName = binding?.labelInputName
-        val inputPrice = binding?.labelInputPrice
-        val selectCategory = binding?.labelSelectCategory
-        val inputCondition = binding?.labelInputCondition
+        val inputName = binding.labelEditName
+        val inputPrice = binding.labelEditPrice
+        val selectCategory = binding.labelEditCategory
+        val inputCondition = binding.labelEditCondition
         var success = true
-        if(inputName!!.editText!!.text!!.isEmpty()){
+        if(inputName.editText!!.text!!.isEmpty()){
             success = false
             inputName.error = getString(R.string.error_text_PRODUCT_NAME)
         }
-        if(inputPrice!!.editText!!.text!!.isEmpty()){
+        if(inputPrice.editText!!.text!!.isEmpty()){
             success = false
             inputPrice.error = getString(R.string.error_text_PRODUCT_NAME)
         }
-        if(selectCategory!!.editText!!.text!!.isEmpty()){
+        if(selectCategory.editText!!.text!!.isEmpty()){
             success = false
             selectCategory.error = getString(R.string.error_text_PRODUCT_NAME)
         }
-        if(inputCondition!!.editText!!.text!!.isEmpty()){
+        if(inputCondition.editText!!.text!!.isEmpty()){
             success = false
             inputCondition.error = getString(R.string.error_text_OLD_PRODUCT_CONDITION)
         }
@@ -93,45 +82,48 @@ class AddOldProductFragment : Fragment() {
             val price = inputPrice.editText?.text.toString().toDouble()
             val condition = inputCondition.editText?.text.toString().toInt()
             val sellerName = "huy"
-            val oldProduct = oldProduct("",category,name,price,sellerName,condition)
-            viewModel.addAnOldProduct(oldProduct)
+            val oldProduct = oldProduct("552",category,name,price,sellerName,condition)
             findNavController().navigate(R.id.action_addOldProductFragment_to_oldProductStoreFragment)
         }
     }
     private fun getListCategory():List<String>{
-        return listOf(Category.Organ.name,Category.Drum.name,Category.Electronic.name,Category.Guitar.name,Category.Piano.name,Category.Bass.name)
+        return listOf(Category.Organ.name,
+            Category.Drum.name,
+            Category.Electronic.name,
+            Category.Guitar.name,
+            Category.Piano.name,
+            Category.Bass.name)
     }
-    private fun category(str:String):Category{
+    private fun category(str:String): Category {
         return when(str){
             Category.Organ.name ->{
-                 Category.Organ
+                Category.Organ
             }
             Category.Drum.name ->{
-                 Category.Drum
+                Category.Drum
             }
             Category.Piano.name ->{
-                 Category.Piano
+                Category.Piano
             }
             Category.Bass.name ->{
-                 Category.Bass
+                Category.Bass
             }
             Category.Electronic.name ->{
-                 Category.Electronic
+                Category.Electronic
             }
             else -> Category.Guitar
         }
     }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        binding?.addImageProduct?.setImageBitmap(data?.extras?.get("data")as Bitmap)
+        binding.editImageProduct.setImageBitmap(data?.extras?.get("data")as Bitmap)
     }
     val REQUEST_IMAGE_CAPTURE = 1
     private fun dispatchTakePictureIntent(){
         try {
             val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             startActivityForResult(takePictureIntent,REQUEST_IMAGE_CAPTURE)
-        }catch (e:ActivityNotFoundException){
+        }catch (e: ActivityNotFoundException){
             MaterialAlertDialogBuilder(requireContext())
                 .setTitle("Camera permission")
                 .setMessage(e.message)
