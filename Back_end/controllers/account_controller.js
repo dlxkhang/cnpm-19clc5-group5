@@ -6,13 +6,27 @@ var accountService = require('../services/account_service') // get an instance o
 module.exports.checkLogin = async function(req, res) { 
   // get list of order
   var account = {
-      username: 'buenas',
+      username: 'buyer',
       password: '123456'
   }
   var response = await accountService.checkLogin(account) 
   res.send(JSON.stringify(response))
 }
 
+module.exports.getNormalUserInfo = async function(req, res) { 
+    // get list of order
+    var NID = '001'
+    var normalUserInfo = await accountService.getNormalUserInfo(NID) 
+    res.send(JSON.stringify(normalUserInfo))
+}
+
+module.exports.getSellerInfo = async function(req, res) { 
+    // get list of order
+    var SID = '001'
+    var sellerInfo = await accountService.getSellerInfo(SID) 
+    res.send(JSON.stringify(sellerInfo))
+}
+  
 module.exports.addNormalAccount = async function(req, res) { 
     // get list of order
     var account = {

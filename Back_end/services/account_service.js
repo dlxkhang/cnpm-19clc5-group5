@@ -75,6 +75,36 @@ async function getNID(userID) {
     })
 }
 
+module.exports.getNormalUserInfo = (NID) => {
+    return new Promise(async function(resolve, reject) {
+        db.serialize(() => {
+            var query = "SELECT FULL_NAME as fullname, PHONE_NUMBER as phoneNumber FROM NormalUser WHERE NID = ?"
+            db.all(query, NID, function(err, allRows) {
+                if(err) {
+                    reject(err)
+                    return
+                }
+                resolve(allRows[0])        
+            })  
+        })
+    })
+}
+
+module.exports.getSellerInfo = (SID) => {
+    return new Promise(async function(resolve, reject) {
+        db.serialize(() => {
+            var query = "SELECT STORE_NAME as storeName, STORE_ADDRESS as storeAddress, PHONE_NUMBER as phoneNumber FROM Seller WHERE SID = ?"
+            db.all(query, SID, function(err, allRows) {
+                if(err) {
+                    reject(err)
+                    return
+                }
+                resolve(allRows[0])        
+            })    
+        })
+    })
+}
+
 module.exports.checkLogin = (account) => {
     return new Promise(async function(resolve, reject) {
         // check username, password
@@ -89,13 +119,12 @@ module.exports.checkLogin = (account) => {
         }
         // case account valid => checkMsg contain AID
         var userID = checkMsg.toString()
-        console.log(userID)
         // check whether seller or normal user
         var userType = await checkUserType(userID)
         if(userType == "seller") {
             var response = {
                 ack: null,
-                SID: null
+                SID: null,
             }
             response.ack = 'seller_account_valid'
             response.SID = await getSID(userID)
@@ -104,7 +133,7 @@ module.exports.checkLogin = (account) => {
         }
         var response = {
             ack: null,
-            NID: null
+            NID: null,
         }
         response.ack = 'normal_user_account_valid'
         response.NID = await getNID(userID)

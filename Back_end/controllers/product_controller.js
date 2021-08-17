@@ -99,10 +99,7 @@ module.exports.addToCart = async function(req, res) {
 module.exports.getProductsInCart = async function(req, res) { 
   // get list of product in cart
   var NID = '001'
-  var response = {
-    ack: null
-  }
-  response.ack = await productService.getProductsInCart(NID)
+  response = await productService.getProductsInCart(NID)
   res.send(JSON.stringify(response)) // send acknowledge message
 }
 //////////////////////////////////////////////////////////////////
