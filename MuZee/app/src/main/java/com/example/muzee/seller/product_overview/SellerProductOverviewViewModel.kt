@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.muzee.data.Datasource
 import com.example.muzee.data.Product
+import com.example.muzee.data.newProduct
 import kotlinx.coroutines.launch
 
 class SellerProductOverviewViewModel : ViewModel() {
@@ -34,5 +35,8 @@ class SellerProductOverviewViewModel : ViewModel() {
 
     fun displayPropertyDetailsComplete() {
         _navigateToSelectedProduct.value = null
+    }
+    fun addAnNewProduct(newProduct: newProduct){
+
     }
 }

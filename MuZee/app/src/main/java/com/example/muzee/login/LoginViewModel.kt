@@ -25,6 +25,13 @@ class LoginViewModel : ViewModel() {
             }
         }
     }
+    // JSON:
+    // [
+    // {
+    //      username:String,
+    //      password:String,
+    // }
+    // ]
     private fun createAuthToken(username: String,password: String): String {
         var data = byteArrayOf(0)
         try {

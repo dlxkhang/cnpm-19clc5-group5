@@ -52,7 +52,6 @@
                 android:id="@+id/addNewProductBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="@{() -> sellerProductOverviewFragment.goToAddNewProductScreen()}"
                 android:text="@string/add_new_product_button"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"

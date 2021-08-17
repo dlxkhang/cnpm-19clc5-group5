@@ -34,7 +34,10 @@ class SellerProductOverviewFragment : Fragment() {
         binding.recyclerView.adapter = SellerProductOverviewAdapter(SellerProductOverviewAdapter.OnClickListener {
             viewModel.displayProductDetail(it)
         })
-
+        val add_btn = binding.addNewProductBtn
+        add_btn.setOnClickListener{
+            findNavController().navigate(R.id.action_sellerProductOverviewFragment_to_addNewProductFragment)
+        }
         viewModel.navigateToSelectedProduct.observe(viewLifecycleOwner, Observer {
             if (null != it) {
                 this.findNavController().navigate(SellerProductOverviewFragmentDirections.actionSellerProductOverviewFragmentToSellerProductDetailFragment(it))
