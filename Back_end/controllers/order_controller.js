@@ -20,8 +20,11 @@ module.exports.placeOrder = async function(req, res) {
     orderStatus: 'Pending',
     customerName: 'Daph Duck'
   }
-  var ack = await orderService.placeOrder(order) 
-  res.send(JSON.stringify(ack))
+  var response = {
+    ack: null
+  }
+  response.ack = await orderService.placeOrder(order) 
+  res.send(JSON.stringify(response))
 }
 
 module.exports.cancelOrder = async function(req, res) { 
@@ -30,8 +33,11 @@ module.exports.cancelOrder = async function(req, res) {
     NID: '001',
     OID: '003'
   }
-  var ack = await orderService.cancelOrder(request.NID, request.OID) 
-  res.send(JSON.stringify(ack))
+  var response = {
+    ack: null
+  }
+  response.ack = await orderService.cancelOrder(request.NID, request.OID) 
+  res.send(JSON.stringify(response))
 }
 
 // //////////////////////////////////////////////////////////////////
@@ -49,8 +55,11 @@ module.exports.acceptOrderSeller = async function(req, res) {
     SID: '001',
     OID: '001'
   }
-  var ack = await orderService.acceptOrderSeller(request.SID, request.OID) 
-  res.send(JSON.stringify(ack))
+  var response = {
+    ack: null
+  }
+  response.ack = await orderService.acceptOrderSeller(request.SID, request.OID) 
+  res.send(JSON.stringify(response))
 }
 
 module.exports.cancelOrderSeller = async function(req, res) { 
@@ -59,6 +68,9 @@ module.exports.cancelOrderSeller = async function(req, res) {
     SID: '001',
     OID: '002'
   }
-  var ack = await orderService.cancelOrder(request.SID, request.OID) 
-  res.send(JSON.stringify(ack))
+  var response = {
+    ack: null
+  }
+  response.ack = await orderService.cancelOrder(request.SID, request.OID) 
+  res.send(JSON.stringify(response))
 }
