@@ -110,11 +110,21 @@ module.exports.checkLogin = (account) => {
         // check username, password
         var checkMsg = await checkValidity(account)
         if(checkMsg == "account_not_exist") {
-            resolve('account_not_exist')
+            var response = {
+                ack: null,
+                ID: "",
+            }
+            response.ack = 'account_not_exist'
+            resolve(response)
             return
         }
         if(checkMsg == "account_not_valid") { // wrong username or password
-            resolve("account_not_valid")
+            var response = {
+                ack: null,
+                ID: "",
+            }
+            response.ack = 'account_not_valid'
+            resolve(response)
             return
         }
         // case account valid => checkMsg contain AID

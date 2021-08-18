@@ -6,7 +6,7 @@ var accountController = require('../controllers/account_controller')
 var searchController = require('../controllers/search_controller')
 
 // ACCOUNT
-router.post('/api/account/login', accountController.checkLogin) // check validity of account
+router.get('/api/account/login', accountController.checkLogin) // check validity of account
 router.post('/api/account/normal_user/info', accountController.getNormalUserInfo) // get normal user info
 router.post('/api/account/seller/info', accountController.getSellerInfo) // get normal user info
 router.post('/api/account/signup/normal_user', accountController.addNormalAccount) // add normal user account

@@ -7,7 +7,7 @@ module.exports.checkLogin = async function(req, res) {
   // get list of order
   var account = {
       username: 'buyer',
-      password: '123456'
+      password: '1234556'
   }
   var response = await accountService.checkLogin(account) 
   res.send(JSON.stringify(response))
