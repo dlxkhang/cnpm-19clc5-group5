@@ -1,48 +1,26 @@
 package com.example.muzee.login
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.muzee.network.LoginApi
+import com.example.muzee.network.*
 import kotlinx.coroutines.launch
-import java.io.UnsupportedEncodingException
+import javax.security.auth.callback.Callback
 
 class LoginViewModel : ViewModel() {
-    private val _status = MutableLiveData<String>()
-    val status: LiveData<String> = _status
-
-    init {
-        initAccount()
-    }
-
-    private fun initAccount() {
-        viewModelScope.launch {
+    private val repository = LoginRepository()
+    private val _reponse = MutableLiveData<Login_response?>()
+    val response:LiveData<Login_response?> = _reponse
+    fun checkLogin(username: String, password: String) {
+        viewModelScope.launch{
             try {
-                val account = LoginApi.loginRetrofitService.getAccount()
-                _status.value = "Success: Account received"
-            } catch (e: Exception) {
-                _status.value = "Failure:${e.message}"
+                val login_input = Login_input(username,password)
+                val res = repository.checklogin(login_input)
+                _reponse.postValue(res)
+            }catch (e:Exception){
+                throw RuntimeException("POST ERROR",e)
             }
         }
-    }
-    // JSON:
-    // [
-    // {
-    //      username:String,
-    //      password:String,
-    // }
-    // ]
-    private fun createAuthToken(username: String,password: String): String {
-        var data = byteArrayOf(0)
-        try {
-            data = (username+":"+password)?.toByteArray(Charsets.UTF_8)
-        } catch (e: UnsupportedEncodingException){
-            e.printStackTrace()
-        }
-        return "Basic "
-    }
-    fun checkLogin(username: String, password: String) {
-        val autokenString :String = createAuthToken(username,password)
-        LoginApi.loginRetrofitService.checklogin(autokenString)
     }
 }

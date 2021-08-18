@@ -119,6 +119,12 @@
     <string name="old_shopping">Old shopping mode</string>
     <string name="new_shopping">New shopping mode</string>
     <string name="add_product_condition">Product condition</string>
+    // dialogs
+    <string name="incorrect_username_title">Incorrect Username</string>
+    <string name="incorrect_username_message">The username you entered doesn\'t appear to belong to an account . Please check your username and try again.</string>
+    <string name="incorrect_password_title">Incorrect Password</string>
+    <string name="incorrect_password_message">The username you entered is incorrect.Please try again.</string>
+    <string name="btn_ok">OK</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
@@ -153,4 +159,5 @@
     <string name="add_product_stock">Enter stock of product</string>
     <string name="new_product_label">new product</string>
     <string name="old_product_label">old product</string>
+
 </resources>

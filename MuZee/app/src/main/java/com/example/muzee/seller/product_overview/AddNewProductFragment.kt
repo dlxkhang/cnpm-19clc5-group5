@@ -19,9 +19,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.muzee.R
 import com.example.muzee.data.Category
 import com.example.muzee.data.newProduct
-import com.example.muzee.data.oldProduct
 import com.example.muzee.databinding.FragmentAddNewProductBinding
-import com.example.muzee.oldProduct.OldProductViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 
@@ -32,7 +30,7 @@ class AddNewProductFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // setup data binding
         val fragmentBinding = FragmentAddNewProductBinding.inflate(inflater, container, false)
         binding = fragmentBinding
