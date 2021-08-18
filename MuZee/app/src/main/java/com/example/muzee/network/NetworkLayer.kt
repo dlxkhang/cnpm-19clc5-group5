@@ -1,5 +1,9 @@
 package com.example.muzee.network
 
+import com.example.muzee.network.login.LoginApiClient
+import com.example.muzee.network.login.LoginApiService
+import com.example.muzee.network.signup.SignUpApiClient
+import com.example.muzee.network.signup.SignUpApiService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
@@ -17,5 +21,9 @@ object NetworkLayer {
     val loginRetrofitService: LoginApiService by lazy{
         retrofit.create(LoginApiService::class.java)
     }
-    val ApiClient = ApiClient(loginRetrofitService)
+    val signupRetrofitService:SignUpApiService by lazy{
+        retrofit.create(SignUpApiService::class.java)
+    }
+    val LoginApiClient = LoginApiClient(loginRetrofitService)
+    val SignUpApiClient = SignUpApiClient(signupRetrofitService)
 }

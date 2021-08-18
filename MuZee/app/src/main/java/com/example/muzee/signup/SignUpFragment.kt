@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import com.example.muzee.R
 import com.example.muzee.databinding.SignUpFragmentBinding
@@ -12,15 +14,13 @@ import com.google.android.material.tabs.TabLayout
 
 class SignUpFragment : Fragment() {
 
-    private lateinit var viewmodel: SignUpViewModel
     private var binding: SignUpFragmentBinding? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         val fragmentbinding = SignUpFragmentBinding.inflate(inflater,container,false)
         binding = fragmentbinding
-
         return fragmentbinding.root
     }
 
@@ -30,8 +30,8 @@ class SignUpFragment : Fragment() {
             // Specify the fragment as the lifecycle owner
             lifecycleOwner = viewLifecycleOwner
         }
-        var tab_layout:TabLayout? = binding?.tabLayout
-        var view_page = initViewPager()
+        val tab_layout:TabLayout? = binding?.tabLayout
+        val view_page = initViewPager()
         tab_layout!!.setupWithViewPager(view_page)
     }
     override fun onDestroyView(){
@@ -39,7 +39,7 @@ class SignUpFragment : Fragment() {
         binding = null
     }
     private fun initViewPager(): ViewPager? {
-        var view_page = binding?.viewPager
+        val view_page = binding?.viewPager
         // init the adapter
         val pagerAdapter = ScreenSlidePagerAdapter(requireActivity().supportFragmentManager)
         // init the fragments

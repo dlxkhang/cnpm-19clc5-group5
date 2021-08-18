@@ -11,9 +11,9 @@ class ScreenSlidePagerAdapter(fm:FragmentManager): FragmentStatePagerAdapter(fm)
     }
 
     override fun getItem(position: Int): Fragment = when (position){
-            0-> SignUp_NormalUsersFragment()
-            1 ->  SignUp_SellerFragment()
-            else -> SignUp_NormalUsersFragment()
+            0-> SignUp_NormalUsersFragment.newInstance()
+            1 ->  SignUp_SellerFragment.newInstance()
+            else -> SignUp_NormalUsersFragment.newInstance()
     }
     override fun getPageTitle(position: Int): CharSequence? {
         return tabTitleList.get(position)

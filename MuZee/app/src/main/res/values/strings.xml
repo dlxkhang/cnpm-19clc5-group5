@@ -159,5 +159,9 @@
     <string name="add_product_stock">Enter stock of product</string>
     <string name="new_product_label">new product</string>
     <string name="old_product_label">old product</string>
+    <string name="error_text_fullname">Please enter fullname</string>
+    <string name="error_text_phonenumber">Please enter phone number</string>
+    <string name="error_text_re_password">Please re-enter password</string>
+    <string name="error_text_not_same_pwd">Password does not match. Please try again</string>
 
 </resources>

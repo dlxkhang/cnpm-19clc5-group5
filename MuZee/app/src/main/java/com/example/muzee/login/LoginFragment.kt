@@ -21,8 +21,8 @@ class LoginFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
-        var fragmentbinding = LoginFragmentBinding.inflate(inflater,container,false)
+    ): View {
+        val fragmentbinding = LoginFragmentBinding.inflate(inflater,container,false)
         binding = fragmentbinding
         return fragmentbinding.root
     }

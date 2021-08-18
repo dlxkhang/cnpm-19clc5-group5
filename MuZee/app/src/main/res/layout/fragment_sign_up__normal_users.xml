@@ -9,6 +9,7 @@
         android:id="@+id/sign_up_user_fragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
         tools:context=".signup.SignUp_NormalUsersFragment">
 
         <com.google.android.material.textfield.TextInputLayout

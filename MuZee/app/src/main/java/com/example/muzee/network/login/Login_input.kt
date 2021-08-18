@@ -1,4 +1,4 @@
-package com.example.muzee.network
+package com.example.muzee.network.login
 
 import android.os.Parcelable
 import com.squareup.moshi.Json
