@@ -124,19 +124,19 @@ module.exports.checkLogin = (account) => {
         if(userType == "seller") {
             var response = {
                 ack: null,
-                SID: null,
+                ID: null,
             }
             response.ack = 'seller_account_valid'
-            response.SID = await getSID(userID)
+            response.ID = await getSID(userID)
             resolve(response)
             return
         }
         var response = {
             ack: null,
-            NID: null,
+            ID: null,
         }
         response.ack = 'normal_user_account_valid'
-        response.NID = await getNID(userID)
+        response.ID = await getNID(userID)
         resolve(response)
     })
 }
