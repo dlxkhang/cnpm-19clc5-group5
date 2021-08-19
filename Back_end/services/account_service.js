@@ -214,7 +214,11 @@ module.exports.addNormalAccount = (account) => {
         // check username, password
         var checkMsg = await checkAccountExist(account)
         if(checkMsg == "account_exist") {
-            resolve('account_exist')
+            var response = {
+                ack: null,
+            }
+            response.ack = checkMsg
+            resolve(response)
             return
         }
         // case account not exist => can create a new account
@@ -258,7 +262,6 @@ module.exports.addNormalAccount = (account) => {
                 })
                 var response = {
                     ack: 'sign_up_success',
-                    NID: NID
                 }
                 resolve(response)
             })
@@ -292,7 +295,11 @@ module.exports.addSellerAccount = (account) => {
         // check username, password
         var checkMsg = await checkAccountExist(account)
         if(checkMsg == "account_exist") {
-            resolve('account_exist')
+            var response = {
+                ack: null,
+            }
+            response.ack = checkMsg
+            resolve(response)
             return
         }
         // case account not exist => can create a new account
@@ -336,7 +343,6 @@ module.exports.addSellerAccount = (account) => {
                 })
                 var response = {
                     ack: 'sign_up_success',
-                    SID: SID
                 }
                 resolve(response)
             })
