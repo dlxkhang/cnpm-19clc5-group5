@@ -2,7 +2,6 @@ package com.example.muzee.normalUsers
 
 import android.os.Bundle
 import android.view.*
-import android.widget.CompoundButton
 import android.widget.ImageView
 import android.widget.Switch
 import androidx.appcompat.app.ActionBarDrawerToggle

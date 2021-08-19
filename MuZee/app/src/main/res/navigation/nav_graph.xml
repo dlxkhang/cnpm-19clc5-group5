@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/mainScreenSellerFragment"
         android:name="com.example.muzee.seller.MainScreenSellerFragment"
-        android:label="fragment_main_screen_seller"
+        android:label="@string/home_item"
         tools:layout="@layout/fragment_main_screen_seller" >
         <action
             android:id="@+id/action_mainScreenSellerFragment_to_sellerOrderFragment"
@@ -20,7 +20,8 @@
     <fragment
         android:id="@+id/sellerOrderFragment"
         android:name="com.example.muzee.seller.order_overview.SellerOrderFragment"
-        android:label="SellerOrderFragment" >
+        android:label="@string/order_list_title"
+        tools:layout="@layout/fragment_seller_order">
         <action
             android:id="@+id/action_sellerOrderFragment_to_sellerOrderDetailFragment22"
             app:destination="@id/sellerOrderDetailFragment" />
@@ -28,7 +29,8 @@
     <fragment
         android:id="@+id/addNewProductFragment"
         android:name="com.example.muzee.seller.product_overview.AddNewProductFragment"
-        android:label="AddNewProductFragment" >
+        android:label="@string/add_new_product_title"
+        tools:layout="@layout/fragment_add_new_product">
         <action
             android:id="@+id/action_addNewProductFragment_to_sellerProductOverviewFragment"
             app:destination="@id/sellerProductOverviewFragment"
@@ -38,7 +40,7 @@
     <fragment
         android:id="@+id/sellerOrderDetailFragment"
         android:name="com.example.muzee.seller.order_detail.SellerOrderDetailFragment"
-        android:label="SellerOrderDetailFragment"
+        android:label="@string/order_detail_title"
         tools:layout="@layout/fragment_seller_order_detail">
         <argument
             android:name="selectedOrder"
@@ -47,7 +49,8 @@
     <fragment
         android:id="@+id/sellerProductOverviewFragment"
         android:name="com.example.muzee.seller.product_overview.SellerProductOverviewFragment"
-        android:label="SellerProductOverviewFragment" >
+        android:label="@string/Product_title"
+        tools:layout="@layout/fragment_seller_product_overview">
         <action
             android:id="@+id/action_sellerProductOverviewFragment_to_addNewProductFragment"
             app:destination="@id/addNewProductFragment" />
@@ -61,7 +64,8 @@
     <fragment
         android:id="@+id/sellerProductDetailFragment"
         android:name="com.example.muzee.seller.product_detail.SellerProductDetailFragment"
-        android:label="SellerProductDetailFragment" >
+        android:label="@string/product_detail_title"
+        tools:layout="@layout/fragment_seller_product_detail">
         <argument
             android:name="selectedProduct"
             app:argType="com.example.muzee.data.Product" />
@@ -69,7 +73,8 @@
     <fragment
         android:id="@+id/orderOverviewFragment"
         android:name="com.example.muzee.order_overview.OrderOverviewFragment"
-        android:label="OrderOverviewFragment" >
+        android:label="@string/order_list_title"
+        tools:layout="@layout/fragment_order_overview">
         <action
             android:id="@+id/action_orderOverviewFragment_to_orderDetailFragment"
             app:destination="@id/orderDetailFragment" />
@@ -77,7 +82,8 @@
     <fragment
         android:id="@+id/orderDetailFragment"
         android:name="com.example.muzee.order_detail.OrderDetailFragment"
-        android:label="OrderDetailFragment" >
+        android:label="@string/order_detail_title"
+        tools:layout="@layout/fragment_order_detail">
         <argument
             android:name="selectedOrder"
             app:argType="com.example.muzee.data.NormalUserOrder" />
@@ -159,7 +165,8 @@
     <fragment
         android:id="@+id/addOldProductFragment"
         android:name="com.example.muzee.oldProduct.AddOldProductFragment"
-        android:label="@string/add_old_product_fragment" >
+        android:label="@string/add_old_product_fragment"
+        tools:layout="@layout/fragment_add_old_product">
         <action
             android:id="@+id/action_addOldProductFragment_to_oldProductStoreFragment"
             app:destination="@id/oldProductStoreFragment"

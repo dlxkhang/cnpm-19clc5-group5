@@ -11,20 +11,13 @@
     <androidx.drawerlayout.widget.DrawerLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/drawerLayout"
-        android:fitsSystemWindows="true"
-        tools:openDrawer="start">
+        android:id="@+id/drawerLayout">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:context=".seller.MainScreenSellerFragment">
-
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:context=".seller.MainScreenSellerFragment">
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
@@ -39,7 +32,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.399" />
+                        app:layout_constraintVertical_bias="0.354" />
 
                     <TextView
                         android:id="@+id/storeName"
@@ -62,14 +55,11 @@
                         app:layout_constraintHorizontal_bias="0.497"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/storeName"
-                        app:layout_constraintVertical_bias="0.108">
-
-                    </ImageView>
-
+                        app:layout_constraintVertical_bias="0.108"
+                        tools:ignore="ContentDescription" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-            </FrameLayout>
-        </androidx.appcompat.widget.LinearLayoutCompat>
+        </LinearLayout>
 
         <com.google.android.material.navigation.NavigationView
             android:layout_width="wrap_content"
@@ -77,9 +67,7 @@
             android:id="@+id/navView"
             app:headerLayout="@layout/nav_header_seller"
             app:menu="@menu/nav_menu_seller"
-            android:layout_gravity="start"
-            android:fitsSystemWindows="true">
-        </com.google.android.material.navigation.NavigationView>
+            android:layout_gravity="start"/>
 
     </androidx.drawerlayout.widget.DrawerLayout>
 </layout>

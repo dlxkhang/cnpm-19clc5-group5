@@ -166,5 +166,10 @@
     <string name="error_text_storeName">Please enter store name</string>
     <string name="error_text_addressStore">Please enter store\'s address</string>
     <string name="LoginLabel">Login</string>
+    <string name="Product_title">My Product</string>
+    <string name="product_detail_title">Product Detail</string>
+    <string name="order_list_title">Order List</string>
+    <string name="order_detail_title">Order Detail</string>
+    <string name="add_new_product_title">Add New Product</string>
 
 </resources>

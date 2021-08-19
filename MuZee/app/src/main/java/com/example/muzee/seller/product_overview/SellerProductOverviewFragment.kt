@@ -21,8 +21,7 @@ class SellerProductOverviewFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val activity = activity as AppCompatActivity? // get activity
-        activity!!.supportActionBar?.setTitle("My Product") // set title text for seller product screen
+
 
         binding = FragmentSellerProductOverviewBinding.inflate(inflater, container, false)
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
