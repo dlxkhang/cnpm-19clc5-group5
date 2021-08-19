@@ -6,10 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doBeforeTextChanged
-import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.findNavController
 import com.example.muzee.R
 import com.example.muzee.databinding.LoginFragmentBinding
@@ -28,19 +26,17 @@ class LoginFragment : Fragment() {
         val fragmentbinding = LoginFragmentBinding.inflate(inflater,container,false)
         binding = fragmentbinding
         handle_before_text_change()
-        activity?.actionBar?.hide()
+        val activity = activity as AppCompatActivity?
+        activity!!.supportActionBar!!.hide()
         return fragmentbinding.root
     }
 
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//        requireActivity().window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
-//    }
-//
-//    override fun onDetach() {
-//        super.onDetach()
-//        requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
-//    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        val activity = activity as AppCompatActivity?
+        activity!!.supportActionBar!!.show()
+    }
+
 private fun handle_before_text_change(){
 
     binding?.labelUsername?.editText?.doBeforeTextChanged { _, _, _, _ ->
@@ -93,48 +89,79 @@ private fun handle_before_text_change(){
             viewModel.checkLogin(username,password)
             viewModel.response.observe(viewLifecycleOwner,{ login_response ->
                 if(login_response == null){
-                    val incorrectUsrAlertDialog = MaterialAlertDialogBuilder(requireContext())
-                        .setTitle("Connection Error")
-                        .setMessage("An error occurred when trying to connect to the server. Please check your internet connection and try again")
-                        .setPositiveButton(getString(R.string.btn_ok)) { dialog, which ->
-                            dialog.cancel()
-                        }
-                    incorrectUsrAlertDialog.show()
+                    showDiaLog(
+                        getString(R.string.connection_error_title),
+                        getString(R.string.connection_error_message),
+                    )
                     return@observe
                 }
                 val ID = login_response.ID
                 when(login_response.ack){
                     "account_not_exist"->{
+                        showDiaLog(getString(R.string.incorrect_username_title),
+                            getString(R.string.incorrect_username_message))
                         //pop up an alert dialog to notify incorrect username
-                        val incorrectUsrAlertDialog = MaterialAlertDialogBuilder(requireContext())
-                            .setTitle(getString(R.string.incorrect_username_title))
-                            .setMessage(getString(R.string.incorrect_username_message))
-                            .setPositiveButton(getString(R.string.btn_ok)) { dialog, which ->
-                                dialog.cancel()
-                            }
-                        incorrectUsrAlertDialog.show()
                     }
                     "account_not_valid"->{
                         //pop up an alert dialog to notify incorrect password
-                        val incorrectPwdAlertDialog = MaterialAlertDialogBuilder(requireContext())
-                            .setTitle(getString(R.string.incorrect_password_title))
-                            .setMessage(getString(R.string.incorrect_password_message))
-                            .setPositiveButton(getString(R.string.btn_ok)) { dialog, which ->
-                                dialog.cancel()
-                            }
-                        incorrectPwdAlertDialog.show()
+                        showDiaLog(getString(R.string.incorrect_password_title),
+                            getString(R.string.incorrect_password_message))
+
                     }
                     "seller_account_valid"->{
-
-                        findNavController().navigate(R.id.action_loginFragment_to_mainScreenSellerFragment)
+                        observeSeller(ID!!)
                     }
                     "normal_user_account_valid"->{
-                        findNavController().navigate(R.id.action_loginFragment_to_mainScreenNormalUsersFragment)
+                        observeNUser(ID!!)
                     }
                 }
 
             })
         }
     }
+    private fun observeNUser(id:String){
+        viewModel.getNormalUserInfo(id)
+        viewModel.userAccount.observe(viewLifecycleOwner,{
+            response ->
+            if(response == null){
+                showDiaLog(
+                    getString(R.string.connection_error_title),
+                    getString(R.string.connection_error_message),
+                )
+                return@observe
+            }
+            else {
+                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMainScreenNormalUsersFragment(
+                    response))
+            }
+        })
+    }
+    private fun observeSeller(id:String){
+        viewModel.getSellerInfo(id)
+        viewModel.sellerAccount.observe(viewLifecycleOwner,{
+            response ->
+            if(response == null){
+                showDiaLog(
+                    getString(R.string.connection_error_title),
+                    getString(R.string.connection_error_message),
+                )
+                return@observe
+            }
+            else{
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMainScreenSellerFragment(
+                response))
+            }
+        })
+    }
+    private fun showDiaLog(title:String,message: String){
+        val dialog = MaterialAlertDialogBuilder(requireContext())
+            .setTitle(title)
+            .setMessage(message)
+            .setPositiveButton(getString(R.string.btn_ok)) { dialog, which ->
+                dialog.cancel()
+            }
+        dialog.show()
+    }
+
 
 }

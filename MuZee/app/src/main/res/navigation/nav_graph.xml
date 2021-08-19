@@ -10,6 +10,9 @@
         android:name="com.example.muzee.seller.MainScreenSellerFragment"
         android:label="@string/home_item"
         tools:layout="@layout/fragment_main_screen_seller" >
+        <argument
+            android:name="seller"
+            app:argType="com.example.muzee.data.Seller"/>
         <action
             android:id="@+id/action_mainScreenSellerFragment_to_sellerOrderFragment"
             app:destination="@id/sellerOrderFragment" />
@@ -126,6 +129,9 @@
         android:name="com.example.muzee.normalUsers.MainScreenNormalUsersFragment"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_main_screen_normal_users">
+        <argument
+            android:name="normalUser"
+            app:argType="com.example.muzee.data.NormalUser"/>
         <action
             android:id="@+id/action_mainScreenNormalUsersFragment_to_categoryFragment"
             app:destination="@id/categoryFragment" />
