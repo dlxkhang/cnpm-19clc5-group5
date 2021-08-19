@@ -8,11 +8,11 @@ class SignUpApiClient(
     private val SignUpApiService:SignUpApiService
 ) {
     @POST("/api/account/signup/normal_user")
-    suspend fun addNormalAccount(@Body nAccount:SignUp_nAccount_input): Response<String>{
+    suspend fun addNormalAccount(@Body nAccount:SignUp_nAccount_input): Response<SignUp_response>{
         return SignUpApiService.addNormalAccount(nAccount)
     }
     @POST("/api/account/signup/seller")
-    suspend fun addSellerAccount(@Body sAccount:SignUp_sAccount_input): Response<String>{
+    suspend fun addSellerAccount(@Body sAccount:SignUp_sAccount_input): Response<SignUp_response>{
         return SignUpApiService.addSellerAccount(sAccount)
     }
 }

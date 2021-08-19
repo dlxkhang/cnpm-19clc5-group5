@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Button
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
@@ -21,6 +22,7 @@ class SignUpFragment : Fragment() {
     ): View {
         val fragmentbinding = SignUpFragmentBinding.inflate(inflater,container,false)
         binding = fragmentbinding
+        activity?.actionBar?.hide()
         return fragmentbinding.root
     }
 
@@ -30,9 +32,11 @@ class SignUpFragment : Fragment() {
             // Specify the fragment as the lifecycle owner
             lifecycleOwner = viewLifecycleOwner
         }
+        //requireActivity().window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
         val tab_layout:TabLayout? = binding?.tabLayout
         val view_page = initViewPager()
         tab_layout!!.setupWithViewPager(view_page)
+
     }
     override fun onDestroyView(){
         super.onDestroyView()
@@ -50,4 +54,12 @@ class SignUpFragment : Fragment() {
         return view_page
     }
 
+//    override fun onDetach() {
+//        super.onDetach()
+//        requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+//    }
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
+    }
 }

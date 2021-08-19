@@ -13,13 +13,9 @@ class LoginViewModel : ViewModel() {
     val response:LiveData<Login_response?> = _response
     fun checkLogin(username: String, password: String) {
         viewModelScope.launch{
-            try {
-                val login_input = Login_input(username,password)
-                val res = repository.checklogin(login_input)
-                _response.postValue(res)
-            }catch (e:Exception){
-                throw RuntimeException("LOGIN POST ERROR",e)
-            }
+            val login_input = Login_input(username,password)
+            val res = repository.checklogin(login_input)
+            _response.value = res
         }
     }
 }

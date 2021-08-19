@@ -6,7 +6,7 @@ import retrofit2.http.POST
 
 interface SignUpApiService {
     @POST("/api/account/signup/normal_user")
-    suspend fun addNormalAccount(@Body nAccount:SignUp_nAccount_input):Response<String>
+    suspend fun addNormalAccount(@Body nAccount:SignUp_nAccount_input):Response<SignUp_response>
     @POST("/api/account/signup/seller")
-    suspend fun addSellerAccount(@Body sAccount:SignUp_sAccount_input):Response<String>
+    suspend fun addSellerAccount(@Body sAccount:SignUp_sAccount_input):Response<SignUp_response>
 }

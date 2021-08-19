@@ -85,7 +85,8 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="phone"/>
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/label_enter_password"
@@ -94,17 +95,18 @@
             android:layout_height="wrap_content"
             android:hint="@string/enter_password"
             android:layout_marginTop = "15dp"
-            app:endIconMode="clear_text"
             app:errorEnabled="true"
             app:helperText="@string/required_help_text"
             app:hintTextAppearance="@style/ErrorText"
             app:layout_constraintEnd_toEndOf="@id/label_phone_number"
             app:layout_constraintStart_toStartOf="@id/label_phone_number"
-            app:layout_constraintTop_toBottomOf="@id/label_phone_number">
+            app:layout_constraintTop_toBottomOf="@id/label_phone_number"
+            app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/label_re_enter_password"
@@ -113,17 +115,18 @@
             android:layout_height="wrap_content"
             android:hint="@string/re_enter_password"
             android:layout_marginTop = "15dp"
-            app:endIconMode="clear_text"
             app:errorEnabled="true"
             app:helperText="@string/required_help_text"
             app:hintTextAppearance="@style/ErrorText"
             app:layout_constraintEnd_toEndOf="@id/label_enter_password"
             app:layout_constraintStart_toStartOf="@id/label_enter_password"
-            app:layout_constraintTop_toBottomOf="@id/label_enter_password">
+            app:layout_constraintTop_toBottomOf="@id/label_enter_password"
+            app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
         <Button
             android:id="@+id/btn_sign_up"

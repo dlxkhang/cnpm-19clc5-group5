@@ -188,8 +188,7 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.muzee.login.LoginFragment"
-        android:label="login_fragment"
-        tools:layout="@layout/login_fragment" >
+        tools:layout="@layout/login_fragment">
         <action
             android:id="@+id/action_loginFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
@@ -203,7 +202,6 @@
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.example.muzee.signup.SignUpFragment"
-        android:label="sign_up_fragment"
         tools:layout="@layout/sign_up_fragment" >
         <action
             android:id="@+id/action_signUpFragment_to_loginFragment"

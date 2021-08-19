@@ -6,7 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
+import androidx.core.widget.doBeforeTextChanged
+import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.findNavController
 import com.example.muzee.R
 import com.example.muzee.databinding.LoginFragmentBinding
@@ -24,7 +27,33 @@ class LoginFragment : Fragment() {
     ): View {
         val fragmentbinding = LoginFragmentBinding.inflate(inflater,container,false)
         binding = fragmentbinding
+        handle_before_text_change()
+        activity?.actionBar?.hide()
         return fragmentbinding.root
+    }
+
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//        requireActivity().window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+//    }
+//
+//    override fun onDetach() {
+//        super.onDetach()
+//        requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+//    }
+private fun handle_before_text_change(){
+
+    binding?.labelUsername?.editText?.doBeforeTextChanged { _, _, _, _ ->
+        binding?.labelUsername?.error = null
+    }
+    binding?.labelPassword?.editText?.doBeforeTextChanged { _, _, _, _ ->
+        binding?.labelPassword?.error = null
+    }
+
+}
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -48,9 +77,15 @@ class LoginFragment : Fragment() {
             notNull = false
             username_input_layout.error = getString(R.string.error_enter_username)
         }
+        else{
+            username_input_layout.error =null
+        }
         if(password_input_layout!!.editText!!.text!!.isEmpty()){
             notNull = false
             password_input_layout.error = getString(R.string.error_enter_password)
+        }
+        else{
+            password_input_layout.error = null
         }
         if(notNull){
             val username = username_input_layout.editText?.text.toString()
@@ -58,9 +93,13 @@ class LoginFragment : Fragment() {
             viewModel.checkLogin(username,password)
             viewModel.response.observe(viewLifecycleOwner,{ login_response ->
                 if(login_response == null){
-                    Toast.makeText(
-                        requireContext(),"Unsuccessful network call",Toast.LENGTH_SHORT
-                    ).show()
+                    val incorrectUsrAlertDialog = MaterialAlertDialogBuilder(requireContext())
+                        .setTitle("Connection Error")
+                        .setMessage("An error occurred when trying to connect to the server. Please check your internet connection and try again")
+                        .setPositiveButton(getString(R.string.btn_ok)) { dialog, which ->
+                            dialog.cancel()
+                        }
+                    incorrectUsrAlertDialog.show()
                     return@observe
                 }
                 val ID = login_response.ID
@@ -70,7 +109,8 @@ class LoginFragment : Fragment() {
                         val incorrectUsrAlertDialog = MaterialAlertDialogBuilder(requireContext())
                             .setTitle(getString(R.string.incorrect_username_title))
                             .setMessage(getString(R.string.incorrect_username_message))
-                            .setNeutralButton(getString(R.string.btn_ok)) { dialog, which ->
+                            .setPositiveButton(getString(R.string.btn_ok)) { dialog, which ->
+                                dialog.cancel()
                             }
                         incorrectUsrAlertDialog.show()
                     }
@@ -79,7 +119,8 @@ class LoginFragment : Fragment() {
                         val incorrectPwdAlertDialog = MaterialAlertDialogBuilder(requireContext())
                             .setTitle(getString(R.string.incorrect_password_title))
                             .setMessage(getString(R.string.incorrect_password_message))
-                            .setNeutralButton(getString(R.string.btn_ok)) { dialog, which ->
+                            .setPositiveButton(getString(R.string.btn_ok)) { dialog, which ->
+                                dialog.cancel()
                             }
                         incorrectPwdAlertDialog.show()
                     }

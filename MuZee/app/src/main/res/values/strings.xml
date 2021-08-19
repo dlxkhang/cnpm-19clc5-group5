@@ -163,5 +163,8 @@
     <string name="error_text_phonenumber">Please enter phone number</string>
     <string name="error_text_re_password">Please re-enter password</string>
     <string name="error_text_not_same_pwd">Password does not match. Please try again</string>
+    <string name="error_text_storeName">Please enter store name</string>
+    <string name="error_text_addressStore">Please enter store\'s address</string>
+    <string name="LoginLabel">Login</string>
 
 </resources>

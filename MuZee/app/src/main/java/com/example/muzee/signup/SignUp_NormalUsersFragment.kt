@@ -6,16 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.muzee.R
-import com.example.muzee.data.NormalUser
 import com.example.muzee.databinding.FragmentSignUpNormalUsersBinding
-import com.example.muzee.signup.model.SignUp_NormalUsersViewModel
+import com.example.muzee.signup.model.SignUpViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class SignUp_NormalUsersFragment : Fragment() {
-    private val viewModel:SignUp_NormalUsersViewModel by lazy {
-        ViewModelProvider(this).get(SignUp_NormalUsersViewModel::class.java)
-    }
+    private lateinit var viewModel: SignUpViewModel
     private var binding:FragmentSignUpNormalUsersBinding? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,10 +23,29 @@ class SignUp_NormalUsersFragment : Fragment() {
     ): View {
         val fragmentbinding =  FragmentSignUpNormalUsersBinding.inflate(inflater, container, false)
         binding = fragmentbinding
+        viewModel = SignUpViewModel()
+        handle_on_text_change()
         binding?.btnSignUp?.setOnClickListener{
             handle_sign_up_btn()
         }
         return fragmentbinding.root
+    }
+    private fun handle_on_text_change(){
+        binding?.labelFullName?.editText?.doOnTextChanged { _, _, _, _ ->
+            binding?.labelFullName?.error = null
+        }
+        binding?.labelPhoneNumber?.editText?.doOnTextChanged { _, _, _, _ ->
+            binding?.labelPhoneNumber?.error = null
+        }
+        binding?.labelUsername?.editText?.doOnTextChanged { _, _, _, _ ->
+            binding?.labelUsername?.error = null
+        }
+        binding?.labelEnterPassword?.editText?.doOnTextChanged { _, _, _, _ ->
+            binding?.labelEnterPassword?.error = null
+        }
+        binding?.labelReEnterPassword?.editText?.doOnTextChanged { _, _, _, _ ->
+            binding?.labelReEnterPassword?.error = null
+        }
     }
     fun handle_sign_up_btn(){
         val fullname_input = binding?.labelFullName
@@ -81,7 +100,7 @@ class SignUp_NormalUsersFragment : Fragment() {
                 val phoneNumber = phonenumber_input.editText?.text.toString()
                 val username = username_input.editText?.text.toString()
                 val password = password_input.editText?.text.toString()
-                viewModel.addAnAccount(fullName,username,phoneNumber,password)
+                viewModel.addNormalUserAccount(fullName,username,phoneNumber,password)
                 viewModel.reponse.observe(viewLifecycleOwner,{signup_response->
                     if(signup_response==null){
                         Toast.makeText(
@@ -89,11 +108,25 @@ class SignUp_NormalUsersFragment : Fragment() {
                         ).show()
                         return@observe
                     }
-                    when(signup_response){
+                    when(signup_response.ack){
                         "account_exist"->{
-
+                            val dialogBuilder = MaterialAlertDialogBuilder(requireContext())
+                            dialogBuilder.setMessage("This account already registered in the system. Do you want to sign up again?")
+                                .setTitle("Account Exists")
+                                .setPositiveButton(getString(R.string.btn_ok)){dialog,which->
+                                    dialog.cancel()
+                                }
+                            dialogBuilder.show()
                         }
                         "sign_up_success"->{
+                            val dialogBuilder = MaterialAlertDialogBuilder(requireContext())
+                            dialogBuilder
+                                .setTitle("Sign up Successful")
+                                .setPositiveButton(getString(R.string.btn_ok)){dialog,which->
+                                    dialog.cancel()
+                                    findNavController().navigate(R.id.action_signUpFragment_to_loginFragment)
+                                }
+                            dialogBuilder.show()
 
                         }
                     }
