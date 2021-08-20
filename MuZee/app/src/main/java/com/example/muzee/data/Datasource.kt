@@ -7,6 +7,7 @@ class Datasource {
     init {
         list_product_your_shop = listOf<oldProduct>(
             oldProduct(
+                "123",
                 Category.Piano,
                 "Nord Piano 4 88-Key Digital Piano",
                 2.999,
@@ -21,7 +22,7 @@ class Datasource {
                 "Tho Chung",
                 6
             ),
-            oldProduct(
+            oldProduct("321",
                 Category.Piano,
                 "Nord1 Piano 4 88-Key Digital Piano",
                 2.999,
@@ -36,7 +37,7 @@ class Datasource {
                 "Nguyen",
                 4
             ),
-            oldProduct(
+            oldProduct("543",
                 Category.Guitar,
                 "Nord2 Piano 4 88-Key Digital Piano",
                 2.999,
@@ -145,42 +146,42 @@ class Datasource {
 
     fun loadProduct(): List<Product> {
         return listOf<Product>(
-            Product(
+            Product("12",
                 Category.Piano,
                 "Nord Piano 4 88-Key Digital Piano",
                 2999.0,
                 "Tho Chung",
                 "test"
             ),
-            Product(
+            Product("3319",
                 Category.Piano,
                 "Nord Piano 4 88-Key Digital Piano",
                 2999.0,
                 "Tho Chung",
                 "test"
             ),
-            Product(
+            Product("342",
                 Category.Piano,
                 "Nord Piano 4 88-Key Digital Piano",
                 2999.0,
                 "Tho Chung",
                 "test"
             ),
-            Product(
+            Product("255",
                 Category.Piano,
                 "Nord Piano 4 88-Key Digital Piano",
                 2999.0,
                 "Tho Chung",
                 "test"
             ),
-            Product(
+            Product("322",
                 Category.Piano,
                 "Nord Piano 4 88-Key Digital Piano",
                 2999.0,
                 "Tho Chung",
                 "test"
             ),
-            Product(Category.Piano, "Nord Piano 4 88-Key Digital Piano", 2999.0, "Tho Chung", "test")
+            Product("142",Category.Piano, "Nord Piano 4 88-Key Digital Piano", 2.999, "Tho Chung", "test")
         )
     }
 }

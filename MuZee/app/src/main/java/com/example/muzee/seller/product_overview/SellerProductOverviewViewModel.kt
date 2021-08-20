@@ -36,7 +36,6 @@ class SellerProductOverviewViewModel : ViewModel() {
     fun displayPropertyDetailsComplete() {
         _navigateToSelectedProduct.value = null
     }
-
     fun addAnNewProduct(newProduct: newProduct){
 
     }

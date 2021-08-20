@@ -21,8 +21,7 @@ class SellerProductOverviewFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val activity = activity as AppCompatActivity? // get activity
-        activity!!.supportActionBar?.setTitle("My Product") // set title text for seller product screen
+
 
         binding = FragmentSellerProductOverviewBinding.inflate(inflater, container, false)
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
@@ -34,7 +33,10 @@ class SellerProductOverviewFragment : Fragment() {
         binding.recyclerView.adapter = SellerProductOverviewAdapter(SellerProductOverviewAdapter.OnClickListener {
             viewModel.displayProductDetail(it)
         })
-
+        val add_btn = binding.addNewProductBtn
+        add_btn.setOnClickListener{
+            findNavController().navigate(R.id.action_sellerProductOverviewFragment_to_addNewProductFragment)
+        }
         viewModel.navigateToSelectedProduct.observe(viewLifecycleOwner, Observer {
             if (null != it) {
                 this.findNavController().navigate(SellerProductOverviewFragmentDirections.actionSellerProductOverviewFragmentToSellerProductDetailFragment(it))

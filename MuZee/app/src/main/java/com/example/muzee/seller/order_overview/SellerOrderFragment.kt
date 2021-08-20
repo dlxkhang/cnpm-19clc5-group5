@@ -29,8 +29,6 @@ class SellerOrderFragment : Fragment() {
         // Giving the binding access to the OrderViewModel
         binding!!.orderViewModel = viewModel
 
-        val activity = activity as AppCompatActivity? // get activity
-        activity!!.supportActionBar?.setTitle("Order List") // set title text for seller order screen
 
         binding!!.recyclerView.adapter = SellerOrderAdapter(SellerOrderAdapter.OnClickListener {
             viewModel.displayOrderDetail(it)

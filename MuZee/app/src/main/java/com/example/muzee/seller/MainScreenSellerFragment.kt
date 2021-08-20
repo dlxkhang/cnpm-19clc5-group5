@@ -3,12 +3,14 @@ package com.example.muzee.seller
 
 import android.os.Bundle
 import android.view.*
+import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.muzee.R
+import com.example.muzee.data.Seller
 import com.example.muzee.databinding.FragmentMainScreenSellerBinding
 
 
@@ -34,7 +36,10 @@ class MainScreenSellerFragment : Fragment(){
         toggle = ActionBarDrawerToggle(activity, drawerLayout, R.string.open, R.string.close)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
-
+        val seller: Seller = MainScreenSellerFragmentArgs.fromBundle(requireArguments()).seller
+        binding?.navView?.getHeaderView(0)?.findViewById<TextView>(R.id.storeName_nav_head)?.text = seller.storeName
+        binding?.navView?.getHeaderView(0)?.findViewById<TextView>(R.id.storeAddress_nav_head)?.text = seller.storeAddress
+        binding?.storeNameMain?.text = seller.storeName
         val activity = activity as AppCompatActivity? // get activity
         activity!!.supportActionBar?.setDisplayHomeAsUpEnabled(true) // make toggle button visible
 
