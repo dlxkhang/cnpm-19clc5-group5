@@ -5,20 +5,20 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.core.view.isVisible
+import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.muzee.R
 import com.example.muzee.data.Category
-import com.example.muzee.data.oldProduct
 import com.example.muzee.databinding.FragmentAddOldProductBinding
-import androidx.core.widget.doOnTextChanged
+import com.example.muzee.network.AddOldProduct
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 
@@ -53,9 +53,9 @@ class AddOldProductFragment : Fragment() {
                 binding!!.labelInputName.error = null
 
         }
-        binding?.labelInputPrice?.editText?.doOnTextChanged{text, start, before, count ->
+        binding?.labelInputCondition?.editText?.doOnTextChanged{text, start, before, count ->
 
-            binding!!.labelInputPrice.error = null
+            binding!!.labelInputCondition.error = null
 
         }
         binding?.labelSelectCategory?.editText?.doOnTextChanged{text, start, before, count ->
@@ -69,28 +69,33 @@ class AddOldProductFragment : Fragment() {
     private fun handle_confirm_btn()
     {
         val inputName = binding?.labelInputName
-        val inputPrice = binding?.labelInputPrice
+        val inputCondition = binding?.labelInputCondition
         val selectCategory = binding?.labelSelectCategory
+        val inputDes = binding?.labelProductDescription
         var success = true
         if(inputName!!.editText!!.text!!.isEmpty()){
             success = false
             inputName.error = getString(R.string.error_text_PRODUCT_NAME)
         }
-        if(inputPrice!!.editText!!.text!!.isEmpty()){
+        if(inputCondition!!.editText!!.text!!.isEmpty()){
             success = false
-            inputPrice.error = getString(R.string.error_text_PRODUCT_NAME)
+            inputCondition.error = getString(R.string.error_text_PRODUCT_NAME)
         }
         if(selectCategory!!.editText!!.text!!.isEmpty()){
             success = false
             selectCategory.error = getString(R.string.error_text_PRODUCT_NAME)
         }
         if(success){
-            val category = category((selectCategory.editText as? AutoCompleteTextView)?.text.toString())
+            val category = (selectCategory.editText as? AutoCompleteTextView)?.text.toString()
+            val categoryID = getCategoryID(category)
             val name = inputName.editText?.text.toString()
-            val price = inputPrice.editText?.text.toString().toDouble()
+            val condition = inputCondition.editText?.text.toString().toInt()
+            val description = inputDes?.editText?.text.toString()
 
-            val sellerName = "huy"
-            val oldProduct = oldProduct(category,name,price,sellerName,null)
+            val sellerName = "Daph Duck"
+            val oldProduct = AddOldProduct(null, categoryID, name
+                ,sellerName,null, description, condition)
+
             viewModel.addAnOldProduct(oldProduct)
             findNavController().navigate(R.id.action_addOldProductFragment_to_oldProductStoreFragment)
         }
@@ -119,6 +124,18 @@ class AddOldProductFragment : Fragment() {
         }
     }
 
+    private fun getCategoryID(str: String): String {
+        return when(str){
+            "Piano" -> "001"
+            "Guitar" -> "002"
+            "Drum" -> "003"
+            "Keyboard" -> "004"
+            "Bass" -> "005"
+            "Organ" -> "006"
+            else -> "007"
+        }
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         binding?.addImageProduct?.setImageBitmap(data?.extras?.get("data")as Bitmap)
@@ -137,4 +154,5 @@ class AddOldProductFragment : Fragment() {
                 }
         }
     }
+
 }

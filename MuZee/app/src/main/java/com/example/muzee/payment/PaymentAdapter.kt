@@ -5,16 +5,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.muzee.data.Product
 import com.example.muzee.databinding.ProductItemPaymentBinding
+import com.example.muzee.network.CartProduct
 
 class PaymentAdapter :
-    ListAdapter<Product, PaymentAdapter.PaymentViewHolder>(DiffCallback) {
+    ListAdapter<CartProduct, PaymentAdapter.PaymentViewHolder>(DiffCallback) {
 
     class PaymentViewHolder(
         private var binding: ProductItemPaymentBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(product: Product) {
+        fun bind(product: CartProduct) {
             binding.product = product
             binding.executePendingBindings()
         }
@@ -34,12 +34,12 @@ class PaymentAdapter :
         holder.bind(item)
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<Product>() {
-        override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
+    companion object DiffCallback : DiffUtil.ItemCallback<CartProduct>() {
+        override fun areItemsTheSame(oldItem: CartProduct, newItem: CartProduct): Boolean {
             return oldItem.productName == newItem.productName
         }
 
-        override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
+        override fun areContentsTheSame(oldItem: CartProduct, newItem: CartProduct): Boolean {
             return oldItem.productPrice == newItem.productPrice
         }
     }

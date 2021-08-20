@@ -113,9 +113,12 @@
     <string name="error_text_CATEGORY">Select a category</string>
     <string name="error_text_PRODUCT_NAME">Enter product name</string>
     <string name="error_text_PRODUCT_PRICE">Enter product price</string>
+    <string name="error_text_OLD_PRODUCT_CONDITION">Enter product condition</string>
     <string name="edit">Edit</string>
     <string name="myShopFragment">My Shop</string>
     <string name="old_shopping">Old shopping mode</string>
     <string name="new_shopping">New shopping mode</string>
-
+    <string name="edit_product">Edit product</string>
+    <string name="add_product_condition">Product condition</string>
+    <string name="condition">Cond: %s/10</string>
 </resources>

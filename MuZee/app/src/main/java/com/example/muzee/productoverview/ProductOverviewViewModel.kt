@@ -1,20 +1,28 @@
 package com.example.muzee.productoverview
 
+import Api
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.muzee.data.Datasource
-import com.example.muzee.data.Product
+import com.example.muzee.network.NewProduct
 import kotlinx.coroutines.launch
+
+enum class ApiStatus { LOADING, ERROR, DONE }
 
 class ProductOverviewViewModel : ViewModel() {
 
-    private val _products = MutableLiveData<List<Product>>()
-    val products: LiveData<List<Product>> = _products
+    // The internal MutableLiveData that stores the status of the most recent request
+    private val _status = MutableLiveData<ApiStatus>()
 
-    private val _navigateToSelectedProduct = MutableLiveData<Product>()
-    val navigateToSelectedProduct: LiveData<Product>
+    // The external immutable LiveData for the request status
+    val status: LiveData<ApiStatus> = _status
+
+    private val _products = MutableLiveData<List<NewProduct>>()
+    val products: LiveData<List<NewProduct>> = _products
+
+    private val _navigateToSelectedProduct = MutableLiveData<NewProduct>()
+    val navigateToSelectedProduct: LiveData<NewProduct>
         get() = _navigateToSelectedProduct
 
     init {
@@ -24,11 +32,18 @@ class ProductOverviewViewModel : ViewModel() {
     private fun getProducts() {
 
         viewModelScope.launch {
-            _products.value = Datasource().loadProduct()
+            _status.value = ApiStatus.LOADING
+            try {
+                _products.value = Api.retrofitService.getNewProducts()
+                _status.value = ApiStatus.DONE
+            } catch (e: Exception) {
+                _status.value = ApiStatus.ERROR
+                _products.value = listOf()
+            }
         }
     }
 
-    fun displayProductDetail(product: Product) {
+    fun displayProductDetail(product: NewProduct) {
         _navigateToSelectedProduct.value = product
     }
 
