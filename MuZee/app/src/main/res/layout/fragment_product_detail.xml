@@ -101,7 +101,8 @@
                     android:layout_height="63dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_baseline_person_24" />
+                    app:srcCompat="@drawable/ic_baseline_person_24"
+                    tools:ignore="VectorDrawableCompat" />
 
                 <TextView
                     android:id="@+id/seller_name"

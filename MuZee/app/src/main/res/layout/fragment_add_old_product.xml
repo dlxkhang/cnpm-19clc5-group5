@@ -10,13 +10,11 @@
             name="viewModel"
             type="com.example.muzee.oldProduct.OldProductViewModel" />
     </data>
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/scroll_add_old_product_Fragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/add_product_image_label"
@@ -36,18 +34,7 @@
             android:layout_marginTop="10dp"
             android:src="@drawable/ic_launcher_background"
             app:layout_constraintStart_toStartOf="@+id/add_product_image_label"
-            app:layout_constraintTop_toBottomOf="@+id/add_product_image_label"
-            tools:ignore="ContentDescription" />
-        <ImageView
-            android:id="@+id/plus_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_add_24"
-            app:layout_constraintBottom_toBottomOf="@+id/add_image_product"
-            app:layout_constraintEnd_toEndOf="@+id/add_image_product"
-            app:layout_constraintStart_toStartOf="@+id/add_image_product"
-            app:layout_constraintTop_toTopOf="@+id/add_image_product"
-            tools:ignore="ContentDescription" />
+            app:layout_constraintTop_toBottomOf="@+id/add_product_image_label" />
 
         <TextView
             android:id="@+id/Enter_product_detail_label"
@@ -78,8 +65,7 @@
             <AutoCompleteTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="none"
-                tools:ignore="LabelFor" />
+                android:inputType="none" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -128,30 +114,12 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/label_input_condition"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/add_product_condition"
-            app:helperText="@string/required_help_text"
-            app:endIconMode="clear_text"
-            app:errorEnabled="true"
-            app:layout_constraintTop_toBottomOf="@id/label_input_price"
-            app:layout_constraintEnd_toEndOf="@+id/label_input_price"
-            app:layout_constraintStart_toStartOf="@id/label_input_price"
-            app:suffixText="/10"
-            >
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"/>
-        </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/label_product_description"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
-            android:layout_height="100dp"
+            android:layout_height="0dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="16dp"
             android:hint="@string/add_product_description"
@@ -168,18 +136,24 @@
                 android:scrollbars="vertical" />
         </com.google.android.material.textfield.TextInputLayout>
 
-
+        <ImageView
+            android:id="@+id/plus_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_add_24"
+            app:layout_constraintBottom_toBottomOf="@+id/add_image_product"
+            app:layout_constraintEnd_toEndOf="@+id/add_image_product"
+            app:layout_constraintStart_toStartOf="@+id/add_image_product"
+            app:layout_constraintTop_toTopOf="@+id/add_image_product" />
 
         <Button
             android:id="@+id/btn_confirm_add_product"
             style="@style/TextAppearance.AppCompat.Button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
             android:text="@string/btn_confirm_label"
-            android:background="@color/button"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/label_product_description"
             app:layout_constraintStart_toStartOf="@+id/label_product_description" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
 </layout>
