@@ -33,8 +33,11 @@ module.exports.addNewProduct = async function(req, res) {
     productDescription: null,
     stock: 12
   }
-  var ack = await productService.addNewProduct(product)
-  res.send(JSON.stringify(ack)) // send acknowledge message
+  var response = {
+    ack: null
+  }
+  response.ack = await productService.addNewProduct(product)
+  res.send(JSON.stringify(response)) // send acknowledge message
 }
 
 module.exports.editProduct = async function(req, res) { 
@@ -50,16 +53,22 @@ module.exports.editProduct = async function(req, res) {
     productDescription: null,
     stock: 100
   }
-  var ack = await productService.editProduct(product)
-  res.send(JSON.stringify(ack)) // send acknowledge message
+  var response = {
+    ack: null
+  }
+  response.ack = await productService.editProduct(product)
+  res.send(JSON.stringify(response)) // send acknowledge message
 }
 
 module.exports.deleteProduct = async function(req, res) { 
   // parse JSON to object
   //var product = JSON.parse(req.body)
   var productId = '010'
-  var ack = await productService.deleteProduct(productId)
-  res.send(JSON.stringify(ack)) // send acknowledge message
+  var response = {
+    ack: null
+  }
+  response.ack = await productService.deleteProduct(productId)
+  res.send(JSON.stringify(response)) // send acknowledge message
 }
 
 module.exports.addToCart = async function(req, res) { 
@@ -77,18 +86,21 @@ module.exports.addToCart = async function(req, res) {
   console.log(req.body)
   // var request = {
   //   NID: '001',
-  //   SID: '002',
+  //   SID: '001',
   //   PID: '002'
   // }
-  var ack = await productService.addToCart(req.body)
-  // res.send(JSON.stringify(ack)) // send acknowledge message
+  var response = {
+    ack: null
+  }
+  response.ack = await productService.addToCart(req.body)
+  res.send(JSON.stringify(response)) // send acknowledge message
 }
 
 module.exports.getProductsInCart = async function(req, res) { 
   // get list of product in cart
   var NID = '001'
-  var ack = await productService.getProductsInCart(NID)
-  res.send(JSON.stringify(ack)) // send acknowledge message
+  response = await productService.getProductsInCart(NID)
+  res.send(JSON.stringify(response)) // send acknowledge message
 }
 //////////////////////////////////////////////////////////////////
 // OLD PRODUCT
@@ -101,17 +113,21 @@ module.exports.getOldProductList = async function(req, res) {
 module.exports.addOldProduct = async function(req, res) { 
   // parse JSON to object
   //var product = JSON.parse(req.body)
-  var product = {
-    productId: null,
-    productCategory: '005',
-    productName: 'Guitar Bass Yamaha ALO',
-    sellerName: 'Daph Duck',
-    imageURI: null,
-    productDescription: null,
-    condition: 8
+  // var product = {
+  //   productId: null,
+  //   productCategory: '005',
+  //   productName: 'Guitar Bass Yamaha ALO',
+  //   sellerName: 'Daph Duck',
+  //   imageURI: null,
+  //   productDescription: null,
+  //   condition: 8
+  // }
+  var response = {
+    ack: null
   }
-  var ack = await productService.addOldProduct(product)
-  res.send(JSON.stringify(ack)) // send acknowledge message
+  console.log(req.body)
+  response.ack = await productService.addOldProduct(req.body)
+  res.send(JSON.stringify(response)) // send acknowledge message
 }
 
 module.exports.editOldProduct = async function(req, res) { 
@@ -126,14 +142,29 @@ module.exports.editOldProduct = async function(req, res) {
     productDescription: null,
     condition: 6
   }
-  var ack = await productService.editOldProduct(product)
-  res.send(JSON.stringify(ack)) // send acknowledge message
+  var response = {
+    ack: null
+  }
+  response.ack = await productService.editOldProduct(product)
+  res.send(JSON.stringify(response)) // send acknowledge message
 }
 
 module.exports.deleteOldProduct = async function(req, res) { 
   // parse JSON to object
   //var product = JSON.parse(req.body)
-  var productId = '002'
-  var ack = await productService.deleteOldProduct(productId)
-  res.send(JSON.stringify(ack)) // send acknowledge message
+  var productId = '003'
+  var response = {
+    ack: null
+  }
+  console.log(req.body)
+  console.log(2)
+  response.ack = await productService.deleteOldProduct(req.body)
+  // res.send(JSON.stringify(response)) // send acknowledge message
+}
+
+module.exports.getUserProducts= async function(req, res) { 
+  // get list of product in cart
+  var NID = '001'
+  var listOfUserProducts = await productService.getUserProducts(NID)
+  res.send(JSON.stringify(listOfUserProducts))
 }

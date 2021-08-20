@@ -22,6 +22,8 @@ class CartViewModel : ViewModel() {
     private val _products = MutableLiveData<List<CartProduct>>()
     val products: LiveData<List<CartProduct>> = _products
 
+    val total_price = MutableLiveData<Double>(0.0)
+
     init {
         getProducts()
     }
@@ -32,11 +34,20 @@ class CartViewModel : ViewModel() {
             _status.value = ApiStatus.LOADING
             try {
                 _products.value = Api.retrofitService.getCartProducts()
+                calculateTotal()
                 _status.value = ApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = ApiStatus.ERROR
                 _products.value = listOf()
             }
         }
+    }
+
+    private fun calculateTotal() {
+        var temp = 0.0
+        products.value?.forEach {
+            temp += it.productPrice
+        }
+        total_price.value = temp
     }
 }

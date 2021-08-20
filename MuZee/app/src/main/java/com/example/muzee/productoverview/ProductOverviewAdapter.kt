@@ -1,10 +1,12 @@
 package com.example.muzee.productoverview
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.muzee.R
 import com.example.muzee.databinding.NewProductItemBinding
 import com.example.muzee.network.NewProduct
 
@@ -32,6 +34,9 @@ class ProductOverviewAdapter(private val onClickListener: OnClickListener) :
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val item = getItem(position)
         holder.itemView.setOnClickListener {
+            onClickListener.onClick(item)
+        }
+        holder.itemView.findViewById<View>(R.id.view_button).setOnClickListener {
             onClickListener.onClick(item)
         }
         holder.bind(item)

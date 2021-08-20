@@ -26,7 +26,8 @@ class ProductDetailViewModel(product: NewProduct, app: Application) : AndroidVie
     fun addProductToCart() {
         viewModelScope.launch {
             val cartProduct = AddToCartProduct("001",selectedProduct.value!!.SID, selectedProduct.value!!.productId)
-            Api.retrofitService.addToCart(cartProduct)
+            val test = Api.retrofitService.addToCart(cartProduct).toString()
+            val b = 2
         }
     }
 }

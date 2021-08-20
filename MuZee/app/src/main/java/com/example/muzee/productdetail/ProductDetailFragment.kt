@@ -13,7 +13,9 @@ import com.example.muzee.databinding.FragmentProductDetailBinding
 
 class ProductDetailFragment : Fragment() {
 
-    private val viewModel: ProductDetailViewModel by activityViewModels()
+    private val sharedViewModel: ProductDetailViewModel by activityViewModels()
+
+    private var _binding: FragmentProductDetailBinding? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -24,11 +26,22 @@ class ProductDetailFragment : Fragment() {
         val viewModelFactory = ProductDetailViewModelFactory(product, application)
         binding.viewModel = ViewModelProvider(
             this, viewModelFactory).get(ProductDetailViewModel::class.java)
+
+        _binding = binding
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        _binding?.apply {
+            lifecycleOwner = viewLifecycleOwner
+            fragment = this@ProductDetailFragment
+        }
+    }
+
     fun addToCart() {
-        // viewModel.addProductToCart()
+        _binding?.viewModel?.addProductToCart()
         findNavController().navigate(R.id.action_productDetailFragment_to_mainScreenNormalUsersFragment)
     }
 }

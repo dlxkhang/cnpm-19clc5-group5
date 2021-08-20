@@ -19,37 +19,72 @@ class oldProduct(
     product_name:String,
     product_price:Double,
     seller_name:String,
-    val condidtion:String?
-):Product(product_category,product_name,product_price,seller_name){
+    var condition:Int?
+):Product(product_category,product_name,product_price,seller_name) {
     constructor(parcel: Parcel) : this(
-        TODO("productCategory"),
-        TODO("productName"),
-        TODO("productPrice"),
-        TODO("sellerName"),
-        parcel.readString()){
-
+        TODO("product_category"),
+        TODO("product_name"),
+        TODO("product_price"),
+        TODO("seller_name"),
+        parcel.readInt()) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         super.writeToParcel(parcel, flags)
-        parcel.writeString(condidtion)
+        parcel.writeInt(condition!!)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+    companion object CREATOR : Parcelable.Creator<newProduct> {
+        override fun createFromParcel(parcel: Parcel): newProduct {
+            return newProduct(parcel)
+        }
+
+        override fun newArray(size: Int): Array<newProduct?> {
+            return arrayOfNulls(size)
+        }
+    }
+}
+class newProduct(
+    product_category: Category,
+
+    product_name:String,
+
+    product_price:Double,
+
+    seller_name:String,
+    val stock: Int
+):Product(product_category,product_name,product_price,seller_name) {
+    constructor(parcel: Parcel) : this(
+        TODO("product_category"),
+        TODO("product_name"),
+        TODO("product_price"),
+        TODO("seller_name"),
+        parcel.readInt()) {
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        super.writeToParcel(parcel, flags)
+        parcel.writeInt(stock)
     }
 
     override fun describeContents(): Int {
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<oldProduct> {
-        override fun createFromParcel(parcel: Parcel): oldProduct {
-            return oldProduct(parcel)
+    companion object CREATOR : Parcelable.Creator<newProduct> {
+        override fun createFromParcel(parcel: Parcel): newProduct {
+            return newProduct(parcel)
         }
 
-        override fun newArray(size: Int): Array<oldProduct?> {
+        override fun newArray(size: Int): Array<newProduct?> {
             return arrayOfNulls(size)
         }
     }
-
 }
+
 
 enum class Category(var category: String){
     Piano("Piano"),

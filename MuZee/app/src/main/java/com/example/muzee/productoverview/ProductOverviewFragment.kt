@@ -24,7 +24,7 @@ class ProductOverviewFragment : Fragment() {
         // Giving the binding access to the OverviewViewModel
         binding.viewModel = viewModel
 
-        // Sets the adapter of the photosGrid RecyclerView
+        // Sets the adapter of the  RecyclerView
         binding.recyclerView.adapter = ProductOverviewAdapter(ProductOverviewAdapter.OnClickListener {
             viewModel.displayProductDetail(it)
         })

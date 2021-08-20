@@ -28,7 +28,7 @@
             tools:text="Nord Piano 4 88-Key Digital Piano" />
 
         <TextView
-            android:id="@+id/product_price"
+            android:id="@+id/product_condition"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{String.valueOf(product.productPrice)}"

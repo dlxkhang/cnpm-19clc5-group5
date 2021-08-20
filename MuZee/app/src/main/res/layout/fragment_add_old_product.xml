@@ -91,13 +91,13 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/label_input_price"
+            android:id="@+id/label_input_condition"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             app:helperText="@string/required_help_text"
-            android:hint="@string/add_product_price"
+            android:hint="@string/add_product_condition"
             app:endIconMode="clear_text"
             app:errorEnabled="true"
             app:hintTextAppearance="@style/ErrorText"
@@ -121,14 +121,14 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="100dp"
+            android:layout_marginBottom="16dp"
             android:hint="@string/add_product_description"
             app:helperTextEnabled="false"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/btn_confirm_add_product"
             app:layout_constraintEnd_toEndOf="@id/label_select_category"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@id/label_input_price"
-            app:layout_constraintTop_toBottomOf="@id/label_input_price">
+            app:layout_constraintStart_toStartOf="@id/label_input_condition"
+            app:layout_constraintTop_toBottomOf="@id/label_input_condition">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -151,11 +151,10 @@
             style="@style/TextAppearance.AppCompat.Button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:text="@string/btn_confirm_label"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/label_product_description"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/label_product_description"
-            app:layout_constraintTop_toBottomOf="@+id/label_product_description" />
+            app:layout_constraintStart_toStartOf="@+id/label_product_description" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

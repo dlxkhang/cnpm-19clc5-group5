@@ -6,7 +6,7 @@ var accountController = require('../controllers/account_controller')
 var searchController = require('../controllers/search_controller')
 
 // ACCOUNT
-router.get('/api/account/login', accountController.checkLogin) // check validity of account
+router.post('/api/account/login', accountController.checkLogin) // check validity of account
 router.post('/api/account/signup/normal_user', accountController.addNormalAccount) // add normal user account
 router.post('/api/account/signup/seller', accountController.addSellerAccount) // add seller account
 
@@ -23,6 +23,7 @@ router.get('/api/old_product', productController.getOldProductList) // get list 
 router.post('/api/old_product/add', productController.addOldProduct) // add old product
 router.post('/api/old_product/edit', productController.editOldProduct) // edit old product
 router.post('/api/old_product/delete', productController.deleteOldProduct) // delete old product
+router.get('/api/old_product/user_product', productController.getUserProducts) // get user's product
 
 // NORMAL USER ORDER
 router.get('/api/order', orderController.getOrderList) // get order list
