@@ -175,5 +175,6 @@
     <string name="add_new_product_title">Add New Product</string>
     <string name="connection_error_title">Connection Error</string>
     <string name="connection_error_message">An error occurred when trying to connect to the server. Please check your internet connection and try again</string>
+    <string name="stock_test">x1</string>
 
 </resources>

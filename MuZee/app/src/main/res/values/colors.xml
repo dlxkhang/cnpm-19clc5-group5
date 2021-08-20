@@ -21,5 +21,6 @@
     <color name="nav_header">#bdbdbd</color>
     <color name="red">#FF0000</color>
     <color name="button">#66BB6A</color>
+    <color name="order_bg">#CEEDFF</color>
 </resources>
 
