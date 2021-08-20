@@ -155,7 +155,7 @@
     <string name="add_store_name">Enter store name</string>
     <string name="add_address_store">"Enter store address "</string>
     <string name="btn_sign_up">Sign Up</string>
-    <string name="error_enter_username">Enter username</string>
+    <string name="error_enter_username">Please enter username</string>
     <string name="error_enter_password">Please enter password</string>
     <string name="edit_stock">Enter stock of product</string>
     <string name="add_product_stock">Enter stock of product</string>
