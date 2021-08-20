@@ -271,6 +271,18 @@ module.exports.placeOrder = (order) => {
                         return
                     }
                 })
+
+                // delete ordered product in Shopping Cart table
+                db.serialize(async () => {
+                    var query = "DELETE FROM ShoppingCart WHERE NID = ?"
+                    db.run(query, NID, function(err) {
+                        if (err) {
+                            reject(err)
+                            return
+                        }
+                    })
+                })
+
             })
             resolve("place_order_success")
         })

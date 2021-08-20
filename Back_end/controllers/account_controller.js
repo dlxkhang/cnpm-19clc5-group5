@@ -15,15 +15,14 @@ module.exports.checkLogin = async function(req, res) {
 
 module.exports.getNormalUserInfo = async function(req, res) { 
     // get list of order
-    var NID = '001'
-    var normalUserInfo = await accountService.getNormalUserInfo(NID) 
+    var normalUserInfo = await accountService.getNormalUserInfo(req.body.accountID) 
     res.send(JSON.stringify(normalUserInfo))
 }
 
 module.exports.getSellerInfo = async function(req, res) { 
     // get list of order
     var SID = '001'
-    var sellerInfo = await accountService.getSellerInfo(SID) 
+    var sellerInfo = await accountService.getSellerInfo(req.body.accountID) 
     res.send(JSON.stringify(sellerInfo))
 }
   

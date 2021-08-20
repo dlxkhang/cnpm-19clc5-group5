@@ -26,12 +26,12 @@ module.exports.addNewProduct = async function(req, res) {
   var product = {
     productId: null,
     productCategory: '005',
-    productName: 'Guitar Bass Yamaha ALO',
+    productName: 'test guitar',
     productPrice: 229,
-    sellerName: 'Test Store',
+    sellerName: 'Khang Music',
     imageURI: null,
     productDescription: null,
-    stock: 12
+    stock: 20
   }
   var response = {
     ack: null
@@ -63,7 +63,8 @@ module.exports.editProduct = async function(req, res) {
 module.exports.deleteProduct = async function(req, res) { 
   // parse JSON to object
   //var product = JSON.parse(req.body)
-  var productId = '010'
+  var productId = '003'
+
   var response = {
     ack: null
   }
@@ -72,18 +73,6 @@ module.exports.deleteProduct = async function(req, res) {
 }
 
 module.exports.addToCart = async function(req, res) { 
-  // parse JSON to object
-  //var product = JSON.parse(req.body)
-  // var product = {
-  //   productId: null,
-  //   productCategory: null,
-  //   productName: 'test',
-  //   productPrice: 1303,
-  //   sellerName: 'Test Store',
-  //   imageURI: null,
-  //   productDescription: 'description'
-  // }
-  console.log(req.body)
   var request = {
     NID: '001',
     SID: '001',
@@ -93,6 +82,18 @@ module.exports.addToCart = async function(req, res) {
     ack: null
   }
   response.ack = await productService.addToCart(request)
+  res.send(JSON.stringify(response)) // send acknowledge message
+}
+
+module.exports.deleteProductFromCart = async function(req, res) { 
+  var req = {
+    productId: '001',
+    NID: '001'
+  }
+  var response = {
+    ack: null
+  }
+  response.ack = await productService.deleteProductFromCart(req)
   res.send(JSON.stringify(response)) // send acknowledge message
 }
 

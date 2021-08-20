@@ -247,6 +247,20 @@ module.exports.addToCart = async (request) => {
     })
 }
 
+module.exports.deleteProductFromCart = async (req) => {
+    return new Promise(async function(resolve, reject) {
+        // delete in Product table
+        var query = "DELETE FROM ShoppingCart WHERE NID = ? AND PID = ?"
+        db.run(query, req.NID, req.productId, function(err) {
+            if (err) {
+                reject(err)
+                return
+            }
+            resolve("delete_product_from_cart_success")
+        })
+    })
+}
+
 module.exports.getProductsInCart = (NID) => {
     return new Promise(function(resolve, reject) {
         var query = "SELECT p.PRODUCT_NAME as productName, sc.TOTAL_PRICE as productPrice FROM ShoppingCart sc JOIN Product p ON(sc.PID = p.PID) WHERE sc.NID = ?"
