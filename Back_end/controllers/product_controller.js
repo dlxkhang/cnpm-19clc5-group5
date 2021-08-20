@@ -28,7 +28,7 @@ module.exports.addNewProduct = async function(req, res) {
     productCategory: '005',
     productName: 'test guitar',
     productPrice: 229,
-    sellerName: 'Khang Music',
+    SID: '002',
     imageURI: null,
     productDescription: null,
     stock: 20
@@ -48,7 +48,7 @@ module.exports.editProduct = async function(req, res) {
     productCategory: '005',
     productName: 'Guitar BA DON',
     productPrice: 366,
-    sellerName: 'Test Store',
+    SID: '001',
     imageURI: null,
     productDescription: null,
     stock: 100
@@ -118,7 +118,7 @@ module.exports.addOldProduct = async function(req, res) {
     productId: null,
     productCategory: '005',
     productName: 'Guitar Bass Yamaha ALO',
-    sellerName: 'Daph Duck',
+    NID: '001',
     imageURI: null,
     productDescription: null,
     condition: 8
@@ -137,7 +137,7 @@ module.exports.editOldProduct = async function(req, res) {
     productId: '002',
     productCategory: '005',
     productName: 'Guitar BA DON',
-    sellerName: 'Daph Duck',
+    NID: '001',
     imageURI: null,
     productDescription: null,
     condition: 6

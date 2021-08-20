@@ -264,8 +264,7 @@ module.exports.placeOrder = (order) => {
             db.serialize(async () => {
                 // insert into OrderOf table
                 var query = "INSERT INTO OrderOf VALUES (?, ?, ?)"
-                var NID = await findNIDByFullName(order.customerName)
-                db.run(query, order.orderId, NID, order.orderStatus, function(err) {
+                db.run(query, order.orderId, order.NID, order.orderStatus, function(err) {
                     if (err) {
                         reject(err)
                         return
@@ -275,7 +274,7 @@ module.exports.placeOrder = (order) => {
                 // delete ordered product in Shopping Cart table
                 db.serialize(async () => {
                     var query = "DELETE FROM ShoppingCart WHERE NID = ?"
-                    db.run(query, NID, function(err) {
+                    db.run(query, order.NID, function(err) {
                         if (err) {
                             reject(err)
                             return

@@ -18,7 +18,7 @@ module.exports.placeOrder = async function(req, res) {
     orderAddress: '37 xyz',
     orderedProducts: [['001', '002'], ['001', '003']], // [SID, PID]
     orderStatus: 'Pending',
-    customerName: 'Daph Duck'
+    NID: '001'
   }
   var response = {
     ack: null

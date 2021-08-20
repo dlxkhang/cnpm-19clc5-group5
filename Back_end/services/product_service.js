@@ -28,8 +28,8 @@ module.exports.getProductList = () => {
 
 async function checkProductExist(product) {
     return new Promise(async function(resolve, reject) {
-        var query = "SELECT p.PRODUCT_NAME as productName, s.STORE_NAME as sellerName FROM Product p JOIN Warehouse w ON(p.PID = w.PID) JOIN Seller s ON(w.SID = s.SID) WHERE p.PRODUCT_NAME = ? AND s.STORE_NAME = ?"
-        var params = [product.productName, product.sellerName]
+        var query = "SELECT p.PRODUCT_NAME as productName, w.SID FROM Product p JOIN Warehouse w ON(p.PID = w.PID) WHERE p.PRODUCT_NAME = ? AND w.SID = ?"
+        var params = [product.productName, product.SID]
         db.all(query, params, function(err, allRows) {
             if(err) {
                 reject(err)
@@ -105,13 +105,10 @@ module.exports.addNewProduct = async (product) => {
                 }
             })
 
-            db.serialize(async () => {
-                // get store ID based on store name
-                var storeId = await getStoreId(product)
-                
+            db.serialize(async () => {              
                 // add product to warehouse
                 var query = "INSERT INTO Warehouse VALUES (?, ?, ?, ?)"
-                var params = [storeId, product.productId, product.stock, product.productPrice]
+                var params = [product.SID, product.productId, product.stock, product.productPrice]
                 db.run(query, params, function(err) {
                     if(err) {
                         reject(err)
@@ -290,8 +287,8 @@ module.exports.getOldProductList = () => {
 
 async function checkOldProductExist(product) {
     return new Promise(async function(resolve, reject) {
-        var query = "SELECT p.PRODUCT_NAME as productName, n.FULL_NAME as sellerName FROM OldProduct p JOIN UserWarehouse w ON(p.PID = w.PID) JOIN NormalUser n ON(w.NID = n.NID) WHERE p.PRODUCT_NAME = ? AND n.FULL_NAME = ?"
-        var params = [product.productName, product.sellerName]
+        var query = "SELECT p.PRODUCT_NAME as productName, w.NID FROM OldProduct p JOIN UserWarehouse w ON(p.PID = w.PID) WHERE p.PRODUCT_NAME = ? AND w.NID = ?"
+        var params = [product.productName, product.NID]
         db.all(query, params, function(err, allRows) {
             if(err) {
                 reject(err)
@@ -368,13 +365,10 @@ module.exports.addOldProduct = async (product) => {
             })
 
             db.serialize(async () => {
-                // get seller ID based on seller name
-                var sellerId = await getSellerId(product)
-                
                 // add product to user warehouse
                 console.log(product)
                 var query = "INSERT INTO UserWarehouse VALUES (?, ?, ?)"
-                var params = [sellerId, product.productId, product.condition]
+                var params = [product.NID, product.productId, product.condition]
                 db.run(query, params, function(err) {
                     if(err) {
                         reject(err)
@@ -426,7 +420,6 @@ module.exports.editOldProduct = async (product) => {
 
             db.serialize(async () => {
                 // update product in UserWarehouse table
-                console.log(product)
                 var query = "UPDATE UserWarehouse SET CONDITION = ? WHERE PID = ?"
                 var params = [product.condition, product.productId]
                 db.run(query, params, function(err) {
