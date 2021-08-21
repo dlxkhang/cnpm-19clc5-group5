@@ -19,6 +19,11 @@
         <action
             android:id="@+id/action_mainScreenSellerFragment_to_sellerProductOverviewFragment"
             app:destination="@id/sellerProductOverviewFragment" />
+        <action
+            android:id="@+id/action_mainScreenSellerFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/sellerOrderFragment"
@@ -146,6 +151,11 @@
         <action
             android:id="@+id/action_showDetail"
             app:destination="@id/productDetailFragment" />
+        <action
+            android:id="@+id/action_mainScreenNormalUsersFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/categoryFragment"

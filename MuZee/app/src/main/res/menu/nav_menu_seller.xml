@@ -16,4 +16,13 @@
         android:id="@+id/orderListItem"
         android:icon="@drawable/ic_baseline_list_alt_24"
         android:title="@string/order_list_item"/>
+    <group
+        android:id="@+id/system_group"
+        >
+        <item
+            android:id="@+id/logout_btn"
+            android:title="@string/btn_logout"
+            android:icon="@drawable/logout_icon"
+            />
+    </group>
 </menu>

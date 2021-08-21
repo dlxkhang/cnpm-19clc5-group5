@@ -38,10 +38,18 @@
         android:id="@+id/switchMode"
         android:icon="@drawable/ic_switch_mode_icon"
         android:title="@string/switch_shopping_mode_item"
-        app:actionLayout="@layout/switch_item"
-        app:showAsAction="always" />
+        />
     <item
         android:id="@+id/customerSupportItem"
         android:icon="@drawable/ic_customer_support_icon"
         android:title="@string/customer_support_item" />
+    <group
+        android:id="@+id/system_group"
+        >
+        <item
+            android:id="@+id/logout_btn"
+            android:title="@string/btn_logout"
+            android:icon="@drawable/logout_icon"
+            />
+    </group>
 </menu>

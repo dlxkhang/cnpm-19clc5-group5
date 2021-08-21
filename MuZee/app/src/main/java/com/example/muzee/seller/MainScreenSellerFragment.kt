@@ -57,6 +57,9 @@ class MainScreenSellerFragment : Fragment(){
                     R.id.orderListItem -> {
                         findNavController().navigate(R.id.action_mainScreenSellerFragment_to_sellerOrderFragment) // move to order list screen
                     }
+                    R.id.logout_btn->{
+                        findNavController().navigate(R.id.action_mainScreenSellerFragment_to_loginFragment)
+                    }
                 }
             true
         }
