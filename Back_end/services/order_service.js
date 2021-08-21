@@ -219,6 +219,19 @@ async function generateNewId(order) {
     })
 }
 
+async function getListOfOrderedProduct(order) {
+    return new Promise(async function(resolve, reject) {
+        var query = "SELECT SID, PID FROM ShoppingCart WHERE NID = ?"
+        db.all(query, order.NID, function(err, allRows) {
+            if(err) {
+                reject(err)
+                return
+            }
+            resolve(allRows.map(Object.values))
+        })
+    })
+}
+
 module.exports.placeOrder = (order) => {
     return new Promise(async function(resolve, reject) {
         db.serialize(async () => {
@@ -236,8 +249,9 @@ module.exports.placeOrder = (order) => {
             })
 
             db.serialize(async () => {
+                var orderedProducts = await getListOfOrderedProduct(order)
                 // insert into OrderDetail table
-                for(const item of order.orderedProducts) {
+                for(const item of orderedProducts) {
                     var query = "INSERT INTO OrderDetail VALUES (?, ?, ?, ?, ?)"
                     var productPrice = await queryProductPrice(item[0], item[1])
                     var params = [order.orderId, item[0], item[1], 1, productPrice]
