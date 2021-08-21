@@ -22,7 +22,6 @@ class SignUpFragment : Fragment() {
     ): View {
         val fragmentbinding = SignUpFragmentBinding.inflate(inflater,container,false)
         binding = fragmentbinding
-        activity?.actionBar?.hide()
         return fragmentbinding.root
     }
 

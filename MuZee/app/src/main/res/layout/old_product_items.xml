@@ -6,7 +6,7 @@
     <data>
         <variable
             name="oldproduct"
-            type="com.example.muzee.data.Product" />
+            type="com.example.muzee.network.OldProduct" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="2dp"
-        android:background="#FFFFFF">
+        android:background="@color/white">
 
         <ImageView
             android:id="@+id/product_image"
@@ -29,45 +29,48 @@
         <TextView
             android:id="@+id/product_title"
             style="@style/text_style"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:text="@{oldproduct.productName}"
+            app:layout_constraintEnd_toStartOf="@+id/delete_btn"
             app:layout_constraintStart_toEndOf="@+id/product_image"
             app:layout_constraintTop_toTopOf="@+id/product_image"
             tools:text="Nord Piano 4 88-Key Digital Piano" />
 
         <TextView
-            android:id="@+id/product_price"
+            android:id="@+id/product_condition"
             style="@style/text_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{String.valueOf(oldproduct)}"
-            app:layout_constraintBottom_toTopOf="@+id/view_button"
+            android:layout_marginTop="8dp"
+            android:text="@{@string/condition(oldproduct.condition)}"
             app:layout_constraintStart_toStartOf="@+id/product_title"
-            app:layout_constraintTop_toBottomOf="@+id/product_title" />
+            app:layout_constraintTop_toBottomOf="@+id/product_title"
+            tools:text="Cond: 7/10" />
 
         <Button
-            android:id="@+id/view_button"
-            style="@style/button_style"
-            android:layout_width="85dp"
-            android:layout_height="36dp"
-            android:text="@string/view"
-            android:textSize="10sp"
-            app:backgroundTint="#9BBC9E"
-            app:layout_constraintBottom_toBottomOf="@+id/product_image"
-            app:layout_constraintStart_toStartOf="@+id/product_price" />
-
-        <Button
-            android:id="@+id/edit_button"
+            android:id="@+id/edit_btn"
             style="@style/button_style"
             android:layout_width="wrap_content"
             android:layout_height="36dp"
-            android:layout_marginStart="90dp"
+            android:layout_marginTop="8dp"
             android:fontFamily="@font/roboto"
             android:text="@string/edit"
             android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/view_button" />
+            app:layout_constraintStart_toStartOf="@+id/product_condition"
+            app:layout_constraintTop_toBottomOf="@+id/product_condition" />
+
+        <ImageView
+            android:id="@+id/delete_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_baseline_delete_forever_24"
+            tools:ignore="VectorDrawableCompat" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

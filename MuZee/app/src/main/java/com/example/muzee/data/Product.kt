@@ -40,18 +40,16 @@ class oldProduct(
     override fun describeContents(): Int {
         return 0
     }
-
-    companion object CREATOR : Parcelable.Creator<oldProduct> {
-        override fun createFromParcel(parcel: Parcel): oldProduct {
-            return oldProduct(parcel)
+    companion object CREATOR : Parcelable.Creator<newProduct> {
+        override fun createFromParcel(parcel: Parcel): newProduct {
+            return newProduct(parcel)
         }
 
-        override fun newArray(size: Int): Array<oldProduct?> {
+        override fun newArray(size: Int): Array<newProduct?> {
             return arrayOfNulls(size)
         }
     }
 }
-
 class newProduct(
     product_id: String,
     product_category: Category,
@@ -91,6 +89,7 @@ class newProduct(
         }
     }
 }
+
 
 enum class Category(var category: String){
     Piano("Piano"),

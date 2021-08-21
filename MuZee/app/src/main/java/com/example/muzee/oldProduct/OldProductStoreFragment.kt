@@ -1,10 +1,10 @@
 package com.example.muzee.oldProduct
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.muzee.R
@@ -25,7 +25,7 @@ class oldProductStoreFragment : Fragment() {
         binding?.viewModel = viewModel
         binding?.recycleViewOldProduct?.adapter = OldProductAdapter(OldProductAdapter.OnClickListener{
             viewModel.displayOldProductDetail(it)
-        })
+        }, viewModel)
         binding?.btnPost?.setOnClickListener {
             findNavController().navigate(R.id.action_oldProductStoreFragment_to_addOldProductFragment)
         }

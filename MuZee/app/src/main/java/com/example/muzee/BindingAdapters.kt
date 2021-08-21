@@ -6,7 +6,9 @@ import com.example.muzee.cart.CartAdapter
 import com.example.muzee.data.NormalUserOrder
 import com.example.muzee.data.Product
 import com.example.muzee.data.SellerOrder
-import com.example.muzee.data.oldProduct
+import com.example.muzee.network.CartProduct
+import com.example.muzee.network.NewProduct
+import com.example.muzee.network.OldProduct
 import com.example.muzee.oldProduct.OldProductAdapter
 import com.example.muzee.order_detail.OrderDetailAdapter
 import com.example.muzee.order_overview.OrderOverviewAdapter
@@ -17,19 +19,19 @@ import com.example.muzee.seller.order_overview.SellerOrderAdapter
 import com.example.muzee.seller.product_overview.SellerProductOverviewAdapter
 
 @BindingAdapter("listData")
-fun bindRecyclerViewProductOverview(recyclerView: RecyclerView, data: List<Product>?) {
+fun bindRecyclerViewProductOverview(recyclerView: RecyclerView, data: List<NewProduct>?) {
     val adapter = recyclerView.adapter as ProductOverviewAdapter
     adapter.submitList(data)
 }
 
 @BindingAdapter("listData1")
-fun bindRecyclerViewProductCart(recyclerView: RecyclerView, data: List<Product>?) {
+fun bindRecyclerViewProductCart(recyclerView: RecyclerView, data: List<CartProduct>?) {
     val adapter = recyclerView.adapter as CartAdapter
     adapter.submitList(data)
 }
 
 @BindingAdapter("listDataPayment")
-fun bindRecyclerViewPayment(recyclerView: RecyclerView, data: List<Product>?) {
+fun bindRecyclerViewPayment(recyclerView: RecyclerView, data: List<CartProduct>?) {
     val adapter = recyclerView.adapter as PaymentAdapter
     adapter.submitList(data)
 }
@@ -65,7 +67,7 @@ fun bindRecyclerViewOrderDetail(recyclerView: RecyclerView, data: List<Product>?
 }
 
 @BindingAdapter("listOldData")
-fun bindRecyclerViewOldProduct(recyclerView: RecyclerView, data: List<oldProduct>?) {
+fun bindRecyclerViewOldProduct(recyclerView: RecyclerView, data: List<OldProduct>?) {
     val adapter = recyclerView.adapter as OldProductAdapter
     adapter.submitList(data)
 }

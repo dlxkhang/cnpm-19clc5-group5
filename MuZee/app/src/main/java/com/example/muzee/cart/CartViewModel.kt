@@ -1,17 +1,28 @@
 package com.example.muzee.cart
 
+import Api
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.muzee.data.Datasource
-import com.example.muzee.data.Product
+import com.example.muzee.network.CartProduct
+import com.example.muzee.productoverview.ApiStatus
 import kotlinx.coroutines.launch
+
+enum class ApiStatus { LOADING, ERROR, DONE }
 
 class CartViewModel : ViewModel() {
 
-    private val _products = MutableLiveData<List<Product>>()
-    val products: LiveData<List<Product>> = _products
+    // The internal MutableLiveData that stores the status of the most recent request
+    private val _status = MutableLiveData<ApiStatus>()
+
+    // The external immutable LiveData for the request status
+    val status: LiveData<ApiStatus> = _status
+
+    private val _products = MutableLiveData<List<CartProduct>>()
+    val products: LiveData<List<CartProduct>> = _products
+
+    val total_price = MutableLiveData<Double>(0.0)
 
     init {
         getProducts()
@@ -20,7 +31,23 @@ class CartViewModel : ViewModel() {
     private fun getProducts() {
 
         viewModelScope.launch {
-            _products.value = Datasource().loadProduct()
+            _status.value = ApiStatus.LOADING
+            try {
+                _products.value = Api.retrofitService.getCartProducts()
+                calculateTotal()
+                _status.value = ApiStatus.DONE
+            } catch (e: Exception) {
+                _status.value = ApiStatus.ERROR
+                _products.value = listOf()
+            }
         }
+    }
+
+    private fun calculateTotal() {
+        var temp = 0.0
+        products.value?.forEach {
+            temp += it.productPrice
+        }
+        total_price.value = temp
     }
 }

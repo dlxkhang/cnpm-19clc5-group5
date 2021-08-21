@@ -1,20 +1,22 @@
 package com.example.muzee.productoverview
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.muzee.data.Product
-import com.example.muzee.databinding.ProductItemBinding
+import com.example.muzee.R
+import com.example.muzee.databinding.NewProductItemBinding
+import com.example.muzee.network.NewProduct
 
-class ProductOverviewAdapter(private  val onClickListener: OnClickListener) :
-    ListAdapter<Product, ProductOverviewAdapter.ProductViewHolder>(DiffCallback) {
+class ProductOverviewAdapter(private val onClickListener: OnClickListener) :
+    ListAdapter<NewProduct, ProductOverviewAdapter.ProductViewHolder>(DiffCallback) {
 
     class ProductViewHolder(
-        private var binding: ProductItemBinding
+        private var binding: NewProductItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(product: Product) {
+        fun bind(product: NewProduct) {
             binding.product = product
             binding.executePendingBindings()
         }
@@ -25,7 +27,7 @@ class ProductOverviewAdapter(private  val onClickListener: OnClickListener) :
         viewType: Int
     ): ProductViewHolder {
         return ProductViewHolder(
-            ProductItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            NewProductItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 
@@ -34,20 +36,23 @@ class ProductOverviewAdapter(private  val onClickListener: OnClickListener) :
         holder.itemView.setOnClickListener {
             onClickListener.onClick(item)
         }
+        holder.itemView.findViewById<View>(R.id.view_button).setOnClickListener {
+            onClickListener.onClick(item)
+        }
         holder.bind(item)
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<Product>() {
-        override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
+    companion object DiffCallback : DiffUtil.ItemCallback<NewProduct>() {
+        override fun areItemsTheSame(oldItem: NewProduct, newItem: NewProduct): Boolean {
             return oldItem.productName == newItem.productName
         }
 
-        override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
+        override fun areContentsTheSame(oldItem: NewProduct, newItem: NewProduct): Boolean {
             return oldItem.productPrice == newItem.productPrice
         }
     }
 
-    class OnClickListener(val clickListener: (product: Product) -> Unit) {
-        fun onClick(product: Product) = clickListener(product)
+    class OnClickListener(val clickListener: (product: NewProduct) -> Unit) {
+        fun onClick(product: NewProduct) = clickListener(product)
     }
 }

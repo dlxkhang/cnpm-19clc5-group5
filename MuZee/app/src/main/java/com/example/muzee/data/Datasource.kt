@@ -14,14 +14,6 @@ class Datasource {
                 "Tho Chung",
                 8
             ),
-            oldProduct("12",Category.Bass, "Guitar Bass Yamaha TRBX174", 200.0, "Xuan Khang", 7),
-            oldProduct("1",
-                Category.Electronic,
-                "Yamaha Revstar RS620 Electronic Guitar",
-                714.0,
-                "Tho Chung",
-                6
-            ),
             oldProduct("321",
                 Category.Piano,
                 "Nord1 Piano 4 88-Key Digital Piano",
@@ -29,31 +21,13 @@ class Datasource {
                 "Nguyen",
                 5
             ),
-            oldProduct("22",Category.Guitar, "Guitar1 Bass Yamaha TRBX174", 200.0, "Xuan Khang", 9),
-            oldProduct("123",
-                Category.Electronic,
-                "Yamaha1 Revstar RS620 Electronic Guitar",
-                714.0,
-                "Nguyen",
-                4
-            ),
             oldProduct("543",
                 Category.Guitar,
                 "Nord2 Piano 4 88-Key Digital Piano",
                 2.999,
                 "Ba Huy",
                 9
-            ),
-            oldProduct("22",Category.Bass, "Guitar2 Bass Yamaha TRBX174", 200.0, "Nguyen", 10),
-            oldProduct("123",
-                Category.Electronic,
-                "Yamaha2 Revstar RS620 Electronic Guitar",
-                714.0,
-                "Xuan Khang",
-                9
-            ),
-            oldProduct("3321",Category.Drum, "Yamaha1 Revstar RS620 Drum", 714.0, "Nguyen", 10),
-            oldProduct("1124",Category.Organ, "Nord21 88-Key Organ", 89.99, "Ba Huy", 9),
+            )
         )
     }
 
@@ -149,35 +123,35 @@ class Datasource {
             Product("12",
                 Category.Piano,
                 "Nord Piano 4 88-Key Digital Piano",
-                2.999,
+                2999.0,
                 "Tho Chung",
                 "test"
             ),
             Product("3319",
                 Category.Piano,
                 "Nord Piano 4 88-Key Digital Piano",
-                2.999,
+                2999.0,
                 "Tho Chung",
                 "test"
             ),
             Product("342",
                 Category.Piano,
                 "Nord Piano 4 88-Key Digital Piano",
-                2.999,
+                2999.0,
                 "Tho Chung",
                 "test"
             ),
             Product("255",
                 Category.Piano,
                 "Nord Piano 4 88-Key Digital Piano",
-                2.999,
+                2999.0,
                 "Tho Chung",
                 "test"
             ),
             Product("322",
                 Category.Piano,
                 "Nord Piano 4 88-Key Digital Piano",
-                2.999,
+                2999.0,
                 "Tho Chung",
                 "test"
             ),

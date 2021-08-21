@@ -7,6 +7,9 @@
         <variable
             name="viewModel"
             type="com.example.muzee.productdetail.ProductDetailViewModel" />
+        <variable
+            name="fragment"
+            type="com.example.muzee.productdetail.ProductDetailFragment" />
     </data>
 
     <ScrollView
@@ -71,6 +74,7 @@
                 <Button
                     android:id="@+id/add_to_cart_detail_button"
                     style="@style/button_style"
+                    android:onClick="@{() -> fragment.addToCart()}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/add_to_cart"
@@ -97,7 +101,8 @@
                     android:layout_height="63dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_baseline_person_24" />
+                    app:srcCompat="@drawable/ic_baseline_person_24"
+                    tools:ignore="VectorDrawableCompat" />
 
                 <TextView
                     android:id="@+id/seller_name"
@@ -105,7 +110,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/roboto"
-                    android:text="@string/test_seller_name"
+                    android:text="@{viewModel.selectedProduct.sellerName}"
                     app:layout_constraintStart_toEndOf="@+id/imageView"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="Daph Duck" />

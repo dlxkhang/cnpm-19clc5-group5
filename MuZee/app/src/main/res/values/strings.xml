@@ -118,7 +118,9 @@
     <string name="myShopFragment">My Shop</string>
     <string name="old_shopping">Old shopping mode</string>
     <string name="new_shopping">New shopping mode</string>
+    <string name="edit_product">Edit product</string>
     <string name="add_product_condition">Product condition</string>
+    <string name="condition">Cond: %s/10</string>
     // dialogs
     <string name="incorrect_username_title">Incorrect Username</string>
     <string name="incorrect_username_message">The username you entered doesn\'t appear to belong to an account . Please check your username and try again.</string>
@@ -173,5 +175,6 @@
     <string name="add_new_product_title">Add New Product</string>
     <string name="connection_error_title">Connection Error</string>
     <string name="connection_error_message">An error occurred when trying to connect to the server. Please check your internet connection and try again</string>
+    <string name="stock_test">x1</string>
 
 </resources>

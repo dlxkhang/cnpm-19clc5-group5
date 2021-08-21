@@ -7,7 +7,7 @@
 
         <variable
             name="product"
-            type="com.example.muzee.data.Product" />
+            type="com.example.muzee.network.CartProduct" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -41,7 +41,7 @@
             tools:text="Nord Piano 4 88-Key Digital Piano" />
 
         <TextView
-            android:id="@+id/product_price"
+            android:id="@+id/product_condition"
             style="@style/text_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

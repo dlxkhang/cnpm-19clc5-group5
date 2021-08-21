@@ -72,6 +72,9 @@
         <argument
             android:name="selectedProduct"
             app:argType="com.example.muzee.data.Product" />
+        <action
+            android:id="@+id/action_sellerProductDetailFragment_to_editOldProductFragment"
+            app:destination="@id/editOldProductFragment" />
     </fragment>
     <fragment
         android:id="@+id/orderOverviewFragment"
@@ -92,23 +95,19 @@
             app:argType="com.example.muzee.data.NormalUserOrder" />
     </fragment>
     <fragment
-        android:id="@+id/productOverviewFragment"
-        android:name="com.example.muzee.productoverview.ProductOverviewFragment"
-        android:label="ProductOverviewFragment"
-        tools:layout="@layout/fragment_product_overview">
-        <action
-            android:id="@+id/action_showDetail"
-            app:destination="@id/productDetailFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/productDetailFragment"
         android:name="com.example.muzee.productdetail.ProductDetailFragment"
         android:label="ProductDetailFragment"
         tools:layout="@layout/fragment_product_detail">
         <argument
             android:name="selectedProduct"
-            app:argType="com.example.muzee.data.Product"/>
+            app:argType="com.example.muzee.network.NewProduct"/>
+        <action
+            android:id="@+id/action_productDetailFragment_to_mainScreenNormalUsersFragment"
+            app:destination="@id/mainScreenNormalUsersFragment"
+            app:popUpTo="@id/mainScreenNormalUsersFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.example.muzee.cart.CartFragment"
@@ -144,6 +143,9 @@
         <action
             android:id="@+id/action_mainScreenNormalUsersFragment_to_orderOverviewFragment"
             app:destination="@id/orderOverviewFragment" />
+        <action
+            android:id="@+id/action_showDetail"
+            app:destination="@id/productDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/categoryFragment"

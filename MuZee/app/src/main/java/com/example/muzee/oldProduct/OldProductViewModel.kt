@@ -1,19 +1,29 @@
 package com.example.muzee.oldProduct
 
+import Api
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.muzee.data.Datasource
-import com.example.muzee.data.oldProduct
+import com.example.muzee.network.AddOldProduct
+import com.example.muzee.network.OldProduct
 import kotlinx.coroutines.launch
 
-class OldProductViewModel: ViewModel() {
-    private var _oldproducts = MutableLiveData<List<oldProduct>>()
-    val oldproducts: LiveData<List<oldProduct>> = _oldproducts
+enum class ApiStatus { LOADING, ERROR, DONE }
 
-    private val _navigateToSelectedProduct = MutableLiveData<oldProduct>()
-    val navigateToSelectedProduct: LiveData<oldProduct>
+class OldProductViewModel: ViewModel() {
+
+    // The internal MutableLiveData that stores the status of the most recent request
+    private val _status = MutableLiveData<ApiStatus>()
+
+    // The external immutable LiveData for the request status
+    val status: LiveData<ApiStatus> = _status
+
+    private var _oldproducts = MutableLiveData<List<OldProduct>>()
+    val oldproducts: LiveData<List<OldProduct>> = _oldproducts
+
+    private val _navigateToSelectedProduct = MutableLiveData<OldProduct>()
+    val navigateToSelectedProduct: LiveData<OldProduct>
         get() = _navigateToSelectedProduct
 
     init {
@@ -23,20 +33,28 @@ class OldProductViewModel: ViewModel() {
     private fun getOldProducts() {
 
         viewModelScope.launch {
-            _oldproducts.value = Datasource().loadOldProduct()
+            _status.value = ApiStatus.LOADING
+            try {
+                _oldproducts.value = Api.retrofitService.getOldProducts()
+                _status.value = ApiStatus.DONE
+            } catch (e: Exception) {
+                _status.value = ApiStatus.ERROR
+                _oldproducts.value = listOf()
+            }
         }
     }
 
-    fun displayOldProductDetail(oldproduct: oldProduct) {
+    fun displayOldProductDetail(oldproduct: OldProduct) {
         _navigateToSelectedProduct.value = oldproduct
     }
-    fun addAnOldProduct(oldproduct: oldProduct){
-         _oldproducts.value = _oldproducts.value?.plus(oldproduct)
+    fun addAnOldProduct(oldproduct: AddOldProduct){
+        viewModelScope.launch {
+            Api.retrofitService.addOldProduct(oldproduct)
+        }
     }
-    fun deleteAnProduct(oldproduct:oldProduct){
-        _oldproducts.value = _oldproducts.value?.minusElement(oldproduct)
-    }
-    fun editAnProduct(){
-
+    fun deleteAnOldProduct(oldProductID: String?) {
+        viewModelScope.launch {
+            Api.retrofitService.deleteOldProduct(oldProductID)
+        }
     }
 }
