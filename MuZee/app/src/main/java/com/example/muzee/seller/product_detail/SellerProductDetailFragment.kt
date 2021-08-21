@@ -20,8 +20,8 @@ class SellerProductDetailFragment : Fragment() {
         binding.viewModel = ViewModelProvider(
             this, viewModelFactory).get(SellerProductDetailViewModel::class.java)
 
-        val activity = activity as AppCompatActivity? // get activity
-        activity!!.supportActionBar?.setTitle("Product Detail") // set title text for seller product detail screen
+//        val activity = activity as AppCompatActivity? // get activity
+//        activity!!.supportActionBar?.setTitle("Product Detail") // set title text for seller product detail screen
         return binding.root
     }
 }

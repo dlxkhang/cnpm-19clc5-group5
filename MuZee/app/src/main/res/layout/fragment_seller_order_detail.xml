@@ -11,13 +11,11 @@
 
     <androidx.drawerlayout.widget.DrawerLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
+        android:layout_height="match_parent">
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fillViewport="true"
-            android:layout_marginTop="85dp">
+            android:fillViewport="true">
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -100,6 +98,7 @@
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recycler_view"
+                        android:background="@drawable/border"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

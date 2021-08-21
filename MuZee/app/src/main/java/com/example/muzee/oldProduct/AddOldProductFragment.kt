@@ -45,7 +45,7 @@ class AddOldProductFragment : Fragment() {
         }
         val plus_img = binding?.plusImage
 
-        plus_img?.setOnClickListener(View.OnClickListener {
+        plus_img?.setOnClickListener({
             plus_img.isVisible = false
             dispatchTakePictureIntent()
         })
@@ -59,11 +59,9 @@ class AddOldProductFragment : Fragment() {
 
         }
         binding?.labelSelectCategory?.editText?.doOnTextChanged{text, start, before, count ->
-
-
             binding!!.labelSelectCategory.error = null
-
         }
+
         return fragmentbinding.root
     }
     private fun handle_confirm_btn()
@@ -84,6 +82,10 @@ class AddOldProductFragment : Fragment() {
         if(selectCategory!!.editText!!.text!!.isEmpty()){
             success = false
             selectCategory.error = getString(R.string.error_text_PRODUCT_NAME)
+        }
+        if(inputCondition!!.editText!!.text!!.isEmpty()){
+            success = false
+            inputCondition.error = getString(R.string.error_text_OLD_PRODUCT_CONDITION)
         }
         if(success){
             val category = (selectCategory.editText as? AutoCompleteTextView)?.text.toString()

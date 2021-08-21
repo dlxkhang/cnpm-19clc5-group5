@@ -23,8 +23,6 @@ class OrderDetailFragment : Fragment() {
         val viewModelFactory = OrderDetailViewModelFactory(order as NormalUserOrder, application)
         binding.viewModel = ViewModelProvider(
             this, viewModelFactory).get(OrderDetailViewModel::class.java)
-        val activity = activity as AppCompatActivity? // get activity
-        activity!!.supportActionBar?.title = "Order Detail" // set title text for seller order detail screen
         return binding.root
     }
 }

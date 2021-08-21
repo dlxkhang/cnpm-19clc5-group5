@@ -40,4 +40,8 @@
 
         <item name="android:textColor">@color/red</item>
     </style>
+    <style name="NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 </resources>

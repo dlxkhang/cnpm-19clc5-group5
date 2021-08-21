@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.ImageView
 import android.widget.Switch
+import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat.invalidateOptionsMenu
@@ -13,6 +14,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.muzee.R
+import com.example.muzee.data.NormalUser
 import com.example.muzee.databinding.FragmentMainScreenNormalUsersBinding
 import com.example.muzee.productoverview.ProductOverviewAdapter
 import com.example.muzee.productoverview.ProductOverviewViewModel
@@ -64,6 +66,8 @@ class MainScreenNormalUsersFragment : Fragment() {
         activity!!.supportActionBar?.setDisplayHomeAsUpEnabled(true)// make toggle button visible
         //activity!!.supportActionBar?.setHomeButtonEnabled(true)
         activity.supportActionBar?.setTitle(R.string.app_name)// set title text for main screen
+        val normal_user_account :NormalUser = MainScreenNormalUsersFragmentArgs.fromBundle(requireArguments()).normalUser
+        binding?.navView?.getHeaderView(0)?.findViewById<TextView>(R.id.usernameLabel)?.text = normal_user_account.fullname
         //handle onClick event on menu Items
         binding!!.navView.setNavigationItemSelectedListener {
             when (it.itemId) {
@@ -72,7 +76,6 @@ class MainScreenNormalUsersFragment : Fragment() {
                 }
                 R.id.categoriesItem -> {
                     findNavController().navigate(R.id.action_mainScreenNormalUsersFragment_to_categoryFragment)
-
                 }
                 R.id.cart_item -> {
                     findNavController().navigate(R.id.action_mainScreenNormalUsersFragment_to_cartFragment)
