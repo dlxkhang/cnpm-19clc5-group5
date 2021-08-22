@@ -260,7 +260,7 @@ module.exports.deleteProductFromCart = async (req) => {
 
 module.exports.getProductsInCart = (NID) => {
     return new Promise(function(resolve, reject) {
-        var query = "SELECT p.PRODUCT_NAME as productName, sc.TOTAL_PRICE as productPrice FROM ShoppingCart sc JOIN Product p ON(sc.PID = p.PID) WHERE sc.NID = ?"
+        var query = "SELECT sc.PID, p.PRODUCT_NAME as productName, sc.TOTAL_PRICE as productPrice FROM ShoppingCart sc JOIN Product p ON(sc.PID = p.PID) WHERE sc.NID = ?"
         db.all(query, NID, function(err, allRows) {
             if(err) {
                 reject(err)
