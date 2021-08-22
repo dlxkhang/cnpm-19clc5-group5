@@ -5,7 +5,7 @@
     <data>
         <variable
             name="order"
-            type="com.example.muzee.network.seller.order.Order_responseItem"/>
+            type="com.example.muzee.network.seller.order.get_list_order.Order_responseItem"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

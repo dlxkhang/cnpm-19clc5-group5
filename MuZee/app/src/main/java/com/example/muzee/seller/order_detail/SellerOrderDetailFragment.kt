@@ -4,12 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.muzee.data.SellerOrder
 import com.example.muzee.databinding.FragmentSellerOrderDetailBinding
-import com.example.muzee.network.seller.order.Order_responseItem
+import com.example.muzee.network.seller.order.get_list_order.Order_responseItem
 
 class SellerOrderDetailFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

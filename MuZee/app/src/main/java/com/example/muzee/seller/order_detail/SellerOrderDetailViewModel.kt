@@ -7,9 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.example.muzee.R
-import com.example.muzee.data.Order
-import com.example.muzee.data.SellerOrder
-import com.example.muzee.network.seller.order.Order_responseItem
+import com.example.muzee.network.seller.order.get_list_order.Order_responseItem
 
 class SellerOrderDetailViewModel(order: Order_responseItem, app: Application) : AndroidViewModel(app) {
     private val _selectedOrder = MutableLiveData<Order_responseItem>()

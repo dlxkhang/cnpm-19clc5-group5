@@ -5,12 +5,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.muzee.cart.CartAdapter
 import com.example.muzee.data.NormalUserOrder
 import com.example.muzee.data.Product
-import com.example.muzee.data.SellerOrder
 import com.example.muzee.network.CartProduct
 import com.example.muzee.network.NewProduct
 import com.example.muzee.network.OldProduct
-import com.example.muzee.network.seller.order.Order_responseItem
-import com.example.muzee.network.seller.order.OrderedProduct
+import com.example.muzee.network.seller.order.get_list_order.Order_responseItem
+import com.example.muzee.network.seller.order.get_list_order.OrderedProduct
 import com.example.muzee.oldProduct.OldProductAdapter
 import com.example.muzee.order_detail.OrderDetailAdapter
 import com.example.muzee.order_overview.OrderOverviewAdapter
