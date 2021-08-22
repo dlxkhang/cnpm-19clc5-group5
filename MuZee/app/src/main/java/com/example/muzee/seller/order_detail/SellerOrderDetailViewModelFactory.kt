@@ -5,9 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.muzee.data.Order
 import com.example.muzee.data.SellerOrder
+import com.example.muzee.network.seller.order.Order_responseItem
 
 class SellerOrderDetailViewModelFactory(
-    private val order: SellerOrder,
+    private val order: Order_responseItem,
     private val application: Application
 ) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")

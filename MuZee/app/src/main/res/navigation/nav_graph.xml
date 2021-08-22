@@ -52,7 +52,7 @@
         tools:layout="@layout/fragment_seller_order_detail">
         <argument
             android:name="selectedOrder"
-            app:argType="com.example.muzee.data.SellerOrder"/>
+            app:argType="com.example.muzee.network.seller.order.Order_responseItem"/>
     </fragment>
     <fragment
         android:id="@+id/sellerProductOverviewFragment"

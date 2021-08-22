@@ -5,7 +5,7 @@
     <data>
         <variable
             name="order"
-            type="com.example.muzee.data.SellerOrder"/>
+            type="com.example.muzee.network.seller.order.Order_responseItem"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -74,7 +74,7 @@
             android:id="@+id/totalPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{Double.toString(order.totalPrice()) + `$`}"
+            android:text="@{Double.toString(order.itemTotal) + `$`}"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

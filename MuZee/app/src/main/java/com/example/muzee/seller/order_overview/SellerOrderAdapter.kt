@@ -5,16 +5,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.muzee.data.SellerOrder
 import com.example.muzee.databinding.OrderSellerItemBinding
+import com.example.muzee.network.seller.order.Order_responseItem
 
 class SellerOrderAdapter(private  val onClickListener: OnClickListener) :
-    ListAdapter<SellerOrder, SellerOrderAdapter.OrderViewHolder>(DiffCallback) {
+    ListAdapter<Order_responseItem, SellerOrderAdapter.OrderViewHolder>(DiffCallback) {
 
     class OrderViewHolder(
         private var binding: OrderSellerItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(order: SellerOrder) {
+        fun bind(order: Order_responseItem) {
             binding.order = order
             binding.executePendingBindings()
         }
@@ -38,12 +38,12 @@ class SellerOrderAdapter(private  val onClickListener: OnClickListener) :
         holder.bind(item)
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<SellerOrder>() {
-        override fun areItemsTheSame(oldItem: SellerOrder, newItem: SellerOrder): Boolean {
+    companion object DiffCallback : DiffUtil.ItemCallback<Order_responseItem>() {
+        override fun areItemsTheSame(oldItem: Order_responseItem, newItem: Order_responseItem): Boolean {
             return oldItem.orderId == newItem.orderId
         }
 
-        override fun areContentsTheSame(oldItem: SellerOrder, newItem: SellerOrder): Boolean {
+        override fun areContentsTheSame(oldItem: Order_responseItem, newItem: Order_responseItem): Boolean {
             return oldItem.orderId == newItem.orderId
                     && oldItem.orderAddress == newItem.orderAddress
                     && oldItem.orderedProducts == newItem.orderedProducts
@@ -54,7 +54,7 @@ class SellerOrderAdapter(private  val onClickListener: OnClickListener) :
         }
     }
 
-    class OnClickListener(val clickListener: (order: SellerOrder) -> Unit) {
-        fun onClick(order: SellerOrder) = clickListener(order)
+    class OnClickListener(val clickListener: (order: Order_responseItem) -> Unit) {
+        fun onClick(order: Order_responseItem) = clickListener(order)
     }
 }

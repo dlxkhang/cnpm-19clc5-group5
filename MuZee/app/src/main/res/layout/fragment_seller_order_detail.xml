@@ -98,15 +98,17 @@
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recycler_view"
-                        android:background="@drawable/border"
+                        listProductSellerOrderDetail="@{viewModel.selectedOrder.orderedProducts}"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:background="@drawable/border"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        listProductSellerOrderDetail="@{viewModel.selectedOrder.orderedProducts}"/>
+                        app:layout_constraintVertical_bias="0.0" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -190,7 +192,7 @@
                         android:id="@+id/total"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{Double.toString(viewModel.selectedOrder.totalPrice())}"
+                        android:text="@{Double.toString(viewModel.selectedOrder.itemTotal)}"
                         android:textColor="@color/black"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"

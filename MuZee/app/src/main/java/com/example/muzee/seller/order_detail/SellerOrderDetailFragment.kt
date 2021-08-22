@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.muzee.data.SellerOrder
 import com.example.muzee.databinding.FragmentSellerOrderDetailBinding
+import com.example.muzee.network.seller.order.Order_responseItem
 
 class SellerOrderDetailFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -20,7 +21,7 @@ class SellerOrderDetailFragment : Fragment() {
         binding.recyclerView.adapter = SellerOrderDetailAdapter()
 
         val order = SellerOrderDetailFragmentArgs.fromBundle(requireArguments()).selectedOrder
-        val viewModelFactory = SellerOrderDetailViewModelFactory(order as SellerOrder, application)
+        val viewModelFactory = SellerOrderDetailViewModelFactory(order as Order_responseItem, application)
         binding.viewModel = ViewModelProvider(
             this, viewModelFactory).get(SellerOrderDetailViewModel::class.java)
 
