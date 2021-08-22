@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.muzee.databinding.ProductItemOrderDetailSellerBinding
-import com.example.muzee.network.seller.order.get_list_order.OrderedProduct
+import com.example.muzee.network.seller.order.OrderedProduct
 
 class SellerOrderDetailAdapter :
     ListAdapter<OrderedProduct, SellerOrderDetailAdapter.SellerOrderDetailViewHolder>(DiffCallback) {

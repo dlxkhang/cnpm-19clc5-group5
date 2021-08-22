@@ -15,10 +15,11 @@ class LoginViewModel : ViewModel() {
     val userAccount:LiveData<NormalUser> = _userAccount
     private val _sellerAccount = MutableLiveData<Seller>()
     val sellerAccount:LiveData<Seller> = _sellerAccount
+    private val _accountID = MutableLiveData<String>()
+    val accountID:LiveData<String> = _accountID
 
     // The internal MutableLiveData that stores the status of the most recent request
     private val _status = MutableLiveData<ApiStatus>()
-
     // The external immutable LiveData for the request status
     val status: LiveData<ApiStatus> = _status
     fun checkLogin(username: String, password: String) {
@@ -37,6 +38,7 @@ class LoginViewModel : ViewModel() {
                         }
                         "seller_account_valid"->{
                             _status.value = ApiStatus.SUCCESS
+                            _accountID.value = data.ID
                             val id_input = getUser_response(data.ID.toString())
                             val seller_request = NetworkLayer.LoginApiClient.getSellerInfo(id_input)
                             if(seller_request.isSuccessful){
@@ -45,6 +47,7 @@ class LoginViewModel : ViewModel() {
                         }
                         "normal_user_account_valid"->{
                             _status.value = ApiStatus.SUCCESS
+                            _accountID.value = data.ID
                             val id_input = getUser_response(data.ID.toString())
                             val normal_request = NetworkLayer.LoginApiClient.getNormalUserInfo(id_input)
                             if(normal_request.isSuccessful){

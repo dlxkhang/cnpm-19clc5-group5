@@ -84,7 +84,7 @@ private fun handle_before_text_change(){
     }
     private fun handleSuccessCase(){
         viewModel.sellerAccount.observe(viewLifecycleOwner,{
-            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMainScreenSellerFragment(it))
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMainScreenSellerFragment(it,viewModel.accountID.value!!))
         })
         viewModel.userAccount.observe(viewLifecycleOwner,{
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMainScreenNormalUsersFragment(it))

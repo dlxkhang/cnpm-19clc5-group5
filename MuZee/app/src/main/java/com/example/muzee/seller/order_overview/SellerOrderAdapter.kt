@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.muzee.databinding.OrderSellerItemBinding
-import com.example.muzee.network.seller.order.get_list_order.Order_responseItem
+import com.example.muzee.network.seller.order.Order_responseItem
 
 class SellerOrderAdapter(private  val onClickListener: OnClickListener) :
     ListAdapter<Order_responseItem, SellerOrderAdapter.OrderViewHolder>(DiffCallback) {

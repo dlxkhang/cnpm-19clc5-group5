@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.muzee.network.NetworkLayer
-import com.example.muzee.network.seller.order.get_list_order.Order_request
-import com.example.muzee.network.seller.order.get_list_order.Order_responseItem
+import com.example.muzee.network.seller.order.Order_request
+import com.example.muzee.network.seller.order.Order_responseItem
 import kotlinx.coroutines.launch
 import java.lang.Exception
 

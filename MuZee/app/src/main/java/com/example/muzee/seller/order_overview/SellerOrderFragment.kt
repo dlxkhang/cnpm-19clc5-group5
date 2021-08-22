@@ -36,7 +36,7 @@ class SellerOrderFragment : Fragment() {
         binding!!.recyclerView.adapter = SellerOrderAdapter(SellerOrderAdapter.OnClickListener {
             viewModel.displayOrderDetail(it)
         })
-        val SID = "001"
+        val SID = SellerOrderFragmentArgs.fromBundle(requireArguments()).sellerID
         viewModel.getListOfOrders(SID)
         viewModel.status.observe(viewLifecycleOwner,{
             when(it)
@@ -54,7 +54,7 @@ class SellerOrderFragment : Fragment() {
         })
         viewModel.navigateToSelectedOrder.observe(viewLifecycleOwner, {
             if (null != it) {
-                this.findNavController().navigate(SellerOrderFragmentDirections.actionSellerOrderFragmentToSellerOrderDetailFragment22(it))
+                this.findNavController().navigate(SellerOrderFragmentDirections.actionSellerOrderFragmentToSellerOrderDetailFragment22(it,SID))
                 viewModel.displayPropertyDetailsComplete()
             }
         })

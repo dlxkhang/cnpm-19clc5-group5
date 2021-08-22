@@ -1,4 +1,4 @@
-package com.example.muzee.network.seller.order.get_list_order
+package com.example.muzee.network.seller.order
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
