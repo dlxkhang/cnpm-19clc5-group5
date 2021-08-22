@@ -4,6 +4,4 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class CartProduct (
-    val PID: String, val productName: String, val productPrice: Double
-    ) : Parcelable
+data class NormalUserID(val NID: String?): Parcelable

@@ -10,21 +10,26 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat.invalidateOptionsMenu
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.muzee.R
-import com.example.muzee.data.NormalUser
 import com.example.muzee.databinding.FragmentMainScreenNormalUsersBinding
+import com.example.muzee.login.LoginViewModel
 import com.example.muzee.productoverview.ProductOverviewAdapter
 import com.example.muzee.productoverview.ProductOverviewViewModel
+import com.example.muzee.productoverview.ProductOverviewViewModelFactory
 
 class MainScreenNormalUsersFragment : Fragment() {
     private lateinit var drawer_layout: DrawerLayout // drawerLayout contain nav menu in xml
     lateinit var toggle: ActionBarDrawerToggle // toggle button
     private var binding: FragmentMainScreenNormalUsersBinding? = null
     private var isOpenMyStore: Boolean = false
-    private val viewModel: ProductOverviewViewModel by viewModels()
+    private val viewModel: ProductOverviewViewModel by activityViewModels { ProductOverviewViewModelFactory(args.NID, args.normalUser ,requireNotNull(activity).application) }
+    private val loginViewModel: LoginViewModel by viewModels()
+    private val args: MainScreenNormalUsersFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,7 +53,7 @@ class MainScreenNormalUsersFragment : Fragment() {
 
         viewModel.navigateToSelectedProduct.observe(viewLifecycleOwner, Observer {
             if (null != it) {
-                this.findNavController().navigate(MainScreenNormalUsersFragmentDirections.actionShowDetail(it))
+                this.findNavController().navigate(MainScreenNormalUsersFragmentDirections.actionShowDetail(it, viewModel.NID))
                 viewModel.displayPropertyDetailsComplete()
             }
         })
@@ -66,8 +71,7 @@ class MainScreenNormalUsersFragment : Fragment() {
         activity!!.supportActionBar?.setDisplayHomeAsUpEnabled(true)// make toggle button visible
         //activity!!.supportActionBar?.setHomeButtonEnabled(true)
         activity.supportActionBar?.setTitle(R.string.app_name)// set title text for main screen
-        val normal_user_account :NormalUser = MainScreenNormalUsersFragmentArgs.fromBundle(requireArguments()).normalUser
-        binding?.navView?.getHeaderView(0)?.findViewById<TextView>(R.id.usernameLabel)?.text = normal_user_account.fullname
+        binding?.navView?.getHeaderView(0)?.findViewById<TextView>(R.id.usernameLabel)?.text = viewModel.normalUser.fullname
         //handle onClick event on menu Items
         binding!!.navView.setNavigationItemSelectedListener {
             when (it.itemId) {
@@ -78,7 +82,7 @@ class MainScreenNormalUsersFragment : Fragment() {
                     findNavController().navigate(R.id.action_mainScreenNormalUsersFragment_to_categoryFragment)
                 }
                 R.id.cart_item -> {
-                    findNavController().navigate(R.id.action_mainScreenNormalUsersFragment_to_cartFragment)
+                    findNavController().navigate(MainScreenNormalUsersFragmentDirections.actionMainToCart(viewModel.NID))
                 }
                 R.id.myOrderItem->{
                     findNavController().navigate(R.id.action_mainScreenNormalUsersFragment_to_orderOverviewFragment)
@@ -126,7 +130,7 @@ class MainScreenNormalUsersFragment : Fragment() {
             return true
         }
         if (item.itemId == R.id.cart_item) {
-            findNavController().navigate(R.id.action_mainScreenNormalUsersFragment_to_cartFragment)
+            findNavController().navigate(MainScreenNormalUsersFragmentDirections.actionMainToCart(viewModel.NID))
             return true
         }
 

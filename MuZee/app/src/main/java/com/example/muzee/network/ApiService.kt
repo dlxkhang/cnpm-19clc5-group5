@@ -2,12 +2,12 @@
 import com.example.muzee.network.*
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 private const val BASE_URL = "http://192.168.31.133:3000"
 
@@ -27,11 +27,15 @@ interface ApiService {
 
     // Get cart
     @GET("api/cart")
-    suspend fun getCartProducts(): List<CartProduct>
+    suspend fun getCartProducts(@Query ("NID") NID: String?): List<CartProduct>
 
     // Post Add to cart
     @POST("api/product/add_to_cart")
-    suspend fun addToCart(@Body cartProduct: AddToCartProduct): Response<AckResponse>
+    suspend fun addToCart(@Body cartProduct: AddToCartProduct): Void
+
+    // Delete product from cart
+    @POST("api/cart/delete")
+    suspend fun deleteFromCart(@Body deleteProduct: DeleteFromCartProduct): Void
 
     // Old product
     // Get old product overview

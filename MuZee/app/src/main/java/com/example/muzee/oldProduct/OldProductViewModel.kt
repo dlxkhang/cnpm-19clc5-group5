@@ -54,7 +54,11 @@ class OldProductViewModel: ViewModel() {
     }
     fun deleteAnOldProduct(oldProductID: String?) {
         viewModelScope.launch {
-            Api.retrofitService.deleteOldProduct(oldProductID)
+            try {
+                Api.retrofitService.deleteOldProduct(oldProductID)
+            } catch (e: Exception) {
+
+            }
         }
     }
 }

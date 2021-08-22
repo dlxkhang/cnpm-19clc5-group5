@@ -5,13 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import com.example.muzee.cart.CartViewModel
 import com.example.muzee.databinding.FragmentPaymentBinding
 
 class PaymentFragment : Fragment() {
 
-    private val viewModel: CartViewModel by viewModels()
+    private val sharedViewModel: CartViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,7 +23,7 @@ class PaymentFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         // Giving the binding access to the OverviewViewModel
-        binding.viewModel = viewModel
+        binding.viewModel =  sharedViewModel
 
         // Sets the adapter of the RecyclerView
         binding.recyclerView.adapter = PaymentAdapter()

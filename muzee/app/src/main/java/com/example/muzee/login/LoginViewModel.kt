@@ -17,6 +17,8 @@ class LoginViewModel : ViewModel() {
     val sellerAccount:LiveData<Seller> = _sellerAccount
     private val _response = MutableLiveData<Login_response?>()
     val response:LiveData<Login_response?> = _response
+
+
     fun checkLogin(username: String, password: String) {
         viewModelScope.launch{
             val login_input = Login_input(username,password)
