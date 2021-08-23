@@ -37,7 +37,11 @@ class SellerOrderFragment : Fragment() {
             viewModel.displayOrderDetail(it)
         })
         val SID = SellerOrderFragmentArgs.fromBundle(requireArguments()).sellerID
-        viewModel.getListOfOrders(SID)
+        var sellerID = ""
+        SID?.let{
+            sellerID = it
+        }
+        viewModel.getListOfOrders(sellerID)
         viewModel.status.observe(viewLifecycleOwner,{
             when(it)
             {

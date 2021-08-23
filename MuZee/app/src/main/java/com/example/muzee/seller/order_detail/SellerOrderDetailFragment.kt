@@ -30,14 +30,18 @@ class SellerOrderDetailFragment : Fragment() {
         val viewModelFactory = SellerOrderDetailViewModelFactory(order as Order_responseItem, application)
         binding?.viewModel = ViewModelProvider(
             this, viewModelFactory).get(SellerOrderDetailViewModel::class.java)
-        val SID:String = SellerOrderDetailFragmentArgs.fromBundle(requireArguments()).sellerID
+        val SID = SellerOrderDetailFragmentArgs.fromBundle(requireArguments()).sellerID
+        var sellerID = ""
+        SID?.let{
+            sellerID = it
+        }
         binding?.acceptButton?.setOnClickListener{
             val dialog = MaterialAlertDialogBuilder(requireContext())
             dialog.setTitle("Accept the order?")
                 .setMessage("Do you sure to accept the order? ")
                 .setPositiveButton("Yes") { dialog, which ->
                     dialog.cancel()
-                    viewModel.acceptOrder(SID)
+                    viewModel.acceptOrder(sellerID)
                 }
                 .setNegativeButton("No"){
                         dialog,which-> dialog.cancel()
@@ -50,7 +54,7 @@ class SellerOrderDetailFragment : Fragment() {
                 .setMessage("Do you sure to cancel the order? ")
                 .setPositiveButton("Yes") { dialog, which ->
                     dialog.cancel()
-                    viewModel.cancelOrder(SID)
+                    viewModel.cancelOrder(sellerID)
                 }
                 .setNegativeButton("No"){
                         dialog,which-> dialog.cancel()
@@ -125,18 +129,6 @@ class SellerOrderDetailFragment : Fragment() {
         })
 
         return fragmentbinding.root
-    }
-    private fun showDiaLog(title:String,message: String){
-        val dialog = MaterialAlertDialogBuilder(requireContext())
-        dialog.setTitle(title)
-            .setMessage(message)
-            .setPositiveButton(getString(R.string.btn_ok)) { dialog, which ->
-                dialog.cancel()
-            }
-            .setNegativeButton("No"){
-                dialog,which-> dialog.cancel()
-            }
-        dialog.show()
     }
     private fun showSnackBar(){
         Snackbar.make(binding!!.root, R.string.connection_error_title, Snackbar.LENGTH_SHORT).show()

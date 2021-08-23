@@ -7,13 +7,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.example.muzee.R
-import com.example.muzee.data.Product
+import com.example.muzee.network.seller.product.ProductSeller
 
-class SellerProductDetailViewModel(product: Product, app: Application) : AndroidViewModel(app) {
-    private val _selectedProduct = MutableLiveData<Product>()
+class SellerProductDetailViewModel(product: ProductSeller, app: Application) : AndroidViewModel(app) {
+    private val _selectedProduct = MutableLiveData<ProductSeller>()
 
     // The extenal LiveData for the SelectedProduct
-    val selectedProduct: LiveData<Product>
+    val selectedProduct: LiveData<ProductSeller>
         get() = _selectedProduct
 
     init {

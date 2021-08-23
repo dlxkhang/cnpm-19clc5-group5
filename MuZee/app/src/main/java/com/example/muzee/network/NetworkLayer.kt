@@ -4,6 +4,8 @@ import com.example.muzee.network.login.LoginApiClient
 import com.example.muzee.network.login.LoginApiService
 import com.example.muzee.network.seller.order.OrderApiClient
 import com.example.muzee.network.seller.order.OrderApiService
+import com.example.muzee.network.seller.product.ProductApiClient
+import com.example.muzee.network.seller.product.ProductApiService
 import com.example.muzee.network.signup.SignUpApiClient
 import com.example.muzee.network.signup.SignUpApiService
 import com.squareup.moshi.Moshi
@@ -33,4 +35,9 @@ object NetworkLayer {
         retrofit.create(OrderApiService::class.java)
     }
     val OrderApiClient = OrderApiClient(orderRetrofitSeller)
+
+    val sellerproductRetrofitSeller:ProductApiService by lazy{
+        retrofit.create(ProductApiService::class.java)
+    }
+    val SellerProductApiClient = ProductApiClient(sellerproductRetrofitSeller)
 }

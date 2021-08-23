@@ -11,6 +11,8 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.muzee.R
 import com.example.muzee.databinding.FragmentSellerProductOverviewBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 
 
 class SellerProductOverviewFragment : Fragment() {
@@ -33,10 +35,26 @@ class SellerProductOverviewFragment : Fragment() {
         binding.recyclerView.adapter = SellerProductOverviewAdapter(SellerProductOverviewAdapter.OnClickListener {
             viewModel.displayProductDetail(it)
         })
+        val SID = SellerProductOverviewFragmentArgs.fromBundle(requireArguments()).sellerID
+        var sellerID = ""
+        SID?.let{
+            sellerID = it
+        }
+        viewModel.getProducts(sellerID)
         val add_btn = binding.addNewProductBtn
         add_btn.setOnClickListener{
-            findNavController().navigate(R.id.action_sellerProductOverviewFragment_to_addNewProductFragment)
+            findNavController().navigate(SellerProductOverviewFragmentDirections.actionSellerProductOverviewFragmentToAddNewProductFragment(SID))
         }
+        viewModel.status.observe(viewLifecycleOwner,{
+            when(it){
+                SellerProductOverviewViewModel.ApiStatus.DONE->{
+
+                }
+                SellerProductOverviewViewModel.ApiStatus.ERROR->{
+                    showSnackBar()
+                }
+            }
+        })
         viewModel.navigateToSelectedProduct.observe(viewLifecycleOwner, Observer {
             if (null != it) {
                 this.findNavController().navigate(SellerProductOverviewFragmentDirections.actionSellerProductOverviewFragmentToSellerProductDetailFragment(it))
@@ -50,12 +68,20 @@ class SellerProductOverviewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding?.apply {
+        binding.apply {
             sellerProductOverviewFragment = this@SellerProductOverviewFragment
         }
     }
-
-    fun goToAddNewProductScreen() {
-        findNavController().navigate(R.id.action_sellerProductOverviewFragment_to_addNewProductFragment)
+    private fun showDiaLog(title:String,message: String){
+        val dialog = MaterialAlertDialogBuilder(requireContext())
+        dialog.setTitle(title)
+            .setMessage(message)
+            .setPositiveButton(getString(R.string.btn_ok)) { dialog, which ->
+                dialog.cancel()
+            }
+        dialog.show()
+    }
+    private fun showSnackBar(){
+        Snackbar.make(binding.root,R.string.connection_error_title, Snackbar.LENGTH_SHORT).show()
     }
 }

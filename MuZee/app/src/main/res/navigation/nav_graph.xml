@@ -26,7 +26,9 @@
             app:popUpToInclusive="true" />
         <argument
             android:name="sellerID"
-            app:argType="string" />
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/sellerOrderFragment"
@@ -38,7 +40,9 @@
             app:destination="@id/sellerOrderDetailFragment" />
         <argument
             android:name="sellerID"
-            app:argType="string" />
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/addNewProductFragment"
@@ -50,6 +54,11 @@
             app:destination="@id/sellerProductOverviewFragment"
             app:popUpTo="@id/sellerProductOverviewFragment"
             app:popUpToInclusive="true" />
+        <argument
+            android:name="sellerID"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/sellerOrderDetailFragment"
@@ -61,7 +70,9 @@
             app:argType="com.example.muzee.network.seller.order.Order_responseItem"/>
         <argument
             android:name="sellerID"
-            app:argType="string" />
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
 
     </fragment>
     <fragment
@@ -78,6 +89,11 @@
         <action
             android:id="@+id/action_sellerProductOverviewFragment_to_editNewProductFragment"
             app:destination="@id/editNewProductFragment" />
+        <argument
+            android:name="sellerID"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/sellerProductDetailFragment"
@@ -86,7 +102,7 @@
         tools:layout="@layout/fragment_seller_product_detail">
         <argument
             android:name="selectedProduct"
-            app:argType="com.example.muzee.data.Product" />
+            app:argType="com.example.muzee.network.seller.product.ProductSeller" />
         <action
             android:id="@+id/action_sellerProductDetailFragment_to_editOldProductFragment"
             app:destination="@id/editOldProductFragment" />
