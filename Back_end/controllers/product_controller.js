@@ -11,6 +11,12 @@ module.exports.getProductList = async function(req, res) {
   res.send(JSON.stringify(productList))
 }
 
+module.exports.getProductListSeller = async function(req, res) { 
+  // get list of product for seller
+  var productList = await productService.getProductListSeller(req.SID)
+  res.send(JSON.stringify(productList))
+}
+
 module.exports.addNewProduct = async function(req, res) { 
   // parse JSON to object
   //var product = JSON.parse(req.body)

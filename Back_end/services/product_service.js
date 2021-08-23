@@ -26,6 +26,19 @@ module.exports.getProductList = () => {
     })
 }
 
+module.exports.getProductListSeller = (SID) => {
+    return new Promise(function(resolve, reject) {
+        var query = "SELECT p.PID as productId, c.CATEGORY_NAME as productCategory, p.PRODUCT_NAME as productName, w.UNIT_PRICE as productPrice, s.STORE_NAME as sellerName, s.SID, p.IMAGE_URL as imageURI, p.DESCRIPTION as productDescription, w.STOCK as stock FROM Product p JOIN Warehouse w ON(p.PID = w.PID) JOIN Seller s ON(w.SID = s.SID) JOIN Category c ON(c.CID = p.CATEGORY) WHERE w.stock > 0 AND w.SID = ?"
+        db.all(query, SID, function(err, allRows) {
+            if(err) {
+                reject(err)
+                return
+            }
+            resolve(allRows)
+        })
+    })
+}
+
 async function checkProductExist(product) {
     return new Promise(async function(resolve, reject) {
         var query = "SELECT p.PRODUCT_NAME as productName, w.SID FROM Product p JOIN Warehouse w ON(p.PID = w.PID) WHERE p.PRODUCT_NAME = ? AND w.SID = ?"

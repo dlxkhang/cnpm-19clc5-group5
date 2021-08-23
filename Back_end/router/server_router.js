@@ -14,6 +14,7 @@ router.post('/api/account/signup/seller', accountController.addSellerAccount) //
 
 // NEW PRODUCT
 router.get('/api/product', productController.getProductList) // get list of product
+router.get('/api/product', productController.getProductListSeller) // get list of product for seller
 router.get('/api/product/add', productController.addNewProduct) // add new product
 router.post('/api/product/edit', productController.editProduct) // edit product
 router.post('/api/product/delete', productController.deleteProduct) // delete product
