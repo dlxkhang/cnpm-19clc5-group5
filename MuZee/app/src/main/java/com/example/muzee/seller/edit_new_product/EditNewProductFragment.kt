@@ -15,8 +15,8 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.example.muzee.R
 import com.example.muzee.data.Category
-import com.example.muzee.data.newProduct
 import com.example.muzee.databinding.FragmentEditNewProductBinding
+import com.example.muzee.network.seller.product.ProductSeller
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class EditNewProductFragment : Fragment() {
@@ -30,7 +30,7 @@ class EditNewProductFragment : Fragment() {
         val binding = fragmentbinding
         binding.lifecycleOwner = this
         val new_product = EditNewProductFragmentArgs.fromBundle(requireArguments()).selectedNewProduct
-        val viewModelFractory = EditNewProductViewModelFractory(new_product as newProduct,application)
+        val viewModelFractory = EditNewProductViewModelFractory(new_product as ProductSeller,application)
         binding.viewModel = ViewModelProvider(this,viewModelFractory).get(EditNewProductViewMoldel::class.java)
         //handle list category
         val textField = binding.labelEditCategory
@@ -79,8 +79,7 @@ class EditNewProductFragment : Fragment() {
             val name = inputName.editText?.text.toString()
             val price = inputPrice.editText?.text.toString().toDouble()
             val stock = inputStock.editText?.text.toString().toInt()
-            val sellerName = "huy"
-            val newProduct = newProduct("552",category,name,price,sellerName,stock)
+            //val newProduct = ProductSeller("552",category,name,price,stock)
 
         }
     }

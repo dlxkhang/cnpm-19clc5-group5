@@ -1,15 +1,23 @@
 package com.example.muzee.seller.product_overview
 
+import android.app.AlertDialog
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.muzee.R
 import com.example.muzee.data.Product
 import com.example.muzee.databinding.ProductItemBinding
 import com.example.muzee.network.seller.product.ProductSeller
 
-class SellerProductOverviewAdapter (private  val onClickListener: OnClickListener) :
+class SellerProductOverviewAdapter (private  val onClickListener: OnClickListener,
+                                    private val viewModel: SellerProductOverviewViewModel,
+                                    private val fragment:SellerProductOverviewFragment,private val sellerID:String?) :
     ListAdapter<ProductSeller, SellerProductOverviewAdapter.ProductViewHolder>(DiffCallback) {
 
     class ProductViewHolder(
@@ -35,6 +43,25 @@ class SellerProductOverviewAdapter (private  val onClickListener: OnClickListene
         holder.itemView.setOnClickListener {
             onClickListener.onClick(item)
         }
+//        holder.itemView.findViewById<View>(R.id.btn_view).setOnClickListener{
+//            onClickListener.onClick(item)
+//        }
+//        holder.itemView.findViewById<View>(R.id.btn_edit).setOnClickListener{
+//            fragment.findNavController().navigate(SellerProductOverviewFragmentDirections.actionSellerProductOverviewFragmentToEditNewProductFragment(item,sellerID))
+//        }
+//        holder.itemView.findViewById<View>(R.id.btn_delete).setOnClickListener{
+//            var builder = AlertDialog.Builder(holder.itemView.context)
+//            builder.setTitle("Delete product!")
+//            builder.setMessage("Sure?")
+//            builder.setNegativeButton("Yes") { dialog, id ->
+//                item.productId?.let{
+//                    viewModel.deleteProduct(it)
+//                }
+//            }
+//            builder.setPositiveButton("No") { dialog, id -> dialog.cancel() }
+//            var alert: AlertDialog = builder.create()
+//            alert.show()
+//        }
         holder.bind(item)
     }
 

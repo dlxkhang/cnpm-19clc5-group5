@@ -1,4 +1,4 @@
-package com.example.muzee.seller.product_overview
+package com.example.muzee.seller.add_new_product
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
@@ -27,7 +27,7 @@ import com.google.android.material.snackbar.Snackbar
 class AddNewProductFragment : Fragment() {
 
     private var binding: FragmentAddNewProductBinding? = null // binding fragment_add_new_product.xml
-    private val viewModel: SellerProductOverviewViewModel by viewModels()
+    private val viewModel: AddNewProductFragmentViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,7 +38,6 @@ class AddNewProductFragment : Fragment() {
         val activity = activity as AppCompatActivity? // get activity
         activity!!.supportActionBar?.setTitle("Add New Product") // set title text for seller product screen
         val textField = binding?.labelSelectCategory
-
         val items = getListCategory()
         val adapter = ArrayAdapter(requireContext(), R.layout.list_item,items)
         (textField?.editText as? AutoCompleteTextView)?.setAdapter(adapter)
@@ -65,15 +64,15 @@ class AddNewProductFragment : Fragment() {
         binding?.labelSelectCategory?.editText?.doOnTextChanged{text, start, before, count ->
             binding!!.labelSelectCategory.error = null
         }
-        viewModel.status_add.observe(viewLifecycleOwner,{
+        viewModel.status.observe(viewLifecycleOwner,{
             when(it){
-                SellerProductOverviewViewModel.ApiStatus_Func.SUCCESS->{
+                AddNewProductFragmentViewModel.ApiStatus.SUCCESS ->{
                     showDiaLog("Add product successful")
                 }
-                SellerProductOverviewViewModel.ApiStatus_Func.EXIST->{
+                AddNewProductFragmentViewModel.ApiStatus.EXIST ->{
                     showDiaLog("This product has already existed")
                 }
-                SellerProductOverviewViewModel.ApiStatus_Func.ERROR->{
+                AddNewProductFragmentViewModel.ApiStatus.ERROR ->{
                     showSnackBar()
                 }
             }
@@ -122,16 +121,17 @@ class AddNewProductFragment : Fragment() {
             inputStock.error = getString(R.string.error_text_OLD_PRODUCT_CONDITION)
         }
         if(success){
-            val category = (selectCategory.editText as? AutoCompleteTextView)?.text.toString()
+            val category = getIdOfCategory((selectCategory.editText as? AutoCompleteTextView)?.text.toString())
             val name = inputName.editText?.text.toString()
             val price = inputPrice.editText?.text.toString().toDouble()
             val stock = inputStock.editText?.text.toString().toInt()
+            val description = binding?.labelNewProductDescription?.editText?.text.toString()
             val SID = AddNewProductFragmentArgs.fromBundle(requireArguments()).sellerID
             var sellerID = ""
             SID?.let{
                 sellerID = it
             }
-            val newProductSeller = ProductSeller(sellerID,null,category,null,null,name,price,stock)
+            val newProductSeller = ProductSeller(sellerID,null,category,description,null,name,price,stock)
             viewModel.addProduct(newProductSeller)
             findNavController().navigate(R.id.action_addNewProductFragment_to_sellerProductOverviewFragment)
         }
@@ -150,5 +150,26 @@ class AddNewProductFragment : Fragment() {
     private fun showSnackBar(){
         Snackbar.make(binding!!.root,R.string.connection_error_title, Snackbar.LENGTH_SHORT).show()
     }
+    private fun getIdOfCategory(category: String) = when(category){
+            "Guitar Acoustic"->{
+                 "002"
+            }
+            "Drum"->{
+                 "003"
+            }
+            "Guitar Bass"->{
+                 "005"
+            }
+            "Piano"->{
+                 "001"
+            }
+            "Organ"->{
+                "004"
+            }
+            else->{
+                 "006"
+            }
+        }
+
 
 }

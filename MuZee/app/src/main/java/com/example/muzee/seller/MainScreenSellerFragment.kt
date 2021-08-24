@@ -53,7 +53,7 @@ class MainScreenSellerFragment : Fragment(){
                         drawerLayout.closeDrawers() // close menu and stay at home screen
                     }
                     R.id.myProductItem -> {
-                        findNavController().navigate(MainScreenSellerFragmentDirections.actionMainScreenSellerFragmentToSellerProductOverviewFragment(args.sellerID)) // move to product screen
+                        findNavController().navigate(MainScreenSellerFragmentDirections.actionMainScreenSellerFragmentToSellerProductOverviewFragment(args.sellerID,args.seller)) // move to product screen
                     }
                     R.id.orderListItem -> {
                         findNavController().navigate(MainScreenSellerFragmentDirections.actionMainScreenSellerFragmentToSellerOrderFragment(args.sellerID)) // move to order list screen

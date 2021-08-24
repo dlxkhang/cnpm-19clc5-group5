@@ -105,21 +105,20 @@
                         android:layout_width="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
-                        android:text="@string/test_seller_name"
+                        android:text="@{viewModel.seller.storeName}"
                         app:layout_constraintStart_toEndOf="@+id/imageView"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:text="Daph Duck"
                         android:layout_height="wrap_content"/>
 
                     <TextView
                         android:id="@+id/seller_address"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/test_seller_make"
+                        android:text="@{viewModel.seller.storeAddress}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/seller_name"
                         app:layout_constraintTop_toBottomOf="@+id/seller_name"
-                        tools:text="Tan Binh, Ho Chi Minh" />
+                        />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -155,12 +154,12 @@
                         android:layout_width="wrap_content"/>
 
                     <TextView
-                        android:id="@+id/make_label"
-                        android:layout_width="70dp"
+                        android:id="@+id/stock_label"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="@string/make"
-                        android:textSize="12sp"
+                        android:text="@string/stock_value_detail_product"
+
                         app:layout_constraintStart_toStartOf="@+id/category_label"
                         app:layout_constraintTop_toBottomOf="@+id/category_label" />
 
@@ -168,18 +167,24 @@
                         android:id="@+id/textView8"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:text="@{viewModel.getCategory()}"
                         android:textSize="12sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/category_label"
                         app:layout_constraintStart_toEndOf="@+id/category_label"
                         app:layout_constraintTop_toTopOf="@+id/category_label"
+                        app:layout_constraintVertical_bias="1.0"
                         tools:text="Keyboard" />
 
                     <TextView
                         android:id="@+id/make"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="@{String.valueOf(viewModel.selectedProduct.stock)}"
                         android:textSize="12sp"
-                        app:layout_constraintBottom_toBottomOf="@+id/make_label"
-                        app:layout_constraintStart_toEndOf="@+id/make_label"
+                        app:layout_constraintBottom_toBottomOf="@+id/stock_label"
+                        app:layout_constraintStart_toStartOf="@+id/textView8"
+                        app:layout_constraintTop_toTopOf="@+id/stock_label"
                         tools:text="Nord" />
 
                     <View
@@ -190,7 +195,7 @@
                         android:background="@android:color/darker_gray"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/make_label" />
+                        app:layout_constraintTop_toBottomOf="@+id/stock_label" />
 
                     <TextView
                         android:id="@+id/textView11"
@@ -208,12 +213,12 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:text="@string/test_description"
+                        android:text="@{viewModel.selectedProduct.productDescription.toString()}"
                         android:textSize="12sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/textView11"
                         app:layout_constraintTop_toBottomOf="@+id/textView11"
-                        tools:text="General  \n- 88-note Triple Sensor keybed with grand weighted action  \n- Nord Virtual Hammer Action Technology   \n- Seamless Transitions NEW  \n- Layer and Split with Split Point crossfades NEW  \n- OLED display for excellent overview   \n- Enhanced Organize Mode NEW  \n- Numeric Pad for direct Program access  NEW " />
+                        />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

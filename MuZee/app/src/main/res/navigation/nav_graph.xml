@@ -46,7 +46,7 @@
     </fragment>
     <fragment
         android:id="@+id/addNewProductFragment"
-        android:name="com.example.muzee.seller.product_overview.AddNewProductFragment"
+        android:name="com.example.muzee.seller.add_new_product.AddNewProductFragment"
         android:label="@string/add_new_product_title"
         tools:layout="@layout/fragment_add_new_product">
         <action
@@ -94,6 +94,11 @@
             app:argType="string"
             app:nullable="true"
             android:defaultValue="@null" />
+        <argument
+            android:name="sellerInfo"
+            app:argType="com.example.muzee.data.Seller"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/sellerProductDetailFragment"
@@ -104,8 +109,11 @@
             android:name="selectedProduct"
             app:argType="com.example.muzee.network.seller.product.ProductSeller" />
         <action
-            android:id="@+id/action_sellerProductDetailFragment_to_editOldProductFragment"
-            app:destination="@id/editOldProductFragment" />
+            android:id="@+id/action_sellerProductDetailFragment_to_editNewProductFragment"
+            app:destination="@id/editNewProductFragment" />
+        <argument
+            android:name="sellerInfo"
+            app:argType="com.example.muzee.data.Seller" />
     </fragment>
     <fragment
         android:id="@+id/orderOverviewFragment"
@@ -229,7 +237,7 @@
         tools:layout="@layout/fragment_edit_old_product">
         <argument
             android:name="selectedOldProduct"
-            app:argType="com.example.muzee.data.Product"/>
+            app:argType="com.example.muzee.network.seller.product.ProductSeller"/>
         <action
             android:id="@+id/action_editOldProductFragment_to_oldProductStoreFragment"
             app:destination="@id/oldProductStoreFragment"
@@ -267,6 +275,11 @@
         tools:layout="@layout/fragment_edit_new_product" >
         <argument
             android:name="selectedNewProduct"
-            app:argType="com.example.muzee.data.Product"/>
+            app:argType="com.example.muzee.network.seller.product.ProductSeller"/>
+        <argument
+            android:name="sellerID"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
 </navigation>

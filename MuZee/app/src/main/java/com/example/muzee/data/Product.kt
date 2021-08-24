@@ -95,7 +95,7 @@ enum class Category(var category: String){
     Piano("Piano"),
     Organ("Organ"),
     Drum("Drum"),
-    Guitar("Guitar Bass"),
+    Guitar("Guitar Acoustic"),
     Electronic("Guitar Electronic"),
     Bass("Guitar Bass")
 }
