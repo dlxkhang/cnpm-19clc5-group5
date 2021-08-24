@@ -14,5 +14,5 @@ interface ProductApiService {
     @POST("/api/product/edit")
     suspend fun editSellerProduct(@Body productSeller: ProductSeller):Response<AckResponse>
     @POST("/api/product/delete")
-    suspend fun deleteSellerProduct(@Body productID:String):Response<AckResponse>
+    suspend fun deleteSellerProduct(@Body productID:ID_Request):Response<AckResponse>
 }

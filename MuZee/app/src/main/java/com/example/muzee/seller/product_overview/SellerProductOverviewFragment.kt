@@ -56,6 +56,19 @@ class SellerProductOverviewFragment : Fragment() {
                 }
             }
         })
+        viewmodel.status_del.observe(viewLifecycleOwner,{
+            when(it){
+                SellerProductOverviewViewModel.ApiStatus_Delete.ERROR->{
+                    showSnackBar()
+                }
+                SellerProductOverviewViewModel.ApiStatus_Delete.SUCCESS->{
+                    showDiaLog("Delete product successful","This product is removed in the system")
+                }
+                SellerProductOverviewViewModel.ApiStatus_Delete.NOTEXIST->{
+                    showDiaLog("Delete product failed","This product is not existed in system")
+                }
+            }
+        })
         viewmodel.navigateToSelectedProduct.observe(viewLifecycleOwner, Observer {
             if (null != it) {
                 this.findNavController().navigate(SellerProductOverviewFragmentDirections.actionSellerProductOverviewFragmentToSellerProductDetailFragment(it,sellerInfo!!))

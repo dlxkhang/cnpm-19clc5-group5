@@ -271,15 +271,25 @@
     <fragment
         android:id="@+id/editNewProductFragment"
         android:name="com.example.muzee.seller.edit_new_product.EditNewProductFragment"
-        android:label="fragment_edit_new_product"
-        tools:layout="@layout/fragment_edit_new_product" >
+        android:label="Edit product"
+        tools:layout="@layout/fragment_edit_new_product">
         <argument
             android:name="selectedNewProduct"
-            app:argType="com.example.muzee.network.seller.product.ProductSeller"/>
+            app:argType="com.example.muzee.network.seller.product.ProductSeller" />
         <argument
             android:name="sellerID"
+            android:defaultValue="@null"
             app:argType="string"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_editNewProductFragment_to_sellerProductOverviewFragment"
+            app:destination="@id/sellerProductOverviewFragment"
+            app:popUpTo="@id/sellerProductOverviewFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_editNewProductFragment_to_sellerProductDetailFragment"
+            app:destination="@id/sellerProductDetailFragment"
+            app:popUpTo="@id/sellerProductDetailFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

@@ -67,10 +67,11 @@ class AddNewProductFragment : Fragment() {
         viewModel.status.observe(viewLifecycleOwner,{
             when(it){
                 AddNewProductFragmentViewModel.ApiStatus.SUCCESS ->{
-                    showDiaLog("Add product successful")
+                    showDiaLog("Add product successful","A new product is added to system")
+                    findNavController().navigate(R.id.action_addNewProductFragment_to_sellerProductOverviewFragment)
                 }
                 AddNewProductFragmentViewModel.ApiStatus.EXIST ->{
-                    showDiaLog("This product has already existed")
+                    showDiaLog("Add product failed", "This product has been existed in system")
                 }
                 AddNewProductFragmentViewModel.ApiStatus.ERROR ->{
                     showSnackBar()
@@ -133,15 +134,16 @@ class AddNewProductFragment : Fragment() {
             }
             val newProductSeller = ProductSeller(sellerID,null,category,description,null,name,price,stock)
             viewModel.addProduct(newProductSeller)
-            findNavController().navigate(R.id.action_addNewProductFragment_to_sellerProductOverviewFragment)
+
         }
     }
     private fun getListCategory():List<String>{
         return listOf(Category.Organ.name,Category.Drum.name,Category.Electronic.name,Category.Guitar.name,Category.Piano.name,Category.Bass.name)
     }
-    private fun showDiaLog(title:String){
+    private fun showDiaLog(title:String,measage:String){
         val dialog = MaterialAlertDialogBuilder(requireContext())
         dialog.setTitle(title)
+            .setMessage(measage)
             .setPositiveButton(getString(R.string.btn_ok)) { dialog, which ->
                 dialog.cancel()
             }

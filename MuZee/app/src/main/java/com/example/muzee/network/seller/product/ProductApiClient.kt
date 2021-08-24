@@ -22,7 +22,7 @@ class ProductApiClient(
         return productApiService.editSellerProduct(productSeller)
     }
     @POST("/api/product/delete")
-    suspend fun deleteSellerProduct(@Body productID:String): Response<AckResponse>{
+    suspend fun deleteSellerProduct(@Body productID:ID_Request): Response<AckResponse>{
         return productApiService.deleteSellerProduct(productID)
     }
 }

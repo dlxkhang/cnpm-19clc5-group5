@@ -13,26 +13,30 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.muzee.R
 import com.example.muzee.data.Category
 import com.example.muzee.databinding.FragmentEditNewProductBinding
 import com.example.muzee.network.seller.product.ProductSeller
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 
 class EditNewProductFragment : Fragment() {
     private lateinit var binding:FragmentEditNewProductBinding
+    private lateinit var viewModel:EditNewProductViewMoldel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
         val application = requireNotNull(activity).application
         val fragmentbinding = FragmentEditNewProductBinding.inflate(inflater,container,false)
-        val binding = fragmentbinding
+        binding = fragmentbinding
         binding.lifecycleOwner = this
         val new_product = EditNewProductFragmentArgs.fromBundle(requireArguments()).selectedNewProduct
-        val viewModelFractory = EditNewProductViewModelFractory(new_product as ProductSeller,application)
-        binding.viewModel = ViewModelProvider(this,viewModelFractory).get(EditNewProductViewMoldel::class.java)
+        val viewModelFractory = EditNewProductViewModelFractory(new_product,application)
+        viewModel = ViewModelProvider(this,viewModelFractory).get(EditNewProductViewMoldel::class.java)
         //handle list category
+        binding.viewModel = viewModel
         val textField = binding.labelEditCategory
         val items = getListCategory()
         val adapter = ArrayAdapter(requireContext(), R.layout.list_item,items)
@@ -44,7 +48,20 @@ class EditNewProductFragment : Fragment() {
             plus_img.isVisible = false
             dispatchTakePictureIntent()
         })
-
+        viewModel.status.observe(viewLifecycleOwner,{
+            when(it){
+                EditNewProductViewMoldel.ApiStatus.SUCCESS->{
+                    showDiaLog("Edit product successful", "This product is edited and saved in system")
+                    findNavController().navigate(R.id.action_editNewProductFragment_to_sellerProductOverviewFragment)
+                }
+                EditNewProductViewMoldel.ApiStatus.ERROR->{
+                    showSnackBar()
+                }
+                EditNewProductViewMoldel.ApiStatus.NOTEXIST->{
+                    showDiaLog("Edit product failed","This product is not existed in system.")
+                }
+            }
+        })
         // handle confirm button
         binding.btnConfirmEditProduct.setOnClickListener{
             handle_confirm_btn()
@@ -75,12 +92,14 @@ class EditNewProductFragment : Fragment() {
             inputStock.error = getString(R.string.error_text_OLD_PRODUCT_CONDITION)
         }
         if(success){
-            val category = category((selectCategory.editText as? AutoCompleteTextView)?.text.toString())
+            val category = getIdOfCategory((selectCategory.editText as? AutoCompleteTextView)?.text.toString())
             val name = inputName.editText?.text.toString()
             val price = inputPrice.editText?.text.toString().toDouble()
             val stock = inputStock.editText?.text.toString().toInt()
-            //val newProduct = ProductSeller("552",category,name,price,stock)
-
+            val description = binding.labelEditProductDescription.editText.toString()
+            val SID = EditNewProductFragmentArgs.fromBundle(requireArguments()).sellerID
+            val editProduct = ProductSeller(SID!!,null,category,description,null,name,price,stock)
+            viewModel.editProduct(editProduct)
         }
     }
     private fun getListCategory():List<String>{
@@ -127,6 +146,38 @@ class EditNewProductFragment : Fragment() {
                 .setNeutralButton("Cancel"){dialog,which->
                     dialog.cancel()
                 }
+        }
+    }
+    private fun showDiaLog(title:String,message:String){
+        val dialog = MaterialAlertDialogBuilder(requireContext())
+        dialog.setTitle(title)
+            .setMessage(message)
+            .setPositiveButton(getString(R.string.btn_ok)) { dialog, which ->
+                dialog.cancel()
+            }
+        dialog.show()
+    }
+    private fun showSnackBar(){
+        Snackbar.make(binding!!.root,R.string.connection_error_title, Snackbar.LENGTH_SHORT).show()
+    }
+    private fun getIdOfCategory(category: String) = when(category){
+        "Guitar Acoustic"->{
+            "002"
+        }
+        "Drum"->{
+            "003"
+        }
+        "Guitar Bass"->{
+            "005"
+        }
+        "Piano"->{
+            "001"
+        }
+        "Organ"->{
+            "004"
+        }
+        else->{
+            "006"
         }
     }
 }
