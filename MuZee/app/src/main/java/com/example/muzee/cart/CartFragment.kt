@@ -1,6 +1,8 @@
 package com.example.muzee.cart
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +18,7 @@ class CartFragment : Fragment() {
 
     private val args: CartFragmentArgs by navArgs()
 
-    private val sharedViewModel: CartViewModel by activityViewModels { CartViewModelFactory(args.NID, requireNotNull(activity).application) }
+    private val sharedViewModel: CartViewModel by activityViewModels { CartViewModelFactory(args.NID, args.normalUser, requireNotNull(activity).application) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,10 +32,12 @@ class CartFragment : Fragment() {
         fragmentBinding.lifecycleOwner = this
 
         // Giving the binding access to the ViewModel
+        sharedViewModel.getProducts(sharedViewModel.NID)
         fragmentBinding.viewModel = sharedViewModel
         // Sets the adapter of the RecyclerView
         fragmentBinding.recyclerView.adapter = CartAdapter(sharedViewModel)
 
+        Log.d(TAG, "onCreateView Called")
         return fragmentBinding.root
     }
 
@@ -41,9 +45,30 @@ class CartFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding?.cartFragment = this
+        Log.d(TAG, "onViewCreated Called")
     }
 
     fun goToPayment() {
         findNavController().navigate(CartFragmentDirections.actionCartFragmentToPaymentFragment())
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "onResume Called")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG, "onPause Called")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, "onStop Called")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG, "onDestroy Called")
     }
 }

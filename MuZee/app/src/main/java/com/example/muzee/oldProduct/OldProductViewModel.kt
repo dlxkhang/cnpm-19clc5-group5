@@ -1,6 +1,7 @@
 package com.example.muzee.oldProduct
 
 import Api
+import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,7 +12,7 @@ import kotlinx.coroutines.launch
 
 enum class ApiStatus { LOADING, ERROR, DONE }
 
-class OldProductViewModel: ViewModel() {
+class OldProductViewModel(val NID: String?, val app: Application): ViewModel() {
 
     // The internal MutableLiveData that stores the status of the most recent request
     private val _status = MutableLiveData<ApiStatus>()
@@ -35,7 +36,7 @@ class OldProductViewModel: ViewModel() {
         viewModelScope.launch {
             _status.value = ApiStatus.LOADING
             try {
-                _oldproducts.value = Api.retrofitService.getOldProducts()
+                _oldproducts.value = Api.retrofitService.getOldProducts(NID)
                 _status.value = ApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = ApiStatus.ERROR

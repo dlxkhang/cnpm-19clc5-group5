@@ -41,6 +41,7 @@ class CartAdapter (val viewModel: CartViewModel) :
             builder.setMessage("Sure?")
             builder.setNegativeButton("Yes") { dialog, id ->
                 viewModel.deleteProductFromCart(item.PID)
+                viewModel.getProducts(viewModel.NID)
             }
             builder.setPositiveButton("No") { dialog, id -> print(0) }
             var alert: AlertDialog = builder.create()

@@ -5,16 +5,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.muzee.data.Product
-import com.example.muzee.databinding.ProductItemOrderDetailBinding
+import com.example.muzee.databinding.ProductUserOrderItemBinding
+import com.example.muzee.network.NewProduct
 
 class OrderDetailAdapter :
-    ListAdapter<Product, OrderDetailAdapter.OrderDetailViewHolder>(DiffCallback) {
+    ListAdapter<NewProduct, OrderDetailAdapter.OrderDetailViewHolder>(DiffCallback) {
 
     class OrderDetailViewHolder(
-        private var binding: ProductItemOrderDetailBinding
+        private var binding: ProductUserOrderItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(product: Product) {
+        fun bind(product: NewProduct) {
             binding.product = product
             binding.executePendingBindings()
         }
@@ -25,7 +25,7 @@ class OrderDetailAdapter :
         viewType: Int
     ): OrderDetailAdapter.OrderDetailViewHolder {
         return OrderDetailAdapter.OrderDetailViewHolder (
-            ProductItemOrderDetailBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ProductUserOrderItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 
@@ -34,12 +34,12 @@ class OrderDetailAdapter :
         holder.bind(item)
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<Product>() {
-        override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
+    companion object DiffCallback : DiffUtil.ItemCallback<NewProduct>() {
+        override fun areItemsTheSame(oldItem: NewProduct, newItem: NewProduct): Boolean {
             return oldItem.productName == newItem.productName
         }
 
-        override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
+        override fun areContentsTheSame(oldItem: NewProduct, newItem: NewProduct): Boolean {
             return oldItem.productPrice == newItem.productPrice
         }
     }

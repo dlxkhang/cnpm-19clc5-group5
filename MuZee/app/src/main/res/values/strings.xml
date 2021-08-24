@@ -58,6 +58,7 @@
     <string name="shipping_to">Shipping to</string>
     <string name="test_shipping_profile">David Dean | 0908999888</string>
     <string name="test_address">Adr: 246 Cong Hoa, Q.Tan Binh, Ho Chi Minh</string>
+    <string name="payment_info">%s | %s</string>
 
     //Main screen normal user
     <string name="hello_blank_fragment">Hello blank fragment</string>

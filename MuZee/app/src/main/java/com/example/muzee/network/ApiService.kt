@@ -1,7 +1,9 @@
 
 import com.example.muzee.network.*
+import com.example.muzee.network.signup.SignUp_response
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.Body
@@ -25,6 +27,10 @@ interface ApiService {
     @GET("api/product")
     suspend fun getNewProducts(): List<NewProduct>
 
+    // Search new product
+    @GET("api/search/product")
+    suspend fun searchNewProducts(@Query("key") key: String?): List<NewProduct>
+
     // Get cart
     @GET("api/cart")
     suspend fun getCartProducts(@Query ("NID") NID: String?): List<CartProduct>
@@ -35,12 +41,16 @@ interface ApiService {
 
     // Delete product from cart
     @POST("api/cart/delete")
-    suspend fun deleteFromCart(@Body deleteProduct: DeleteFromCartProduct): Void
+    suspend fun deleteFromCart(@Body deleteProduct: DeleteFromCartProduct): Response<SignUp_response>
+
+    // Place order
+    @POST("api/order/place_order")
+    suspend fun placeOrder(@Body placeOrder: PlaceOrder): Response<SignUp_response>
 
     // Old product
     // Get old product overview
-    @GET("api/old_product")
-    suspend fun getOldProducts(): List<OldProduct>
+    @GET("api/old_product/user_product")
+    suspend fun getOldProducts(@Query ("NID") NID: String?): List<OldProduct>
 
     // Add old product
     @POST("api/old_product/add")
@@ -49,6 +59,11 @@ interface ApiService {
     // Delete old product
     @POST("api/old_product/delete")
     suspend fun deleteOldProduct(@Body oldProductID: String?): Void
+
+    // Normal User Order
+    // Get normal user order
+    @GET("api/order")
+    suspend fun getUserOders(@Query ("NID") NID: String?): List<UserOrder>
 }
 
 object Api {

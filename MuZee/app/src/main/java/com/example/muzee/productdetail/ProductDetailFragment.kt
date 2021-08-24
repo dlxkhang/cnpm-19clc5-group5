@@ -10,7 +10,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.muzee.R
 import com.example.muzee.databinding.FragmentProductDetailBinding
 import com.example.muzee.login.LoginViewModel
 
@@ -47,7 +46,7 @@ class ProductDetailFragment : Fragment() {
 
     fun addToCart() {
         _binding?.viewModel?.addProductToCart(args.NID)
-        Toast.makeText(context, "Add successfully", Toast.LENGTH_SHORT)
-        findNavController().navigate(R.id.action_productDetailFragment_to_mainScreenNormalUsersFragment)
+        Toast.makeText(context, "Add successfully", Toast.LENGTH_LONG).show()
+        findNavController().popBackStack()
     }
 }

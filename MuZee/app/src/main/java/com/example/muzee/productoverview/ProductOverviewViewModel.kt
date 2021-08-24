@@ -28,15 +28,29 @@ class ProductOverviewViewModel (val NID: String?, val normalUser: NormalUser ,ap
         get() = _navigateToSelectedProduct
 
     init {
-        getProducts()
+        getNewProducts()
     }
 
-    private fun getProducts() {
+    fun getNewProducts() {
 
         viewModelScope.launch {
             _status.value = ApiStatus.LOADING
             try {
                 _products.value = Api.retrofitService.getNewProducts()
+                _status.value = ApiStatus.DONE
+            } catch (e: Exception) {
+                _status.value = ApiStatus.ERROR
+                _products.value = listOf()
+            }
+        }
+    }
+
+    fun searchProduct(key: String?) {
+
+        viewModelScope.launch {
+            _status.value = ApiStatus.LOADING
+            try {
+                _products.value = Api.retrofitService.searchNewProducts(key)
                 _status.value = ApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = ApiStatus.ERROR

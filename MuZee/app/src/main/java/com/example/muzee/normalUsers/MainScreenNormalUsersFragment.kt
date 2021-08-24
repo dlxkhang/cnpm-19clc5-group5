@@ -2,9 +2,7 @@ package com.example.muzee.normalUsers
 
 import android.os.Bundle
 import android.view.*
-import android.widget.ImageView
-import android.widget.Switch
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat.invalidateOptionsMenu
@@ -44,6 +42,7 @@ class MainScreenNormalUsersFragment : Fragment() {
         fragmentbinding.lifecycleOwner = this
 
         // Giving the binding access to the OverviewViewModel
+        viewModel.getNewProducts()
         fragmentbinding.viewModel = viewModel
 
         // Sets the adapter of the photosGrid RecyclerView
@@ -82,10 +81,10 @@ class MainScreenNormalUsersFragment : Fragment() {
                     findNavController().navigate(R.id.action_mainScreenNormalUsersFragment_to_categoryFragment)
                 }
                 R.id.cart_item -> {
-                    findNavController().navigate(MainScreenNormalUsersFragmentDirections.actionMainToCart(viewModel.NID))
+                    findNavController().navigate(MainScreenNormalUsersFragmentDirections.actionMainToCart(viewModel.NID, viewModel.normalUser))
                 }
                 R.id.myOrderItem->{
-                    findNavController().navigate(R.id.action_mainScreenNormalUsersFragment_to_orderOverviewFragment)
+                    findNavController().navigate(MainScreenNormalUsersFragmentDirections.actionMainScreenNormalUsersFragmentToOrderOverviewFragment(viewModel.NID, viewModel.normalUser))
                 }
                 R.id.myShopItem -> {
 //                    val productItem = binding!!.navView.menu.findItem(R.id.productItem)
@@ -98,7 +97,7 @@ class MainScreenNormalUsersFragment : Fragment() {
                     invalidateOptionsMenu(activity)
                 }
                 R.id.productItem -> {
-                    findNavController().navigate(R.id.action_mainScreenNormalUsersFragment_to_oldProductStoreFragment)
+                    findNavController().navigate(MainScreenNormalUsersFragmentDirections.actionMainScreenNormalUsersFragmentToOldProductStoreFragment(viewModel.NID))
                 }
 
                 //R.id.switchingModeItem->{true}
@@ -117,6 +116,23 @@ class MainScreenNormalUsersFragment : Fragment() {
             }
         })
 
+        binding?.searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query.isNullOrBlank() or query.isNullOrEmpty()) {
+                    Toast.makeText(context, "Please enter keyword", Toast.LENGTH_LONG).show()
+                }
+                else {
+                    viewModel.searchProduct(query)
+                }
+
+                return false
+            }
+            override fun onQueryTextChange(newText: String): Boolean {
+                return false
+            }
+        })
+
         return fragmentbinding.root
     }
 
@@ -130,7 +146,7 @@ class MainScreenNormalUsersFragment : Fragment() {
             return true
         }
         if (item.itemId == R.id.cart_item) {
-            findNavController().navigate(MainScreenNormalUsersFragmentDirections.actionMainToCart(viewModel.NID))
+            findNavController().navigate(MainScreenNormalUsersFragmentDirections.actionMainToCart(viewModel.NID, viewModel.normalUser))
             return true
         }
 

@@ -1,34 +1,48 @@
 package com.example.muzee.order_overview
 
+import Api
+import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.muzee.data.Datasource
-import com.example.muzee.data.NormalUserOrder
+import com.example.muzee.data.NormalUser
+import com.example.muzee.network.UserOrder
+import com.example.muzee.productoverview.ApiStatus
 import kotlinx.coroutines.launch
 
-class OrderOverviewViewModel : ViewModel() {
+enum class ApiStatus { LOADING, ERROR, DONE }
 
-    private val _listOfOrders = MutableLiveData<List<NormalUserOrder>>()
-    val listOfOrders: LiveData<List<NormalUserOrder>> = _listOfOrders
+class OrderOverviewViewModel(val NID: String?, val normalUser: NormalUser, app: Application) : ViewModel() {
 
-    private val _navigateToSelectedOrder = MutableLiveData<NormalUserOrder>()
-    val navigateToSelectedOrder: LiveData<NormalUserOrder>
+    // The internal MutableLiveData that stores the status of the most recent request
+    private val _status = MutableLiveData<ApiStatus>()
+
+    // The external immutable LiveData for the request status
+    val status: LiveData<ApiStatus> = _status
+
+    private val _listOfOrders = MutableLiveData<List<UserOrder>>()
+    val listOfOrders: LiveData<List<UserOrder>> = _listOfOrders
+
+    private val _navigateToSelectedOrder = MutableLiveData<UserOrder>()
+    val navigateToSelectedOrder: LiveData<UserOrder>
         get() = _navigateToSelectedOrder
 
-    init {
-        getListOfOrders()
-    }
-
-    private fun getListOfOrders() {
+    fun getOrders() {
 
         viewModelScope.launch {
-            _listOfOrders.value = Datasource().loadOrder()
+            _status.value = ApiStatus.LOADING
+            try {
+                _listOfOrders.value = listOf()
+                _listOfOrders.value = Api.retrofitService.getUserOders(NID)
+                _status.value = ApiStatus.DONE
+            } catch (e: Exception) {
+                _status.value = ApiStatus.ERROR
+            }
         }
     }
 
-    fun displayOrderDetail(order: NormalUserOrder) {
+    fun displayOrderDetail(order: UserOrder) {
         _navigateToSelectedOrder.value = order
     }
 

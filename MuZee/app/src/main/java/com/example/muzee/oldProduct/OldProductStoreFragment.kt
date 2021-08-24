@@ -5,14 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.muzee.R
 import com.example.muzee.databinding.FragmentOldProductStoreBinding
 
 class oldProductStoreFragment : Fragment() {
     private var binding : FragmentOldProductStoreBinding? = null
-    private val viewModel: OldProductViewModel by viewModels()
+
+    private val args: oldProductStoreFragmentArgs by navArgs()
+
+    private val viewModel: OldProductViewModel by activityViewModels { OldProductViewModelFactory(args.NID, requireNotNull(activity).application) }
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
