@@ -37,9 +37,8 @@ class SellerProductOverviewViewModel(sellerID:String,app:Application) : ViewMode
         get() = _navigateToSelectedProduct
     init {
         _sellerID.value = sellerID
-        getProducts()
     }
-    private fun getProducts() {
+    fun getNewProducts() {
         viewModelScope.launch {
             _status.value = ApiStatus.LOADING
             _sellerID.value?.let {

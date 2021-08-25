@@ -59,6 +59,10 @@
             app:argType="string"
             app:nullable="true"
             android:defaultValue="@null" />
+        <argument android:name="sellerInfo"
+            app:argType="com.example.muzee.data.Seller"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/sellerOrderDetailFragment"
@@ -114,6 +118,11 @@
         <argument
             android:name="sellerInfo"
             app:argType="com.example.muzee.data.Seller" />
+        <argument
+            android:name="sellerID"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/orderOverviewFragment"
@@ -291,5 +300,10 @@
             app:destination="@id/sellerProductDetailFragment"
             app:popUpTo="@id/sellerProductDetailFragment"
             app:popUpToInclusive="true" />
+        <argument
+            android:name="sellerInfo"
+            app:argType="com.example.muzee.data.Seller"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
 </navigation>

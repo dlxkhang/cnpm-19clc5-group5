@@ -44,7 +44,7 @@ class SellerProductOverviewAdapter (private  val onClickListener: OnClickListene
             onClickListener.onClick(item)
         }
         holder.itemView.findViewById<View>(R.id.btn_edit).setOnClickListener{
-            fragment.findNavController().navigate(SellerProductOverviewFragmentDirections.actionSellerProductOverviewFragmentToEditNewProductFragment(item,sellerID))
+            fragment.findNavController().navigate(SellerProductOverviewFragmentDirections.actionSellerProductOverviewFragmentToEditNewProductFragment(item,sellerID,fragment.args.sellerInfo))
         }
         holder.itemView.findViewById<View>(R.id.btn_delete).setOnClickListener{
             val builder = AlertDialog.Builder(holder.itemView.context)

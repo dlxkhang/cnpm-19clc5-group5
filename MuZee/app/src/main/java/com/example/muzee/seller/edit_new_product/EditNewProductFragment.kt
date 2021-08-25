@@ -14,6 +14,7 @@ import android.widget.AutoCompleteTextView
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.muzee.R
 import com.example.muzee.data.Category
 import com.example.muzee.databinding.FragmentEditNewProductBinding
@@ -24,6 +25,7 @@ import com.google.android.material.snackbar.Snackbar
 class EditNewProductFragment : Fragment() {
     private lateinit var binding:FragmentEditNewProductBinding
     private lateinit var viewModel:EditNewProductViewMoldel
+    private val args:EditNewProductFragmentArgs by navArgs()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -32,7 +34,7 @@ class EditNewProductFragment : Fragment() {
         val fragmentbinding = FragmentEditNewProductBinding.inflate(inflater,container,false)
         binding = fragmentbinding
         binding.lifecycleOwner = this
-        val new_product = EditNewProductFragmentArgs.fromBundle(requireArguments()).selectedNewProduct
+        val new_product = args.selectedNewProduct
         val viewModelFractory = EditNewProductViewModelFractory(new_product,application)
         viewModel = ViewModelProvider(this,viewModelFractory).get(EditNewProductViewMoldel::class.java)
         //handle list category
@@ -53,7 +55,7 @@ class EditNewProductFragment : Fragment() {
             when(it){
                 EditNewProductViewMoldel.ApiStatus.SUCCESS->{
                     showDiaLog("Edit product successful", "This product is edited and saved in system")
-                    findNavController().navigate(R.id.action_editNewProductFragment_to_sellerProductOverviewFragment)
+                    findNavController().navigate(EditNewProductFragmentDirections.actionEditNewProductFragmentToSellerProductOverviewFragment(args.sellerID,args.sellerInfo))
                 }
                 EditNewProductViewMoldel.ApiStatus.ERROR->{
                     showSnackBar()
@@ -98,7 +100,7 @@ class EditNewProductFragment : Fragment() {
             val price = inputPrice.editText?.text.toString().toDouble()
             val stock = inputStock.editText?.text.toString().toInt()
             val description = binding.labelEditProductDescription.editText?.text.toString()
-            val SID = EditNewProductFragmentArgs.fromBundle(requireArguments()).sellerID
+            val SID = args.sellerID
             val editProduct = ProductSeller(SID!!,null,category,description,null,name,price,stock)
             viewModel.editProduct(editProduct)
         }

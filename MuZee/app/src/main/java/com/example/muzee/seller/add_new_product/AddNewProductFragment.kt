@@ -16,10 +16,12 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.muzee.R
 import com.example.muzee.data.Category
 import com.example.muzee.databinding.FragmentAddNewProductBinding
 import com.example.muzee.network.seller.product.ProductSeller
+import com.example.muzee.seller.product_overview.SellerProductOverviewFragmentArgs
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 
@@ -28,6 +30,7 @@ class AddNewProductFragment : Fragment() {
 
     private var binding: FragmentAddNewProductBinding? = null // binding fragment_add_new_product.xml
     private val viewModel: AddNewProductFragmentViewModel by viewModels()
+    private val args:AddNewProductFragmentArgs by navArgs()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -68,7 +71,7 @@ class AddNewProductFragment : Fragment() {
             when(it){
                 AddNewProductFragmentViewModel.ApiStatus.SUCCESS ->{
                     showDiaLog("Add product successful","A new product is added to system")
-                    findNavController().navigate(R.id.action_addNewProductFragment_to_sellerProductOverviewFragment)
+                    findNavController().navigate(AddNewProductFragmentDirections.actionAddNewProductFragmentToSellerProductOverviewFragment(args.sellerID,args.sellerInfo))
                 }
                 AddNewProductFragmentViewModel.ApiStatus.EXIST ->{
                     showDiaLog("Add product failed", "This product has been existed in system")
@@ -127,7 +130,7 @@ class AddNewProductFragment : Fragment() {
             val price = inputPrice.editText?.text.toString().toDouble()
             val stock = inputStock.editText?.text.toString().toInt()
             val description = binding?.labelNewProductDescription?.editText?.text.toString()
-            val SID = AddNewProductFragmentArgs.fromBundle(requireArguments()).sellerID
+            val SID = args.sellerID
             var sellerID = ""
             SID?.let{
                 sellerID = it
