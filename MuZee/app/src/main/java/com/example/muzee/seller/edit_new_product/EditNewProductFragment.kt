@@ -41,7 +41,8 @@ class EditNewProductFragment : Fragment() {
         val items = getListCategory()
         val adapter = ArrayAdapter(requireContext(), R.layout.list_item,items)
         (textField.editText as? AutoCompleteTextView)?.setAdapter(adapter)
-
+        val index = getListCategory().indexOf(viewModel.selectedNewProduct.value?.productCategory.toString())
+        (textField.editText as? AutoCompleteTextView)?.setText(getListCategory().get(index),false)
         //handle select image
         val plus_img = binding.editPlusImage
         plus_img.setOnClickListener({
@@ -96,7 +97,7 @@ class EditNewProductFragment : Fragment() {
             val name = inputName.editText?.text.toString()
             val price = inputPrice.editText?.text.toString().toDouble()
             val stock = inputStock.editText?.text.toString().toInt()
-            val description = binding.labelEditProductDescription.editText.toString()
+            val description = binding.labelEditProductDescription.editText?.text.toString()
             val SID = EditNewProductFragmentArgs.fromBundle(requireArguments()).sellerID
             val editProduct = ProductSeller(SID!!,null,category,description,null,name,price,stock)
             viewModel.editProduct(editProduct)
@@ -109,26 +110,6 @@ class EditNewProductFragment : Fragment() {
             Category.Guitar.name,
             Category.Piano.name,
             Category.Bass.name)
-    }
-    private fun category(str:String): Category {
-        return when(str){
-            Category.Organ.name ->{
-                Category.Organ
-            }
-            Category.Drum.name ->{
-                Category.Drum
-            }
-            Category.Piano.name ->{
-                Category.Piano
-            }
-            Category.Bass.name ->{
-                Category.Bass
-            }
-            Category.Electronic.name ->{
-                Category.Electronic
-            }
-            else -> Category.Guitar
-        }
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -158,7 +139,7 @@ class EditNewProductFragment : Fragment() {
         dialog.show()
     }
     private fun showSnackBar(){
-        Snackbar.make(binding!!.root,R.string.connection_error_title, Snackbar.LENGTH_SHORT).show()
+        Snackbar.make(binding.root,R.string.connection_error_title, Snackbar.LENGTH_SHORT).show()
     }
     private fun getIdOfCategory(category: String) = when(category){
         "Guitar Acoustic"->{

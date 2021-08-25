@@ -25,6 +25,7 @@ class EditNewProductViewMoldel(newproduct: ProductSeller, app: Application) : An
         _selectedNewProduct.value = newproduct
     }
     fun editProduct(product: ProductSeller){
+        product.productId = _selectedNewProduct.value?.productId
         viewModelScope.launch {
             try {
                 val response = NetworkLayer.SellerProductApiClient.editSellerProduct(product)
@@ -45,7 +46,7 @@ class EditNewProductViewMoldel(newproduct: ProductSeller, app: Application) : An
         }
     }
     @SuppressLint("StringFormatInvalid")
-    val displayOldProduct = Transformations.map(selectedNewProduct) {
+    val displayProduct = Transformations.map(selectedNewProduct) {
         app.applicationContext.getString(R.string.new_product_label,it.productId)
     }
 }
