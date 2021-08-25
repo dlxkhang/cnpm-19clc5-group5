@@ -42,7 +42,12 @@ class MainScreenNormalUsersFragment : Fragment() {
         fragmentbinding.lifecycleOwner = this
 
         // Giving the binding access to the OverviewViewModel
-        viewModel.getNewProducts()
+        if (viewModel.isSearchedCategory){
+            viewModel.isSearchedCategory = false
+        }
+        else {
+            viewModel.getNewProducts()
+        }
         fragmentbinding.viewModel = viewModel
 
         // Sets the adapter of the photosGrid RecyclerView

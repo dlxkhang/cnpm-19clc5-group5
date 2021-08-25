@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.muzee.R
 import com.example.muzee.databinding.FragmentOldProductStoreBinding
+import com.example.muzee.order_overview.OrderOverviewFragmentDirections
 
 class oldProductStoreFragment : Fragment() {
     private var binding : FragmentOldProductStoreBinding? = null
@@ -28,10 +29,19 @@ class oldProductStoreFragment : Fragment() {
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
         binding?.lifecycleOwner = this
         // Giving the binding access to the oldProductViewModel
+        viewModel.getOldProducts()
         binding?.viewModel = viewModel
         binding?.recycleViewOldProduct?.adapter = OldProductAdapter(OldProductAdapter.OnClickListener{
             viewModel.displayOldProductDetail(it)
         }, viewModel)
+
+        viewModel.navigateToSelectedProduct.observe(viewLifecycleOwner, {
+            if (null != it) {
+                this.findNavController().navigate(oldProductStoreFragmentDirections.actionOldProductStoreFragmentToEditOldProductFragment(it))
+                viewModel.displayOldProductDetailComplete()
+            }
+        })
+
         binding?.btnPost?.setOnClickListener {
             findNavController().navigate(R.id.action_oldProductStoreFragment_to_addOldProductFragment)
         }

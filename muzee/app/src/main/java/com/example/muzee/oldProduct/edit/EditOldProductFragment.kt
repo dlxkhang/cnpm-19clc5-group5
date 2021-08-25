@@ -5,23 +5,27 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.muzee.R
 import com.example.muzee.data.Category
-import com.example.muzee.data.oldProduct
 import com.example.muzee.databinding.FragmentEditOldProductBinding
+import com.example.muzee.network.AddOldProduct
+import com.example.muzee.network.OldProduct
+import com.example.muzee.oldProduct.OldProductViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class EditOldProductFragment : Fragment() {
-    private lateinit var binding:FragmentEditOldProductBinding
+    private lateinit var _binding:FragmentEditOldProductBinding
+    private val sharedViewModeL: OldProductViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -31,7 +35,7 @@ class EditOldProductFragment : Fragment() {
         val binding = fragmentbinding
         binding.lifecycleOwner = this
         val old_product = EditOldProductFragmentArgs.fromBundle(requireArguments()).selectedOldProduct
-        val viewModelFractory = EditOldProductViewModelFractory(old_product as oldProduct,application)
+        val viewModelFractory = EditOldProductViewModelFractory(old_product as OldProduct,application)
         binding.viewModel = ViewModelProvider(this,viewModelFractory).get(EditOldProductViewMoldel::class.java)
 
         //handle list category
@@ -47,27 +51,22 @@ class EditOldProductFragment : Fragment() {
             dispatchTakePictureIntent()
         })
 
-        // handle confirm button
-        binding.btnConfirmEditProduct.setOnClickListener{
-            handle_confirm_btn()
-        }
+        _binding = binding
+
         return fragmentbinding.root
     }
-    private fun handle_confirm_btn()
+    fun handle_confirm_btn()
     {
-        val inputName = binding.labelEditName
-        val inputPrice = binding.labelEditPrice
-        val selectCategory = binding.labelEditCategory
-        val inputCondition = binding.labelEditCondition
+        val inputName = _binding.labelEditName
+        val selectCategory = _binding.labelEditCategory
+        val inputCondition = _binding.labelEditCondition
+        val inputDes = _binding?.labelEditProductDescription
         var success = true
         if(inputName.editText!!.text!!.isEmpty()){
             success = false
             inputName.error = getString(R.string.error_text_PRODUCT_NAME)
         }
-        if(inputPrice.editText!!.text!!.isEmpty()){
-            success = false
-            inputPrice.error = getString(R.string.error_text_PRODUCT_NAME)
-        }
+
         if(selectCategory.editText!!.text!!.isEmpty()){
             success = false
             selectCategory.error = getString(R.string.error_text_PRODUCT_NAME)
@@ -77,15 +76,33 @@ class EditOldProductFragment : Fragment() {
             inputCondition.error = getString(R.string.error_text_OLD_PRODUCT_CONDITION)
         }
         if(success){
-            val category = category((selectCategory.editText as? AutoCompleteTextView)?.text.toString())
+            val category = (selectCategory.editText as? AutoCompleteTextView)?.text.toString()
             val name = inputName.editText?.text.toString()
-            val price = inputPrice.editText?.text.toString().toDouble()
+            val categoryID = getCategoryID(category)
+
             val condition = inputCondition.editText?.text.toString().toInt()
-            val sellerName = "huy"
-            val oldProduct = oldProduct("552",category,name,price,sellerName,condition)
-            findNavController().navigate(R.id.action_addOldProductFragment_to_oldProductStoreFragment)
+            val description = inputDes?.editText?.text.toString()
+
+            val oldProduct = AddOldProduct(
+                _binding.viewModel!!.selectedOldProduct.value?.productId, categoryID, name
+                ,sharedViewModeL.NID,_binding.viewModel!!.selectedOldProduct.value?.imageURI, description, condition)
+
+            sharedViewModeL.editAnOldProduct(oldProduct)
+            sharedViewModeL.getOldProducts()
+
+            findNavController().popBackStack()
         }
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        _binding?.apply {
+            lifecycleOwner = viewLifecycleOwner
+            fragment = this@EditOldProductFragment
+        }
+    }
+
     private fun getListCategory():List<String>{
         return listOf(Category.Organ.name,
             Category.Drum.name,
@@ -114,9 +131,21 @@ class EditOldProductFragment : Fragment() {
             else -> Category.Guitar
         }
     }
+
+    private fun getCategoryID(str: String): String {
+        return when(str){
+            "Piano" -> "001"
+            "Guitar" -> "002"
+            "Drum" -> "003"
+            "Keyboard" -> "004"
+            "Bass" -> "005"
+            else -> "006"
+        }
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        binding.editImageProduct.setImageBitmap(data?.extras?.get("data")as Bitmap)
+        _binding.editImageProduct.setImageBitmap(data?.extras?.get("data")as Bitmap)
     }
     val REQUEST_IMAGE_CAPTURE = 1
     private fun dispatchTakePictureIntent(){

@@ -232,7 +232,7 @@
         tools:layout="@layout/fragment_edit_old_product">
         <argument
             android:name="selectedOldProduct"
-            app:argType="com.example.muzee.data.Product"/>
+            app:argType="com.example.muzee.network.OldProduct"/>
         <action
             android:id="@+id/action_editOldProductFragment_to_oldProductStoreFragment"
             app:destination="@id/oldProductStoreFragment"

@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -39,8 +38,7 @@ class OldProductAdapter(private  val onClickListener: OnClickListener, private v
             onClickListener.onClick(item)
         }
         holder.itemView.findViewById<View>(R.id.edit_btn).setOnClickListener {
-            val test = item.productName
-            Toast.makeText(holder.itemView.context, item.productName, Toast.LENGTH_SHORT)
+            onClickListener.onClick(item)
         }
         holder.itemView.findViewById<View>(R.id.delete_btn).setOnClickListener {
             var builder = AlertDialog.Builder(holder.itemView.context)
@@ -48,6 +46,7 @@ class OldProductAdapter(private  val onClickListener: OnClickListener, private v
             builder.setMessage("Sure?")
             builder.setNegativeButton("Yes") { dialog, id ->
                 viewModel.deleteAnOldProduct(item.productId)
+                viewModel.getOldProducts()
             }
             builder.setPositiveButton("No") { dialog, id -> print(0) }
             var alert: AlertDialog = builder.create()

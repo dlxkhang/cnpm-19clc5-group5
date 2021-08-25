@@ -14,6 +14,8 @@ enum class ApiStatus { LOADING, ERROR, DONE }
 
 class ProductOverviewViewModel (val NID: String?, val normalUser: NormalUser ,app: Application) : ViewModel() {
 
+    var isSearchedCategory = false
+    
     // The internal MutableLiveData that stores the status of the most recent request
     private val _status = MutableLiveData<ApiStatus>()
 
@@ -51,6 +53,20 @@ class ProductOverviewViewModel (val NID: String?, val normalUser: NormalUser ,ap
             _status.value = ApiStatus.LOADING
             try {
                 _products.value = Api.retrofitService.searchNewProducts(key)
+                _status.value = ApiStatus.DONE
+            } catch (e: Exception) {
+                _status.value = ApiStatus.ERROR
+                _products.value = listOf()
+            }
+        }
+    }
+
+    fun searchProductByCategory(category: String?) {
+
+        viewModelScope.launch {
+            _status.value = ApiStatus.LOADING
+            try {
+                _products.value = Api.retrofitService.searchNewProductsByCategory(category)
                 _status.value = ApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = ApiStatus.ERROR

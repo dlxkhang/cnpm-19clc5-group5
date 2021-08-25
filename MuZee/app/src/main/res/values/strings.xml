@@ -75,12 +75,12 @@
     <string name="todo">TODO</string>
     <string name="category_fragment_label">Category</string>
     // search key when clicking on the image
-    <string name="piano_search">piano</string>
-    <string name="organ_search">organ</string>
-    <string name="drum_search">drum</string>
-    <string name="guitar_search">guitar</string>
-    <string name="electric_search">electric</string>
-    <string name="bass_search">bass</string>
+    <string name="piano_search">Piano</string>
+    <string name="organ_search">Keyboard</string>
+    <string name="drum_search">Drum</string>
+    <string name="guitar_search">Guitar</string>
+    <string name="electric_search">Electric</string>
+    <string name="bass_search">Bass</string>
 
     // Nav menu item for normal users
     <string name="category_item">Categories</string>

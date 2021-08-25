@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.muzee.network.AddOldProduct
 import com.example.muzee.network.OldProduct
+import com.example.muzee.network.OldProductID
 import kotlinx.coroutines.launch
 
 enum class ApiStatus { LOADING, ERROR, DONE }
@@ -27,11 +28,8 @@ class OldProductViewModel(val NID: String?, val app: Application): ViewModel() {
     val navigateToSelectedProduct: LiveData<OldProduct>
         get() = _navigateToSelectedProduct
 
-    init {
-        getOldProducts()
-    }
 
-    private fun getOldProducts() {
+    fun getOldProducts() {
 
         viewModelScope.launch {
             _status.value = ApiStatus.LOADING
@@ -48,15 +46,28 @@ class OldProductViewModel(val NID: String?, val app: Application): ViewModel() {
     fun displayOldProductDetail(oldproduct: OldProduct) {
         _navigateToSelectedProduct.value = oldproduct
     }
+
+    fun displayOldProductDetailComplete() {
+        _navigateToSelectedProduct.value = null
+    }
+
     fun addAnOldProduct(oldproduct: AddOldProduct){
         viewModelScope.launch {
-            Api.retrofitService.addOldProduct(oldproduct)
+            val temp = Api.retrofitService.addOldProduct(oldproduct)
         }
     }
+
+    fun editAnOldProduct(oldproduct: AddOldProduct){
+        viewModelScope.launch {
+            val temp = Api.retrofitService.editOldProduct(oldproduct)
+        }
+    }
+
     fun deleteAnOldProduct(oldProductID: String?) {
         viewModelScope.launch {
             try {
-                Api.retrofitService.deleteOldProduct(oldProductID)
+                val PID = OldProductID(oldProductID)
+                val temp = Api.retrofitService.deleteOldProduct(PID)
             } catch (e: Exception) {
 
             }

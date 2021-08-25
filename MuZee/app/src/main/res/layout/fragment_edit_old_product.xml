@@ -8,6 +8,11 @@
         <variable
             name="viewModel"
             type="com.example.muzee.oldProduct.edit.EditOldProductViewMoldel" />
+
+        <variable
+            name="fragment"
+            type="com.example.muzee.oldProduct.edit.EditOldProductFragment" />
+
     </data>
     <ScrollView
         android:layout_width="match_parent"
@@ -104,32 +109,6 @@
                     android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/label_edit_price"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                app:helperText="@string/required_help_text"
-                android:hint="@string/add_product_price"
-                app:endIconMode="clear_text"
-                app:errorEnabled="true"
-                app:hintTextAppearance="@style/ErrorText"
-                app:layout_constraintEnd_toEndOf="@id/label_edit_category"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@id/label_edit_name"
-                app:layout_constraintTop_toBottomOf="@id/label_edit_name"
-                app:prefixText="$">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:text="@{Double.toString(viewModel.selectedOldProduct.productPrice)}"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="numberDecimal" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/label_edit_condition"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -139,13 +118,13 @@
                 app:helperText="@string/required_help_text"
                 app:endIconMode="clear_text"
                 app:errorEnabled="true"
-                app:layout_constraintTop_toBottomOf="@id/label_edit_price"
-                app:layout_constraintEnd_toEndOf="@+id/label_edit_price"
-                app:layout_constraintStart_toStartOf="@id/label_edit_price"
+                app:layout_constraintTop_toBottomOf="@id/label_edit_name"
+                app:layout_constraintEnd_toEndOf="@+id/label_edit_name"
+                app:layout_constraintStart_toStartOf="@id/label_edit_name"
                 app:suffixText="/10"
                 >
                 <com.google.android.material.textfield.TextInputEditText
-                    android:text="@{viewModel.selectedOldProduct.condition.toString()}"
+                    android:text="@{Integer.toString(viewModel.selectedOldProduct.condition)}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"/>
@@ -175,6 +154,7 @@
             <Button
                 android:id="@+id/btn_confirm_edit_product"
                 style="@style/TextAppearance.AppCompat.Button"
+                android:onClick="@{() -> fragment.handle_confirm_btn()}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"

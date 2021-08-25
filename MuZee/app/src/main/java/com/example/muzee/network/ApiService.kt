@@ -31,6 +31,10 @@ interface ApiService {
     @GET("api/search/product")
     suspend fun searchNewProducts(@Query("key") key: String?): List<NewProduct>
 
+    // Search new product by category
+    @GET("api/search/product/category")
+    suspend fun searchNewProductsByCategory(@Query("key") key: String?): List<NewProduct>
+
     // Get cart
     @GET("api/cart")
     suspend fun getCartProducts(@Query ("NID") NID: String?): List<CartProduct>
@@ -43,9 +47,7 @@ interface ApiService {
     @POST("api/cart/delete")
     suspend fun deleteFromCart(@Body deleteProduct: DeleteFromCartProduct): Response<SignUp_response>
 
-    // Place order
-    @POST("api/order/place_order")
-    suspend fun placeOrder(@Body placeOrder: PlaceOrder): Response<SignUp_response>
+
 
     // Old product
     // Get old product overview
@@ -54,16 +56,28 @@ interface ApiService {
 
     // Add old product
     @POST("api/old_product/add")
-    suspend fun addOldProduct(@Body oldProduct: AddOldProduct): Void
+    suspend fun addOldProduct(@Body oldProduct: AddOldProduct): Response<SignUp_response>
+
+    // Edit old product
+    @POST("api/old_product/edit")
+    suspend fun editOldProduct(@Body oldProduct: AddOldProduct): Response<SignUp_response>
 
     // Delete old product
     @POST("api/old_product/delete")
-    suspend fun deleteOldProduct(@Body oldProductID: String?): Void
+    suspend fun deleteOldProduct(@Body oldProductID: OldProductID): Response<SignUp_response>
 
     // Normal User Order
     // Get normal user order
     @GET("api/order")
     suspend fun getUserOders(@Query ("NID") NID: String?): List<UserOrder>
+
+    // Place order
+    @POST("api/order/place_order")
+    suspend fun placeOrder(@Body placeOrder: PlaceOrder): Response<SignUp_response>
+
+    // Cancel order
+    @POST("api/order/cancel")
+    suspend fun cancelOrder(@Body cancelOrder: CancelOrder): Response<SignUp_response>
 }
 
 object Api {

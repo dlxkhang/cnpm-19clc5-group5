@@ -3,9 +3,9 @@ package com.example.muzee.oldProduct.edit
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.muzee.data.oldProduct
+import com.example.muzee.network.OldProduct
 
-class EditOldProductViewModelFractory(private val oldproduct: oldProduct,
+class EditOldProductViewModelFractory(private val oldproduct: OldProduct,
                                               private val application: Application
 ): ViewModelProvider.Factory {
     @Suppress("unchecked_cast")

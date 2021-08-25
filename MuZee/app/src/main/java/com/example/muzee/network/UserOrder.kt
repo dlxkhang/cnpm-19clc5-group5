@@ -10,3 +10,6 @@ val itemTotal: Double, val deliveryCharges: Double, val orderStatus: String, val
         return itemTotal + deliveryCharges
     }
 }
+
+@Parcelize
+data class CancelOrder(val NID: String?, val OID: String?): Parcelable
