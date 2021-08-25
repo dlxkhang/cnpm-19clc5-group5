@@ -49,7 +49,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="@{String.valueOf(viewModel.displayPropertyPrice)}"
+                        android:text="@{String.valueOf(viewModel.selectedProduct.productPrice)}"
                         android:textColor="#de000000"
                         android:textSize="20sp"
                         android:textStyle="bold"
@@ -168,7 +168,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
-                        android:text="@{viewModel.getCategory()}"
+                        android:text="@{viewModel.selectedProduct.productCategory}"
                         android:textSize="12sp"
                         app:layout_constraintBottom_toBottomOf="@+id/category_label"
                         app:layout_constraintStart_toEndOf="@+id/category_label"
@@ -185,7 +185,7 @@
                         app:layout_constraintBottom_toBottomOf="@+id/stock_label"
                         app:layout_constraintStart_toStartOf="@+id/textView8"
                         app:layout_constraintTop_toTopOf="@+id/stock_label"
-                        tools:text="Nord" />
+                        tools:text="15" />
 
                     <View
                         android:id="@+id/view"

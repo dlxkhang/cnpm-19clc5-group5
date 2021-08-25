@@ -29,7 +29,7 @@ class EditNewProductFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         val application = requireNotNull(activity).application
         val fragmentbinding = FragmentEditNewProductBinding.inflate(inflater,container,false)
         binding = fragmentbinding
@@ -95,7 +95,7 @@ class EditNewProductFragment : Fragment() {
             inputStock.error = getString(R.string.error_text_OLD_PRODUCT_CONDITION)
         }
         if(success){
-            val category = getIdOfCategory((selectCategory.editText as? AutoCompleteTextView)?.text.toString())
+            val category = getCategoryID((selectCategory.editText as? AutoCompleteTextView)?.text.toString())
             val name = inputName.editText?.text.toString()
             val price = inputPrice.editText?.text.toString().toDouble()
             val stock = inputStock.editText?.text.toString().toInt()
@@ -105,6 +105,7 @@ class EditNewProductFragment : Fragment() {
             viewModel.editProduct(editProduct)
         }
     }
+
     private fun getListCategory():List<String>{
         return listOf(Category.Organ.name,
             Category.Drum.name,
@@ -143,24 +144,14 @@ class EditNewProductFragment : Fragment() {
     private fun showSnackBar(){
         Snackbar.make(binding.root,R.string.connection_error_title, Snackbar.LENGTH_SHORT).show()
     }
-    private fun getIdOfCategory(category: String) = when(category){
-        "Guitar Acoustic"->{
-            "002"
-        }
-        "Drum"->{
-            "003"
-        }
-        "Guitar Bass"->{
-            "005"
-        }
-        "Piano"->{
-            "001"
-        }
-        "Organ"->{
-            "004"
-        }
-        else->{
-            "006"
+    private fun getCategoryID(str: String): String {
+        return when(str){
+            "Piano" -> "001"
+            "Guitar" -> "002"
+            "Drum" -> "003"
+            "Keyboard" -> "004"
+            "Bass" -> "005"
+            else -> "006"
         }
     }
 }

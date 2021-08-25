@@ -28,29 +28,4 @@ class SellerProductDetailViewModel(product: ProductSeller,seller: Seller, app: A
     val displayPropertyPrice = Transformations.map(selectedProduct) {
         app.applicationContext.getString(R.string.display_price, it.productPrice)
     }
-    fun getCategory() = when(_selectedProduct.value?.productCategory){
-        "002"->{
-
-            "Guitar Acoustic"
-        }
-        "003"->{
-
-            "Drum"
-        }
-        "005"->{
-
-            "Guitar Bass"
-        }
-        "001"->{
-
-            "Piano"
-        }
-        "004"->{
-
-            "Organ"
-        }
-        else->{
-            "Electronic Guitar"
-        }
-    }
 }

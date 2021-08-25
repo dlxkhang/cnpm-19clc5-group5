@@ -53,6 +53,7 @@ class SellerProductOverviewAdapter (private  val onClickListener: OnClickListene
             builder.setPositiveButton("Yes") { dialog, id ->
                 item.productId?.let{
                     viewModel.deleteProduct(it)
+                    viewModel.getNewProducts()
                 }
             }
             builder.setNegativeButton("No") { dialog, id -> dialog.cancel() }

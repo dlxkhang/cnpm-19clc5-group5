@@ -21,7 +21,6 @@ import com.example.muzee.R
 import com.example.muzee.data.Category
 import com.example.muzee.databinding.FragmentAddNewProductBinding
 import com.example.muzee.network.seller.product.ProductSeller
-import com.example.muzee.seller.product_overview.SellerProductOverviewFragmentArgs
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 
@@ -38,6 +37,7 @@ class AddNewProductFragment : Fragment() {
         // setup data binding
         val fragmentBinding = FragmentAddNewProductBinding.inflate(inflater, container, false)
         binding = fragmentBinding
+        binding?.lifecycleOwner = this
         val activity = activity as AppCompatActivity? // get activity
         activity!!.supportActionBar?.setTitle("Add New Product") // set title text for seller product screen
         val textField = binding?.labelSelectCategory
@@ -70,8 +70,15 @@ class AddNewProductFragment : Fragment() {
         viewModel.status.observe(viewLifecycleOwner,{
             when(it){
                 AddNewProductFragmentViewModel.ApiStatus.SUCCESS ->{
-                    showDiaLog("Add product successful","A new product is added to system")
-                    findNavController().navigate(AddNewProductFragmentDirections.actionAddNewProductFragmentToSellerProductOverviewFragment(args.sellerID,args.sellerInfo))
+                    val dialog = MaterialAlertDialogBuilder(requireContext())
+                    dialog.setTitle("Add product successful")
+                        .setMessage("A new product is added to system")
+                        .setPositiveButton(getString(R.string.btn_ok)) { dialog, which ->
+                            dialog.cancel()
+                            findNavController().navigate(AddNewProductFragmentDirections.actionAddNewProductFragmentToSellerProductOverviewFragment(args.sellerID,args.sellerInfo))
+                        }
+                    dialog.show()
+
                 }
                 AddNewProductFragmentViewModel.ApiStatus.EXIST ->{
                     showDiaLog("Add product failed", "This product has been existed in system")
@@ -125,7 +132,7 @@ class AddNewProductFragment : Fragment() {
             inputStock.error = getString(R.string.error_text_OLD_PRODUCT_CONDITION)
         }
         if(success){
-            val category = getIdOfCategory((selectCategory.editText as? AutoCompleteTextView)?.text.toString())
+            val category = getCategoryID((selectCategory.editText as? AutoCompleteTextView)?.text.toString())
             val name = inputName.editText?.text.toString()
             val price = inputPrice.editText?.text.toString().toDouble()
             val stock = inputStock.editText?.text.toString().toInt()
@@ -155,26 +162,16 @@ class AddNewProductFragment : Fragment() {
     private fun showSnackBar(){
         Snackbar.make(binding!!.root,R.string.connection_error_title, Snackbar.LENGTH_SHORT).show()
     }
-    private fun getIdOfCategory(category: String) = when(category){
-            "Guitar Acoustic"->{
-                 "002"
-            }
-            "Drum"->{
-                 "003"
-            }
-            "Guitar Bass"->{
-                 "005"
-            }
-            "Piano"->{
-                 "001"
-            }
-            "Organ"->{
-                "004"
-            }
-            else->{
-                 "006"
-            }
-        }
 
+    private fun getCategoryID(str: String): String {
+        return when(str){
+            "Piano" -> "001"
+            "Guitar" -> "002"
+            "Drum" -> "003"
+            "Keyboard" -> "004"
+            "Bass" -> "005"
+            else -> "006"
+        }
+    }
 
 }
