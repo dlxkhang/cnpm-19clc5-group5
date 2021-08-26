@@ -19,8 +19,7 @@ import com.google.android.material.snackbar.Snackbar
 
 class SellerProductOverviewFragment : Fragment() {
 
-    private val viewmodel: SellerProductOverviewViewModel by activityViewModels{SellerProductOverviewViewModelFactory(args.sellerID!!,
-        requireNotNull(activity).application)}
+    private lateinit var viewmodel: SellerProductOverviewViewModel
     private var binding: FragmentSellerProductOverviewBinding? = null
     val args:SellerProductOverviewFragmentArgs by navArgs()
     override fun onCreateView(
@@ -31,7 +30,8 @@ class SellerProductOverviewFragment : Fragment() {
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
         binding = fragmmentbinding
         binding?.lifecycleOwner = this
-
+        val viewModelFactory = SellerProductOverviewViewModelFactory(args.sellerID!!, requireNotNull(activity).application)
+        viewmodel = ViewModelProvider(this,viewModelFactory).get(SellerProductOverviewViewModel::class.java)
         val SID = args.sellerID
         val sellerInfo = args.sellerInfo
         var sellerID = ""
