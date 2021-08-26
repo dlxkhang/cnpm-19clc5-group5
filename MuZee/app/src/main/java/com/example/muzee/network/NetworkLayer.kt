@@ -2,6 +2,10 @@ package com.example.muzee.network
 
 import com.example.muzee.network.login.LoginApiClient
 import com.example.muzee.network.login.LoginApiService
+import com.example.muzee.network.seller.order.OrderApiClient
+import com.example.muzee.network.seller.order.OrderApiService
+import com.example.muzee.network.seller.product.ProductApiClient
+import com.example.muzee.network.seller.product.ProductApiService
 import com.example.muzee.network.signup.SignUpApiClient
 import com.example.muzee.network.signup.SignUpApiService
 import com.squareup.moshi.Moshi
@@ -10,7 +14,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 object NetworkLayer {
-    private const val BASE_URL = "http://192.168.31.133:3000/"
+    private const val BASE_URL = "http://192.168.11.109:3000/"
     private val moshi = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())
         .build()
@@ -26,4 +30,14 @@ object NetworkLayer {
     }
     val LoginApiClient = LoginApiClient(loginRetrofitService)
     val SignUpApiClient = SignUpApiClient(signupRetrofitService)
+
+    val orderRetrofitSeller: OrderApiService by lazy{
+        retrofit.create(OrderApiService::class.java)
+    }
+    val OrderApiClient = OrderApiClient(orderRetrofitSeller)
+
+    val sellerproductRetrofitSeller:ProductApiService by lazy{
+        retrofit.create(ProductApiService::class.java)
+    }
+    val SellerProductApiClient = ProductApiClient(sellerproductRetrofitSeller)
 }

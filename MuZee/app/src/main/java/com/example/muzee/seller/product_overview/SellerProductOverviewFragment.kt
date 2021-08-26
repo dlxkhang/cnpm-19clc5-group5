@@ -4,47 +4,69 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.muzee.R
 import com.example.muzee.databinding.FragmentSellerProductOverviewBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 
 
 class SellerProductOverviewFragment : Fragment() {
 
-    private val viewModel: SellerProductOverviewViewModel by viewModels()
-    lateinit var binding: FragmentSellerProductOverviewBinding
+    private lateinit var viewmodel: SellerProductOverviewViewModel
+    private var binding: FragmentSellerProductOverviewBinding? = null
+    val args:SellerProductOverviewFragmentArgs by navArgs()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-
-        binding = FragmentSellerProductOverviewBinding.inflate(inflater, container, false)
+        val fragmmentbinding = FragmentSellerProductOverviewBinding.inflate(inflater, container, false)
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
-        binding.lifecycleOwner = this
-
-        // Giving the binding access to the OverviewViewModel
-        binding.viewModel = viewModel
-        // Sets the adapter of the photosGrid RecyclerView
-        binding.recyclerView.adapter = SellerProductOverviewAdapter(SellerProductOverviewAdapter.OnClickListener {
-            viewModel.displayProductDetail(it)
-        })
-        val add_btn = binding.addNewProductBtn
-        add_btn.setOnClickListener{
-            findNavController().navigate(R.id.action_sellerProductOverviewFragment_to_addNewProductFragment)
+        binding = fragmmentbinding
+        binding?.lifecycleOwner = this
+        val viewModelFactory = SellerProductOverviewViewModelFactory(args.sellerID!!, requireNotNull(activity).application)
+        viewmodel = ViewModelProvider(this,viewModelFactory).get(SellerProductOverviewViewModel::class.java)
+        val SID = args.sellerID
+        val sellerInfo = args.sellerInfo
+        var sellerID = ""
+        SID?.let{
+            sellerID = it
         }
-        viewModel.navigateToSelectedProduct.observe(viewLifecycleOwner, Observer {
+        viewmodel.getNewProducts()
+        // Sets the adapter of the photosGrid RecyclerView
+        binding?.viewModel = viewmodel
+        binding?.recyclerView?.adapter = SellerProductOverviewAdapter(SellerProductOverviewAdapter.OnClickListener {
+            viewmodel.displayProductDetail(it)
+        },viewmodel,this,SID)
+
+        val add_btn = binding?.addNewProductBtn
+        add_btn?.setOnClickListener{
+            findNavController().navigate(SellerProductOverviewFragmentDirections.actionSellerProductOverviewFragmentToAddNewProductFragment(SID,args.sellerInfo))
+        }
+        viewmodel.status.observe(viewLifecycleOwner,{
+            when(it){
+                SellerProductOverviewViewModel.ApiStatus.DONE->{
+
+                }
+                SellerProductOverviewViewModel.ApiStatus.ERROR->{
+                    showSnackBar()
+                }
+            }
+        })
+        viewmodel.navigateToSelectedProduct.observe(viewLifecycleOwner, Observer {
             if (null != it) {
-                this.findNavController().navigate(SellerProductOverviewFragmentDirections.actionSellerProductOverviewFragmentToSellerProductDetailFragment(it))
-                viewModel.displayPropertyDetailsComplete()
+                this.findNavController().navigate(SellerProductOverviewFragmentDirections.actionSellerProductOverviewFragmentToSellerProductDetailFragment(it,sellerInfo!!,args.sellerID))
+                viewmodel.displayPropertyDetailsComplete()
             }
         })
 
-        return binding.root
+        return fragmmentbinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -54,8 +76,17 @@ class SellerProductOverviewFragment : Fragment() {
             sellerProductOverviewFragment = this@SellerProductOverviewFragment
         }
     }
-
-    fun goToAddNewProductScreen() {
-        findNavController().navigate(R.id.action_sellerProductOverviewFragment_to_addNewProductFragment)
+    private fun showDiaLog(title:String,message: String){
+        val dialog = MaterialAlertDialogBuilder(requireContext())
+        dialog.setTitle(title)
+            .setMessage(message)
+            .setPositiveButton(getString(R.string.btn_ok)) { dialog, which ->
+                dialog.cancel()
+            }
+        dialog.show()
     }
+    private fun showSnackBar(){
+        Snackbar.make(binding!!.root,R.string.connection_error_title, Snackbar.LENGTH_SHORT).show()
+    }
+
 }

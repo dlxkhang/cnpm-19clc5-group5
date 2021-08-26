@@ -16,6 +16,7 @@
         <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/drawable/ic_store_icon.xml" value="0.15260416666666668" />
         <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/drawable/ic_switch_camera.xml" value="0.15260416666666668" />
         <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/drawable/layout_signup.xml" value="0.1640625" />
+        <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/drawable/logout_icon.xml" value="0.14010416666666667" />
         <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/drawable/muzeelogin.xml" value="0.1703125" />
         <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/drawable/round_button.xml" value="0.18489583333333334" />
         <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/drawable/rounded_conner.xml" value="0.15260416666666668" />
@@ -23,10 +24,11 @@
         <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/font/roboto.xml" value="0.1859375" />
         <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/app_bar_main.xml" value="0.1" />
         <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/expandable_my_shop_item.xml" value="0.1" />
-        <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/fragment_add_new_product.xml" value="0.1" />
+        <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/fragment_add_new_product.xml" value="0.264" />
         <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/fragment_add_old_product.xml" value="0.1" />
         <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/fragment_camera.xml" value="0.1" />
         <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/fragment_cart.xml" value="0.16875" />
+        <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/fragment_edit_new_product.xml" value="0.1" />
         <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/fragment_edit_old_product.xml" value="0.1" />
         <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/fragment_login.xml" value="0.2" />
         <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/fragment_main_screen_normal_users.xml" value="0.1" />
@@ -38,29 +40,32 @@
         <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/fragment_product_detail.xml" value="0.14791666666666667" />
         <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/fragment_product_overview.xml" value="0.15625" />
         <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/fragment_seller_order.xml" value="0.12228260869565218" />
-        <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/fragment_seller_order_detail.xml" value="0.12001811594202899" />
-        <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/fragment_seller_product_detail.xml" value="0.12001811594202899" />
-        <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/fragment_seller_product_overview.xml" value="0.1" />
+        <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/fragment_seller_order_detail.xml" value="0.4" />
+        <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/fragment_seller_product_detail.xml" value="0.2554945054945055" />
+        <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/fragment_seller_product_overview.xml" value="0.136" />
         <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/fragment_sign_up__normal_users.xml" value="0.1" />
         <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/fragment_sign_up__seller.xml" value="0.1" />
         <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/list_item.xml" value="0.11458333333333333" />
         <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/listheader.xml" value="0.1" />
         <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/login_fragment.xml" value="0.264" />
         <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/my_shop_item.xml" value="0.152" />
-        <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/nav_header_normal_users.xml" value="0.536" />
-        <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/nav_header_seller.xml" value="0.1" />
+        <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/nav_header_normal_users.xml" value="0.264" />
+        <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/nav_header_seller.xml" value="0.264" />
+        <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/new_product_item.xml" value="0.13125" />
         <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/old_product_items.xml" value="0.1" />
         <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/order_item.xml" value="0.1" />
-        <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/order_seller_item.xml" value="0.1" />
+        <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/order_seller_item.xml" value="0.2" />
         <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/preview.xml" value="0.16875" />
         <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/product_item.xml" value="0.15625" />
         <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/product_item_cart.xml" value="0.1" />
         <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/product_item_order_detail.xml" value="0.1" />
-        <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/product_item_payment.xml" value="0.1" />
+        <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/product_item_order_detail_seller.xml" value="0.264" />
+        <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/product_item_payment.xml" value="0.16" />
+        <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/product_seller_items.xml" value="0.4" />
         <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/sign_up_fragment.xml" value="0.2" />
         <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/layout/switch_item.xml" value="0.12228260869565218" />
         <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/menu/nav_menu_normal_users.xml" value="0.4" />
-        <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/menu/nav_menu_seller.xml" value="0.13958333333333334" />
+        <entry key="..\:/Project/cnpm-19clc5-group5/cnpm-19clc5-group5/MuZee/app/src/main/res/menu/nav_menu_seller.xml" value="0.2" />
       </map>
     </option>
   </component>

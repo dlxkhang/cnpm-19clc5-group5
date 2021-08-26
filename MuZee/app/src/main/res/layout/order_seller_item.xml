@@ -5,7 +5,7 @@
     <data>
         <variable
             name="order"
-            type="com.example.muzee.data.SellerOrder"/>
+            type="com.example.muzee.network.seller.order.Order_responseItem"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,7 +28,8 @@
             app:layout_constraintHorizontal_bias="0.02"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="SmallSp" />
+            tools:ignore="SmallSp"
+            tools:text="001"/>
 
         <TextView
             android:id="@+id/storeName"
@@ -41,7 +42,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.022"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/orderId" />
+            app:layout_constraintTop_toBottomOf="@+id/orderId"
+            tools:text="Daph Duck"/>
 
         <TextView
             android:id="@+id/orderAddress"
@@ -55,7 +57,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/storeName"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="abc"/>
 
         <TextView
             android:id="@+id/totalLabel"
@@ -65,7 +68,7 @@
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.659"
+            app:layout_constraintHorizontal_bias="0.662"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.347" />
@@ -74,26 +77,27 @@
             android:id="@+id/totalPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{Double.toString(order.totalPrice()) + `$`}"
+            android:layout_marginTop="5dp"
+            android:text="@{Double.toString(order.itemTotal) + `$`}"
             android:textColor="@color/black"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.646"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.891" />
+            app:layout_constraintEnd_toEndOf="@+id/totalLabel"
+            app:layout_constraintHorizontal_bias="0.511"
+            app:layout_constraintStart_toStartOf="@+id/totalLabel"
+            app:layout_constraintTop_toBottomOf="@+id/totalLabel"
+            tools:text="10$" />
 
         <TextView
             android:id="@+id/orderStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="44dp"
-            android:text="alo"
+            android:layout_marginEnd="16dp"
+            android:text="@{order.orderStatus}"
             android:textColor="@color/black"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.488" />
+            app:layout_constraintVertical_bias="0.488"
+            tools:text="Pendding" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

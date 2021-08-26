@@ -45,8 +45,7 @@ module.exports.cancelOrder = async function(req, res) {
 // // SELLER ORDER
 module.exports.getSellerOrderList = async function(req, res) { 
   // get list of order
-  var SID = '001'
-  var orderList = await orderService.getSellerOrderList(SID) 
+  var orderList = await orderService.getSellerOrderList(req.body.accountID) 
   res.send(JSON.stringify(orderList))
 }
 
@@ -59,7 +58,7 @@ module.exports.acceptOrderSeller = async function(req, res) {
   var response = {
     ack: null
   }
-  response.ack = await orderService.acceptOrderSeller(request.SID, request.OID) 
+  response.ack = await orderService.acceptOrderSeller(req.body.SID, req.body.OID) 
   res.send(JSON.stringify(response))
 }
 
@@ -72,6 +71,6 @@ module.exports.cancelOrderSeller = async function(req, res) {
   var response = {
     ack: null
   }
-  response.ack = await orderService.cancelOrder(request.SID, request.OID) 
+  response.ack = await orderService.cancelOrder(req.body.SID, req.body.OID) 
   res.send(JSON.stringify(response))
 }

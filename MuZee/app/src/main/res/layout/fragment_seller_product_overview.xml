@@ -38,7 +38,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:itemCount="2"
-                    tools:listitem="@layout/product_item" />
+                    tools:listitem="@layout/product_seller_items" />
             </ScrollView>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -54,7 +54,7 @@
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"></Button>
+                app:layout_constraintStart_toStartOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.drawerlayout.widget.DrawerLayout>
 </layout>

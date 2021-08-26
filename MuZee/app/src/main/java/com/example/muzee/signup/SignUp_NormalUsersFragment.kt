@@ -13,6 +13,7 @@ import com.example.muzee.R
 import com.example.muzee.databinding.FragmentSignUpNormalUsersBinding
 import com.example.muzee.signup.model.SignUpViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 
 class SignUp_NormalUsersFragment : Fragment() {
     private lateinit var viewModel: SignUpViewModel
@@ -28,6 +29,26 @@ class SignUp_NormalUsersFragment : Fragment() {
         binding?.btnSignUp?.setOnClickListener{
             handle_sign_up_btn()
         }
+        viewModel.status.observe(viewLifecycleOwner,{
+            when(it){
+                SignUpViewModel.ApiStatus.ERROR->{
+                    showDiaLog(getString(R.string.connection_error_title),getString(R.string.connection_error_message))
+                }
+                SignUpViewModel.ApiStatus.SUCCESS->{
+                    val dialogBuilder = MaterialAlertDialogBuilder(requireContext())
+                    dialogBuilder
+                        .setTitle("Sign up Successful")
+                        .setPositiveButton(getString(R.string.btn_ok)){dialog,which->
+                            dialog.cancel()
+                            findNavController().navigate(R.id.action_signUpFragment_to_loginFragment)
+                        }
+                    dialogBuilder.show()
+                }
+                SignUpViewModel.ApiStatus.EXISTACCOUNT ->{
+                    showDiaLog("Account Exists","This account already registered in the system. Do you want to sign up again?")
+                }
+            }
+        })
         return fragmentbinding.root
     }
     private fun handle_on_text_change(){
@@ -101,36 +122,6 @@ class SignUp_NormalUsersFragment : Fragment() {
                 val username = username_input.editText?.text.toString()
                 val password = password_input.editText?.text.toString()
                 viewModel.addNormalUserAccount(fullName,username,phoneNumber,password)
-                viewModel.reponse.observe(viewLifecycleOwner,{signup_response->
-                    if(signup_response==null){
-                        Toast.makeText(
-                            requireContext(),"Unsuccessful network call", Toast.LENGTH_SHORT
-                        ).show()
-                        return@observe
-                    }
-                    when(signup_response.ack){
-                        "account_exist"->{
-                            val dialogBuilder = MaterialAlertDialogBuilder(requireContext())
-                            dialogBuilder.setMessage("This account already registered in the system. Do you want to sign up again?")
-                                .setTitle("Account Exists")
-                                .setPositiveButton(getString(R.string.btn_ok)){dialog,which->
-                                    dialog.cancel()
-                                }
-                            dialogBuilder.show()
-                        }
-                        "sign_up_success"->{
-                            val dialogBuilder = MaterialAlertDialogBuilder(requireContext())
-                            dialogBuilder
-                                .setTitle("Sign up Successful")
-                                .setPositiveButton(getString(R.string.btn_ok)){dialog,which->
-                                    dialog.cancel()
-                                    findNavController().navigate(R.id.action_signUpFragment_to_loginFragment)
-                                }
-                            dialogBuilder.show()
-
-                        }
-                    }
-                })
             }
         }
     }
@@ -140,5 +131,14 @@ class SignUp_NormalUsersFragment : Fragment() {
     companion object {
         fun newInstance() =
             SignUp_NormalUsersFragment()
+    }
+    private fun showDiaLog(title:String,message: String){
+        val dialog = MaterialAlertDialogBuilder(requireContext())
+        dialog.setTitle(title)
+            .setMessage(message)
+            .setPositiveButton(getString(R.string.btn_ok)) { dialog, which ->
+                dialog.cancel()
+            }
+        dialog.show()
     }
 }

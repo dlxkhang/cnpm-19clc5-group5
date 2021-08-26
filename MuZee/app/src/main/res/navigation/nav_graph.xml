@@ -19,6 +19,16 @@
         <action
             android:id="@+id/action_mainScreenSellerFragment_to_sellerProductOverviewFragment"
             app:destination="@id/sellerProductOverviewFragment" />
+        <action
+            android:id="@+id/action_mainScreenSellerFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="sellerID"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/sellerOrderFragment"
@@ -28,10 +38,15 @@
         <action
             android:id="@+id/action_sellerOrderFragment_to_sellerOrderDetailFragment22"
             app:destination="@id/sellerOrderDetailFragment" />
+        <argument
+            android:name="sellerID"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/addNewProductFragment"
-        android:name="com.example.muzee.seller.product_overview.AddNewProductFragment"
+        android:name="com.example.muzee.seller.add_new_product.AddNewProductFragment"
         android:label="@string/add_new_product_title"
         tools:layout="@layout/fragment_add_new_product">
         <action
@@ -39,6 +54,15 @@
             app:destination="@id/sellerProductOverviewFragment"
             app:popUpTo="@id/sellerProductOverviewFragment"
             app:popUpToInclusive="true" />
+        <argument
+            android:name="sellerID"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument android:name="sellerInfo"
+            app:argType="com.example.muzee.data.Seller"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/sellerOrderDetailFragment"
@@ -47,7 +71,13 @@
         tools:layout="@layout/fragment_seller_order_detail">
         <argument
             android:name="selectedOrder"
-            app:argType="com.example.muzee.data.SellerOrder"/>
+            app:argType="com.example.muzee.network.seller.order.Order_responseItem"/>
+        <argument
+            android:name="sellerID"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+
     </fragment>
     <fragment
         android:id="@+id/sellerProductOverviewFragment"
@@ -63,6 +93,16 @@
         <action
             android:id="@+id/action_sellerProductOverviewFragment_to_editNewProductFragment"
             app:destination="@id/editNewProductFragment" />
+        <argument
+            android:name="sellerID"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="sellerInfo"
+            app:argType="com.example.muzee.data.Seller"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/sellerProductDetailFragment"
@@ -71,10 +111,18 @@
         tools:layout="@layout/fragment_seller_product_detail">
         <argument
             android:name="selectedProduct"
-            app:argType="com.example.muzee.data.Product" />
+            app:argType="com.example.muzee.network.seller.product.ProductSeller" />
         <action
-            android:id="@+id/action_sellerProductDetailFragment_to_editOldProductFragment"
-            app:destination="@id/editOldProductFragment" />
+            android:id="@+id/action_sellerProductDetailFragment_to_editNewProductFragment"
+            app:destination="@id/editNewProductFragment" />
+        <argument
+            android:name="sellerInfo"
+            app:argType="com.example.muzee.data.Seller" />
+        <argument
+            android:name="sellerID"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/orderOverviewFragment"
@@ -181,6 +229,11 @@
             android:name="NID"
             app:argType="string"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_mainScreenNormalUsersFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/categoryFragment"
@@ -266,10 +319,30 @@
     <fragment
         android:id="@+id/editNewProductFragment"
         android:name="com.example.muzee.seller.edit_new_product.EditNewProductFragment"
-        android:label="fragment_edit_new_product"
-        tools:layout="@layout/fragment_edit_new_product" >
+        android:label="Edit product"
+        tools:layout="@layout/fragment_edit_new_product">
         <argument
             android:name="selectedNewProduct"
-            app:argType="com.example.muzee.data.Product"/>
+            app:argType="com.example.muzee.network.seller.product.ProductSeller" />
+        <argument
+            android:name="sellerID"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_editNewProductFragment_to_sellerProductOverviewFragment"
+            app:destination="@id/sellerProductOverviewFragment"
+            app:popUpTo="@id/sellerProductOverviewFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_editNewProductFragment_to_sellerProductDetailFragment"
+            app:destination="@id/sellerProductDetailFragment"
+            app:popUpTo="@id/sellerProductDetailFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="sellerInfo"
+            app:argType="com.example.muzee.data.Seller"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
 </navigation>

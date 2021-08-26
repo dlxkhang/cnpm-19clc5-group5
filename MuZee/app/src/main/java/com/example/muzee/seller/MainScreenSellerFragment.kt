@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.muzee.R
 import com.example.muzee.data.Seller
 import com.example.muzee.databinding.FragmentMainScreenSellerBinding
@@ -19,7 +20,7 @@ class MainScreenSellerFragment : Fragment(){
     lateinit var drawerLayout : DrawerLayout // drawerLayout contain nav menu in xml
     lateinit var toggle: ActionBarDrawerToggle // toggle button
     private var binding: FragmentMainScreenSellerBinding? = null // binding fragment_main_screen_seller.xml
-
+    private val args:MainScreenSellerFragmentArgs by navArgs()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,10 +53,13 @@ class MainScreenSellerFragment : Fragment(){
                         drawerLayout.closeDrawers() // close menu and stay at home screen
                     }
                     R.id.myProductItem -> {
-                        findNavController().navigate(R.id.action_mainScreenSellerFragment_to_sellerProductOverviewFragment) // move to product screen
+                        findNavController().navigate(MainScreenSellerFragmentDirections.actionMainScreenSellerFragmentToSellerProductOverviewFragment(args.sellerID,args.seller)) // move to product screen
                     }
                     R.id.orderListItem -> {
-                        findNavController().navigate(R.id.action_mainScreenSellerFragment_to_sellerOrderFragment) // move to order list screen
+                        findNavController().navigate(MainScreenSellerFragmentDirections.actionMainScreenSellerFragmentToSellerOrderFragment(args.sellerID)) // move to order list screen
+                    }
+                    R.id.logout_btn->{
+                        findNavController().navigate(R.id.action_mainScreenSellerFragment_to_loginFragment)
                     }
                 }
             true

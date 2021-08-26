@@ -93,10 +93,10 @@ class newProduct(
 
 enum class Category(var category: String){
     Piano("Piano"),
-    Organ("Organ"),
+    Organ("Keyboard"),
     Drum("Drum"),
-    Guitar("Guitar Bass"),
-    Electronic("Guitar Electronic"),
-    Bass("Guitar Bass")
+    Guitar("Guitar"),
+    Electronic("Electronic"),
+    Bass("Bass")
 }
 

@@ -14,7 +14,8 @@ router.post('/api/account/signup/seller', accountController.addSellerAccount) //
 
 // NEW PRODUCT
 router.get('/api/product', productController.getProductList) // get list of product
-router.get('/api/product/add', productController.addNewProduct) // add new product
+router.post('/api/product/seller', productController.getProductListSeller) // get list of product for seller
+router.post('/api/product/add', productController.addNewProduct) // add new product
 router.post('/api/product/edit', productController.editProduct) // edit product
 router.post('/api/product/delete', productController.deleteProduct) // delete product
 router.post('/api/product/add_to_cart', productController.addToCart) // add product to cart
@@ -34,7 +35,7 @@ router.post('/api/order/place_order', orderController.placeOrder) // place order
 router.post('/api/order/cancel', orderController.cancelOrder) // update order status
 
 // SELLER ORDER
-router.get('/api/order_seller', orderController.getSellerOrderList) // get seller order list
+router.post('/api/order_seller', orderController.getSellerOrderList) // get seller order list
 router.post('/api/order_seller/accept', orderController.acceptOrderSeller) // accept seller order
 router.post('/api/order_seller/cancel', orderController.cancelOrderSeller) // cancel seller order
 

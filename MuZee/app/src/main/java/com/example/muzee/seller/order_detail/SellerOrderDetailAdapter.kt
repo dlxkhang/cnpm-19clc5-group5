@@ -5,16 +5,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.muzee.data.Product
-import com.example.muzee.databinding.ProductItemOrderDetailBinding
+import com.example.muzee.databinding.ProductItemOrderDetailSellerBinding
+import com.example.muzee.network.seller.order.OrderedProduct
 
 class SellerOrderDetailAdapter :
-    ListAdapter<Product, SellerOrderDetailAdapter.SellerOrderDetailViewHolder>(DiffCallback) {
+    ListAdapter<OrderedProduct, SellerOrderDetailAdapter.SellerOrderDetailViewHolder>(DiffCallback) {
 
     class SellerOrderDetailViewHolder(
-        private var binding: ProductItemOrderDetailBinding
+        private var binding: ProductItemOrderDetailSellerBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(product: Product) {
+        fun bind(product: OrderedProduct) {
             binding.product = product
             binding.executePendingBindings()
         }
@@ -25,7 +25,7 @@ class SellerOrderDetailAdapter :
         viewType: Int
     ): SellerOrderDetailAdapter.SellerOrderDetailViewHolder {
         return SellerOrderDetailAdapter.SellerOrderDetailViewHolder (
-            ProductItemOrderDetailBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ProductItemOrderDetailSellerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 
@@ -34,12 +34,12 @@ class SellerOrderDetailAdapter :
         holder.bind(item)
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<Product>() {
-        override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
+    companion object DiffCallback : DiffUtil.ItemCallback<OrderedProduct>() {
+        override fun areItemsTheSame(oldItem: OrderedProduct, newItem: OrderedProduct): Boolean {
             return oldItem.productName == newItem.productName
         }
 
-        override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
+        override fun areContentsTheSame(oldItem: OrderedProduct, newItem: OrderedProduct): Boolean {
             return oldItem.productPrice == newItem.productPrice
         }
     }

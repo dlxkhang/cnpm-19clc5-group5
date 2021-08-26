@@ -11,28 +11,26 @@ module.exports.getProductList = async function(req, res) {
   res.send(JSON.stringify(productList))
 }
 
+module.exports.getProductListSeller = async function(req, res) { 
+  // get list of product for seller
+  var productList = await productService.getProductListSeller(req.body.SID)
+  res.send(JSON.stringify(productList))
+}
+
 module.exports.addNewProduct = async function(req, res) { 
   // parse JSON to object
   //var product = JSON.parse(req.body)
   // var product = {
   //   productId: null,
-  //   productCategory: null,
-  //   productName: 'test',
-  //   productPrice: 1303,
-  //   sellerName: 'Test Store',
+  //   productCategory: '006',
+  //   productName: 'test123',
+  //   productPrice: 150.5,
+  //   SID: '001',
   //   imageURI: null,
-  //   productDescription: 'description'
+  //   productDescription: 'testdescription',
+  //   stock:12
   // }
-  var product = {
-    productId: null,
-    productCategory: '005',
-    productName: 'test guitar',
-    productPrice: 229,
-    SID: '002',
-    imageURI: null,
-    productDescription: null,
-    stock: 20
-  }
+  
   var response = {
     ack: null
   }
@@ -43,32 +41,22 @@ module.exports.addNewProduct = async function(req, res) {
 module.exports.editProduct = async function(req, res) { 
   // parse JSON to object
   //var product = JSON.parse(req.body)
-  var product = {
-    productId: '010',
-    productCategory: '005',
-    productName: 'Guitar BA DON',
-    productPrice: 366,
-    SID: '001',
-    imageURI: null,
-    productDescription: null,
-    stock: 100
-  }
+  
   var response = {
     ack: null
   }
-  response.ack = await productService.editProduct(product)
+  response.ack = await productService.editProduct(req.body)
   res.send(JSON.stringify(response)) // send acknowledge message
 }
 
 module.exports.deleteProduct = async function(req, res) { 
   // parse JSON to object
   //var product = JSON.parse(req.body)
-  var productId = '003'
 
   var response = {
     ack: null
   }
-  response.ack = await productService.deleteProduct(productId)
+  response.ack = await productService.deleteProduct(req.body.SID)
   res.send(JSON.stringify(response)) // send acknowledge message
 }
 

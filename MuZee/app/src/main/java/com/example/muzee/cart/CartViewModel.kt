@@ -88,5 +88,6 @@ class CartViewModel(val NID: String?, val normalUser: NormalUser, app: Applicati
                 _status.value = ApiStatus.ERROR
             }
         }
+        total_price.value = temp
     }
 }

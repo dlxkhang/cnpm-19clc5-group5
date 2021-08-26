@@ -104,6 +104,9 @@ class MainScreenNormalUsersFragment : Fragment() {
                 R.id.productItem -> {
                     findNavController().navigate(MainScreenNormalUsersFragmentDirections.actionMainScreenNormalUsersFragmentToOldProductStoreFragment(viewModel.NID))
                 }
+                R.id.logout_btn->{
+                    findNavController().navigate(R.id.action_mainScreenNormalUsersFragment_to_loginFragment)
+                }
 
                 //R.id.switchingModeItem->{true}
                 //R.id.customerSupportItem->{true}
@@ -112,14 +115,7 @@ class MainScreenNormalUsersFragment : Fragment() {
             true
         }
 
-        binding?.navView?.findViewById<Switch>(R.id.btn_switch_mode)?.setOnCheckedChangeListener({_,isChecked ->
-            if(isChecked){
-                binding?.navView?.menu?.findItem(R.id.switchMode)?.title = getString(R.string.old_shopping)
-            }
-            else {
-                binding?.navView?.menu?.findItem(R.id.switchMode)?.title = getString(R.string.new_shopping)
-            }
-        })
+
 
         binding?.searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
