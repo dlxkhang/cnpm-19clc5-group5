@@ -174,7 +174,7 @@
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.example.muzee.cart.CartFragment"
-        android:label="CartFragment"
+        android:label="@string/cart_fragment_label"
         tools:layout="@layout/fragment_cart">
         <action
             android:id="@+id/action_cartFragment_to_paymentFragment"
@@ -185,7 +185,7 @@
             app:nullable="true" />
         <argument
             android:name="normalUser"
-            app:argType="com.example.muzee.data.NormalUser"/>
+            app:argType="com.example.muzee.data.NormalUser" />
         <action
             android:id="@+id/action_cartFragment_to_mainScreenNormalUsersFragment"
             app:destination="@id/mainScreenNormalUsersFragment"
@@ -281,11 +281,11 @@
     <fragment
         android:id="@+id/editOldProductFragment"
         android:name="com.example.muzee.oldProduct.edit.EditOldProductFragment"
-        android:label="fragment_edit_old_product"
+        android:label="@string/edit_old_product_fragment_label"
         tools:layout="@layout/fragment_edit_old_product">
         <argument
             android:name="selectedOldProduct"
-            app:argType="com.example.muzee.network.OldProduct"/>
+            app:argType="com.example.muzee.network.OldProduct" />
         <action
             android:id="@+id/action_editOldProductFragment_to_oldProductStoreFragment"
             app:destination="@id/oldProductStoreFragment"

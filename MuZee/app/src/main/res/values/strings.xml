@@ -181,4 +181,6 @@
     <string name="delete_product">Delete product</string>
     <string name="stock_value_detail_product">Stock</string>
     <string name="display_address">Adr: %s</string>
+    <string name="edit_old_product_fragment_label">Edit old product</string>
+    <string name="cart_fragment_label">Cart</string>
 </resources>
