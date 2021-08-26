@@ -87,7 +87,7 @@ private fun handle_before_text_change(){
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMainScreenSellerFragment(it,viewModel.accountID.value!!))
         })
         viewModel.userAccount.observe(viewLifecycleOwner,{
-            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMainScreenNormalUsersFragment(it))
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMainScreenNormalUsersFragment(it,viewModel.accountID.value!!))
         })
     }
     private fun handleSignInBtn(){

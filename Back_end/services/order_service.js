@@ -74,9 +74,9 @@ async function getOrderedProducts(OID, listSID) {
 async function calcItemTotal(orderedProducts) {
     return new Promise(function(resolve, reject) {
         var itemTotal = 0
-        orderedProducts.forEach((product) => {
+        for(const product of orderedProducts) {
             itemTotal += product.productPrice
-        })
+        }
         resolve(itemTotal)
     })
 }

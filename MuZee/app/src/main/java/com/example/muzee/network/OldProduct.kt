@@ -13,7 +13,7 @@ data class OldProduct(
 @Parcelize
 data class AddOldProduct(
     val productId: String?, val productCategory: String, val productName: String,
-    val sellerName: String, val imageURI: String?,
+    val NID: String?, val imageURI: String?,
     val productDescription: String?, val condition: Int
 ): Parcelable
 

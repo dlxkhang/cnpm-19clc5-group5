@@ -46,6 +46,7 @@ module.exports.cancelOrder = async function(req, res) {
 module.exports.getSellerOrderList = async function(req, res) { 
   // get list of order
   var orderList = await orderService.getSellerOrderList(req.body.accountID) 
+  console.log(orderList)
   res.send(JSON.stringify(orderList))
 }
 
