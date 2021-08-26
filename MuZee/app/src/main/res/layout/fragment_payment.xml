@@ -7,6 +7,9 @@
         <variable
             name="viewModel"
             type="com.example.muzee.cart.CartViewModel" />
+        <variable
+            name="paymentFragment"
+            type="com.example.muzee.payment.PaymentFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -44,6 +47,7 @@
             <Button
                 android:id="@+id/place_order_button"
                 style="@style/button_style"
+                android:onClick="@{() -> paymentFragment.placeOrder()}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -123,9 +127,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
-                android:text="@string/test_price"
+                android:text="@{@string/display_price(viewModel.subtotal_price)}"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/product_subtotal_label" />
+                app:layout_constraintTop_toTopOf="@+id/product_subtotal_label"
+                tools:text="$2,999" />
 
             <TextView
                 android:id="@+id/shipping_price"
@@ -153,12 +158,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@string/total_price_test"
+                android:text="@{@string/display_price(viewModel.total_price)}"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/total_label"
                 app:layout_constraintEnd_toEndOf="@+id/tax_price"
-                app:layout_constraintTop_toBottomOf="@+id/tax_price" />
+                app:layout_constraintTop_toBottomOf="@+id/tax_price"
+                tools:text="$3,009" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -189,11 +195,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="@string/test_shipping_profile"
+                android:text="@{@string/payment_info(viewModel.user.fullname, viewModel.user.phoneNumber)}"
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toStartOf="@+id/imageView3"
                 app:layout_constraintStart_toEndOf="@+id/shipping_to_label"
-                app:layout_constraintTop_toTopOf="@+id/shipping_to_label" />
+                app:layout_constraintTop_toTopOf="@+id/shipping_to_label"
+                tools:text="Daph Duck | 0909333444" />
 
             <TextView
                 android:id="@+id/address"

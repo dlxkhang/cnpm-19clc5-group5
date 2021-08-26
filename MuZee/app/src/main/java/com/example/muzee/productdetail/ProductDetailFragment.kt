@@ -4,18 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.muzee.R
+import androidx.navigation.fragment.navArgs
 import com.example.muzee.databinding.FragmentProductDetailBinding
+import com.example.muzee.login.LoginViewModel
 
 class ProductDetailFragment : Fragment() {
 
-    private val sharedViewModel: ProductDetailViewModel by activityViewModels()
+    private val sharedViewModel: LoginViewModel by activityViewModels()
 
     private var _binding: FragmentProductDetailBinding? = null
+
+    private val args: ProductDetailFragmentArgs by navArgs()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -41,7 +45,8 @@ class ProductDetailFragment : Fragment() {
     }
 
     fun addToCart() {
-        _binding?.viewModel?.addProductToCart()
-        findNavController().navigate(R.id.action_productDetailFragment_to_mainScreenNormalUsersFragment)
+        _binding?.viewModel?.addProductToCart(args.NID)
+        Toast.makeText(context, "Add successfully", Toast.LENGTH_LONG).show()
+        findNavController().popBackStack()
     }
 }

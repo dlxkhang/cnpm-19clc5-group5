@@ -58,6 +58,7 @@
     <string name="shipping_to">Shipping to</string>
     <string name="test_shipping_profile">David Dean | 0908999888</string>
     <string name="test_address">Adr: 246 Cong Hoa, Q.Tan Binh, Ho Chi Minh</string>
+    <string name="payment_info">%s | %s</string>
 
     //Main screen normal user
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -74,12 +75,12 @@
     <string name="todo">TODO</string>
     <string name="category_fragment_label">Category</string>
     // search key when clicking on the image
-    <string name="piano_search">piano</string>
-    <string name="organ_search">organ</string>
-    <string name="drum_search">drum</string>
-    <string name="guitar_search">guitar</string>
-    <string name="electric_search">electric</string>
-    <string name="bass_search">bass</string>
+    <string name="piano_search">Piano</string>
+    <string name="organ_search">Keyboard</string>
+    <string name="drum_search">Drum</string>
+    <string name="guitar_search">Guitar</string>
+    <string name="electric_search">Electric</string>
+    <string name="bass_search">Bass</string>
 
     // Nav menu item for normal users
     <string name="category_item">Categories</string>

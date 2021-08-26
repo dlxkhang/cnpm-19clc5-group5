@@ -1,17 +1,21 @@
 package com.example.muzee.productoverview
 
 import Api
+import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.muzee.data.NormalUser
 import com.example.muzee.network.NewProduct
 import kotlinx.coroutines.launch
 
 enum class ApiStatus { LOADING, ERROR, DONE }
 
-class ProductOverviewViewModel : ViewModel() {
+class ProductOverviewViewModel (val NID: String?, val normalUser: NormalUser ,app: Application) : ViewModel() {
 
+    var isSearchedCategory = false
+    
     // The internal MutableLiveData that stores the status of the most recent request
     private val _status = MutableLiveData<ApiStatus>()
 
@@ -26,15 +30,43 @@ class ProductOverviewViewModel : ViewModel() {
         get() = _navigateToSelectedProduct
 
     init {
-        getProducts()
+        getNewProducts()
     }
 
-    private fun getProducts() {
+    fun getNewProducts() {
 
         viewModelScope.launch {
             _status.value = ApiStatus.LOADING
             try {
                 _products.value = Api.retrofitService.getNewProducts()
+                _status.value = ApiStatus.DONE
+            } catch (e: Exception) {
+                _status.value = ApiStatus.ERROR
+                _products.value = listOf()
+            }
+        }
+    }
+
+    fun searchProduct(key: String?) {
+
+        viewModelScope.launch {
+            _status.value = ApiStatus.LOADING
+            try {
+                _products.value = Api.retrofitService.searchNewProducts(key)
+                _status.value = ApiStatus.DONE
+            } catch (e: Exception) {
+                _status.value = ApiStatus.ERROR
+                _products.value = listOf()
+            }
+        }
+    }
+
+    fun searchProductByCategory(category: String?) {
+
+        viewModelScope.launch {
+            _status.value = ApiStatus.LOADING
+            try {
+                _products.value = Api.retrofitService.searchNewProductsByCategory(category)
                 _status.value = ApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = ApiStatus.ERROR

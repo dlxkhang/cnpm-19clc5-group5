@@ -5,30 +5,48 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import com.example.muzee.R
 import com.example.muzee.cart.CartViewModel
 import com.example.muzee.databinding.FragmentPaymentBinding
 
 class PaymentFragment : Fragment() {
 
-    private val viewModel: CartViewModel by viewModels()
+    private var binding: FragmentPaymentBinding? = null
+
+    private val sharedViewModel: CartViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentPaymentBinding.inflate(inflater)
+        val fragmentBinding = FragmentPaymentBinding.inflate(inflater)
+
+        binding = fragmentBinding
 
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
-        binding.lifecycleOwner = viewLifecycleOwner
+        fragmentBinding.lifecycleOwner = viewLifecycleOwner
 
         // Giving the binding access to the OverviewViewModel
-        binding.viewModel = viewModel
+        fragmentBinding.viewModel =  sharedViewModel
 
         // Sets the adapter of the RecyclerView
-        binding.recyclerView.adapter = PaymentAdapter()
+        fragmentBinding.recyclerView.adapter = PaymentAdapter()
 
-        return binding.root
+        return fragmentBinding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding?.paymentFragment = this
+    }
+
+    fun placeOrder() {
+        sharedViewModel.placeOrder("102 Trung Hoa")
+        sharedViewModel.getProducts(sharedViewModel.NID)
+        findNavController().popBackStack(R.id.mainScreenNormalUsersFragment, false)
     }
 
 }

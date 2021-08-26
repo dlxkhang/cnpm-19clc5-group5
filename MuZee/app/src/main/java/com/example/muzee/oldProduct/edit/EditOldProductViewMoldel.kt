@@ -2,15 +2,18 @@ package com.example.muzee.oldProduct.edit
 
 import android.annotation.SuppressLint
 import android.app.Application
-import androidx.lifecycle.*
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import com.example.muzee.R
-import com.example.muzee.data.oldProduct
+import com.example.muzee.network.OldProduct
 
-class EditOldProductViewMoldel(oldproduct: oldProduct, app: Application) : AndroidViewModel(app) {
-    private val _selectedOldProduct = MutableLiveData<oldProduct>()
+class EditOldProductViewMoldel(oldproduct: OldProduct, app: Application) : AndroidViewModel(app) {
+    private val _selectedOldProduct = MutableLiveData<OldProduct>()
 
     // The extenal LiveData for the SelectedProduct
-    val selectedOldProduct: LiveData<oldProduct>
+    val selectedOldProduct: LiveData<OldProduct>
         get() = _selectedOldProduct
 
     init {
@@ -18,6 +21,6 @@ class EditOldProductViewMoldel(oldproduct: oldProduct, app: Application) : Andro
     }
     @SuppressLint("StringFormatInvalid")
     val displayOldProduct = Transformations.map(selectedOldProduct) {
-        app.applicationContext.getString(R.string.old_product_label,it.product_id)
+        app.applicationContext.getString(R.string.old_product_label,it.productId)
     }
 }

@@ -10,10 +10,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.muzee.R
 import com.example.muzee.data.Category
@@ -25,7 +26,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 class AddOldProductFragment : Fragment() {
 
     var binding: FragmentAddOldProductBinding? = null
-    private val viewModel: OldProductViewModel by viewModels()
+    private val viewModel: OldProductViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -94,12 +95,12 @@ class AddOldProductFragment : Fragment() {
             val condition = inputCondition.editText?.text.toString().toInt()
             val description = inputDes?.editText?.text.toString()
 
-            val sellerName = "Daph Duck"
             val oldProduct = AddOldProduct(null, categoryID, name
-                ,sellerName,null, description, condition)
+                ,viewModel.NID,null, description, condition)
 
-            viewModel.addAnOldProduct(oldProduct)
-            findNavController().navigate(R.id.action_addOldProductFragment_to_oldProductStoreFragment)
+            viewModel.editAnOldProduct(oldProduct)
+            Toast.makeText(context, "Edit successfully", Toast.LENGTH_LONG).show()
+            findNavController().popBackStack(R.id.oldProductStoreFragment, false)
         }
     }
     private fun getListCategory():List<String>{
@@ -133,8 +134,7 @@ class AddOldProductFragment : Fragment() {
             "Drum" -> "003"
             "Keyboard" -> "004"
             "Bass" -> "005"
-            "Organ" -> "006"
-            else -> "007"
+            else -> "006"
         }
     }
 

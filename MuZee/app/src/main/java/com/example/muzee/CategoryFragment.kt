@@ -1,19 +1,22 @@
 package com.example.muzee
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.muzee.databinding.FragmentCategoryBinding
 import com.example.muzee.model.CategoryViewModel
+import com.example.muzee.productoverview.ProductOverviewViewModel
 
 
 class CategoryFragment : Fragment(){
     private var binding:FragmentCategoryBinding? = null
-    private val sharedViewModel:CategoryViewModel by activityViewModels()
+
+    private val viewModel:CategoryViewModel by activityViewModels()
+    private val sharedViewModel: ProductOverviewViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,19 +40,19 @@ class CategoryFragment : Fragment(){
             lifecycleOwner = viewLifecycleOwner
 
             // assign view model to a property in binding class
-            viewModel = sharedViewModel
+            viewModel = viewModel
 
             // assign fragment
             categoryFragment = this@CategoryFragment
         }
     }
     fun sendRequestandBack(pickedCategory: String){
-        sharedViewModel.updateCategoryKey(pickedCategory)
-        findNavController().navigate(R.id.action_categoryFragment_to_mainScreenNormalUsersFragment)
+        sharedViewModel.isSearchedCategory = true
+        findNavController().popBackStack(R.id.mainScreenNormalUsersFragment, false)
+        sharedViewModel.searchProductByCategory(pickedCategory)
     }
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
     }
-
 }
