@@ -13,16 +13,12 @@ import kotlinx.coroutines.launch
 class SellerOrderDetailViewModel(order: Order_responseItem, app: Application) : AndroidViewModel(app) {
     private val _selectedOrder = MutableLiveData<Order_responseItem>()
     enum class ApiStatus { ERROR,SUCCESS}
+    private val _status = MutableLiveData<ApiStatus>()
+
+    // The external immutable LiveData for the request status
+    val status: LiveData<ApiStatus> = _status
     // The extenal LiveData for the SelectedProduct
     // The internal MutableLiveData that stores the status of the most recent request
-    private val _status_accept = MutableLiveData<ApiStatus>()
-
-    // The external immutable LiveData for the request status
-    val status_accept: LiveData<ApiStatus> = _status_accept
-    private val _status_cancel = MutableLiveData<ApiStatus>()
-
-    // The external immutable LiveData for the request status
-    val status_cancel: LiveData<ApiStatus> = _status_cancel
     val selectedOrder: LiveData<Order_responseItem>
         get() = _selectedOrder
     private val _ack_accept = MutableLiveData<AckResponse>()
@@ -36,13 +32,13 @@ class SellerOrderDetailViewModel(order: Order_responseItem, app: Application) : 
         viewModelScope.launch {
             val input = FunctionOrderRequest(SID,_selectedOrder.value!!.orderId)
             try {
-                val response = NetworkLayer.OrderApiClient.acceptOrder(input)
+                val response = NetworkLayer.OrderApiClient.cancleOrder(input)
                 if(response.isSuccessful){
-                    _ack_accept.value = response.body()
-                    _status_accept.value = ApiStatus.SUCCESS
+                    _ack_cancel.value = response.body()
+                    _status.value = ApiStatus.SUCCESS
                 }
             }catch (e:Exception){
-                _status_accept.value = ApiStatus.ERROR
+                _status.value = ApiStatus.ERROR
             }
         }
     }
@@ -52,11 +48,11 @@ class SellerOrderDetailViewModel(order: Order_responseItem, app: Application) : 
             try {
                 val response = NetworkLayer.OrderApiClient.acceptOrder(input)
                 if(response.isSuccessful){
-                    _ack_cancel.value = response.body()
-                    _status_cancel.value = ApiStatus.SUCCESS
+                    _ack_accept.value = response.body()
+                    _status.value = ApiStatus.SUCCESS
                 }
             }catch (e:Exception){
-                _status_cancel.value = ApiStatus.ERROR
+                _status.value = ApiStatus.ERROR
             }
         }
     }

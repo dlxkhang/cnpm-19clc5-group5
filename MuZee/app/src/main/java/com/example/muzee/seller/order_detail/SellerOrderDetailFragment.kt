@@ -61,66 +61,10 @@ class SellerOrderDetailFragment : Fragment() {
                 }
             dialog.show()
         }
-        viewModel.status_accept.observe( viewLifecycleOwner,{
+        viewModel.status.observe(viewLifecycleOwner,{
             when(it){
                 SellerOrderDetailViewModel.ApiStatus.SUCCESS->{
-                    viewModel.ack_accept.observe(viewLifecycleOwner,{
-                        when(it.ack){
-                            "order_seller_already_accepted"->{
-                                val dialog = MaterialAlertDialogBuilder(requireContext())
-                                dialog.setTitle("This order has been accepted before")
-                                    .setPositiveButton("OK") { dialog, which ->
-                                        dialog.cancel()
-                                    }
-                                dialog.show()
-                            }
-                            "cannot_accept_an_canceled_order"->{
-                                val dialog = MaterialAlertDialogBuilder(requireContext())
-                                dialog.setTitle("This order has been canceled before")
-                                    .setPositiveButton("OK") { dialog, which ->
-                                        dialog.cancel()
-                                    }
-                                dialog.show()
-                            }
-                            "accept_order_seller_success"->{
-                                val dialog = MaterialAlertDialogBuilder(requireContext())
-                                dialog.setTitle("Accept order successful!!!")
-                                    .setPositiveButton("OK") { dialog, which ->
-                                        dialog.cancel()
-                                    }
-                                dialog.show()
-                            }
-                        }
-                    })
-                }
-                SellerOrderDetailViewModel.ApiStatus.ERROR->{
-                    showSnackBar()
-                }
-            }
-        })
-        viewModel.status_cancel.observe(viewLifecycleOwner,{
-            when(it){
-                SellerOrderDetailViewModel.ApiStatus.SUCCESS->{
-                    viewModel.ack_cancel.observe(viewLifecycleOwner,{
-                        when(it.ack){
-                            "order_seller_already_canceled"->{
-                                val dialog = MaterialAlertDialogBuilder(requireContext())
-                                dialog.setTitle("This order has been canceled before")
-                                    .setPositiveButton("OK") { dialog, which ->
-                                        dialog.cancel()
-                                    }
-                                dialog.show()
-                            }
-                            "cancel_order_seller_success"->{
-                                val dialog = MaterialAlertDialogBuilder(requireContext())
-                                dialog.setTitle("Cancel order successful!!!")
-                                    .setPositiveButton("OK") { dialog, which ->
-                                        dialog.cancel()
-                                    }
-                                dialog.show()
-                            }
-                        }
-                    })
+                    handleSuccessCase()
                 }
                 SellerOrderDetailViewModel.ApiStatus.ERROR->{
                     showSnackBar()
@@ -128,7 +72,58 @@ class SellerOrderDetailFragment : Fragment() {
             }
         })
 
+
         return fragmentbinding.root
+    }
+    private fun handleSuccessCase(){
+        viewModel.ack_accept.observe(viewLifecycleOwner,{
+            when(it.ack){
+                "order_seller_already_accepted"->{
+                    val dialog = MaterialAlertDialogBuilder(requireContext())
+                    dialog.setTitle("This order has been accepted before")
+                        .setPositiveButton("OK") { dialog, which ->
+                            dialog.cancel()
+                        }
+                    dialog.show()
+                }
+                "cannot_accept_an_canceled_order"->{
+                    val dialog = MaterialAlertDialogBuilder(requireContext())
+                    dialog.setTitle("This order has been canceled before")
+                        .setPositiveButton("OK") { dialog, which ->
+                            dialog.cancel()
+                        }
+                    dialog.show()
+                }
+                "accept_order_seller_success"->{
+                    val dialog = MaterialAlertDialogBuilder(requireContext())
+                    dialog.setTitle("Accept order successful!!!")
+                        .setPositiveButton("OK") { dialog, which ->
+                            dialog.cancel()
+                        }
+                    dialog.show()
+                }
+            }
+        })
+        viewModel.ack_cancel.observe(viewLifecycleOwner,{
+            when(it.ack){
+                "order_seller_already_canceled"->{
+                    val dialog = MaterialAlertDialogBuilder(requireContext())
+                    dialog.setTitle("This order has been canceled before")
+                        .setPositiveButton("OK") { dialog, which ->
+                            dialog.cancel()
+                        }
+                    dialog.show()
+                }
+                "cancel_order_seller_success"->{
+                    val dialog = MaterialAlertDialogBuilder(requireContext())
+                    dialog.setTitle("Cancel order successful!!!")
+                        .setPositiveButton("OK") { dialog, which ->
+                            dialog.cancel()
+                        }
+                    dialog.show()
+                }
+            }
+        })
     }
     private fun showSnackBar(){
         Snackbar.make(binding!!.root, R.string.connection_error_title, Snackbar.LENGTH_SHORT).show()

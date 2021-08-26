@@ -40,48 +40,31 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.022"
-                        tools:ignore="MissingConstraints" />
+                        tools:ignore="MissingConstraints"
+                        tools:text = "Order #001"/>
 
                     <TextView
                         android:id="@+id/customerName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="@{`Ordered by ` + viewModel.selectedOrder.customerName}"
+                        android:text="@{`Ordered by: ` + viewModel.selectedOrder.customerName}"
                         android:textColor="@color/black"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.062"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/orderId"
                         app:layout_constraintTop_toBottomOf="@+id/orderId"
-                        app:layout_constraintVertical_bias="0.0" />
+                        tools:text="Ordered by: test store" />
 
                     <TextView
                         android:id="@+id/deliveryLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:text="Delivery to"
-                        android:textColor="@color/black"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.046"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/customerName" />
-
-                    <TextView
-                        android:id="@+id/orderAddress"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="@{viewModel.selectedOrder.orderAddress}"
+                        android:text="@{`Delivery to: ` + viewModel.selectedOrder.orderAddress}"
                         android:textColor="@color/black"
-                        android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.051"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/deliveryLabel"
-                        app:layout_constraintVertical_bias="0.0" />
+                        app:layout_constraintStart_toStartOf="@+id/customerName"
+                        app:layout_constraintTop_toBottomOf="@+id/customerName"
+                        tools:text="Delivery to: ABC " />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -127,27 +110,23 @@
                         android:id="@+id/itemTotalLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
                         android:text="@string/item_total_label"
                         android:textColor="@color/black"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.045"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.0" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/itemTotal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{Double.toString(viewModel.selectedOrder.itemTotal)}"
+                        android:layout_marginEnd="16dp"
+                        android:text="@{`$`+Double.toString(viewModel.selectedOrder.itemTotal)}"
                         android:textColor="@color/black"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintBottom_toBottomOf="@+id/itemTotalLabel"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.85"
-                        app:layout_constraintStart_toEndOf="@+id/itemTotalLabel"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.0" />
+                        app:layout_constraintTop_toTopOf="@+id/itemTotalLabel"
+                        tools:text="$10" />
 
                     <TextView
                         android:id="@+id/deliveryChargesLabel"
@@ -156,25 +135,19 @@
                         android:layout_marginTop="8dp"
                         android:text="@string/delivery_charges_label"
                         android:textColor="@color/black"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.052"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/itemTotalLabel"
-                        app:layout_constraintVertical_bias="0.0" />
+                        app:layout_constraintStart_toStartOf="@+id/itemTotalLabel"
+                        app:layout_constraintTop_toBottomOf="@+id/itemTotalLabel" />
 
                     <TextView
                         android:id="@+id/deliveryCharges"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{Double.toString(viewModel.selectedOrder.deliveryCharges)}"
+                        android:text="@{`$`+Double.toString(viewModel.selectedOrder.deliveryCharges)}"
                         android:textColor="@color/black"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.824"
-                        app:layout_constraintStart_toEndOf="@+id/deliveryChargesLabel"
-                        app:layout_constraintTop_toBottomOf="@+id/itemTotal"
-                        app:layout_constraintVertical_bias="0.222" />
+                        app:layout_constraintBottom_toBottomOf="@+id/deliveryChargesLabel"
+                        app:layout_constraintStart_toStartOf="@+id/itemTotal"
+                        app:layout_constraintTop_toTopOf="@+id/deliveryChargesLabel"
+                        tools:text="$15" />
 
                     <TextView
                         android:id="@+id/totalLabel"
@@ -183,23 +156,20 @@
                         android:layout_marginTop="8dp"
                         android:text="@string/total_label"
                         android:textColor="@color/black"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.046"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/deliveryChargesLabel"
                         app:layout_constraintTop_toBottomOf="@+id/deliveryChargesLabel" />
 
                     <TextView
                         android:id="@+id/total"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{Double.toString(viewModel.selectedOrder.itemTotal)}"
+                        android:text="@{`$`+Double.toString(viewModel.selectedOrder.itemTotal)}"
                         android:textColor="@color/black"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.871"
-                        app:layout_constraintStart_toEndOf="@+id/totalLabel"
-                        app:layout_constraintTop_toBottomOf="@+id/deliveryCharges"
-                        app:layout_constraintVertical_bias="1.0" />
+                        app:layout_constraintBottom_toBottomOf="@+id/totalLabel"
+                        app:layout_constraintStart_toStartOf="@+id/deliveryCharges"
+                        app:layout_constraintTop_toTopOf="@+id/totalLabel"
+                        tools:text="$35" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
