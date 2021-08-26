@@ -70,7 +70,7 @@
                         tools:text="Nord Piano 4 88-Key Digital Piano" />
 
                     <Button
-                        android:id="@+id/add_to_cart_detail_button"
+                        android:id="@+id/edit_button"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="@string/edit_product"

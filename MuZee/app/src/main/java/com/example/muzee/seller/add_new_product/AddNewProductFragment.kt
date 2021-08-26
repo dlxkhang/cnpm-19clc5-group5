@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.core.widget.doBeforeTextChanged
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -38,6 +39,7 @@ class AddNewProductFragment : Fragment() {
         val fragmentBinding = FragmentAddNewProductBinding.inflate(inflater, container, false)
         binding = fragmentBinding
         binding?.lifecycleOwner = this
+        handle_before_textchange()
         val activity = activity as AppCompatActivity? // get activity
         activity!!.supportActionBar?.setTitle("Add New Product") // set title text for seller product screen
         val textField = binding?.labelSelectCategory
@@ -106,6 +108,23 @@ class AddNewProductFragment : Fragment() {
                 .setNeutralButton("Cancel") { dialog, which ->
                     dialog.cancel()
                 }
+        }
+    }
+    private fun handle_before_textchange(){
+        binding?.labelInputName?.editText?.doBeforeTextChanged{ _,_,_,_ ->
+            binding?.labelInputName?.error = null
+        }
+        binding?.labelInputPrice?.editText?.doBeforeTextChanged{ _,_,_,_ ->
+            binding?.labelInputPrice?.error = null
+        }
+        binding?.labelInputStockNewProduct?.editText?.doBeforeTextChanged{ _,_,_,_ ->
+            binding?.labelInputStockNewProduct?.error = null
+        }
+        binding?.labelNewProductDescription?.editText?.doBeforeTextChanged{ _,_,_,_ ->
+            binding?.labelNewProductDescription?.error = null
+        }
+        binding?.labelSelectCategory?.editText?.doBeforeTextChanged{ _,_,_,_ ->
+            binding?.labelSelectCategory?.error = null
         }
     }
     private fun handle_confirm_btn()

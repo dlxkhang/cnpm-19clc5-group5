@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.core.view.isVisible
+import androidx.core.widget.doBeforeTextChanged
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -34,6 +35,7 @@ class EditNewProductFragment : Fragment() {
         val fragmentbinding = FragmentEditNewProductBinding.inflate(inflater,container,false)
         binding = fragmentbinding
         binding.lifecycleOwner = this
+        handle_before_textchange()
         val new_product = args.selectedNewProduct
         val viewModelFractory = EditNewProductViewModelFractory(new_product,application)
         viewModel = ViewModelProvider(this,viewModelFractory).get(EditNewProductViewMoldel::class.java)
@@ -54,8 +56,15 @@ class EditNewProductFragment : Fragment() {
         viewModel.status.observe(viewLifecycleOwner,{
             when(it){
                 EditNewProductViewMoldel.ApiStatus.SUCCESS->{
-                    showDiaLog("Edit product successful", "This product is edited and saved in system")
-                    findNavController().navigate(EditNewProductFragmentDirections.actionEditNewProductFragmentToSellerProductOverviewFragment(args.sellerID,args.sellerInfo))
+                    val dialog = MaterialAlertDialogBuilder(requireContext())
+                    dialog.setTitle("Edit product successful")
+                        .setMessage("This product is edited and saved in system")
+                        .setPositiveButton(getString(R.string.btn_ok)) { dialog, which ->
+                            dialog.cancel()
+                            findNavController().navigate(EditNewProductFragmentDirections.actionEditNewProductFragmentToSellerProductOverviewFragment(args.sellerID,args.sellerInfo))
+                        }
+                    dialog.show()
+
                 }
                 EditNewProductViewMoldel.ApiStatus.ERROR->{
                     showSnackBar()
@@ -105,7 +114,23 @@ class EditNewProductFragment : Fragment() {
             viewModel.editProduct(editProduct)
         }
     }
-
+    private fun handle_before_textchange(){
+        binding.labelEditName.editText?.doBeforeTextChanged{ _,_,_,_ ->
+            binding.labelEditName.error = null
+        }
+        binding.labelEditPrice.editText?.doBeforeTextChanged{ _,_,_,_ ->
+            binding.labelEditPrice.error = null
+        }
+        binding.labelEditStock.editText?.doBeforeTextChanged{ _,_,_,_ ->
+            binding.labelEditStock.error = null
+        }
+        binding.labelEditProductDescription.editText?.doBeforeTextChanged{ _,_,_,_ ->
+            binding.labelEditProductDescription.error = null
+        }
+        binding.labelEditCategory.editText?.doBeforeTextChanged{ _,_,_,_ ->
+            binding.labelEditCategory.error = null
+        }
+    }
     private fun getListCategory():List<String>{
         return listOf(Category.Organ.name,
             Category.Drum.name,
