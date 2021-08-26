@@ -2,7 +2,9 @@ package com.example.muzee.normalUsers
 
 import android.os.Bundle
 import android.view.*
-import android.widget.*
+import android.widget.ImageView
+import android.widget.SearchView
+import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat.invalidateOptionsMenu
@@ -80,6 +82,7 @@ class MainScreenNormalUsersFragment : Fragment() {
         binding!!.navView.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.homeItem_normalUser -> {
+                    viewModel.getNewProducts()
                     drawer_layout.closeDrawers()
                 }
                 R.id.categoriesItem -> {
@@ -121,7 +124,7 @@ class MainScreenNormalUsersFragment : Fragment() {
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query.isNullOrBlank() or query.isNullOrEmpty()) {
-                    Toast.makeText(context, "Please enter keyword", Toast.LENGTH_LONG).show()
+                    viewModel.getNewProducts()
                 }
                 else {
                     viewModel.searchProduct(query)
@@ -130,7 +133,10 @@ class MainScreenNormalUsersFragment : Fragment() {
                 return false
             }
             override fun onQueryTextChange(newText: String): Boolean {
-                return false
+                if (newText.equals("")) {
+                    this.onQueryTextSubmit("")
+                }
+                return true
             }
         })
 

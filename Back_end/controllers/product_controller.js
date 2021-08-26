@@ -116,6 +116,7 @@ module.exports.addOldProduct = async function(req, res) {
     ack: null
   }
   response.ack = await productService.addOldProduct(req.body)
+  console.log(response.ack)
   res.send(JSON.stringify(response)) // send acknowledge message
 }
 

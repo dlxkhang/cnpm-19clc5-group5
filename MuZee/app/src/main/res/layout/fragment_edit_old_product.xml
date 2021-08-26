@@ -80,7 +80,7 @@
                 app:layout_constraintTop_toBottomOf="@id/edit_Enter_product_detail_label">
 
                 <AutoCompleteTextView
-                    android:text="@{viewModel.selectedOldProduct.productCategory.toString()}"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="none"

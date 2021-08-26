@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -64,7 +63,7 @@ class OldProductAdapter(private  val onClickListener: OnClickListener, private v
         override fun areContentsTheSame(oldItem: OldProduct, newItem: OldProduct): Boolean {
             return (oldItem.productCategory==newItem.productCategory)
                     &&(oldItem.sellerName == newItem.sellerName)
-                    &&(oldItem.condition==oldItem.condition)
+                    &&(oldItem.condition==newItem.condition)
                     &&(oldItem.imageURI == newItem.imageURI)
                     &&(oldItem.productDescription == newItem.productDescription)
                     &&(oldItem.NID == newItem.NID)

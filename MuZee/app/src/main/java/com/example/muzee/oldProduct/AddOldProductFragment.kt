@@ -21,6 +21,7 @@ import com.example.muzee.data.Category
 import com.example.muzee.databinding.FragmentAddOldProductBinding
 import com.example.muzee.network.AddOldProduct
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 
 
 class AddOldProductFragment : Fragment() {
@@ -62,9 +63,44 @@ class AddOldProductFragment : Fragment() {
         binding?.labelSelectCategory?.editText?.doOnTextChanged{text, start, before, count ->
             binding!!.labelSelectCategory.error = null
         }
+        viewModel.status.observe(viewLifecycleOwner,{
+            when(it){
+                ApiStatus.SUCCESS ->{
+                    val dialog = MaterialAlertDialogBuilder(requireContext())
+                    dialog.setTitle("Add product successful")
+                        .setMessage("A new product is added to system")
+                        .setPositiveButton(getString(R.string.btn_ok)) { dialog, which ->
+                            dialog.cancel()
+                            findNavController().popBackStack()
+                        }
+                    dialog.show()
+
+                }
+                ApiStatus.EXIST ->{
+                    showDiaLog("Add product failed", "This product has been existed in system")
+                }
+                ApiStatus.ERROR ->{
+                    showSnackBar()
+                }
+            }
+        })
 
         return fragmentbinding.root
     }
+
+    private fun showDiaLog(title:String,measage:String){
+        val dialog = MaterialAlertDialogBuilder(requireContext())
+        dialog.setTitle(title)
+            .setMessage(measage)
+            .setPositiveButton(getString(R.string.btn_ok)) { dialog, which ->
+                dialog.cancel()
+            }
+        dialog.show()
+    }
+    private fun showSnackBar(){
+        Snackbar.make(binding!!.root,R.string.connection_error_title, Snackbar.LENGTH_SHORT).show()
+    }
+
     private fun handle_confirm_btn()
     {
         val inputName = binding?.labelInputName
@@ -78,15 +114,11 @@ class AddOldProductFragment : Fragment() {
         }
         if(inputCondition!!.editText!!.text!!.isEmpty()){
             success = false
-            inputCondition.error = getString(R.string.error_text_PRODUCT_NAME)
+            inputCondition.error = getString(R.string.error_text_OLD_PRODUCT_CONDITION)
         }
         if(selectCategory!!.editText!!.text!!.isEmpty()){
             success = false
-            selectCategory.error = getString(R.string.error_text_PRODUCT_NAME)
-        }
-        if(inputCondition!!.editText!!.text!!.isEmpty()){
-            success = false
-            inputCondition.error = getString(R.string.error_text_OLD_PRODUCT_CONDITION)
+            selectCategory.error = getString(R.string.error_text_CATEGORY)
         }
         if(success){
             val category = (selectCategory.editText as? AutoCompleteTextView)?.text.toString()
@@ -95,12 +127,20 @@ class AddOldProductFragment : Fragment() {
             val condition = inputCondition.editText?.text.toString().toInt()
             val description = inputDes?.editText?.text.toString()
 
-            val oldProduct = AddOldProduct(null, categoryID, name
-                ,viewModel.NID,null, description, condition)
+            if (condition < 0 || condition > 10) {
+                Toast.makeText(context, "Condition must be in 1-10", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                val oldProduct = AddOldProduct(null, categoryID, name
+                    ,viewModel.NID,null, description, condition)
 
-            viewModel.editAnOldProduct(oldProduct)
-            Toast.makeText(context, "Edit successfully", Toast.LENGTH_LONG).show()
-            findNavController().popBackStack(R.id.oldProductStoreFragment, false)
+                viewModel.addAnOldProduct(oldProduct)
+
+                if (viewModel.status.value == ApiStatus.SUCCESS){
+                    Toast.makeText(context, "Add successfully", Toast.LENGTH_SHORT).show()
+                    findNavController().popBackStack(R.id.oldProductStoreFragment, true)
+                }
+            }
         }
     }
     private fun getListCategory():List<String>{

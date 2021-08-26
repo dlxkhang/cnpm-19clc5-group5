@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -43,6 +44,8 @@ class EditOldProductFragment : Fragment() {
         val items = getListCategory()
         val adapter = ArrayAdapter(requireContext(), R.layout.list_item,items)
         (textField.editText as? AutoCompleteTextView)?.setAdapter(adapter)
+        val index = getListCategory().indexOf(old_product.productCategory.toString())
+        (textField.editText as? AutoCompleteTextView)?.setText(getListCategory().get(index),false)
 
         //handle select image
         val plus_img = binding.editPlusImage
@@ -83,14 +86,25 @@ class EditOldProductFragment : Fragment() {
             val condition = inputCondition.editText?.text.toString().toInt()
             val description = inputDes?.editText?.text.toString()
 
-            val oldProduct = AddOldProduct(
-                _binding.viewModel!!.selectedOldProduct.value?.productId, categoryID, name
-                ,sharedViewModeL.NID,_binding.viewModel!!.selectedOldProduct.value?.imageURI, description, condition)
 
-            sharedViewModeL.editAnOldProduct(oldProduct)
-            sharedViewModeL.getOldProducts()
 
-            findNavController().popBackStack()
+            if (condition < 0 || condition > 10) {
+                Toast.makeText(context, "Condition must be in 1-10", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                val oldProduct = AddOldProduct(
+                    _binding.viewModel!!.selectedOldProduct.value?.productId, categoryID, name
+                    ,sharedViewModeL.NID,_binding.viewModel!!.selectedOldProduct.value?.imageURI, description, condition)
+
+                Toast.makeText(context, "Edit successfully", Toast.LENGTH_SHORT).show()
+
+                sharedViewModeL.editAnOldProduct(oldProduct)
+                sharedViewModeL.getOldProducts()
+
+                findNavController().popBackStack()
+            }
+
+
         }
     }
 

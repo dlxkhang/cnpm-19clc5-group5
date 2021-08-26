@@ -33,6 +33,8 @@ class CartViewModel(val NID: String?, val normalUser: NormalUser, app: Applicati
     val subtotal_price = MutableLiveData<Double>(0.0)
     val total_price = MutableLiveData<Double>(0.0)
 
+    var address = MutableLiveData<String>("")
+
     init {
         setUser()
     }
@@ -79,10 +81,10 @@ class CartViewModel(val NID: String?, val normalUser: NormalUser, app: Applicati
         }
     }
 
-    fun placeOrder(address: String) {
+    fun placeOrder() {
         viewModelScope.launch {
             try {
-                val placeOrder = PlaceOrder(null, address, "Pending", NID.toString())
+                val placeOrder = PlaceOrder(null, address.value, "Pending", NID.toString())
                 val temp = Api.retrofitService.placeOrder(placeOrder)
             } catch (e: Exception) {
                 _status.value = ApiStatus.ERROR

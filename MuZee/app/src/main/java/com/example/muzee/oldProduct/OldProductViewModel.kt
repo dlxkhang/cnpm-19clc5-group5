@@ -11,7 +11,7 @@ import com.example.muzee.network.OldProduct
 import com.example.muzee.network.OldProductID
 import kotlinx.coroutines.launch
 
-enum class ApiStatus { LOADING, ERROR, DONE }
+enum class ApiStatus {SUCCESS,EXIST,ERROR}
 
 class OldProductViewModel(val NID: String?, val app: Application): ViewModel() {
 
@@ -32,12 +32,11 @@ class OldProductViewModel(val NID: String?, val app: Application): ViewModel() {
     fun getOldProducts() {
 
         viewModelScope.launch {
-            _status.value = ApiStatus.LOADING
+
             try {
                 _oldproducts.value = Api.retrofitService.getOldProducts(NID)
-                _status.value = ApiStatus.DONE
+
             } catch (e: Exception) {
-                _status.value = ApiStatus.ERROR
                 _oldproducts.value = listOf()
             }
         }
@@ -53,8 +52,25 @@ class OldProductViewModel(val NID: String?, val app: Application): ViewModel() {
 
     fun addAnOldProduct(oldproduct: AddOldProduct){
         viewModelScope.launch {
-            val temp = Api.retrofitService.addOldProduct(oldproduct)
+            try {
+                val response = Api.retrofitService.addOldProduct(oldproduct)
+                if(response.isSuccessful){
+                    val data = response.body()!!
+                    when(data.ack){
+                        "old_product_exist"->{
+                            _status.value = ApiStatus.EXIST
+                        }
+                        "add_old_product_success"->{
+                            _status.value = ApiStatus.SUCCESS
+                        }
+                    }
+                }
+            }catch (e: java.lang.Exception){
+                _status.value = ApiStatus.ERROR
+            }
         }
+
+
     }
 
     fun editAnOldProduct(oldproduct: AddOldProduct){

@@ -1,9 +1,11 @@
 package com.example.muzee.payment
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -44,9 +46,37 @@ class PaymentFragment : Fragment() {
     }
 
     fun placeOrder() {
-        sharedViewModel.placeOrder("102 Trung Hoa")
-        sharedViewModel.getProducts(sharedViewModel.NID)
-        findNavController().popBackStack(R.id.mainScreenNormalUsersFragment, false)
+        if (sharedViewModel.address.value == "") {
+            var builder = AlertDialog.Builder(context)
+            builder.setTitle("Error")
+            builder.setMessage("Please enter your address")
+            builder.setPositiveButton("OK") { dialog, id ->
+                print(0)
+            }
+            var alert: AlertDialog = builder.create()
+            alert.show()
+        }
+        else {
+            sharedViewModel.placeOrder()
+            sharedViewModel.getProducts(sharedViewModel.NID)
+            findNavController().popBackStack(R.id.mainScreenNormalUsersFragment, false)
+        }
+
     }
 
+    fun enterAddress() {
+        var builder = AlertDialog.Builder(context)
+        builder.setTitle("Address")
+        builder.setMessage("Please enter your address")
+        val input = EditText(context)
+        builder.setView(input)
+        builder.setNegativeButton("Cancel") { dialog, id ->
+            print(0)
+        }
+        builder.setPositiveButton("Submit") { dialog, id ->
+            sharedViewModel.address.value = input.text.toString()
+        }
+        var alert: AlertDialog = builder.create()
+        alert.show()
+    }
 }
