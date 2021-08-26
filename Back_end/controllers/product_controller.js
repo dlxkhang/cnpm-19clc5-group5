@@ -14,6 +14,7 @@ module.exports.getProductList = async function(req, res) {
 module.exports.getProductListSeller = async function(req, res) { 
   // get list of product for seller
   var productList = await productService.getProductListSeller(req.body.SID)
+  console.log(productList)
   res.send(JSON.stringify(productList))
 }
 

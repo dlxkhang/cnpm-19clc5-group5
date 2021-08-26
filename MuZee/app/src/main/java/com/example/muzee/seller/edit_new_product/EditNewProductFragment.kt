@@ -93,15 +93,15 @@ class EditNewProductFragment : Fragment() {
         }
         if(inputPrice.editText!!.text!!.isEmpty()){
             success = false
-            inputPrice.error = getString(R.string.error_text_PRODUCT_NAME)
+            inputPrice.error = getString(R.string.error_text_PRODUCT_PRICE)
         }
         if(selectCategory.editText!!.text!!.isEmpty()){
             success = false
-            selectCategory.error = getString(R.string.error_text_PRODUCT_NAME)
+            selectCategory.error = getString(R.string.error_text_CATEGORY)
         }
         if(inputStock.editText!!.text!!.isEmpty()){
             success = false
-            inputStock.error = getString(R.string.error_text_OLD_PRODUCT_CONDITION)
+            inputStock.error = "Enter the stock of product"
         }
         if(success){
             val category = getCategoryID((selectCategory.editText as? AutoCompleteTextView)?.text.toString())
