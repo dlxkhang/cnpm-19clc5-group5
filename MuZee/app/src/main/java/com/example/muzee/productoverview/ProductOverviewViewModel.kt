@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.muzee.data.NormalUser
+import com.example.muzee.network.AddToCartProduct
 import com.example.muzee.network.NewProduct
 import kotlinx.coroutines.launch
 
@@ -57,6 +58,19 @@ class ProductOverviewViewModel (val NID: String?, val normalUser: NormalUser ,ap
             } catch (e: Exception) {
                 _status.value = ApiStatus.ERROR
                 _products.value = listOf()
+            }
+        }
+    }
+
+    fun addProductToCart(item: NewProduct) {
+        viewModelScope.launch {
+
+
+            try {
+                val cartProduct = AddToCartProduct(NID, item.SID, item.productId)
+                val temp = Api.retrofitService.addToCart(cartProduct)
+            } catch (e: Exception) {
+
             }
         }
     }

@@ -150,12 +150,6 @@ module.exports.getOrderList = (NID) => {
             // get list of ordered products
             var orderedProducts = await getOrderedProducts(OID, listSID)
 
-            // calculate items total price
-            var itemTotal = await calcItemTotal(orderedProducts)
-
-            // calculate delivery charges
-            var deliveryCharges = deliveryChargesByProduct * orderedProducts.length
-
             // get order address of current OID
             var orderAddress = await getOrderAddress(OID)
 
@@ -164,6 +158,12 @@ module.exports.getOrderList = (NID) => {
         
             // get customer name of current OID
             var customerName = await getCustomerName(NID)
+
+            // calculate items total price
+            var itemTotal = await calcItemTotal(orderedProducts)
+
+            // calculate delivery charges
+            var deliveryCharges = deliveryChargesByProduct * orderedProducts.length
             
             var order = await initOrder(OID, orderAddress, orderedProducts, itemTotal, deliveryCharges, orderStatus,customerName)
             listOfOrder.push(order)
@@ -399,12 +399,6 @@ module.exports.getSellerOrderList = (SID) => {
             // get list of ordered products
             var orderedProducts = await getOrderedProductsSeller(OID, SID)
 
-            // calculate items total price
-            var itemTotal = await calcItemTotal(orderedProducts)
-
-            // calculate delivery charges
-            var deliveryCharges = deliveryChargesByProduct * orderedProducts.length
-
             // get order address of current OID
             var orderAddress = await getOrderAddress(OID)
 
@@ -413,6 +407,12 @@ module.exports.getSellerOrderList = (SID) => {
         
             // get customer name of current OID
             var customerName = await getCustomerNameByOID(OID)
+
+            // calculate items total price
+            var itemTotal = await calcItemTotal(orderedProducts)
+
+            // calculate delivery charges
+            var deliveryCharges = deliveryChargesByProduct * orderedProducts.length
             
             var order = await initOrder(OID, orderAddress, orderedProducts, itemTotal, deliveryCharges, orderStatus,customerName)
             listOfOrder.push(order)

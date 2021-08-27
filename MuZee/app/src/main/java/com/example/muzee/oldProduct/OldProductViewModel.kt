@@ -50,29 +50,6 @@ class OldProductViewModel(val NID: String?, val app: Application): ViewModel() {
         _navigateToSelectedProduct.value = null
     }
 
-    fun addAnOldProduct(oldproduct: AddOldProduct){
-        viewModelScope.launch {
-            try {
-                val response = Api.retrofitService.addOldProduct(oldproduct)
-                if(response.isSuccessful){
-                    val data = response.body()!!
-                    when(data.ack){
-                        "old_product_exist"->{
-                            _status.value = ApiStatus.EXIST
-                        }
-                        "add_old_product_success"->{
-                            _status.value = ApiStatus.SUCCESS
-                        }
-                    }
-                }
-            }catch (e: java.lang.Exception){
-                _status.value = ApiStatus.ERROR
-            }
-        }
-
-
-    }
-
     fun editAnOldProduct(oldproduct: AddOldProduct){
         viewModelScope.launch {
             val temp = Api.retrofitService.editOldProduct(oldproduct)
@@ -84,6 +61,7 @@ class OldProductViewModel(val NID: String?, val app: Application): ViewModel() {
             try {
                 val PID = OldProductID(oldProductID)
                 val temp = Api.retrofitService.deleteOldProduct(PID)
+                _oldproducts.value = Api.retrofitService.getOldProducts(NID)
             } catch (e: Exception) {
 
             }

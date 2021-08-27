@@ -25,7 +25,7 @@ class ProductOverviewFragment : Fragment() {
         binding.viewModel = viewModel
 
         // Sets the adapter of the  RecyclerView
-        binding.recyclerView.adapter = ProductOverviewAdapter(ProductOverviewAdapter.OnClickListener {
+        binding.recyclerView.adapter = ProductOverviewAdapter(viewModel, ProductOverviewAdapter.OnClickListener {
             viewModel.displayProductDetail(it)
         })
 

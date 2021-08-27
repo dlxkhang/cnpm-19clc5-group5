@@ -15,11 +15,13 @@ import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.muzee.R
 import com.example.muzee.data.Category
 import com.example.muzee.databinding.FragmentAddOldProductBinding
 import com.example.muzee.network.AddOldProduct
+import com.example.muzee.oldProduct.add.AddOldProductViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 
@@ -28,13 +30,14 @@ class AddOldProductFragment : Fragment() {
 
     var binding: FragmentAddOldProductBinding? = null
     private val viewModel: OldProductViewModel by activityViewModels()
+    private val addViewModel: AddOldProductViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
         val fragmentbinding = FragmentAddOldProductBinding.inflate(inflater,container,false)
         binding = fragmentbinding
-        binding?.viewModel = viewModel
+        binding?.viewModel = addViewModel
         val textField = binding?.labelSelectCategory
 
         val items = getListCategory()
@@ -63,9 +66,9 @@ class AddOldProductFragment : Fragment() {
         binding?.labelSelectCategory?.editText?.doOnTextChanged{text, start, before, count ->
             binding!!.labelSelectCategory.error = null
         }
-        viewModel.status.observe(viewLifecycleOwner,{
+        addViewModel.status.observe(viewLifecycleOwner,{
             when(it){
-                ApiStatus.SUCCESS ->{
+                AddOldProductViewModel.ApiStatus.SUCCESS ->{
                     val dialog = MaterialAlertDialogBuilder(requireContext())
                     dialog.setTitle("Add product successful")
                         .setMessage("A new product is added to system")
@@ -74,12 +77,11 @@ class AddOldProductFragment : Fragment() {
                             findNavController().popBackStack()
                         }
                     dialog.show()
-
                 }
-                ApiStatus.EXIST ->{
+                AddOldProductViewModel.ApiStatus.EXIST ->{
                     showDiaLog("Add product failed", "This product has been existed in system")
                 }
-                ApiStatus.ERROR ->{
+                AddOldProductViewModel.ApiStatus.ERROR ->{
                     showSnackBar()
                 }
             }
@@ -134,12 +136,9 @@ class AddOldProductFragment : Fragment() {
                 val oldProduct = AddOldProduct(null, categoryID, name
                     ,viewModel.NID,null, description, condition)
 
-                viewModel.addAnOldProduct(oldProduct)
 
-                if (viewModel.status.value == ApiStatus.SUCCESS){
-                    Toast.makeText(context, "Add successfully", Toast.LENGTH_SHORT).show()
-                    findNavController().popBackStack(R.id.oldProductStoreFragment, true)
-                }
+                addViewModel.addAnOldProduct(oldProduct)
+                findNavController().popBackStack()
             }
         }
     }

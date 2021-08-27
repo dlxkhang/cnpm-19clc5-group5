@@ -156,11 +156,11 @@
     <fragment
         android:id="@+id/productDetailFragment"
         android:name="com.example.muzee.productdetail.ProductDetailFragment"
-        android:label="ProductDetailFragment"
+        android:label="@string/productdetaillabel"
         tools:layout="@layout/fragment_product_detail">
         <argument
             android:name="selectedProduct"
-            app:argType="com.example.muzee.network.NewProduct"/>
+            app:argType="com.example.muzee.network.NewProduct" />
         <action
             android:id="@+id/action_productDetailFragment_to_mainScreenNormalUsersFragment"
             app:destination="@id/mainScreenNormalUsersFragment"

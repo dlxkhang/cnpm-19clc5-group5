@@ -45,7 +45,7 @@ class MainScreenNormalUsersFragment : Fragment() {
 
         // Giving the binding access to the OverviewViewModel
         if (viewModel.isSearchedCategory){
-            viewModel.isSearchedCategory = false
+
         }
         else {
             viewModel.getNewProducts()
@@ -53,7 +53,7 @@ class MainScreenNormalUsersFragment : Fragment() {
         fragmentbinding.viewModel = viewModel
 
         // Sets the adapter of the photosGrid RecyclerView
-        fragmentbinding.recyclerView.adapter = ProductOverviewAdapter(ProductOverviewAdapter.OnClickListener {
+        fragmentbinding.recyclerView.adapter = ProductOverviewAdapter(viewModel, ProductOverviewAdapter.OnClickListener {
             viewModel.displayProductDetail(it)
         })
 
@@ -134,7 +134,13 @@ class MainScreenNormalUsersFragment : Fragment() {
             }
             override fun onQueryTextChange(newText: String): Boolean {
                 if (newText.equals("")) {
-                    this.onQueryTextSubmit("")
+                    if (viewModel.isSearchedCategory){
+                        viewModel.isSearchedCategory = false
+                    }
+                    else {
+                        this.onQueryTextSubmit("")
+                    }
+
                 }
                 return true
             }

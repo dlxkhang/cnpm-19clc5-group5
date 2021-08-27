@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.muzee.oldProduct.OldProductViewModel" />
+            type="com.example.muzee.oldProduct.add.AddOldProductViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -36,6 +36,7 @@ module.exports.addNewProduct = async function(req, res) {
     ack: null
   }
   response.ack = await productService.addNewProduct(req.body)
+  console.log(JSON.stringify(response))
   res.send(JSON.stringify(response)) // send acknowledge message
 }
 
@@ -71,7 +72,7 @@ module.exports.addToCart = async function(req, res) {
     ack: null
   }
   response.ack = await productService.addToCart(req.body)
-  // res.send(JSON.stringify(response)) // send acknowledge message
+  res.send(JSON.stringify(response)) // send acknowledge message
 }
 
 module.exports.deleteProductFromCart = async function(req, res) { 
@@ -117,7 +118,7 @@ module.exports.addOldProduct = async function(req, res) {
     ack: null
   }
   response.ack = await productService.addOldProduct(req.body)
-  console.log(response.ack)
+  console.log(JSON.stringify(response))
   res.send(JSON.stringify(response)) // send acknowledge message
 }
 

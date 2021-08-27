@@ -11,7 +11,7 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
 
-private const val BASE_URL = "http://192.168.11.109:3000"
+private const val BASE_URL = "http://192.168.31.133:3000"
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
@@ -41,7 +41,7 @@ interface ApiService {
 
     // Post Add to cart
     @POST("api/product/add_to_cart")
-    suspend fun addToCart(@Body cartProduct: AddToCartProduct): Void
+    suspend fun addToCart(@Body cartProduct: AddToCartProduct): Response<SignUp_response>
 
     // Delete product from cart
     @POST("api/cart/delete")
