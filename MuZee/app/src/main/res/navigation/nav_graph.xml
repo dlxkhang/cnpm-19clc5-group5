@@ -194,7 +194,7 @@
     <fragment
         android:id="@+id/paymentFragment"
         android:name="com.example.muzee.payment.PaymentFragment"
-        android:label="PaymentFragment"
+        android:label="@string/payment_label"
         tools:layout="@layout/fragment_payment">
         <action
             android:id="@+id/action_paymentFragment_to_mainScreenNormalUsersFragment"

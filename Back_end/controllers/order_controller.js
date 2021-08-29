@@ -6,8 +6,6 @@ var orderService = require('../services/order_service') // get an instance of or
 // NORMAL USER ORDER
 module.exports.getOrderList = async function(req, res) { 
   // get list of order
-  var NID = '001'
-  console.log(req.query.NID)
   var orderList = await orderService.getOrderList(req.query.NID) 
   res.send(JSON.stringify(orderList))
 }
@@ -29,14 +27,9 @@ module.exports.placeOrder = async function(req, res) {
 
 module.exports.cancelOrder = async function(req, res) { 
   // update order status
-  var request = {
-    NID: '001',
-    OID: '003'
-  }
   var response = {
     ack: null
   }
-  console.log(req.body)
   response.ack = await orderService.cancelOrder(req.body.NID, req.body.OID) 
   res.send(JSON.stringify(response))
 }
@@ -46,7 +39,6 @@ module.exports.cancelOrder = async function(req, res) {
 module.exports.getSellerOrderList = async function(req, res) { 
   // get list of order
   var orderList = await orderService.getSellerOrderList(req.body.accountID) 
-  console.log(orderList)
   res.send(JSON.stringify(orderList))
 }
 

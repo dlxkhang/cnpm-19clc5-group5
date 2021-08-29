@@ -184,4 +184,5 @@
     <string name="edit_old_product_fragment_label">Edit old product</string>
     <string name="cart_fragment_label">Cart</string>
     <string name="productdetaillabel">Product Detail</string>
+    <string name="payment_label">Payment</string>
 </resources>
