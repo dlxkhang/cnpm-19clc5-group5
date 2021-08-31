@@ -120,7 +120,7 @@ class EditOldProductFragment : Fragment() {
     private fun getListCategory():List<String>{
         return listOf(Category.Organ.name,
             Category.Drum.name,
-            Category.Electronic.name,
+            Category.Electric.name,
             Category.Guitar.name,
             Category.Piano.name,
             Category.Bass.name)
@@ -139,8 +139,8 @@ class EditOldProductFragment : Fragment() {
             Category.Bass.name ->{
                 Category.Bass
             }
-            Category.Electronic.name ->{
-                Category.Electronic
+            Category.Electric.name ->{
+                Category.Electric
             }
             else -> Category.Guitar
         }

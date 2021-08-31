@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.muzee.network.AddOldProduct
 import kotlinx.coroutines.launch
+import java.lang.IllegalStateException
 
 class AddOldProductViewModel: ViewModel() {
     enum class ApiStatus {SUCCESS,EXIST,ERROR}
@@ -33,7 +34,7 @@ class AddOldProductViewModel: ViewModel() {
                 }
             }catch (e: Exception){
                 _status.value = ApiStatus.ERROR
-                Log.i("MyActivity", e.message!!)
+                throw IllegalStateException(e.message)
             }
         }
     }

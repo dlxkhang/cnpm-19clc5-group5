@@ -37,6 +37,7 @@ class AddOldProductFragment : Fragment() {
     ): View {
         val fragmentbinding = FragmentAddOldProductBinding.inflate(inflater,container,false)
         binding = fragmentbinding
+        binding?.lifecycleOwner = this
         binding?.viewModel = addViewModel
         val textField = binding?.labelSelectCategory
 
@@ -143,28 +144,9 @@ class AddOldProductFragment : Fragment() {
         }
     }
     private fun getListCategory():List<String>{
-        return listOf(Category.Organ.name,Category.Drum.name,Category.Electronic.name,Category.Guitar.name,Category.Piano.name,Category.Bass.name)
+        return listOf(Category.Organ.name,Category.Drum.name,Category.Electric.name,Category.Guitar.name,Category.Piano.name,Category.Bass.name)
     }
-    private fun category(str:String):Category{
-        return when(str){
-            Category.Organ.name ->{
-                 Category.Organ
-            }
-            Category.Drum.name ->{
-                 Category.Drum
-            }
-            Category.Piano.name ->{
-                 Category.Piano
-            }
-            Category.Bass.name ->{
-                 Category.Bass
-            }
-            Category.Electronic.name ->{
-                 Category.Electronic
-            }
-            else -> Category.Guitar
-        }
-    }
+
 
     private fun getCategoryID(str: String): String {
         return when(str){
@@ -195,5 +177,6 @@ class AddOldProductFragment : Fragment() {
                 }
         }
     }
+
 
 }

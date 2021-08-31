@@ -171,7 +171,7 @@ class AddNewProductFragment : Fragment() {
         }
     }
     private fun getListCategory():List<String>{
-        return listOf(Category.Organ.name,Category.Drum.name,Category.Electronic.name,Category.Guitar.name,Category.Piano.name,Category.Bass.name)
+        return listOf(Category.Organ.name,Category.Drum.name,Category.Electric.name,Category.Guitar.name,Category.Piano.name,Category.Bass.name)
     }
     private fun showDiaLog(title:String,measage:String){
         val dialog = MaterialAlertDialogBuilder(requireContext())
