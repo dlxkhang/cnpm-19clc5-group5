@@ -27,14 +27,13 @@ class AddOldProductViewModel: ViewModel() {
                         "old_product_exist"->{
                             _status.value = ApiStatus.EXIST
                         }
-                        "add_product_success"->{
+                        "add_old_product_success"->{
                             _status.value = ApiStatus.SUCCESS
                         }
                     }
                 }
             }catch (e: Exception){
                 _status.value = ApiStatus.ERROR
-                throw IllegalStateException(e.message)
             }
         }
     }

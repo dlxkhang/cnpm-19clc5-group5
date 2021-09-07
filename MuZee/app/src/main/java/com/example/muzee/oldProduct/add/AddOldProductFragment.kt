@@ -1,4 +1,4 @@
-package com.example.muzee.oldProduct
+package com.example.muzee.oldProduct.add
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
@@ -10,18 +10,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.muzee.R
 import com.example.muzee.data.Category
 import com.example.muzee.databinding.FragmentAddOldProductBinding
 import com.example.muzee.network.AddOldProduct
-import com.example.muzee.oldProduct.add.AddOldProductViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 
@@ -29,7 +27,7 @@ import com.google.android.material.snackbar.Snackbar
 class AddOldProductFragment : Fragment() {
 
     var binding: FragmentAddOldProductBinding? = null
-    private val viewModel: OldProductViewModel by activityViewModels()
+    private val args: AddOldProductFragmentArgs by navArgs()
     private val addViewModel: AddOldProductViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -75,7 +73,8 @@ class AddOldProductFragment : Fragment() {
                         .setMessage("A new product is added to system")
                         .setPositiveButton(getString(R.string.btn_ok)) { dialog, which ->
                             dialog.cancel()
-                            findNavController().popBackStack()
+                            findNavController().navigate(AddOldProductFragmentDirections.actionAddOldProductFragmentToOldProductStoreFragment(
+                                args.NID))
                         }
                     dialog.show()
                 }
@@ -131,15 +130,16 @@ class AddOldProductFragment : Fragment() {
             val description = inputDes?.editText?.text.toString()
 
             if (condition < 0 || condition > 10) {
-                Toast.makeText(context, "Condition must be in 1-10", Toast.LENGTH_SHORT).show()
+                inputCondition.error = "Condition must be in 1-10"
             }
             else {
+                var  normalUserID = ""
+                args.NID?.let {
+                    normalUserID = it
+                }
                 val oldProduct = AddOldProduct(null, categoryID, name
-                    ,viewModel.NID,null, description, condition)
-
-
+                    ,normalUserID,null, description, condition)
                 addViewModel.addAnOldProduct(oldProduct)
-                findNavController().popBackStack()
             }
         }
     }

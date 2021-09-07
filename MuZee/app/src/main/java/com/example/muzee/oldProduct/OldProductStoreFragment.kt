@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.muzee.R
@@ -17,7 +18,7 @@ class oldProductStoreFragment : Fragment() {
 
     private val args: oldProductStoreFragmentArgs by navArgs()
 
-    private val viewModel: OldProductViewModel by activityViewModels { OldProductViewModelFactory(args.NID, requireNotNull(activity).application) }
+    private lateinit var viewModel: OldProductViewModel
 
 
     override fun onCreateView(
@@ -28,6 +29,8 @@ class oldProductStoreFragment : Fragment() {
         binding = fragmentBinding
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
         binding?.lifecycleOwner = this
+        val viewModelFactory = OldProductViewModelFactory(args.NID!!, requireNotNull(activity).application)
+        viewModel = ViewModelProvider(this,viewModelFactory).get(OldProductViewModel::class.java)
         // Giving the binding access to the oldProductViewModel
         viewModel.getOldProducts()
         binding?.viewModel = viewModel
@@ -37,13 +40,13 @@ class oldProductStoreFragment : Fragment() {
 
         viewModel.navigateToSelectedProduct.observe(viewLifecycleOwner, {
             if (null != it) {
-                this.findNavController().navigate(oldProductStoreFragmentDirections.actionOldProductStoreFragmentToEditOldProductFragment(it))
+                this.findNavController().navigate(oldProductStoreFragmentDirections.actionOldProductStoreFragmentToEditOldProductFragment(args.NID,it))
                 viewModel.displayOldProductDetailComplete()
             }
         })
 
         binding?.btnPost?.setOnClickListener {
-            findNavController().navigate(R.id.action_oldProductStoreFragment_to_addOldProductFragment)
+            this.findNavController().navigate(oldProductStoreFragmentDirections.actionOldProductStoreFragmentToAddOldProductFragment(args.NID))
         }
         return fragmentBinding.root
     }
