@@ -66,6 +66,10 @@ interface ApiService {
     @POST("api/old_product/delete")
     suspend fun deleteOldProduct(@Body oldProductID: OldProductID): Response<SignUp_response>
 
+    // Get all old product to buy
+    @GET("api/old_product")
+    suspend fun getAllOldProduct():List<OldProduct>
+
     // Normal User Order
     // Get normal user order
     @GET("api/order")

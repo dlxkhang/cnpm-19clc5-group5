@@ -11,13 +11,11 @@ import androidx.core.app.ActivityCompat.invalidateOptionsMenu
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.muzee.R
 import com.example.muzee.databinding.FragmentMainScreenNormalUsersBinding
-import com.example.muzee.login.LoginViewModel
 import com.example.muzee.productoverview.ProductOverviewAdapter
 import com.example.muzee.productoverview.ProductOverviewViewModel
 import com.example.muzee.productoverview.ProductOverviewViewModelFactory
@@ -28,7 +26,6 @@ class MainScreenNormalUsersFragment : Fragment() {
     private var binding: FragmentMainScreenNormalUsersBinding? = null
     private var isOpenMyStore: Boolean = false
     private val viewModel: ProductOverviewViewModel by activityViewModels { ProductOverviewViewModelFactory(args.NID, args.normalUser ,requireNotNull(activity).application) }
-    private val loginViewModel: LoginViewModel by viewModels()
     private val args: MainScreenNormalUsersFragmentArgs by navArgs()
 
     override fun onCreateView(
@@ -64,6 +61,7 @@ class MainScreenNormalUsersFragment : Fragment() {
             }
         })
 
+
         setHasOptionsMenu(true)
 
         // binding drawerLayout from xml
@@ -78,6 +76,20 @@ class MainScreenNormalUsersFragment : Fragment() {
         //activity!!.supportActionBar?.setHomeButtonEnabled(true)
         activity.supportActionBar?.setTitle(R.string.app_name)// set title text for main screen
         binding?.navView?.getHeaderView(0)?.findViewById<TextView>(R.id.usernameLabel)?.text = viewModel.normalUser.fullname
+        viewModel.isNewProduct.observe(viewLifecycleOwner,{
+            when(it){
+                true->{
+                    fragmentbinding.recyclerView.adapter = ProductOverviewAdapter(viewModel, ProductOverviewAdapter.OnClickListener {
+                        viewModel.displayProductDetail(it)
+                    })
+                    binding!!.navView.menu.findItem(R.id.switchMode).title = "New shopping mode"
+                    viewModel.getNewProducts()
+                }
+                false->{
+                    binding!!.navView.menu.findItem(R.id.switchMode).title = "Old shopping mode"
+                }
+            }
+        })
         //handle onClick event on menu Items
         binding!!.navView.setNavigationItemSelectedListener {
             when (it.itemId) {
@@ -111,7 +123,9 @@ class MainScreenNormalUsersFragment : Fragment() {
                     findNavController().navigate(R.id.action_mainScreenNormalUsersFragment_to_loginFragment)
                 }
 
-                //R.id.switchingModeItem->{true}
+                R.id.switchMode->{
+                    viewModel.switchMode()
+                }
                 //R.id.customerSupportItem->{true}
 
             }
