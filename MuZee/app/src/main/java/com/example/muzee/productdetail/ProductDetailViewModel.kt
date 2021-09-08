@@ -5,7 +5,9 @@ import android.app.Application
 import androidx.lifecycle.*
 import com.example.muzee.R
 import com.example.muzee.network.AddToCartProduct
+import com.example.muzee.network.NetworkLayer
 import com.example.muzee.network.NewProduct
+import com.example.muzee.network.login.getUser_response
 import kotlinx.coroutines.launch
 
 class ProductDetailViewModel(product: NewProduct, app: Application) : AndroidViewModel(app) {
@@ -17,6 +19,7 @@ class ProductDetailViewModel(product: NewProduct, app: Application) : AndroidVie
 
     init {
         _selectedProduct.value = product
+        getaddofSeller()
     }
 
     val displayPropertyPrice = Transformations.map(selectedProduct) {
@@ -32,5 +35,21 @@ class ProductDetailViewModel(product: NewProduct, app: Application) : AndroidVie
 
             }
         }
+    }
+    private val _address = MutableLiveData<String>()
+    val address:LiveData<String> = _address
+    fun getaddofSeller(){
+
+        val _input = getUser_response(_selectedProduct.value!!.SID)
+        viewModelScope.launch {
+            try{
+                val response = NetworkLayer.loginRetrofitService.getSellerInfo(_input)
+                if(response.isSuccessful){
+                    _address.value = response.body()!!.storeAddress
+                }
+            }catch (e: Exception){
+            }
+        }
+
     }
 }

@@ -150,9 +150,11 @@ class AddNewProductFragment : Fragment() {
             success = false
             inputStock.error = getString(R.string.error_text_OLD_PRODUCT_CONDITION)
         }
-        if(inputStock!!.editText!!.text!!.toString().toInt()<=0){
-            success = false
-            inputStock.error = "Cannot enter non-negative product's stock"
+        if(inputStock!!.editText!!.text!!.isNotEmpty() ){
+            if(inputStock!!.editText!!.text!!.toString().toInt()<=0) {
+                success = false
+                inputStock.error = "Cannot enter non-negative product's stock"
+            }
         }
         if(success){
             val category = getCategoryID((selectCategory.editText as? AutoCompleteTextView)?.text.toString())

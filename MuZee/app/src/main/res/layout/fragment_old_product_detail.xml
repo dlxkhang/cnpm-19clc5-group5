@@ -109,11 +109,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto"
-                    android:text="@string/test_seller_make"
+                    android:text="@{viewModel.phoneNumber}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/seller_name"
                     app:layout_constraintTop_toBottomOf="@+id/seller_name"
-                    tools:text="Tan Binh, Ho Chi Minh" />
+                    tools:text="0122773224" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
