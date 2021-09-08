@@ -40,9 +40,6 @@ class SellerProductOverviewAdapter (private  val onClickListener: OnClickListene
         holder.itemView.setOnClickListener {
             onClickListener.onClick(item)
         }
-        holder.itemView.findViewById<View>(R.id.btn_view).setOnClickListener{
-            onClickListener.onClick(item)
-        }
         holder.itemView.findViewById<View>(R.id.btn_edit).setOnClickListener{
             fragment.findNavController().navigate(SellerProductOverviewFragmentDirections.actionSellerProductOverviewFragmentToEditNewProductFragment(item,sellerID,fragment.args.sellerInfo))
         }

@@ -37,9 +37,6 @@ class ProductOverviewAdapter(val viewModel: ProductOverviewViewModel, val onClic
         holder.itemView.setOnClickListener {
             onClickListener.onClick(item)
         }
-        holder.itemView.findViewById<View>(R.id.view_button).setOnClickListener {
-            onClickListener.onClick(item)
-        }
         holder.itemView.findViewById<View>(R.id.add2cart_button).setOnClickListener {
             viewModel.addProductToCart(item)
             Toast.makeText(holder.itemView.context, "Product has been added to cart", Toast.LENGTH_LONG).show()

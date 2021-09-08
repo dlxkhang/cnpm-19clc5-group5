@@ -42,35 +42,25 @@
             style="@style/text_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:text="@{String.valueOf(product.productPrice)}"
-            app:layout_constraintBottom_toTopOf="@+id/view_button"
             app:layout_constraintStart_toStartOf="@+id/product_title"
             app:layout_constraintTop_toBottomOf="@+id/product_title"
             tools:text="$2,999" />
-
-        <Button
-            android:id="@+id/view_button"
-            style="@style/button_style"
-            android:layout_width="85dp"
-            android:layout_height="36dp"
-            android:fontFamily="@font/roboto"
-            android:text="@string/view"
-            android:textSize="10sp"
-            app:backgroundTint="@color/main_green"
-            app:layout_constraintBottom_toBottomOf="@+id/product_image"
-            app:layout_constraintStart_toStartOf="@+id/product_condition" />
 
         <Button
             android:id="@+id/add2cart_button"
             style="@style/button_style"
             android:layout_width="wrap_content"
             android:layout_height="36dp"
-            android:layout_marginStart="90dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
             android:fontFamily="@font/roboto"
             android:text="@string/add_to_cart"
             android:textSize="10sp"
             app:backgroundTint="@color/main_green"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/view_button" />
+            app:layout_constraintEnd_toEndOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
