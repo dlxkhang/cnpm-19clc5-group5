@@ -3,8 +3,6 @@ package com.example.muzee
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.muzee.cart.CartAdapter
-import com.example.muzee.data.Product
-import com.example.muzee.data.SellerOrder
 import com.example.muzee.network.UserOrder
 import com.example.muzee.network.CartProduct
 import com.example.muzee.network.NewProduct
@@ -13,6 +11,7 @@ import com.example.muzee.network.seller.order.Order_responseItem
 import com.example.muzee.network.seller.order.OrderedProduct
 import com.example.muzee.network.seller.product.ProductSeller
 import com.example.muzee.oldProduct.OldProductAdapter
+import com.example.muzee.oldproduct_overview.OldProductOverviewAdapter
 import com.example.muzee.order_detail.OrderDetailAdapter
 import com.example.muzee.order_overview.OrderOverviewAdapter
 import com.example.muzee.payment.PaymentAdapter
@@ -26,7 +25,11 @@ fun bindRecyclerViewProductOverview(recyclerView: RecyclerView, data: List<NewPr
     val adapter = recyclerView.adapter as ProductOverviewAdapter
     adapter.submitList(data)
 }
-
+@BindingAdapter("listOldProduct")
+fun bindRecyclerViewOldProductOverview(recyclerView: RecyclerView,data:List<OldProduct>?){
+    val adapter = recyclerView.adapter as OldProductOverviewAdapter
+    adapter.submitList(data)
+}
 @BindingAdapter("listData1")
 fun bindRecyclerViewProductCart(recyclerView: RecyclerView, data: List<CartProduct>?) {
     val adapter = recyclerView.adapter as CartAdapter

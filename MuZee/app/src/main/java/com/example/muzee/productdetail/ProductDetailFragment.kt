@@ -15,7 +15,6 @@ import com.example.muzee.login.LoginViewModel
 
 class ProductDetailFragment : Fragment() {
 
-    private val sharedViewModel: LoginViewModel by activityViewModels()
 
     private var _binding: FragmentProductDetailBinding? = null
 

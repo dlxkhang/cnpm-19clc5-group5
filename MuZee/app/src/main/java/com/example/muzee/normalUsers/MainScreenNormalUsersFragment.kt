@@ -12,6 +12,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.muzee.R
@@ -25,7 +26,8 @@ class MainScreenNormalUsersFragment : Fragment() {
     lateinit var toggle: ActionBarDrawerToggle // toggle button
     private var binding: FragmentMainScreenNormalUsersBinding? = null
     private var isOpenMyStore: Boolean = false
-    private val viewModel: ProductOverviewViewModel by activityViewModels { ProductOverviewViewModelFactory(args.NID, args.normalUser ,requireNotNull(activity).application) }
+    private lateinit var viewModel:ProductOverviewViewModel
+    //private val viewModel: ProductOverviewViewModel by activityViewModels { ProductOverviewViewModelFactory(args.NID, args.normalUser ,requireNotNull(activity).application) }
     private val args: MainScreenNormalUsersFragmentArgs by navArgs()
 
     override fun onCreateView(
@@ -40,6 +42,8 @@ class MainScreenNormalUsersFragment : Fragment() {
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
         fragmentbinding.lifecycleOwner = this
 
+        val viewModelFactory = ProductOverviewViewModelFactory(args.NID,args.normalUser, requireNotNull(activity).application)
+        viewModel = ViewModelProvider(this,viewModelFactory).get(ProductOverviewViewModel::class.java)
         // Giving the binding access to the OverviewViewModel
         if (viewModel.isSearchedCategory){
 
@@ -76,20 +80,6 @@ class MainScreenNormalUsersFragment : Fragment() {
         //activity!!.supportActionBar?.setHomeButtonEnabled(true)
         activity.supportActionBar?.setTitle(R.string.app_name)// set title text for main screen
         binding?.navView?.getHeaderView(0)?.findViewById<TextView>(R.id.usernameLabel)?.text = viewModel.normalUser.fullname
-        viewModel.isNewProduct.observe(viewLifecycleOwner,{
-            when(it){
-                true->{
-                    fragmentbinding.recyclerView.adapter = ProductOverviewAdapter(viewModel, ProductOverviewAdapter.OnClickListener {
-                        viewModel.displayProductDetail(it)
-                    })
-                    binding!!.navView.menu.findItem(R.id.switchMode).title = "New shopping mode"
-                    viewModel.getNewProducts()
-                }
-                false->{
-                    binding!!.navView.menu.findItem(R.id.switchMode).title = "Old shopping mode"
-                }
-            }
-        })
         //handle onClick event on menu Items
         binding!!.navView.setNavigationItemSelectedListener {
             when (it.itemId) {
@@ -124,7 +114,7 @@ class MainScreenNormalUsersFragment : Fragment() {
                 }
 
                 R.id.switchMode->{
-                    viewModel.switchMode()
+                    findNavController().navigate(R.id.action_mainScreenNormalUsersFragment_to_oldProductOverviewFragment)
                 }
                 //R.id.customerSupportItem->{true}
 

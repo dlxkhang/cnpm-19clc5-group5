@@ -9,14 +9,11 @@ import androidx.lifecycle.viewModelScope
 import com.example.muzee.data.NormalUser
 import com.example.muzee.network.AddToCartProduct
 import com.example.muzee.network.NewProduct
-import com.example.muzee.network.OldProduct
 import kotlinx.coroutines.launch
 
 enum class ApiStatus { LOADING, ERROR, DONE }
 
 class ProductOverviewViewModel (val NID: String?, val normalUser: NormalUser ,app: Application) : ViewModel() {
-    private val _isNewProduct = MutableLiveData<Boolean>()
-    val isNewProduct:LiveData<Boolean> = _isNewProduct
     var isSearchedCategory = false
     
     // The internal MutableLiveData that stores the status of the most recent request
@@ -31,8 +28,6 @@ class ProductOverviewViewModel (val NID: String?, val normalUser: NormalUser ,ap
     private val _navigateToSelectedProduct = MutableLiveData<NewProduct>()
     val navigateToSelectedProduct: LiveData<NewProduct>
         get() = _navigateToSelectedProduct
-    private var _oldproducts = MutableLiveData<List<OldProduct>>()
-    val oldproducts: LiveData<List<OldProduct>> = _oldproducts
     init {
         getNewProducts()
     }
@@ -47,27 +42,6 @@ class ProductOverviewViewModel (val NID: String?, val normalUser: NormalUser ,ap
             } catch (e: Exception) {
                 _status.value = ApiStatus.ERROR
                 _products.value = listOf()
-            }
-        }
-    }
-    fun switchMode(){
-        if(_isNewProduct.value == true){
-            _isNewProduct.value = false
-        }
-        else{
-            _isNewProduct.value = true
-        }
-    }
-    fun getOldProduct(){
-        viewModelScope.launch {
-            _status.value = ApiStatus.LOADING
-            try {
-                _oldproducts.value = Api.retrofitService.getAllOldProduct()
-                _status.value = ApiStatus.DONE
-            }catch (e:Exception){
-                _status.value = ApiStatus.ERROR
-                _oldproducts.value = listOf()
-
             }
         }
     }
