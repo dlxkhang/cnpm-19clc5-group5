@@ -150,46 +150,26 @@
                     app:layout_constraintTop_toBottomOf="@+id/detail" />
 
                 <TextView
-                    android:id="@+id/make_label"
-                    android:layout_width="70dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/make"
-                    android:textSize="12sp"
-                    app:layout_constraintStart_toStartOf="@+id/category_label"
-                    app:layout_constraintTop_toBottomOf="@+id/category_label" />
-
-                <TextView
                     android:id="@+id/textView8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto"
-                    android:text="@string/test_category"
+                    android:text="@{viewModel.selectedOldProduct.productCategory}"
                     android:textSize="12sp"
                     app:layout_constraintStart_toEndOf="@+id/category_label"
                     app:layout_constraintTop_toTopOf="@+id/category_label"
                     tools:text="Keyboard" />
 
-                <TextView
-                    android:id="@+id/make"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto"
-                    android:text="@string/test_make"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/make_label"
-                    app:layout_constraintStart_toEndOf="@+id/make_label"
-                    tools:text="Nord" />
 
                 <View
                     android:id="@+id/view"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="8dp"
                     android:background="@android:color/darker_gray"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/make_label" />
+                    app:layout_constraintTop_toBottomOf="@+id/category_label" />
 
                 <TextView
                     android:id="@+id/textView11"
