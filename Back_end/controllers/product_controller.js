@@ -118,7 +118,6 @@ module.exports.addOldProduct = async function(req, res) {
     ack: null
   }
   response.ack = await productService.addOldProduct(req.body)
-  console.log(JSON.stringify(response))
   res.send(JSON.stringify(response)) // send acknowledge message
 }
 
@@ -137,7 +136,6 @@ module.exports.editOldProduct = async function(req, res) {
   var response = {
     ack: null
   }
-  console.log(req.body)
   response.ack = await productService.editOldProduct(req.body)
   res.send(JSON.stringify(response)) // send acknowledge message
 }
@@ -156,7 +154,6 @@ module.exports.deleteOldProduct = async function(req, res) {
 module.exports.getUserProducts= async function(req, res) { 
   // get list of product in cart
   var NID = '001'
-  console.log(req.query.NID)
   var listOfUserProducts = await productService.getUserProducts(req.query.NID)
   res.send(JSON.stringify(listOfUserProducts))
 }
