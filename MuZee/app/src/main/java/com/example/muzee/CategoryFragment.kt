@@ -15,7 +15,7 @@ import com.example.muzee.productoverview.ProductOverviewViewModel
 class CategoryFragment : Fragment(){
     private var binding:FragmentCategoryBinding? = null
 
-    private val viewModel:CategoryViewModel by activityViewModels()
+
     private val sharedViewModel: ProductOverviewViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {

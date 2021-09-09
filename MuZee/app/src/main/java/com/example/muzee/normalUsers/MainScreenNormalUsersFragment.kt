@@ -26,8 +26,8 @@ class MainScreenNormalUsersFragment : Fragment() {
     lateinit var toggle: ActionBarDrawerToggle // toggle button
     private var binding: FragmentMainScreenNormalUsersBinding? = null
     private var isOpenMyStore: Boolean = false
-    private lateinit var viewModel:ProductOverviewViewModel
-    //private val viewModel: ProductOverviewViewModel by activityViewModels { ProductOverviewViewModelFactory(args.NID, args.normalUser ,requireNotNull(activity).application) }
+    //private lateinit var viewModel:ProductOverviewViewModel
+    private val viewModel: ProductOverviewViewModel by activityViewModels { ProductOverviewViewModelFactory(args.NID, args.normalUser ,requireNotNull(activity).application) }
     private val args: MainScreenNormalUsersFragmentArgs by navArgs()
 
     override fun onCreateView(
@@ -42,8 +42,8 @@ class MainScreenNormalUsersFragment : Fragment() {
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
         fragmentbinding.lifecycleOwner = this
 
-        val viewModelFactory = ProductOverviewViewModelFactory(args.NID,args.normalUser, requireNotNull(activity).application)
-        viewModel = ViewModelProvider(this,viewModelFactory).get(ProductOverviewViewModel::class.java)
+//        val viewModelFactory = ProductOverviewViewModelFactory(args.NID,args.normalUser, requireNotNull(activity).application)
+//        viewModel = ViewModelProvider(this,viewModelFactory).get(ProductOverviewViewModel::class.java)
         // Giving the binding access to the OverviewViewModel
         if (viewModel.isSearchedCategory){
 
