@@ -38,6 +38,7 @@ class SellerOrderViewModel : ViewModel() {
                     _listOfOrders.value = data
                 }
             }catch (e:Exception){
+                throw(e)
                 _status.value = ApiStatus.ERROR
                 _listOfOrders.value = listOf()
             }

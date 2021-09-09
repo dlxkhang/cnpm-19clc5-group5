@@ -164,7 +164,7 @@
                         android:id="@+id/total"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{`$`+Double.toString(viewModel.selectedOrder.itemTotal)}"
+                        android:text="@{`$`+Double.toString(viewModel.selectedOrder.itemTotal+viewModel.selectedOrder.deliveryCharges)}"
                         android:textColor="@color/black"
                         app:layout_constraintBottom_toBottomOf="@+id/totalLabel"
                         app:layout_constraintStart_toStartOf="@+id/deliveryCharges"

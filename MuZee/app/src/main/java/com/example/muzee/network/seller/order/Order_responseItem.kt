@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 data class Order_responseItem(
     val customerName: String,
     val deliveryCharges: Int,
-    val itemTotal: Int,
+    val itemTotal: Double,
     val orderAddress: String,
     val orderId: String,
     val orderStatus: String,
