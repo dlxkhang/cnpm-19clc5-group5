@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.muzee.databinding.FragmentCategoryBinding
-import com.example.muzee.model.CategoryViewModel
 import com.example.muzee.productoverview.ProductOverviewViewModel
 
 

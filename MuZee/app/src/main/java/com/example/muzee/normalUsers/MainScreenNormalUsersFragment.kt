@@ -12,7 +12,6 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.muzee.R
@@ -45,6 +44,12 @@ class MainScreenNormalUsersFragment : Fragment() {
 //        val viewModelFactory = ProductOverviewViewModelFactory(args.NID,args.normalUser, requireNotNull(activity).application)
 //        viewModel = ViewModelProvider(this,viewModelFactory).get(ProductOverviewViewModel::class.java)
         // Giving the binding access to the OverviewViewModel
+        if (viewModel.navigateFromLogin){
+            viewModel.NID = args.NID
+            viewModel.normalUser = args.normalUser
+            viewModel.navigateFromLogin = false
+        }
+
         if (viewModel.isSearchedCategory){
 
         }
@@ -111,6 +116,7 @@ class MainScreenNormalUsersFragment : Fragment() {
                 }
                 R.id.logout_btn->{
                     findNavController().navigate(R.id.action_mainScreenNormalUsersFragment_to_loginFragment)
+                    viewModel.navigateFromLogin = true
                 }
 
                 R.id.switchMode->{

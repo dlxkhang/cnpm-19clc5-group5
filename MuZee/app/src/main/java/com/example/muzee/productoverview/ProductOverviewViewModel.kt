@@ -13,8 +13,9 @@ import kotlinx.coroutines.launch
 
 enum class ApiStatus { LOADING, ERROR, DONE }
 
-class ProductOverviewViewModel (val NID: String?, val normalUser: NormalUser ,app: Application) : ViewModel() {
+class ProductOverviewViewModel (var NID: String?, var normalUser: NormalUser, app: Application) : ViewModel() {
     var isSearchedCategory = false
+    var navigateFromLogin = false
     
     // The internal MutableLiveData that stores the status of the most recent request
     private val _status = MutableLiveData<ApiStatus>()
