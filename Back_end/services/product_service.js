@@ -10,10 +10,26 @@ var db = require('../database/database') // get an instance of database
 //     var imageURI: String? = null,
 //     var productDescription:String? = null): Parcelable
 
+
+//////////////////////////////////////////////////////////////////
+// NEW PRODUCT
 module.exports.getProductList = () => {
     return new Promise(function(resolve, reject) {
-        var query = "SELECT p.PID as productId, p.CATEGORY as productCategory, p.PRODUCT_NAME as productName, w.UNIT_PRICE as productPrice, s.STORE_NAME as sellerName, p.IMAGE_URL as imageURI, p.DESCRIPTION as productDescription, w.STOCK as stock FROM Product p JOIN Warehouse w ON(p.PID = w.PID) JOIN Seller s ON(w.SID = s.SID) WHERE w.stock > 0"
+        var query = "SELECT p.PID as productId, c.CATEGORY_NAME as productCategory, p.PRODUCT_NAME as productName, w.UNIT_PRICE as productPrice, s.STORE_NAME as sellerName, s.SID, p.IMAGE_URL as imageURI, p.DESCRIPTION as productDescription, w.STOCK as stock FROM Product p JOIN Warehouse w ON(p.PID = w.PID) JOIN Seller s ON(w.SID = s.SID) JOIN Category c ON(c.CID = p.CATEGORY) WHERE w.stock > 0"
         db.all(query, function(err, allRows) {
+            if(err) {
+                reject(err)
+                return
+            }
+            resolve(allRows)
+        })
+    })
+}
+
+module.exports.getProductListSeller = (SID) => {
+    return new Promise(function(resolve, reject) {
+        var query = "SELECT p.PID as productId, c.CATEGORY_NAME as productCategory, p.PRODUCT_NAME as productName, w.UNIT_PRICE as productPrice, s.STORE_NAME as sellerName, s.SID, p.IMAGE_URL as imageURI, p.DESCRIPTION as productDescription, w.STOCK as stock FROM Product p JOIN Warehouse w ON(p.PID = w.PID) JOIN Seller s ON(w.SID = s.SID) JOIN Category c ON(c.CID = p.CATEGORY) WHERE w.stock > 0 AND w.SID = ?"
+        db.all(query, SID, function(err, allRows) {
             if(err) {
                 reject(err)
                 return
@@ -25,8 +41,8 @@ module.exports.getProductList = () => {
 
 async function checkProductExist(product) {
     return new Promise(async function(resolve, reject) {
-        var query = "SELECT p.PRODUCT_NAME as productName, s.STORE_NAME as sellerName FROM Product p JOIN Warehouse w ON(p.PID = w.PID) JOIN Seller s ON(w.SID = s.SID) WHERE p.PRODUCT_NAME = ? AND s.STORE_NAME = ?"
-        var params = [product.productName, product.sellerName]
+        var query = "SELECT p.PRODUCT_NAME as productName, w.SID FROM Product p JOIN Warehouse w ON(p.PID = w.PID) WHERE p.PRODUCT_NAME = ? AND w.SID = ?"
+        var params = [product.productName, product.SID]
         db.all(query, params, function(err, allRows) {
             if(err) {
                 reject(err)
@@ -102,14 +118,10 @@ module.exports.addNewProduct = async (product) => {
                 }
             })
 
-            db.serialize(async () => {
-                // get store ID based on store name
-                var storeId = await getStoreId(product)
-                
+            db.serialize(async () => {              
                 // add product to warehouse
-                console.log(product)
                 var query = "INSERT INTO Warehouse VALUES (?, ?, ?, ?)"
-                var params = [storeId, product.productId, product.stock, product.productPrice]
+                var params = [product.SID, product.productId, product.stock, product.productPrice]
                 db.run(query, params, function(err) {
                     if(err) {
                         reject(err)
@@ -207,5 +219,277 @@ module.exports.deleteProduct = async (productId) => {
                 })
             });
         });
+    })
+}
+
+async function queryProductPrice(SID, PID) {
+    return new Promise(async function(resolve, reject) {
+        var query = "SELECT UNIT_PRICE FROM Warehouse WHERE SID = ? AND PID = ?"
+        db.each(query, SID, PID, function(err, row) {
+            if(err) {
+                reject(err)
+                return
+            }
+            resolve(row.UNIT_PRICE)
+        })
+    })
+}
+
+module.exports.addToCart = async (request) => {
+    return new Promise(async function(resolve, reject) {
+        db.serialize(async () => {
+            // query Price of product
+            var productPrice = await queryProductPrice(request.SID, request.PID)
+            
+            db.serialize(() => {
+                // add to ShoppingCart table
+                var query = "INSERT INTO ShoppingCart VALUES (?, ?, ?, ?, ?)"
+                var params = [request.NID, request.SID, request.PID, 1, productPrice]
+                db.run(query, params, function(err) {
+                    if (err) {
+                        reject(err)
+                        return
+                    }
+                    resolve('add_to_cart_success')
+                })
+            })
+        })
+    })
+}
+
+module.exports.deleteProductFromCart = async (req) => {
+    return new Promise(async function(resolve, reject) {
+        // delete in Product table
+        var query = "DELETE FROM ShoppingCart WHERE NID = ? AND PID = ?"
+        db.run(query, req.NID, req.productId, function(err) {
+            if (err) {
+                reject(err)
+                return
+            }
+            resolve("delete_product_from_cart_success")
+        })
+    })
+}
+
+module.exports.getProductsInCart = (NID) => {
+    return new Promise(function(resolve, reject) {
+        var query = "SELECT sc.PID, p.PRODUCT_NAME as productName, sc.TOTAL_PRICE as productPrice FROM ShoppingCart sc JOIN Product p ON(sc.PID = p.PID) WHERE sc.NID = ?"
+        db.all(query, NID, function(err, allRows) {
+            if(err) {
+                reject(err)
+                return
+            }
+            resolve(allRows)
+        })
+    })
+}
+//////////////////////////////////////////////////////////////////
+// OLD PRODUCT
+module.exports.getOldProductList = () => {
+    return new Promise(function(resolve, reject) {
+        var query = "SELECT p.PID as productId, c.CATEGORY_NAME as productCategory, p.PRODUCT_NAME as productName, n.FULL_NAME as sellerName, n.NID, p.IMAGE_URL as imageURI, p.DESCRIPTION as productDescription, w.CONDITION as condition FROM OldProduct p JOIN UserWarehouse w ON(p.PID = w.PID) JOIN NormalUser n ON(w.NID = n.NID) JOIN Category c ON(c.CID = p.CATEGORY)"
+        db.all(query, function(err, allRows) {
+            if(err) {
+                reject(err)
+                return
+            }
+            resolve(allRows)
+        })
+    })
+}
+
+async function checkOldProductExist(product) {
+    return new Promise(async function(resolve, reject) {
+        var query = "SELECT p.PRODUCT_NAME as productName, w.NID FROM OldProduct p JOIN UserWarehouse w ON(p.PID = w.PID) WHERE p.PRODUCT_NAME = ? AND w.NID = ?"
+        var params = [product.productName, product.NID]
+        db.all(query, params, function(err, allRows) {
+            if(err) {
+                reject(err)
+                return
+            }
+            if(allRows.length == 0) {
+                resolve(false)
+                return
+            }
+            resolve(true)
+        })  
+    })
+}
+
+async function generateNewIdForOldProduct(product) {
+    return new Promise(async function(resolve, reject) {
+        // generate new ID
+        var newProductId = 0
+        var query = "SELECT MAX(PID) as MAX_PID FROM OldProduct"
+        db.each(query, function(err, row) {
+            if(err) {
+                reject(err)
+                return
+            }
+            if(row.length == 0)
+                newProductId = 0
+            else {
+                newProductId = parseInt(`${row.MAX_PID}`) + 1
+                product.productId = newProductId.toString().padStart(3, '0')
+                resolve()
+            }     
+        })
+    })
+}
+
+async function getSellerId(product) {
+    return new Promise(async function(resolve, reject) {
+        // get seller ID based on seller name
+        var sellerId
+        var query = "SELECT NID FROM NormalUser WHERE FULL_NAME = ?"
+        db.each(query, [product.sellerName], function(err, row) {
+            if(err) {
+                reject(err)
+                return
+            }
+            sellerId = parseInt(`${row.NID}`)
+            resolve(sellerId.toString().padStart(3, '0'))
+        })
+    })
+}
+
+module.exports.addOldProduct = async (product) => {
+    return new Promise(async function(resolve, reject) {
+        // check if product already exists
+        var productExist = await checkOldProductExist(product)
+        if(productExist) {
+            resolve('old_product_exist')
+            return
+        }
+        
+        // generate new ID
+        await generateNewIdForOldProduct(product)
+
+
+        db.serialize(() => {
+            // add to Product table
+            var query = "INSERT INTO OldProduct VALUES (?, ?, ?, ?, ?)"
+            var params = [product.productId, product.productName, product.productCategory, product.imageURI, product.productDescription]
+            db.run(query, params, function(err) {
+                if (err) {
+                    reject(err)
+                    return
+                }
+            })
+
+            db.serialize(async () => {
+                // add product to user warehouse
+                console.log(product)
+                var query = "INSERT INTO UserWarehouse VALUES (?, ?, ?)"
+                var params = [product.NID, product.productId, product.condition]
+                db.run(query, params, function(err) {
+                    if(err) {
+                        reject(err)
+                        return
+                    }
+                    resolve("add_old_product_success")
+                })
+            });
+        });
+    })
+}
+
+async function checkOldProductExistById(PID) {
+    return new Promise(async function(resolve, reject) {
+        var query = "SELECT PID FROM OldProduct WHERE PID = ?"
+        db.all(query, [PID], function(err, allRows) {
+            if(err) {
+                reject(err)
+                return
+            }
+            if(allRows.length == 0) {
+                resolve(false)
+                return
+            }
+            resolve(true)
+        })  
+    })
+}
+
+module.exports.editOldProduct = async (product) => {
+    return new Promise(async function(resolve, reject) {
+        // check if product exist by ID
+        var productExist = await checkOldProductExistById(product.productId)
+        if(!productExist) {
+            resolve('old_product_not_exist')
+            return
+        }
+
+        db.serialize(() => {
+            // update in Product table
+            var query = "UPDATE OldProduct SET PRODUCT_NAME = ?, CATEGORY = ?, IMAGE_URL = ?, DESCRIPTION = ? WHERE PID = ?"
+            var params = [product.productName, product.productCategory, product.imageURI, product.productDescription, product.productId]
+            db.run(query, params, function(err) {
+                if (err) {
+                    reject(err)
+                    return
+                }
+            })
+
+            db.serialize(async () => {
+                // update product in UserWarehouse table
+                var query = "UPDATE UserWarehouse SET CONDITION = ? WHERE PID = ?"
+                var params = [product.condition, product.productId]
+                db.run(query, params, function(err) {
+                    if(err) {
+                        reject(err)
+                        return
+                    }
+                    resolve("edit_old_product_success")
+                })
+            });
+        });
+    })
+}
+
+module.exports.deleteOldProduct = async (productId) => {
+    return new Promise(async function(resolve, reject) {
+        // check if product exist by ID
+        var productExist = await checkOldProductExistById(productId)
+        if(!productExist) {
+            resolve('old_product_not_exist')
+            return
+        }
+
+        db.serialize(() => {
+            // delete in OldProduct table
+            var query = "DELETE FROM OldProduct WHERE PID = ?"
+            db.run(query, productId, function(err) {
+                if (err) {
+                    reject(err)
+                    return
+                }
+            })
+
+            db.serialize(async () => {
+                // delete product in UserWarehouse table
+                var query = "DELETE FROM UserWarehouse WHERE PID = ?"
+                db.run(query, productId, function(err) {
+                    if(err) {
+                        reject(err)
+                        return
+                    }
+                    resolve("delete_old_product_success")
+                })
+            });
+        });
+    })
+}
+
+module.exports.getUserProducts = (NID) => {
+    return new Promise(function(resolve, reject) {
+        var query = "SELECT p.PID as productId, c.CATEGORY_NAME as productCategory, p.PRODUCT_NAME as productName, n.FULL_NAME as sellerName, n.NID, p.IMAGE_URL as imageURI, p.DESCRIPTION as productDescription, w.CONDITION as condition FROM OldProduct p JOIN UserWarehouse w ON(p.PID = w.PID) JOIN NormalUser n ON(w.NID = n.NID AND w.NID = ?) JOIN Category c ON(c.CID = p.CATEGORY)"
+        db.all(query, NID, function(err, allRows) {
+            if(err) {
+                reject(err)
+                return
+            }
+            resolve(allRows)
+        })
     })
 }
