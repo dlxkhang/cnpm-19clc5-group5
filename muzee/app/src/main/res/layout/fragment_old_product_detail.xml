@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.muzee.oldproduct_detail.OldProductDetailViewModel" />
+        <variable
+            name="fragment"
+            type="com.example.muzee.oldproduct_detail.OldProductDetailFragment" />
+    </data>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".DetailFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#EFEFEF"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/product_image_detail"
+                android:layout_width="0dp"
+                android:layout_height="266dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/logo"
+                tools:src="@tools:sample/backgrounds/scenic" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/tittle_price"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="#FFFFFF"
+                android:padding="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/product_image_detail"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/product_image_detail"
+                app:layout_constraintTop_toBottomOf="@+id/product_image_detail">
+
+                <TextView
+                    android:id="@+id/product_price_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@{String.valueOf(viewModel.displayPropertyCondition)}"
+                    android:textColor="#de000000"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/product_title_detail"
+                    app:layout_constraintTop_toBottomOf="@+id/product_title_detail"
+                    tools:text="Cond: 7/10" />
+
+                <TextView
+                    android:id="@+id/product_title_detail"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.selectedOldProduct.productName}"
+                    android:textColor="#de000000"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Nord Piano 4 88-Key Digital Piano" />
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/seller_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="#FFFFFF"
+                android:padding="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/tittle_price"
+                app:layout_constraintStart_toStartOf="@+id/tittle_price"
+                app:layout_constraintTop_toBottomOf="@+id/tittle_price">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="63dp"
+                    android:layout_height="63dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_baseline_person_24"
+                    tools:ignore="VectorDrawableCompat" />
+
+                <TextView
+                    android:id="@+id/seller_name"
+                    style="@style/text_style_1"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/roboto"
+                    android:text="@{viewModel.selectedOldProduct.sellerName}"
+                    app:layout_constraintStart_toEndOf="@+id/imageView"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Daph Duck" />
+
+                <TextView
+                    android:id="@+id/seller_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:text="@{viewModel.phoneNumber}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/seller_name"
+                    app:layout_constraintTop_toBottomOf="@+id/seller_name"
+                    tools:text="0122773224" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/detail_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="#FFFFFF"
+                android:padding="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/seller_profile"
+                app:layout_constraintStart_toStartOf="@+id/seller_profile"
+                app:layout_constraintTop_toBottomOf="@+id/seller_profile">
+
+                <TextView
+                    android:id="@+id/detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:text="@string/detail"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/category_label"
+                    style="@style/text_style_12"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/category"
+                    app:layout_constraintStart_toStartOf="@+id/detail"
+                    app:layout_constraintTop_toBottomOf="@+id/detail" />
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:text="@{viewModel.selectedOldProduct.productCategory}"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toEndOf="@+id/category_label"
+                    app:layout_constraintTop_toTopOf="@+id/category_label"
+                    tools:text="Keyboard" />
+
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@android:color/darker_gray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/category_label" />
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/description"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view" />
+
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@{viewModel.selectedOldProduct.productDescription}"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/textView11"
+                    app:layout_constraintTop_toBottomOf="@+id/textView11"
+                    tools:text="General  \n- 88-note Triple Sensor keybed with grand weighted action  \n- Nord Virtual Hammer Action Technology   \n- Seamless Transitions NEW  \n- Layer and Split with Split Point crossfades NEW  \n- OLED display for excellent overview   \n- Enhanced Organize Mode NEW  \n- Numeric Pad for direct Program access  NEW " />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

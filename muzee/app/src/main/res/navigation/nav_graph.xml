@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/mainScreenSellerFragment"
+        android:name="com.example.muzee.seller.MainScreenSellerFragment"
+        android:label="@string/home_item"
+        tools:layout="@layout/fragment_main_screen_seller" >
+        <argument
+            android:name="seller"
+            app:argType="com.example.muzee.data.Seller"/>
+        <action
+            android:id="@+id/action_mainScreenSellerFragment_to_sellerOrderFragment"
+            app:destination="@id/sellerOrderFragment" />
+        <action
+            android:id="@+id/action_mainScreenSellerFragment_to_sellerProductOverviewFragment"
+            app:destination="@id/sellerProductOverviewFragment" />
+        <action
+            android:id="@+id/action_mainScreenSellerFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="sellerID"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/sellerOrderFragment"
+        android:name="com.example.muzee.seller.order_overview.SellerOrderFragment"
+        android:label="@string/order_list_title"
+        tools:layout="@layout/fragment_seller_order">
+        <action
+            android:id="@+id/action_sellerOrderFragment_to_sellerOrderDetailFragment22"
+            app:destination="@id/sellerOrderDetailFragment" />
+        <argument
+            android:name="sellerID"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/addNewProductFragment"
+        android:name="com.example.muzee.seller.add_new_product.AddNewProductFragment"
+        android:label="@string/add_new_product_title"
+        tools:layout="@layout/fragment_add_new_product">
+        <action
+            android:id="@+id/action_addNewProductFragment_to_sellerProductOverviewFragment"
+            app:destination="@id/sellerProductOverviewFragment"
+            app:popUpTo="@id/sellerProductOverviewFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="sellerID"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument android:name="sellerInfo"
+            app:argType="com.example.muzee.data.Seller"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/sellerOrderDetailFragment"
+        android:name="com.example.muzee.seller.order_detail.SellerOrderDetailFragment"
+        android:label="@string/order_detail_title"
+        tools:layout="@layout/fragment_seller_order_detail">
+        <argument
+            android:name="selectedOrder"
+            app:argType="com.example.muzee.network.seller.order.Order_responseItem"/>
+        <argument
+            android:name="sellerID"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/sellerProductOverviewFragment"
+        android:name="com.example.muzee.seller.product_overview.SellerProductOverviewFragment"
+        android:label="@string/Product_title"
+        tools:layout="@layout/fragment_seller_product_overview">
+        <action
+            android:id="@+id/action_sellerProductOverviewFragment_to_addNewProductFragment"
+            app:destination="@id/addNewProductFragment" />
+        <action
+            android:id="@+id/action_sellerProductOverviewFragment_to_sellerProductDetailFragment"
+            app:destination="@id/sellerProductDetailFragment" />
+        <action
+            android:id="@+id/action_sellerProductOverviewFragment_to_editNewProductFragment"
+            app:destination="@id/editNewProductFragment" />
+        <argument
+            android:name="sellerID"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="sellerInfo"
+            app:argType="com.example.muzee.data.Seller"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/sellerProductDetailFragment"
+        android:name="com.example.muzee.seller.product_detail.SellerProductDetailFragment"
+        android:label="@string/product_detail_title"
+        tools:layout="@layout/fragment_seller_product_detail">
+        <argument
+            android:name="selectedProduct"
+            app:argType="com.example.muzee.network.seller.product.ProductSeller" />
+        <action
+            android:id="@+id/action_sellerProductDetailFragment_to_editNewProductFragment"
+            app:destination="@id/editNewProductFragment" />
+        <argument
+            android:name="sellerInfo"
+            app:argType="com.example.muzee.data.Seller" />
+        <argument
+            android:name="sellerID"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderOverviewFragment"
+        android:name="com.example.muzee.order_overview.OrderOverviewFragment"
+        android:label="@string/order_list_title"
+        tools:layout="@layout/fragment_order_overview">
+        <argument
+            android:name="NID"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="normalUser"
+            app:argType="com.example.muzee.data.NormalUser"/>
+        <action
+            android:id="@+id/action_orderOverviewFragment_to_orderDetailFragment"
+            app:destination="@id/orderDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderDetailFragment"
+        android:name="com.example.muzee.order_detail.OrderDetailFragment"
+        android:label="@string/order_detail_title"
+        tools:layout="@layout/fragment_order_detail">
+        <argument
+            android:name="selectedOrder"
+            app:argType="com.example.muzee.network.UserOrder" />
+        <argument
+            android:name="NID"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.example.muzee.productdetail.ProductDetailFragment"
+        android:label="@string/productdetaillabel"
+        tools:layout="@layout/fragment_product_detail">
+        <argument
+            android:name="selectedProduct"
+            app:argType="com.example.muzee.network.NewProduct" />
+        <action
+            android:id="@+id/action_productDetailFragment_to_mainScreenNormalUsersFragment"
+            app:destination="@id/mainScreenNormalUsersFragment"
+            app:popUpTo="@id/mainScreenNormalUsersFragment" />
+        <argument
+            android:name="NID"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.example.muzee.cart.CartFragment"
+        android:label="@string/cart_fragment_label"
+        tools:layout="@layout/fragment_cart">
+        <action
+            android:id="@+id/action_cartFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
+        <argument
+            android:name="NID"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="normalUser"
+            app:argType="com.example.muzee.data.NormalUser" />
+        <action
+            android:id="@+id/action_cartFragment_to_mainScreenNormalUsersFragment"
+            app:destination="@id/mainScreenNormalUsersFragment"
+            app:popUpTo="@id/mainScreenNormalUsersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentFragment"
+        android:name="com.example.muzee.payment.PaymentFragment"
+        android:label="@string/payment_label"
+        tools:layout="@layout/fragment_payment">
+        <action
+            android:id="@+id/action_paymentFragment_to_mainScreenNormalUsersFragment"
+            app:destination="@id/mainScreenNormalUsersFragment"
+            app:popUpTo="@id/mainScreenNormalUsersFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mainScreenNormalUsersFragment"
+        android:name="com.example.muzee.normalUsers.MainScreenNormalUsersFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_main_screen_normal_users">
+        <argument
+            android:name="normalUser"
+            app:argType="com.example.muzee.data.NormalUser"/>
+        <action
+            android:id="@+id/action_mainScreenNormalUsersFragment_to_categoryFragment"
+            app:destination="@id/categoryFragment" />
+        <action
+            android:id="@+id/action_MainToCart"
+            app:destination="@id/cartFragment" />
+        <action
+            android:id="@+id/action_mainScreenNormalUsersFragment_to_oldProductStoreFragment"
+            app:destination="@id/oldProductStoreFragment" />
+        <action
+            android:id="@+id/action_mainScreenNormalUsersFragment_to_orderOverviewFragment"
+            app:destination="@id/orderOverviewFragment" />
+        <action
+            android:id="@+id/action_showDetail"
+            app:destination="@id/productDetailFragment" />
+        <argument
+            android:name="NID"
+            app:argType="string"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_mainScreenNormalUsersFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_mainScreenNormalUsersFragment_to_oldProductOverviewFragment"
+            app:destination="@id/oldProductOverviewFragment"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="com.example.muzee.CategoryFragment"
+        android:label="@string/category_fragment_label"
+        tools:layout="@layout/fragment_category" >
+        <action
+            android:id="@+id/action_categoryFragment_to_mainScreenNormalUsersFragment"
+            app:destination="@id/mainScreenNormalUsersFragment"
+            app:popUpTo="@id/mainScreenNormalUsersFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/oldProductStoreFragment"
+        android:name="com.example.muzee.oldProduct.oldProductStoreFragment"
+        android:label="@string/myShopFragment"
+        tools:layout="@layout/fragment_old_product_store">
+        <action
+            android:id="@+id/action_oldProductStoreFragment_to_addOldProductFragment"
+            app:destination="@id/addOldProductFragment" />
+        <action
+            android:id="@+id/action_oldProductStoreFragment_to_editOldProductFragment"
+            app:destination="@id/editOldProductFragment" />
+        <argument
+            android:name="NID"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/addOldProductFragment"
+        android:name="com.example.muzee.oldProduct.add.AddOldProductFragment"
+        android:label="@string/add_old_product_fragment"
+        tools:layout="@layout/fragment_add_old_product">
+        <argument
+            android:name="NID"
+            app:argType="string"
+            app:nullable="true"/>
+        <action
+            android:id="@+id/action_addOldProductFragment_to_oldProductStoreFragment"
+            app:destination="@id/oldProductStoreFragment"
+            app:popUpTo="@id/oldProductStoreFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/editOldProductFragment"
+        android:name="com.example.muzee.oldProduct.edit.EditOldProductFragment"
+        android:label="@string/edit_old_product_fragment_label"
+        tools:layout="@layout/fragment_edit_old_product">
+        <argument
+            android:name="NID"
+            app:argType="string"
+            app:nullable="true"/>
+        <argument
+            android:name="selectedOldProduct"
+            app:argType="com.example.muzee.network.OldProduct" />
+        <action
+            android:id="@+id/action_editOldProductFragment_to_oldProductStoreFragment"
+            app:destination="@id/oldProductStoreFragment"
+            app:popUpTo="@id/oldProductStoreFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.muzee.login.LoginFragment"
+        tools:layout="@layout/login_fragment">
+        <action
+            android:id="@+id/action_loginFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_mainScreenSellerFragment"
+            app:destination="@id/mainScreenSellerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_mainScreenNormalUsersFragment"
+            app:destination="@id/mainScreenNormalUsersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.example.muzee.signup.SignUpFragment"
+        tools:layout="@layout/sign_up_fragment" >
+        <action
+            android:id="@+id/action_signUpFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/editNewProductFragment"
+        android:name="com.example.muzee.seller.edit_new_product.EditNewProductFragment"
+        android:label="Edit product"
+        tools:layout="@layout/fragment_edit_new_product">
+        <argument
+            android:name="selectedNewProduct"
+            app:argType="com.example.muzee.network.seller.product.ProductSeller" />
+        <argument
+            android:name="sellerID"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_editNewProductFragment_to_sellerProductOverviewFragment"
+            app:destination="@id/sellerProductOverviewFragment"
+            app:popUpTo="@id/sellerProductOverviewFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_editNewProductFragment_to_sellerProductDetailFragment"
+            app:destination="@id/sellerProductDetailFragment"
+            app:popUpTo="@id/sellerProductDetailFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="sellerInfo"
+            app:argType="com.example.muzee.data.Seller"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/oldProductOverviewFragment"
+        android:name="com.example.muzee.oldproduct_overview.OldProductOverviewFragment"
+        android:label="Old shopping"
+        tools:layout="@layout/fragment_old_product_overview" >
+
+        <action
+            android:id="@+id/action_oldProductOverviewFragment_to_oldProductDetailFragment"
+            app:destination="@id/oldProductDetailFragment"
+            />
+        <action
+            android:id="@+id/action_oldProductOverviewFragment_to_oldProductDetailFragment2"
+            app:destination="@id/oldProductDetailFragment" />
+        <action
+            android:id="@+id/action_oldProductOverviewFragment_to_mainScreenNormalUsersFragment"
+            app:destination="@id/mainScreenNormalUsersFragment"
+            app:popUpTo="@id/mainScreenNormalUsersFragment"
+            app:popUpToInclusive="true" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/oldProductDetailFragment"
+        android:name="com.example.muzee.oldproduct_detail.OldProductDetailFragment"
+        android:label="Old product detail"
+        tools:layout="@layout/fragment_old_product_detail">
+        <argument
+            android:name="selectedOldProduct"
+            app:argType="com.example.muzee.network.OldProduct" />
+        <action
+            android:id="@+id/action_oldProductDetailFragment_to_oldProductOverviewFragment2"
+            app:destination="@id/oldProductOverviewFragment"
+            app:popUpTo="@id/oldProductOverviewFragment" />
+    </fragment>
+</navigation>

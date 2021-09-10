@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="product"
+            type="com.example.muzee.network.NewProduct" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:background="@color/cardview_light_background">
+
+        <ImageView
+            android:id="@+id/product_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/logo"
+            tools:srcCompat="@drawable/logo" />
+
+        <TextView
+            android:id="@+id/product_title"
+            style="@style/text_style"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@{product.productName}"
+            app:layout_constraintStart_toEndOf="@+id/product_image"
+            app:layout_constraintTop_toTopOf="@+id/product_image"
+            tools:text="Nord Piano 4 88-Key Digital Piano" />
+
+        <TextView
+            android:id="@+id/product_condition"
+            style="@style/text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@{String.valueOf(product.productPrice)}"
+            app:layout_constraintStart_toStartOf="@+id/product_title"
+            app:layout_constraintTop_toBottomOf="@+id/product_title"
+            tools:text="$2,999" />
+
+        <Button
+            android:id="@+id/add2cart_button"
+            style="@style/button_style"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/roboto"
+            android:text="@string/add_to_cart"
+            android:textSize="10sp"
+            app:backgroundTint="@color/main_green"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
