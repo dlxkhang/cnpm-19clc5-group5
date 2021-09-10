@@ -14,7 +14,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 object NetworkLayer {
-    private const val BASE_URL = "http://192.168.1.2:3000/"
+    private const val BASE_URL = "http://192.168.11.117:3000"
     private val moshi = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())
         .build()
